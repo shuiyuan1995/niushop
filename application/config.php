@@ -27,7 +27,7 @@ define("__ROOT__", $root);
 /**
  * *************************************************************伪静态*******************************************************************************
  */
-define("REWRITE_MODEL", false); // 设置伪静态
+define("REWRITE_MODEL", true); // 设置伪静态
                                 // 入口文件,系统未开启伪静态
 $rewrite = REWRITE_MODEL;
 if (! $rewrite) {
@@ -343,7 +343,7 @@ return [
     'paginate' => [
         'type' => 'bootstrap',
         'var_page' => 'page',
-        'list_rows' => 14,
+        'list_rows' => 15,
         'list_showpages' => 5,
         'picture_page_size' => 15
     ]

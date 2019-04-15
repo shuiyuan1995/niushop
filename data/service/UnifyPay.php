@@ -341,7 +341,6 @@ class UnifyPay extends BaseService implements IUnifyPay
         if($trade_type== 'APPLET'){
             $openid = $applet_openid;
         }
-        
         $retval = $weixin_pay->setWeiXinPay($data['pay_body'], $data['pay_detail'], $data['pay_money']*100, $out_trade_no, $red_url, $trade_type, $openid, $product_id);
         return $retval;
         

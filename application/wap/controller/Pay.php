@@ -215,6 +215,7 @@ class Pay extends Controller
                 $this->redirect($res["mweb_url"]);
             } else {
                 $res = $pay->wchatPay($out_trade_no, 'NATIVE', $red_url);
+                //var_dump($res);exit;
                 if ($res["return_code"] == "SUCCESS") {
                     if (empty($res['code_url'])) {
                         $code_url = "生成支付二维码失败!";

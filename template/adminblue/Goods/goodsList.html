@@ -1,7 +1,9 @@
 {extend name="adminblue/base" /}
 {block name="resources"/}
 <link rel="stylesheet" type="text/css" href="ADMIN_CSS/product.css">
+<link rel="stylesheet" type="text/css" href="ADMIN_CSS/layer.css">
 <script type="text/javascript" src="__STATIC__/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="ADMIN_JS/layer.js"></script>
 <style type="text/css">
 #productTbody td{padding:5px;font-size:12px;}
 #productTbody td:first-child{border-left: 1px solid #E1E6F0;}
@@ -59,10 +61,10 @@ input, textarea, .uneditable-input {width: 147px;}
 	<tr>
 		<th align="left">
 			<a class="btn-common" href="{:__URL('ADMIN_MAIN/goods/addgoods')}">发布商品</a>
-			<a class="btn-common-white" href="javascript:batchDelete()">批量删除</a>
-			<a class="btn-common-white upstore" href="javascript:goodsIdCount('online')">上架</a>
-			<a class="btn-common-white downstore" href="javascript:goodsIdCount('offline')">下架</a>
-			<a class="btn-common-white recommend" href="javascript:ShowRecommend()" data-html="true" id="setRecommend" title="推荐"
+			<a class="btn-common-white" id="batchDelete" href="javascript:void(0);">批量删除</a>
+			<a class="btn-common-white upstore" id="goodsOnline" href="javascript:void(0);">上架</a>
+			<a class="btn-common-white downstore" id="goodsOffline" href="javascript:void(0);">下架</a>
+			<a class="btn-common-white recommend" href="javascript:void(0);" data-html="true" id="setRecommend" title="推荐"
 			data-container="body" data-placement="bottom"  data-trigger="manual"
 			data-content="<div class='edit-group' id='recommendType'>
 				<label class='checkbox-inline'><i class='checkbox-common'><input type='checkbox' value='1' /></i> 热卖 </label>
@@ -73,7 +75,7 @@ input, textarea, .uneditable-input {width: 147px;}
 				<button class='btn btn-small' onclick='hideSetRecommend()'>取消</button>
 				"
 			>推荐</a>
-			<a data-html="true" class="btn-common-white fun-a category" href="javascript:goodsGroupIdCount();" id="editGroup" title="修改商品标签" data-container="body" data-placement="bottom"  data-trigger="manual"
+			<a data-html="true" class="btn-common-white fun-a category" href="javascript:void(0);" id="editGroup" title="修改商品标签" data-container="body" data-placement="bottom"  data-trigger="manual"
 				data-content="<div class='edit-group' id='goodsChecked' style='max-width:auto;'>
 					{foreach $goods_group as $vo}
 					<label class='checkbox-inline'>
@@ -91,9 +93,9 @@ input, textarea, .uneditable-input {width: 147px;}
 				<button class='btn btn-small' onclick='hideEditGroup()'>取消</button>
 				">
 				商品标签</a>
-			<a href="javascript:batchUpdateGoodsQrcode();;" class="btn-common-white fun-a category" title="更新二维码">更新二维码</a>
-			<a href="javascript:;" id="batchProcessing"  class="btn-common-white" title="批量设置商品信息">批量处理</a>
-			<a href="javascript:;" id="setMemberDiscount"  class="btn-common-white" title="批量设置会员折扣">设置折扣</a>
+			<a href="javascript:void(0);" id="updateQrcode" class="btn-common-white fun-a category" title="更新二维码">更新二维码</a>
+			<a href="javascript:void(0);" id="batchProcessing"  class="btn-common-white" title="批量设置商品信息">批量处理</a>
+			<a href="javascript:void(0);" id="setMemberDiscount"  class="btn-common-white" title="批量设置会员折扣">设置折扣</a>
 			<input type='hidden' id='goods_type_ids'/>
 		</th>
 		<th style="position: relative;">
@@ -484,6 +486,26 @@ function CheckAll(event){
 }
 
 //商品上架id合计
+$(function () {
+	$("#goodsOnline").click(function () {
+		goodsIdCount('online');
+    });
+    $("#goodsOffline").click(function () {
+        goodsIdCount('offline');
+    });
+    $("#setRecommend").click(function () {
+        ShowRecommend();
+    });
+    $("#editGroup").click(function () {
+        goodsGroupIdCount();
+    });
+    $("#updateQrcode").click(function () {
+        batchUpdateGoodsQrcode();
+    });
+    $("#batchDelete").click(function () {
+        batchDelete();
+    })
+});
 function goodsIdCount(line){
 	var goods_ids= "";
 	$("#productTbody input[type='checkbox']:checked").each(function() {
@@ -520,9 +542,9 @@ function goodsIdCount(line){
 		}
 	});
 	goods_ids = goods_ids.substring(0, goods_ids.length - 1);
-	if(goods_ids == ""){
-		showTip("请选择需要操作的记录","warning");
-		return false;
+    if(goods_ids == ""){
+        showTip("请至少选择一件商品！","warning");
+        return false;
 	}
 	modifyGoodsOnline(goods_ids,line);
 }
