@@ -152,8 +152,10 @@
 				}
 
 				$(".pay-type-list li").click(function() {
+					console.log(new Date())
 					$(".pay-type-list li").removeClass("selected");
 					$(this).addClass("selected")
+					console.log(new Date())
 					// $(this).addClass("selected").siblings("li").removeClass("selected");
 					// $("#pay").removeClass("disabled");
 				})
