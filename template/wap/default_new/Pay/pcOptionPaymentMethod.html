@@ -53,7 +53,7 @@
 				<div class="pay-type">
 					<p class="pay-type-tit">支付方式：</p>
 					{if condition="$pay_config['wchat_pay_config']['is_use'] ==1 || $pay_config['ali_pay_config']['is_use'] == 1 || $pay_config['union_pay_config']['is_use'] == 1"}
-					<ul class="pay-type-list" name="payment_type">
+					<ul id="pay-type-list" class="pay-type-list" name="payment_type">
 						{if condition="$pay_config['wchat_pay_config']['is_use']==1"}
 						<li data-pay="wchat" value="0">
 							<img src="__TEMP__/{$style}/public/images/pay/wechat_qr.png">
@@ -146,25 +146,23 @@
 				interval = setInterval("countdown()",1000);
 
 				//如果有支付方式则默认选中第一个支付方式
-				if($(".pay-type-list li").length > 0){
-					$(".pay-type-list li").eq(0).addClass("selected");
+				if($("#pay-type-list li").length > 0){
+					$("#pay-type-list li").eq(0).addClass("selected");
 					// $("#pay").removeClass("disabled");
 				}
 
-				$(".pay-type-list li").click(function() {
+				$("#pay-type-list li").click(function() {
 					console.log(new Date())
-					$(".pay-type-list li").removeClass("selected");
-					$(this).addClass("selected")
-					console.log(new Date())
-					// $(this).addClass("selected").siblings("li").removeClass("selected");
+					$(this).addClass("selected").siblings("li").removeClass("selected");
 					// $("#pay").removeClass("disabled");
+					console.log(new Date())
 				})
 
 				//去支付
 				$("#pay").click(function() {
-					if ($('.pay-type-list li.selected').attr("data-pay") != null) {
+					if ($('#pay-type-list li.selected').attr("data-pay") != null) {
 						
-						switch ($('.pay-type-list li.selected').attr("data-pay")) {
+						switch ($('#pay-type-list li.selected').attr("data-pay")) {
 						case "wchat":
 							url = '{:__URL('APP_MAIN/pay/wchatpay?no='.$pay_value['out_trade_no'])}';
 							break;
