@@ -148,12 +148,14 @@
 				//如果有支付方式则默认选中第一个支付方式
 				if($(".pay-type-list li").length > 0){
 					$(".pay-type-list li").eq(0).addClass("selected");
-					$("#pay").removeClass("disabled");
+					// $("#pay").removeClass("disabled");
 				}
 
 				$(".pay-type-list li").click(function() {
-					$(this).addClass("selected").siblings("li").removeClass("selected");
-					$("#pay").removeClass("disabled");
+					$(".pay-type-list li").removeClass("selected");
+					$(this).addClass("selected")
+					// $(this).addClass("selected").siblings("li").removeClass("selected");
+					// $("#pay").removeClass("disabled");
 				})
 
 				//去支付
