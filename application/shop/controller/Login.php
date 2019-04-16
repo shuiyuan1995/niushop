@@ -236,7 +236,7 @@ class Login extends Controller
         }
 
         $res = $this->user->login($username, $password);
-        halt($res);
+        //halt($res);
         if ($res == 1) {
             if (! empty($_SESSION['login_pre_url'])) {
                 $retval = [

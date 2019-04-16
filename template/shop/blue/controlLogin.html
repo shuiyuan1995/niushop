@@ -167,7 +167,7 @@ function btnlogin(event) {
 		url:"{:__URL('SHOP_MAIN/login/login')}",
 		data:{"userName" : userName,"password" : password,"vertification" : vertification},
 		success : function(data){
-			if(data['code']>0){
+            if(data['code']>0){
 				$("#hidden_uid").val(data['code']);
 				var tag = $('#mask-layer-login').attr("data-tag");
 				if(goodsid == '' || tag==undefined){

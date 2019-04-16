@@ -1309,6 +1309,7 @@ class Goods extends BaseController
         if (!empty($cart_detail)) {
             $cart_detail = json_decode($cart_detail, true);
         }
+        //var_dump($cart_detail);exit;
         $goods_id = $cart_detail['goods_id'];
         // $goods_id = input('goods_id');
         $goods_name = $cart_detail['goods_name'];
@@ -1324,6 +1325,28 @@ class Goods extends BaseController
         $_SESSION['order_tag'] = ""; // 清空订单
         $retval = $goods->addCart($uid, $shop_id, $web_info['title'], $goods_id, $goods_name, $sku_id, $sku_name, $price, $count, $picture_id, 0);
         return $retval;
+    }
+
+    /**
+     * 添加购物车
+     */
+    public function indexAddCart()
+    {
+        header("Content-type:text/html;charset=utf-8");
+        $goods = new GoodsService();
+        $goods_id = request()->post('goods_id/d');
+        $goods_info = $goods->getGoodsDetail($goods_id)->toArray();
+        if (empty($goods_info)) https(404);
+        //var_dump($goods_info);exit;
+        $cart_detail['goods_id'] = "$goods_id";
+        $cart_detail['count'] = 1;
+        $cart_detail['goods_name'] = $goods_info['goods_name'];
+        $cart_detail['sku_id'] = $goods_info['sku_list'][0]['sku_id'];
+        $cart_detail['sku_name'] = $goods_info['sku_list'][0]['sku_name'];
+        $cart_detail['price'] = $goods_info['price'];
+        $cart_detail['cost_price'] = $goods_info['cost_price'];
+        $cart_detail['picture_id'] = $goods_info['picture'];
+        return json_encode($cart_detail,JSON_UNESCAPED_UNICODE);
     }
 
     /**

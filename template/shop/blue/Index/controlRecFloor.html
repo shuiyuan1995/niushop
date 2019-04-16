@@ -196,7 +196,7 @@
 										{/if}
 									{/in}
 									<div class="goods_add">
-										<a href="{:__URL('SHOP_MAIN/goods/addCart','goods_id='.$v['goods_id']&'goods_name='.$v['goods_name'])}">
+										<a href="javascript:void(0);" onclick="addCart({$v.goods_id})">
 											<button class="addcar">加入购物车</button>
 										</a>
 										
@@ -314,3 +314,22 @@
 	</div>
 	{/if}
 	{/volist}
+		<script>
+			function addCart(goods_id) {
+                $.ajax({
+                    url : __URL(SHOPMAIN+"/goods/indexaddcart"),
+                    type : "post",
+                    data : { "goods_id" : goods_id },
+                    success : function(res){
+                        $.ajax({
+                            url : __URL(SHOPMAIN+"/goods/addcart"),
+                            type : "post",
+                            data : { "cart_detail" : res },
+                            success : function(res){
+                                location.href = __URL(SHOPMAIN + "/goods/cart");
+                            }
+                        });
+                    }
+                });
+            }
+		</script>
