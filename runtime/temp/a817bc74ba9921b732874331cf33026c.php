@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:55:"template/wap\default_new\Pay\pcOptionPaymentMethod.html";i:1554637734;s:38:"template/wap\default_new\urlModel.html";i:1554176224;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:55:"template/wap\default_new\Pay\pcOptionPaymentMethod.html";i:1555468176;s:38:"template/wap\default_new\urlModel.html";i:1555468176;}*/ ?>
 <!DOCTYPE html>
 <html>
 	<head>
