@@ -143,6 +143,7 @@ class Config extends BaseController
             $web_style_pc = 1; // request()->post('web_style_pc', ''); // 前台网站风格 已废弃，改为读取配置
             $web_qrcode = request()->post('web_qrcode', ''); // 网站公众号二维码
             $web_url = request()->post('web_url', ''); // 店铺网址
+            $pay_url = request()->post('pay_url', ''); // 支付网址
             $web_phone = request()->post('web_phone', ''); // 网站联系方式
             $web_email = request()->post('web_email', ''); // 网站邮箱
             $web_qq = request()->post('web_qq', ''); // 网站qq号
@@ -154,7 +155,7 @@ class Config extends BaseController
             $web_gov_record = request()->post("web_gov_record", ""); // 公安网备信息
             $web_gov_record_url = request()->post("web_gov_record_url", ""); // 公安网备链接
             
-            $retval = $this->website->updateWebSite($title, $logo, $web_desc, $key_words, $web_icp, $web_style_pc, $web_qrcode, $web_url, $web_phone, $web_email, $web_qq, $web_weixin, $web_address, $third_count, $web_popup_title, $web_wechat_share_logo, $web_gov_record, $web_gov_record_url);
+            $retval = $this->website->updateWebSite($title, $logo, $web_desc, $key_words, $web_icp, $web_style_pc, $web_qrcode, $web_url, $pay_url, $web_phone, $web_email, $web_qq, $web_weixin, $web_address, $third_count, $web_popup_title, $web_wechat_share_logo, $web_gov_record, $web_gov_record_url);
             return AjaxReturn($retval);
         } else {
             $this->infrastructureChildMenu(1);

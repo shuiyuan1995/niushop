@@ -107,6 +107,10 @@ class Pay extends Controller
         $this->assign('order',$order);
         
         $order_model = new NsOrderModel();
+        $website = new WebSite();
+        $web = $website->getWebSiteInfo();
+        $pay_url = $web['pay_url'];
+        $this->assign('pay_url',$pay_url);
         
         //拼团付款限制
         $is_support_pintuan = IS_SUPPORT_PINTUAN;

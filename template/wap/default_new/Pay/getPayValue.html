@@ -84,10 +84,10 @@ function calculate() {
 	var out_trade_no = $("#out_trade_no").val();
 	if (pay_type == 0) {
 		//微信支付
-		window.location.href = __URL("APP_MAIN/pay/wchatpay?no=" + out_trade_no);
+		window.location.href = "{$pay_url}/wap/pay/wchatpay?no=" + out_trade_no;
 	} else if (pay_type == 1) {
 		//支付宝支付
-		window.location.href = __URL("APP_MAIN/pay/alipay?no=" + out_trade_no);
+		window.location.href = "{$pay_url}/wap/pay/alipay?no=" + out_trade_no;
 	}else if (pay_type == 2) {
 		//银联卡支付
 		window.location.href = __URL("APP_MAIN/pay/unionpay?no=" + out_trade_no);

@@ -16,7 +16,13 @@
 	<dl>
 		<dt>官方网址：</dt>
 		<dd>
-			<input id="web_url" type="text" value="{$website.web_url}" class="input-common" />
+			<input id="web_url" type="text" value="{$website.web_url}" class="input-common" /><span>例如：http://xxx</span>
+		</dd>
+	</dl>
+	<dl>
+		<dt>支付域名：</dt>
+		<dd>
+			<input id="pay_url" type="text" value="{$website.pay_url}" class="input-common" /><span>例如：http://xxx</span>
 		</dd>
 	</dl>
 	<dl>
@@ -216,6 +222,7 @@ function imgUpload(event) {
 function setConfigAjax() {
 	var title = $("#title").val();
 	var web_url = $("#web_url").val();
+    var pay_url = $("#pay_url").val();
 	var key_words = $("#key_words").val();
 	var web_desc = $("#web_desc").val();
 	var web_popup_title = $("#web_popup_title").val();
@@ -239,6 +246,7 @@ function setConfigAjax() {
 		data : {
 			'title' : title,
 			'web_url' : web_url,
+			'pay_url' : pay_url,
 			'web_address' : web_address,
 			'web_desc' : web_desc,
 			'logo' : Logo,

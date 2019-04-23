@@ -72,7 +72,7 @@ class WebSite extends BaseService implements IWebSite
      *
      * @see \data\api\IWebsite::updateWebSite()
      */
-    function updateWebSite($title, $logo, $web_desc, $key_words, $web_icp, $web_style_pc, $web_qrcode, $web_url, $web_phone, $web_email, $web_qq, $web_weixin, $web_address, $third_count, $web_popup_title, $web_wechat_share_logo, $web_gov_record, $web_gov_record_url)
+    function updateWebSite($title, $logo, $web_desc, $key_words, $web_icp, $web_style_pc, $web_qrcode, $web_url, $pay_url, $web_phone, $web_email, $web_qq, $web_weixin, $web_address, $third_count, $web_popup_title, $web_wechat_share_logo, $web_gov_record, $web_gov_record_url)
     {
         $data = array(
             'title' => $title,
@@ -83,6 +83,7 @@ class WebSite extends BaseService implements IWebSite
             'style_id_pc' => $web_style_pc,
             'web_qrcode' => $web_qrcode,
             'web_url' => $web_url,
+            'pay_url' => $pay_url,
             'web_phone' => $web_phone,
             'web_email' => $web_email,
             'web_qq' => $web_qq,

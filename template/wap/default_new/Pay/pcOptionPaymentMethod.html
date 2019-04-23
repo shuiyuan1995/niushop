@@ -162,11 +162,11 @@
 						
 						switch ($('#pay-type-list li.selected').attr("data-pay")) {
 						case "wchat":
-							url = '{:__URL('APP_MAIN/pay/wchatpay?no='.$pay_value['out_trade_no'])}';
+							url = "{$pay_url}/wap/pay/wchatpay?no={$pay_value['out_trade_no']}";
 							break;
 						case "alipay":
 							//跳转到支付宝
-							url = '{:__URL('APP_MAIN/pay/alipay?no='.$pay_value['out_trade_no'])}';
+							url = "{$pay_url}/wap/pay/alipay?no={$pay_value['out_trade_no']}";
 							break;
 						case "unionpay":
 							//跳转到银联卡
