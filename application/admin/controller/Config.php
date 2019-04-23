@@ -651,8 +651,8 @@ class Config extends BaseController
                 // 获取xml文件内容
                 $xml_txt = fopen($config['xml_path'], "r,w");
                 $xml_str = fread($xml_txt, filesize($config['xml_path'])); // 指定读取大小，这里把整个文件内容读取出来
-                $xml_text = str_replace("\r\n", "<br />", $xml_str);
-                $xml->loadXML($xml_text);
+                //$xml_text = str_replace("\r\n", "<br />", $xml_str);
+                $xml->loadXML($xml_str);
                 $template = $xml->getElementsByTagName('template'); // 最外层节点
                 foreach ($template as $p) {
                     foreach ($xmlTag as $x) {

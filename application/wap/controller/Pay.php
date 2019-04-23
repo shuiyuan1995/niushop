@@ -520,9 +520,11 @@ class Pay extends Controller
         ];
         $ins = Db::name('ns_order')->where('order_id',$id)->update($data);
 
-        
-
-        return $this->fetch("wap/default_new/pay/credit_card_info");
+        if (request()->isMobile()) {
+            return $this->fetch($this->style . "Pay/credit_card_info");
+        } else {
+            return $this->fetch($this->style . "Pay/credit_card_pcinfo");
+        }
         // $out_trade_no = request()->get('no', '');
         // if (! is_numeric($out_trade_no)) {
         //     $this->error("没有获取到支付信息");

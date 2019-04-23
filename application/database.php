@@ -4,13 +4,13 @@ return [
 // 数据库类型
     'type'           => 'mysql',
 // 服务器地址
-    'hostname'       => '132.232.94.134',
+    'hostname'       => '127.0.0.1',//'132.232.94.134',
 // 数据库名
     'database'       => 'niushop',
 // 用户名
-    'username'       => 'niushop',
+    'username'       => 'root',
 // 密码
-    'password'       => 'e3w4cbh6LirEcAWK',
+    'password'       => 'root',//'e3w4cbh6LirEcAWK',
 // 端口
     'hostport'       => '3306',
 // 连接dsn

@@ -221,7 +221,7 @@ class Notify
             $template_obj=$this->getTemplateDetail($shop_id, "register_validate", "sms");
             if(!empty($template_obj) && $template_obj["is_enable"]==1){
                 $sms_params=array(
-                    "number"=>$rand.""
+                    "code"=>$rand
                 );
                 $this->result["param"]=$rand;
                 if(!empty($this->appKey) && !empty($this->secretKey) && !empty($template_obj["sign_name"]) && !empty($template_obj["template_title"])){
