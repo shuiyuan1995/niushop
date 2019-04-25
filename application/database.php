@@ -6,11 +6,11 @@ return [
 // 服务器地址
     'hostname'       => '127.0.0.1',//'132.232.94.134',
 // 数据库名
-    'database'       => 'niushop',
+    'database'       => '51buyan',
 // 用户名
-    'username'       => 'root',
+    'username'       => '51buyan',
 // 密码
-    'password'       => 'root',//'e3w4cbh6LirEcAWK',
+    'password'       => 'wxzFHs8tCcFTFDPR',//'e3w4cbh6LirEcAWK',
 // 端口
     'hostport'       => '3306',
 // 连接dsn
