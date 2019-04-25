@@ -327,11 +327,13 @@ class Pay extends Controller
             $this->error("没有获取到支付信息");
         }
         if (! isWeixin()) {
-            $notify_url = str_replace("/index.php", '', __URL__);
+            $website = new WebSite();
+            $web = $website->getWebSiteInfo();
+            $notify_url = str_replace("/index.php", '', $web['web_url']);
             $notify_url = str_replace("index.php", '', $notify_url);
             $notify_url = $notify_url . "/alipay.php";
-            $return_url = __URL(__URL__ . '/wap/Pay/aliPayReturn');
-            $show_url = __URL(__URL__ . '/wap/Pay/aliUrlBack');
+            $return_url = $web['web_url'] . '/wap/Pay/aliPayReturn';
+            $show_url = $web['web_url'] . '/wap/Pay/aliUrlBack';
             $pay = new UnifyPay();
             Log::write("支付宝------------------------------------" . $notify_url);
             $res = $pay->aliPay($out_trade_no, $notify_url, $return_url, $show_url);

@@ -614,7 +614,7 @@ class Notify
                 if(!empty($template_obj) && $template_obj["is_enable"]==1){
                     #发送
                     $sms_params=array(
-                    "number"=>$rand.""
+                    "code"=>$rand.""
                         );
                         $result=aliSmsSend($this->appKey, $this->secretKey,
                             $template_obj["sign_name"], json_encode($sms_params), $send_param, $template_obj["template_title"], $this->ali_use_type);
@@ -651,7 +651,7 @@ class Notify
             $template_obj=$this->getTemplateDetail($shop_id, "bind_mobile", "sms");
             if(!empty($template_obj) && $template_obj["is_enable"]==1){
                 $sms_params=array(
-                    "number"=>$rand."",
+                    "code"=>$rand."",
                 );
                 $this->result["param"]=$rand;
                 if(!empty($this->appKey) && !empty($this->secretKey) && !empty($template_obj["sign_name"]) && !empty($template_obj["template_title"])){

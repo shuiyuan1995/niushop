@@ -69,7 +69,7 @@
 <!-- 					</div> -->
 <!-- 				</div> -->
 <!-- 			</li> -->
-			<li class="menu-item"><a  href="{:__URL('SHOP_MAIN/member/goodscollectionlist')}" class="menu-hd wap-nav" >收藏夹（0）</a></li>
+			<li class="menu-item"><a  href="{:__URL('SHOP_MAIN/member/goodscollectionlist')}" class="menu-hd wap-nav" >收藏夹</a></li>
 			<li class="menu-item"><a href="{:__URL('SHOP_MAIN/helpcenter/index')}" class="menu-hd site-nav" target="_blank">联系我们</a></li>
 			<!-- 手机端，帮助中心 -->
 			<!-- <li class="menu-item"><a  href="{:__URL('APP_MAIN')}" class="menu-hd wap-nav" ><i></i>{:lang('mobile_terminal')}</a></li>
@@ -85,7 +85,7 @@ function getTopLoginInfo(){
 		type:"post",
 		url:"{:__URL('SHOP_MAIN/components/getlogininfo')}",
 		success:function(data){
-			if(data!=null && data!=""){
+            if(data!=null && data!=""){
 				$(".myinfo").html(data["user_info"]["nick_name"]+'<b></b>').show();
 				$("#hidden_uid").val(data["uid"]);
 				$("#menu-login .js-login-flag").hide();
