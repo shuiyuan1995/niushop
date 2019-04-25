@@ -2,3 +2,4 @@
 /runtime/temp/
 /runtime/cache/
 /*.log
+/application/database.php
