@@ -2,7 +2,7 @@
  * 省市县级联 2017年2月20日 15:05:46
  */
 
-//加载省
+//加载国家
 function initProvince(obj){
 	$.ajax({
 		type : "post",
@@ -12,7 +12,7 @@ function initProvince(obj){
 			if (data != null && data.length > 0) {
 				var str = "";
 				for (var i = 0; i < data.length; i++) {
-					str += '<option value="'+data[i].province_id+'">'+data[i].province_name+'</option>';
+					str += '<option value="'+data[i].id+'">'+data[i].name+'</option>';
 				}
 				$(obj).append(str);
 			}

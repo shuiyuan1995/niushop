@@ -1621,13 +1621,17 @@ class Config extends BaseController
     {
         $data['name'] = $this->request->post('countryName');
         $data['sort'] = $this->request->post('regionSort');
+        $data['id'] = $this->request->post('evaluate_id');
 
         $address = new Address();
         $result = $address->addCountry($data);
-        if ($result){
-            return returnAjax(0,'添加成功');
+        if ($result == 'exists'){
+            return returnAjax(1,'已经存在');
+        }elseif ($result){
+            return returnAjax(0,$data['id']?'修改成功':'添加成功');
+        }else{
+            return returnAjax(1,$data['id']?'修改失败':'添加失败');
         }
-        return returnAjax(1,'添加失败');
     }
 
     public function updateCountryAjax()
@@ -1643,6 +1647,17 @@ class Config extends BaseController
         }else{
             return returnAjax(1,'请求错误');
         }
+    }
+
+    public function deleteCountry()
+    {
+        $id = $this->request->post('regionId');
+        $dataAddress = new DataAddress();
+        $result = $dataAddress->delCountry($id);
+        if ($result){
+            return returnAjax(0,'删除成功');
+        }
+        return returnAjax(1,'删除失败');
     }
 
     public function selectCityListAjax()

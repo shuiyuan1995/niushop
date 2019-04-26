@@ -792,13 +792,21 @@ input[type="radio"]:checked {
 						</div>
 					</div>
 				</li>
+                <li style="clear: both;">
+                    <label>{:lang('member_province')}：</label>
+                    <input type="text" id="detailed_province" maxlength="30" class="s-length">
+                </li>
+                <li style="clear: both;">
+                    <label><i>*</i>{:lang('member_city')}：</label>
+                    <input type="text" id="detailed_city" maxlength="30" class="s-length">
+                </li>
 				<li style="clear: both;">
 					<label><i>*</i>{:lang('member_detailed_address')}：</label>
 					<input type="text" id="detailed_address" maxlength="30" class="l-length">
 				</li>
 				<li style="clear: both;">
-					<label><i>*</i>{:lang('member_zip_code')}：</label>
-					<input type="text" id="zipcode" class="l-length">
+					<label>{:lang('member_zip_code')}：</label>
+					<input type="text" id="zipcode" class="s-length">
 				</li>
 			</ul>
 			<input type="hidden" id="address_id" value="0">

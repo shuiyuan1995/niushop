@@ -271,7 +271,8 @@ return [
     'member_new_delivery_address'    => '新增收货地址',
     'member_operation_prompt'        => '操作提示',
     'member_operation_addresses'     => '您可对已有的地址进行编辑及删除，亦可新增收货地址',
-    'member_distribution_area'       => '配送区域', 
+    'member_distribution_area'       => '配送区域',
+    'member_select_country'          => '请选择国家',
     'member_select_province'         => '请选择省',
     'member_select_city'             => '请选择市', 
     'member_selection_area'          => '请选择区',
@@ -284,6 +285,8 @@ return [
     'member_receive_address_list'    => '收货地址列表',
     'member_consignee'               => '收货人',
     'member_location'                => '所在国家',
+    'member_province'                => '省份',
+    'member_city'                    => '城市',
   //  'member_cell_phone_number'       => '手机号',//
     'member_modify'                  => '修改',
     'member_empty_address_yet'       => '您还没有添加收货地址哦',

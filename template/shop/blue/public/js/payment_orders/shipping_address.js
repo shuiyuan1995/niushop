@@ -105,14 +105,14 @@ $(function(){
 	$("#save_shipping_address").bind("click",function(){
 		if(validationAddress()){
 			var address_id = $("#address_id").val();
-			var consigner = $("#consigner").val();//收件人
-			var detailed_address = $("#detailed_address").val();//详细地址
-			var zipcode = $("#zipcode").val();//邮编
-			var mobile = $("#mobile").val();//手机
-			var phone = $("#phone").val();//固定电话
-			var selProvinces = $("#selProvinces").val();//省
-			var selCities = $("#selCities").val();//市
-			var selDistricts = $("#selDistricts").val();//区
+            var consigner = $("#consigner").val();//收件人
+            var mobile = $("#mobile").val();//手机
+            var phone = $("#phone").val();//固定电话
+            var detailed_address = $("#detailed_address");//详细地址
+            var sel_country = $("#selCountry").val();//国家
+            var detailed_province = $("#detailed_province").val();//省份
+            var detailed_city = $("#detailed_city").val();//城市
+            var zipcode = $("#zipcode").val();//邮编
 			if(flag){
 				return;
 			}
@@ -127,9 +127,9 @@ $(function(){
 					"phone" : phone,
 					"zipcode" : zipcode,
 					"address" : detailed_address,
-					"province" : selProvinces,
-					"city" : selCities,
-					"district" : selDistricts
+					'country' : sel_country,
+					"province" : detailed_province,
+					"city" : detailed_city,
 					},
 				success : function(res){
 					$.msg(res.message);
@@ -197,9 +197,9 @@ function validationAddress(){
 	var mobile = $("#mobile");//手机
 	var phone = $("#phone").val();//固定电话
 	var detailed_address = $("#detailed_address");//详细地址
-	var selProvinces = $("#selProvinces");//省
-	var selCities = $("#selCities");//市
-	var selDistricts = $("#selDistricts");//区
+	var sel_country = $("#selCountry").val();//国家
+	var detailed_province = $("#detailed_province").val();//省份
+	var detailed_city = $("#detailed_city").val()//城市
 	var zipcode = $("#zipcode").val();//邮编
 	if(consigner.val() == ""){
 		consigner.focus();
@@ -228,24 +228,24 @@ function validationAddress(){
 		} 
 	}
 
-	if(parseInt(selProvinces.val()) == -1 || parseInt(selCities.val()) == -1 || (selDistricts.find("option").length>1 && parseInt(selDistricts.val()) == -1)){
-		selProvinces.focus();
-		$.msg('所在地区不完善');
-		return false;
-	}
-	
+    if(sel_country == "0"){
+        $("#selCountry").focus();
+        $.msg('请选择国家');
+        return false;
+    }
+
+
+    if(detailed_city == "") {
+        $("#selCountry").focus();
+        $.msg('城市不能为空');
+        return false;
+    }
+
 	if(detailed_address.val() == ""){
 		detailed_address.focus();
 		$.msg('详细地址不能为空');
 		return false;
 	}
-
-	if(zipcode == ""){
-        $("#zipcode").focus();
-		$.msg('邮政编码不能为空');
-		return false;
-	}
-
 	
 	return true;
 }

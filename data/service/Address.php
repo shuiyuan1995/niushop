@@ -975,9 +975,17 @@ class Address extends BaseService implements IAddress
 
     public function addCountry($data)
     {
-        Cache::rm("country");
         $country = new Country();
-        $res = $country->data($data)->save();
+        $row = $country->where('name',$data['name'])->find();
+        if ($row){
+            return 'exists';
+        }
+        Cache::rm("country");
+        if ($data['id']){
+            $res = $country->isUpdate(true)->save($data);
+        }else{
+            $res = $country->data($data)->save();
+        }
         return $res;
     }
 
@@ -990,6 +998,14 @@ class Address extends BaseService implements IAddress
         }elseif ($data['upType'] == 2){
             $res = $country->where('id',$data['id'])->update(['name'=>$data['countryName']]);
         }
+        return $res;
+    }
+
+    public function delCountry($id)
+    {
+        Cache::rm("country");
+        $country = new Country();
+        $res= $country->where('id',$id)->delete();
         return $res;
     }
 }
