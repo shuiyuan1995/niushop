@@ -797,8 +797,8 @@ input[type="radio"]:checked {
 					<input type="text" id="detailed_address" maxlength="30" class="l-length">
 				</li>
 				<li style="clear: both;">
-					<label>{:lang('member_zip_code')}：</label>
-					<input type="text" id="zipcode" maxlength="6" class="l-length" onkeyup="this.value=this.value.replace(/\D/g,'')">
+					<label><i>*</i>{:lang('member_zip_code')}：</label>
+					<input type="text" id="zipcode" class="l-length">
 				</li>
 			</ul>
 			<input type="hidden" id="address_id" value="0">

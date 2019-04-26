@@ -607,20 +607,26 @@ class Express extends BaseController
   							'child_name' => "地区管理",
   							"active" => 0
   					),
+                    array(
+                        "child_id" => 3,
+                        'url' => "config/country",
+                        'child_name' => "国家管理",
+                        "active" => 0
+                    ),
   					array(
-  							"child_id" => 3,
+  							"child_id" => 4,
   							'url' => "order/returnsetting",
   							'child_name' => "商家地址",
   							"active" => 0
   					),
   					array(
-  							"child_id" => 4,
+  							"child_id" => 5,
   							'url' => "config/distributionareamanagement",
   							'child_name' => "货到付款地区管理",
   							"active" => 0
   					),
   					array(
-  							"child_id" => 5,
+  							"child_id" => 6,
   							'url' => "config/expressmessage",
   							'child_name' => "物流跟踪设置",
   							"active" => 0

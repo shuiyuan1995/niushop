@@ -200,6 +200,7 @@ function validationAddress(){
 	var selProvinces = $("#selProvinces");//省
 	var selCities = $("#selCities");//市
 	var selDistricts = $("#selDistricts");//区
+	var zipcode = $("#zipcode").val();//邮编
 	if(consigner.val() == ""){
 		consigner.focus();
 		$.msg("收件人不能为空");
@@ -238,6 +239,13 @@ function validationAddress(){
 		$.msg('详细地址不能为空');
 		return false;
 	}
+
+	if(zipcode == ""){
+        $("#zipcode").focus();
+		$.msg('邮政编码不能为空');
+		return false;
+	}
+
 	
 	return true;
 }

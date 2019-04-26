@@ -851,7 +851,7 @@ class Order extends BaseController
         $express = new Express();
         $child_menu_list = $express->getExpressChildMenu(1);
         $this->assign('child_menu_list', $child_menu_list);
-        $express_child = $express->getExpressChild(1,3);
+        $express_child = $express->getExpressChild(1,4);
         $this->assign('express_child', $express_child);
         
         $order_service = new OrderService();

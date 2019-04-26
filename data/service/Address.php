@@ -27,6 +27,7 @@ use data\model\DistrictModel as District;
 use data\model\NsOffpayAreaModel;
 use data\model\ProvinceModel as Province;
 use data\service\BaseService as BaseService;
+use data\model\CountryModel as Country;
 use think\Cache;
 
 class Address extends BaseService implements IAddress
@@ -955,5 +956,40 @@ class Address extends BaseService implements IAddress
         } else {
             return 0;
         }
+    }
+
+    public function getCountry()
+    {
+        $cache = Cache::get("country");
+        if(empty($cache))
+        {
+            $country = new Country();
+            $list = $country->order('sort','asc')->select();
+            $list = collection($list)->toArray();
+            Cache::set("country", $list);
+            return $list;
+        }else{
+            return $cache;
+        }
+    }
+
+    public function addCountry($data)
+    {
+        Cache::rm("country");
+        $country = new Country();
+        $res = $country->data($data)->save();
+        return $res;
+    }
+
+    public function updateCountryAjax($data)
+    {
+        Cache::rm('country');
+        $country = new Country();
+        if ($data['upType'] == 1){
+            $res = $country->where('id',$data['id'])->update(['sort'=>$data['sort']]);
+        }elseif ($data['upType'] == 2){
+            $res = $country->where('id',$data['id'])->update(['name'=>$data['countryName']]);
+        }
+        return $res;
     }
 }

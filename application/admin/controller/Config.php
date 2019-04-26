@@ -18,6 +18,7 @@ namespace app\admin\controller;
 use app\api\controller\User;
 use data\extend\Send;
 use data\service\Address as DataAddress;
+use data\service\Address;
 use data\service\Config as WebConfig;
 use data\service\GoodsCategory;
 use data\service\Platform;
@@ -1600,6 +1601,50 @@ class Config extends BaseController
         return view($this->style . 'Config/areaManagement');
     }
 
+    public function country()
+    {
+        // 获取物流配送三级菜单
+        $express = new Express();
+        $child_menu_list = $express->getExpressChildMenu(1);
+        $this->assign('child_menu_list', $child_menu_list);
+        $express_child = $express->getExpressChild(1, 3);
+        $this->assign('express_child', $express_child);
+
+        $address = new Address();
+        $country = $address->getCountry();
+        $this->assign("country",$country);
+
+        return view($this->style . 'Config/country');
+    }
+
+    public function addCountry()
+    {
+        $data['name'] = $this->request->post('countryName');
+        $data['sort'] = $this->request->post('regionSort');
+
+        $address = new Address();
+        $result = $address->addCountry($data);
+        if ($result){
+            return returnAjax(0,'添加成功');
+        }
+        return returnAjax(1,'添加失败');
+    }
+
+    public function updateCountryAjax()
+    {
+        if ($this->request->isAjax()){
+            $data = $this->request->post();
+            $address = new Address();
+            $result = $address->updateCountryAjax($data);
+            if ($result){
+                return returnAjax(0,'修改成功');
+            }
+            return returnAjax(1,'修改失败');
+        }else{
+            return returnAjax(1,'请求错误');
+        }
+    }
+
     public function selectCityListAjax()
     {
         if (request()->isAjax()) {
@@ -2124,7 +2169,7 @@ class Config extends BaseController
         $express = new Express();
         $child_menu_list = $express->getExpressChildMenu(1);
         $this->assign('child_menu_list', $child_menu_list);
-        $express_child = $express->getExpressChild(1, 4);
+        $express_child = $express->getExpressChild(1, 5);
         $this->assign('express_child', $express_child);
         
         $dataAddress = new DataAddress();
@@ -2227,7 +2272,7 @@ class Config extends BaseController
         $express = new Express();
         $child_menu_list = $express->getExpressChildMenu(1);
         $this->assign('child_menu_list', $child_menu_list);
-        $express_child = $express->getExpressChild(1, 5);
+        $express_child = $express->getExpressChild(1, 6);
         $this->assign('express_child', $express_child);
         
         $config_service = new WebConfig();

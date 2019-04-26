@@ -162,6 +162,7 @@ $(document).ready(function(){
 				$("#emailyz").css("color","red").text("{:lang('member_enter_correct_email_format')}");
 			return false;
 		}
+        $("#sendOutCode").val("正在发送. . .");
 		//验证邮箱是否已经注册
 		var is_click = 0;
 		$.ajax({
@@ -187,7 +188,8 @@ $(document).ready(function(){
 						data: {"email":email,"vertification":vertification},
 						success: function(data){
 							if(data['code'] == 0){
-								$("#emailyz").css("color","red").text("{:lang('send_successfully')}");
+                                layer.msg("{:lang('send_successfully')}");
+							    //$("#emailyz").css("color","red").text("{:lang('send_successfully')}");
 								time();
 								is_click = 0;
 							}else{
@@ -206,12 +208,12 @@ $(document).ready(function(){
 
 });
 
-var wait=120; 
+var wait=90;
 function time() {
 	if (wait == 0) {
 		$("#sendOutCode").removeAttr("disabled");
 		$("#sendOutCode").val("{:lang('get_validation_code')}"); 
-		wait = 120;
+		wait = 90;
 	} else {
 		$("#sendOutCode").attr("disabled", 'disabled');
 		$("#sendOutCode").val(wait+"s{:lang('post_resend')}");

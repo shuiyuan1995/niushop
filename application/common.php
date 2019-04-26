@@ -203,6 +203,12 @@ function AjaxReturn($err_code, $data = [])
     return $rs;
 }
 
+function returnAjax($code,$message)
+{
+    $data = array('code'=>$code,'message'=>$message);
+    return json($data);
+}
+
 /**
  * 图片上传函数返回上传的基本信息
  * 传入上传路径

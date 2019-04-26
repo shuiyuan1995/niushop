@@ -283,7 +283,7 @@ return [
     'member_add_delivery_address'    => '添加收货地址',
     'member_receive_address_list'    => '收货地址列表',
     'member_consignee'               => '收货人',
-    'member_location'                => '所在地区',
+    'member_location'                => '所在国家',
   //  'member_cell_phone_number'       => '手机号',//
     'member_modify'                  => '修改',
     'member_empty_address_yet'       => '您还没有添加收货地址哦',
@@ -535,7 +535,7 @@ return [
     'member_no_order_want'          => '没有找到您想要的订单',
     'member_courier_services_company'=> '快递公司',
     'member_logistics_tracking'      => '物流跟踪',
-    'member_consignee'               => '收货人信息',
+    'member_consignee'               => '收货人',
     'member_modify_address'          => '修改地址',
     'member_add_new_address'         => '添加新地址',
     'back_cart_to_update'     => '返回购物车修改',
