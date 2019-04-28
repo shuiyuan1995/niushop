@@ -520,22 +520,22 @@ i.icon-add-add {
 .zhifu-box {
 	border: 1px solid #e0e0e0;
 	background-color: #fff;
-	padding: 20px 0;
-	margin-bottom: 10px;
+	/* padding: 20px 0;
+	margin-bottom: 10px; */
 }
 
 .zhifu-box ul {
 	overflow: hidden;
 	clear: both;
-	margin: 0 39px;
+	/* margin: 0 39px; */
 }
 
 .zhifu-box ul li {
 	position: relative;
 	overflow: hidden;
 	float: left;
-	margin-left: 20px;
-	margin-bottom: 20px;
+	/* margin-left: 20px;
+	margin-bottom: 20px; */
 } /*width:178px;height: 47px;*/
 .zhifu-box ul li img {
 	width: 33px;
@@ -608,7 +608,7 @@ i.icon-add-add {
 }
 
 .order-invoice .item .label {
-	margin-left: 39px;
+	/* margin-left: 39px; */
 }
 
 .order-invoice .item li.company {

@@ -39,6 +39,7 @@ $(function() {
 	 * 2017年6月21日 14:16:57 王永杰
 	 */
 	$(".item-options[data-flag]").click(function() {
+		if($(this).attr('id')=='baoxianphone') return false
 		var curr_options = $(this);//当前点击的项
 		var flag = curr_options.attr('data-flag');
 		if(flag != undefined){

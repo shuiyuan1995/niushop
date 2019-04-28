@@ -224,6 +224,7 @@ $(function(){
 	 * 选择是否购买保险
 	 */
 	$("#baoxian_method .js-select li").click(function(){
+		return false;
 		if($(this).attr("data-code") == "no_config"){
 			return;
 		}
@@ -448,7 +449,7 @@ function init(){
 	.children("a").addClass("selected");
 	// 选中购买保险
 	$("#baoxian_method .js-select li")
-	.eq(0).children("i").show().end()
+	.eq(1).children("i").show().end()
 	.children("a").addClass("selected");
 	
 	//初始化合计
