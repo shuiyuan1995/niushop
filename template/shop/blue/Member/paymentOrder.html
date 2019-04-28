@@ -516,6 +516,54 @@ input[type="radio"]:checked {
 				</div>
 			</div> 
 		{/if}
+
+		<div class="style-zhifu order-invoice">
+			<div class="cart-title">
+				<h3>
+					<span>是否拆包</span>
+				</h3>
+			</div>
+			<div class="zhifu-box" id="chaibao_method">
+				<div class="item js-select">
+					<div class="label">
+						<ul class="zfb">
+							<li data-code="merchant_distribution">
+								<i class="icon-check-zf"></i>
+								<a href="javascript:void(0);">是</a>
+							</li>
+							<li data-code="afhalen">
+								<i class="icon-check-zf"></i>
+								<a href="javascript:void(0);">否</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div> 
+
+		<div class="style-zhifu order-invoice" id="baoxian">
+				<div class="cart-title">
+					<h3>
+						<span>是否购买保险</span>
+					</h3>
+				</div>
+				<div class="zhifu-box" id="baoxian_method">
+					<div class="item js-select">
+						<div class="label">
+							<ul class="zfb">
+								<li data-code="merchant_distribution">
+									<i class="icon-check-zf"></i>
+									<a href="javascript:void(0);">是</a>
+								</li>
+								<li data-code="afhalen">
+									<i class="icon-check-zf"></i>
+									<a href="javascript:void(0);">否</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div> 
 		
 		{if condition="count($shop_config.order_invoice_content_list)"}
 		<div class="style-zhifu order-invoice">
@@ -643,6 +691,14 @@ input[type="radio"]:checked {
 								<span class="txtmoney">￥<b id="express">0.00</b></span>
 							</p>
 							{/if}
+							<p class="slivergrey">
+								<span>拆包：</span>
+								<span class="txtmoney">￥<b id="express">0.00</b></span>
+							</p>
+							<p id="baoxianfei" class="slivergrey">
+								<span>保险：</span>
+								<span class="txtmoney">￥<b id="express">0.00</b></span>
+							</p>
 							<!-- 总优惠 -->
 							<p class="slivergrey">
 								<span>{:lang('member_total_discount')}：</span>
