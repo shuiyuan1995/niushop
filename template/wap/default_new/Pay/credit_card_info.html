@@ -2,119 +2,78 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>{:lang('choose_payment_method')}-{$title}</title>
+    <link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/pro-detail.css">
+    <link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/member_address.css">
     <link type="text/css" rel="stylesheet" href="__TEMP__/{$style}/public/css/pay/pcPayValue.css">
     <style>
-        .payment-wrap {
+        #month{
+            width: 10%;
             text-align: center;
+            padding-left: 10px;
         }
-
-        .payment-wrap label {
-            display: block;
-            margin-top: 10px;
-        }
-
-        .payment-wrap label span {
-            display: inline-block;
-            width: 100px;
-            text-align: right;
-            color: #999;
-        }
-
-        .payment-wrap label select {
-            border: 1px solid #ddd;
-            height: 35px;
-            width: 104px;
-            line-height: 30px;
-            padding: 0px 5px;
-            color: #333333;
-        }
-
-        .payment-wrap label input {
-            border: 1px solid #ddd;
-            height: 30px;
-            width: 200px;
-            line-height: 30px;
-            padding: 0px 5px;
-            color: #333333;
-        }
-
-        .payment-wrap label:first-of-type select {
-            width: 212px;
-        }
-
-        .payment-wrap button {
-            margin-top: 10px;
-            padding: 6px 15px;
-            cursor: pointer;
-            border: none;
-            background: #3bbae5;
+        #year{
+            width: 16%;
+            text-align: center;
+            padding-left: 12px;
         }
     </style>
     <link rel="stylesheet" href="__TEMP__/{$style}/public/css/layer.css" id="layuicss-skinlayercss">
 </head>
-<body class="body">
-<div class="header">
-    <div class="container">
-        <div class="logo fl">
-            <img alt="{$web_info.title}{:lang('cashier_desk')}" src="{:__IMG($web_info.logo)}"/>
-        </div>
-    </div>
-</div>
+<body class="body-gray" style="margin:auto;">
+	<section class="head">
+		<a class="head_back" href="javascript:window.history.go(-1)"><i class="icon-back"></i></a>
+		<div class="head-title">信息填写</div>
+	</section>
 <!-- 订单支付内容区域 -->
-<div class="pay-body">
-    <div class="payment-wrap">
-        <h2>信息填写mobile</h2>
-        <form action="APP_MAIN/pay/credit_card_info" method="post" onsubmit="return checkForm()">
-            <label for="">
-                <span>选择信用卡:</span>
-                <select name="ckind" id="cart_type">
-                    <option value="Visa">Visa</option>
-                    <option value="Master">Master card</option>
-                    <option value="Discover">Discover</option>
-                    <option value="Amex">Amex</option>
-                </select>
-            </label>
-            <label for="">
-                <span>持卡人姓名:</span>
-                <input id="user" type="text" name="username">
-            </label>
-            <label for="">
-                <span>卡号:</span>
-                <input id="cid" type="text" name="cid">
-            </label>
-            <label for="">
-                <span>失效日期:</span>
-                <select name="month" id="month">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                </select>/<select name="year" id="year">
+    <form class="form-info" action="APP_MAIN/pay/credit_card_info" method="post" onsubmit="return checkForm()">
+        <div class="div-item">
+            <span>选择信用卡</span>
+            <select  name="ckind" id="cart_type">
+                <option value="Visa" data-account-type-name="Visa">Visa</option>
+                <option value="Master card" data-account-type-name="Master card">Master card</option>
+                <option value="Discover" data-account-type-name="Discover">Discover</option>
+                <option value="Amex" data-account-type-name="Amex">Amex</option>
+            </select>
+        </div>
+        <div class="div-item">
+            <span>持卡人姓名</span>
+            <input type="text" placeholder="{:lang('member_enter_your_real_name')}" id="user" name="username"/>
+        </div>
+        <div class="div-item">
+            <span>卡号</span>
+            <input id="cid" type="text" name="cid" placeholder="请输入卡号"/>
+        </div>
+        <div class="div-item">
+            <span>失效日期</span>
+            <select  name="month" id="month">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>/<select name="year" id="year">
                 <option value="2019">2019</option>
                 <option value="2020">2020</option>
                 <option value="2021">2021</option>
                 <option value="2022">2022</option>
                 <option value="2023">2023</option>
             </select>
-            </label>
-            <label for="">
-                <span>安全码:</span>
-                <input id="code" type="text" name="pwd">
-            </label>
-            <button type="submit">提交</button>
-            <!-- <a href="APP_MAIN/pay/credit_card_info" onclick="aa()" id="btn-success">提交</a> -->
-        </form>
-    </div>
-</div>
+        </div>
+        <div class="div-item">
+            <span>安全码</span>
+            <input id="code" type="text" name="pwd" placeholder="{:lang('member_enter_your_phone_number')}" />
+        </div>
+        <button type="submit" class="btn-save">提交</button>
+    </form>
 <script src="__TEMP__/{$style}/public/js/jquery.js"></script>
 <script type="text/javascript" src="__TEMP__/{$style}/public/js/layer.js"></script>
 <script type="text/javascript">

@@ -195,6 +195,44 @@ $(function(){
 		}
 		calculateTotalAmount();
 	})
+
+	/**
+	 * 选择是否拆包
+	 */
+	$("#chaibao_method .js-select li").click(function(){
+		if($(this).attr("data-code") == "no_config"){
+			return;
+		}
+		$("#chaibao_method .js-select li i").hide();
+		$("#chaibao_method .js-select li a").removeClass("selected");
+		$(this).children("i").show();
+		$(this).children("a").addClass("selected");
+		switch($(this).attr("data-code")){
+			case "merchant_distribution":
+				$("#baoxian").show(300);
+				$("#baoxianfei").show(300);
+			break;
+			case "afhalen":
+				$("#baoxian").hide(300);
+				$("#baoxianfei").hide(300);
+			break;
+		}
+		calculateTotalAmount();
+	})
+
+	/**
+	 * 选择是否购买保险
+	 */
+	$("#baoxian_method .js-select li").click(function(){
+		if($(this).attr("data-code") == "no_config"){
+			return;
+		}
+		$("#baoxian_method .js-select li i").hide();
+		$("#baoxian_method .js-select li a").removeClass("selected");
+		$(this).children("i").show();
+		$(this).children("a").addClass("selected");
+		calculateTotalAmount();
+	})
 	
 	/**
 	 * 选择发票内容
@@ -403,6 +441,15 @@ function init(){
 	}else{
 		$("#shipping_method .js-select").html('<p class="label fl">商家未配置配送方式</p>');
 	}
+
+	// 选中拆包
+	$("#chaibao_method .js-select li")
+	.eq(0).children("i").show().end()
+	.children("a").addClass("selected");
+	// 选中购买保险
+	$("#baoxian_method .js-select li")
+	.eq(0).children("i").show().end()
+	.children("a").addClass("selected");
 	
 	//初始化合计
 	var init_total_money = parseFloat($("#hidden_count_money").val());//商品金额
