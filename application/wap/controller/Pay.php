@@ -308,10 +308,14 @@ class Pay extends Controller
             $out_trade_no = request()->post("out_trade_no", "");
             $pay = new UnifyPay();
             $payResult = $pay->getPayInfo($out_trade_no);
+            $website = new WebSite();
+            $web = $website->getWebSiteInfo();
+            $web_url = $web['web_url'];
             if ($payResult['pay_status'] > 0) {
                 return $retval = array(
                     "code" => 1,
-                    "message" => ''
+                    "message" => '',
+                    'web_url' => $web_url
                 );
             }
         }

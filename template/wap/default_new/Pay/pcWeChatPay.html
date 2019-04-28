@@ -88,7 +88,7 @@
 				},
 				success : function(data){
 					if(data['code'] > 0){
-						location.href="{:__URL('APP_MAIN/pay/wchatPayResult?out_trade_no='.$pay_value['out_trade_no'].'&msg=1')}";
+                        location.href=data['web_url']+"/wap/pay/wchatPayResult?out_trade_no={$pay_value['out_trade_no']}&msg=1";
 						clearInterval(payStatus);
 					}
 				}
