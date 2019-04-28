@@ -382,8 +382,8 @@ public function registerMember($user_name, $password, $email, $mobile, $user_qq_
         // 处理地址信息
         if (! empty($data)) {
             $address = new Address();
-            $address_info = $address->getAddress($data['province'], $data['city'], $data['district']);
-            $data['address_info'] = $address_info;
+            $address_info = $address->getCountryDetail($data['country']);
+            $data['country_detail'] = $address_info;
         }
         
         return $data;
@@ -537,7 +537,7 @@ public function registerMember($user_name, $password, $email, $mobile, $user_qq_
      *
      * @see \data\api\IMember::addMemberExpressAddress()
      */
-    public function addMemberExpressAddress($consigner, $mobile, $phone, $province, $city, $district, $address, $zip_code, $alias)
+    public function addMemberExpressAddress($consigner, $mobile, $phone, $province, $city, $country, $address, $zip_code, $alias)
     {
         $express_address = new NsMemberExpressAddressModel();
         $express_address->save([
@@ -551,9 +551,9 @@ public function registerMember($user_name, $password, $email, $mobile, $user_qq_
             'consigner' => $consigner,
             'mobile' => $mobile,
             'phone' => $phone,
-            'province' => $province,
-            'city' => $city,
-            'district' => $district,
+            'province_detail' => $province,
+            'city_detail' => $city,
+            'country' => $country,
             'address' => $address,
             'zip_code' => $zip_code,
             'alias' => $alias,
@@ -567,7 +567,7 @@ public function registerMember($user_name, $password, $email, $mobile, $user_qq_
     /**
      * 修改会员收货地址
      */
-    public function updateMemberExpressAddress($id, $consigner, $mobile, $phone, $province, $city, $district, $address, $zip_code, $alias)
+    public function updateMemberExpressAddress($id, $consigner, $mobile, $phone, $province, $city, $country, $address, $zip_code, $alias)
     {
         $express_address = new NsMemberExpressAddressModel();
         $data = array(
@@ -575,9 +575,9 @@ public function registerMember($user_name, $password, $email, $mobile, $user_qq_
             'consigner' => $consigner,
             'mobile' => $mobile,
             'phone' => $phone,
-            'province' => $province,
-            'city' => $city,
-            'district' => $district,
+            'province_detail' => $province,
+            'city_detail' => $city,
+            'country' => $country,
             'address' => $address,
             'zip_code' => $zip_code,
             'alias' => $alias
@@ -606,8 +606,8 @@ public function registerMember($user_name, $password, $email, $mobile, $user_qq_
         if (! empty($data)) {
             foreach ($data['data'] as $key => $val) {
                 $address = new Address();
-                $address_info = $address->getAddress($val['province'], $val['city'], $val['district']);
-                $data['data'][$key]['address_info'] = $address_info;
+                $country_info = $address->getCountryDetail($val['country']);
+                $data['data'][$key]['country_detail'] = $country_info;
             }
         }
         return $data;

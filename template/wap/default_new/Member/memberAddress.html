@@ -56,7 +56,7 @@
 		</div>
 		<a href="javascript:void(0)" class="classnone" style="padding: 5px;" id="mo" onclick='selectAddress({$address.id},this)'>
 			<span class="payStatus">{:lang('member_detailed_address')}：</span>
-			<span class="address">{$address.address_info}&nbsp;{$address.address}</span>
+			<span class="address">{$address.country_detail}&nbsp;{$address.province_detail} {$address.city.detail} {$address.address}</span>
 			<span class="payStatus" style="float: right; line-height: 20px;"><i class="icon-success"></i></span>
 		</a>
 	</li>{/foreach}

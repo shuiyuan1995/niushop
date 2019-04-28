@@ -28,22 +28,29 @@
 			<div class="mar_top">
 				<table width="100%" border="0" cellpadding="10" cellspacing="1" bgcolor="#eeeeee">
 					<tr>
-						<td align="right" width="10%">{:lang('member_distribution_area')}：</td>
+						<td align="right" width="10%">{:lang('member_location')}：</td>
 						<td colspan="3" align="left">
-							<select name="province" id="seleAreaNext" onchange="GetProvince();getSelCity()" class="inputBg">
-							<option value="">{:lang('member_select_province')}</option>
+							<select name="province" id="selCountry" class="inputBg">
+								<option value="0">{:lang('member_select_country')}</option>
+								{volist name="country" id="data"}
+								<option value="{$data.id}" {if condition="$data.id eq $address_info.country"}selected="selected"{/if}>{$data.name}</option>
+								{/volist}
+
 							</select>
-							<select name="city" id="seleAreaThird" onchange="getSelCity()" class="inputBg">
-								<option value="">{:lang('member_select_city')}</option>
-							</select>
-							<select name="district" id="seleAreaFouth" class="inputBg">
-								<option value="-1">{:lang('member_selection_area')}</option>
-							</select>
-						({:lang('member_required')}) </td>
+							({:lang('member_required')})
+						</td>
 					</tr>
 					<tr>
 						<td align="right" width="10%">{:lang('member_consignee_name')}：</td>
 						<td align="left" width="40%"><input name="consignee" type="text" class="inputBg" id="Name" value="{$address_info['consigner']}" />({:lang('member_required')}) </td>
+					</tr>
+					<tr>
+						<td align="right" width="10%">{:lang('member_province')}：</td>
+						<td align="left" width="40%"><input type="text" id="detailed_province" name="province_detail" class="inputBg" value="{$address_info['province_detail']}" /></td>
+					</tr>
+					<tr>
+						<td align="right" width="10%">{:lang('member_city')}：</td>
+						<td align="left" width="40%"><input type="text" id="detailed_city" name="detailed_city" class="inputBg" value="{$address_info['city_detail']}">({:lang('member_required')})</td>
 					</tr>
 					<tr>
 						<td align="right">{:lang('member_detailed_address')}：</td>
@@ -52,12 +59,16 @@
 					<tr>
 						<td align="right">{:lang('member_phone')}：</td>
 						<td align="left"><input name="mobile" type="text" class="inputBg" id="Moblie" value="{$address_info['mobile']}" />({:lang('member_required')})</td>
-					</tr> 
+					</tr>
 				 	<tr>
 	                  	<td align="right">{:lang('member_fixed_telephone')}：</td>
                   		<td align="left"><input name="mobile" type="text" class="inputBg" id="phone" value="{$address_info['phone']}" />
 	                  	</td>
-	                </tr> 
+	                </tr>
+					<tr>
+						<td align="right">{:lang('member_zip_code')}：</td>
+						<td align="left"><input type="text" class="inputBg" name="zipcode" id="zipcode" value="{$address_info['zip_code']}" /></td>
+					</tr>
 					<tr>
 						<td colspan="4" align="center">
 						<button onclick="saveAddress()" class="common-btn">{:lang('member_confirm_change')}</button>
@@ -83,7 +94,7 @@ $(function(){
 	$(".js-bread-crumb").attr("href",'{:__URL('SHOP_MAIN/member/addresslist')}');
 	$(".js-bread-crumb").text("{:lang('member_delivery_address')}");
 	$(".js-bread-crumb").parent().append('<span class="crumbs-arrow">&gt;</span><a href="{:__URL('SHOP_MAIN/member/updatememberaddress','id='.$address_info['id'])}">{:lang('member_modify_delivery_address')}</a>');
-	
+
 	var province=$("#provinceid").val();
 	var city=$("#cityid").val();
 	var district=$("#districtid").val();

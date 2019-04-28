@@ -5,21 +5,15 @@ function saveAddress() {
 	}
 	var url = "";
 /*	var ref_url = $("#ref_url").val();*/
-	var addressID = $("#AddressID").val();
-	var tempSeleAreaFouth = $("#seleAreaFouth").find("option:selected").text();
-	// 表示没有区县
-	if (tempSeleAreaFouth == "选择区/县") {
-		tempSeleAreaFouth = "";
-	}
-	var addressinfo = $("#AddressInfo").val();
-	var province = $("#seleAreaNext").val();
-	var city = $("#seleAreaThird").val();
-	var district = $("#seleAreaFouth").val();
+    var country = $("#selCountry").val();
+	var province = $("#detailed_province").val();
+	var city = $("#detailed_city").val();
+	var address = $("#AddressInfo").val();
 	var name=$("#Name").val();
 	var mobile=$("#Moblie").val();
-	var $remark=$("#AddressInfo").val();
 	var address_id=$("#adressid").val();
 	var phone = $("#phone").val();
+	var zipcode = $("#zipcode").val();
 	if(flag){
 		return;
 	}
@@ -28,7 +22,7 @@ function saveAddress() {
 		$.ajax({
 			type: "POST",
 			url: __URL(SHOPMAIN+"/member/addressInsert"),
-			data: {"consigner":name,"mobile":mobile,"province":province,"city":city,"district":district,"address":addressinfo,"phone":phone},
+			data: {"consigner":name,"mobile":mobile,"province":province,"city":city,"country":country,"address":address,"phone":phone,"zipcode":zipcode},
 			success: function (txt) {
 				if (txt["code"] >0) {
 				   window.location.href =__URL(SHOPMAIN+"/member/addressList");
@@ -44,7 +38,7 @@ function saveAddress() {
 		$.ajax({
 			type: "POST",
 			url: __URL(SHOPMAIN+"/member/updateMemberAddress"),
-			data: {"id":address_id,"consigner":name,"mobile":mobile,"province":province,"city":city,"district":district,"address":addressinfo,"phone":phone},
+			data: {"id":address_id,"consigner":name,"mobile":mobile,"province":province,"city":city,"country":country,"address":address,"phone":phone,"zipcode":zipcode},
 			success: function (txt) {
 				if (txt["code"] > 0) {
 					 window.location.href =__URL(SHOPMAIN+"/member/addressList");
@@ -61,28 +55,12 @@ function saveAddress() {
 
 function Check_Consignee() {
 	var reg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
-	if ($("#seleAreaFouth").val() < 0 || $("#seleAreaFouth").val() == "") {
-		if ($("#seleAreaNext").val() == "" || $("#seleAreaNext").val() == -1) {
-			$.msg("请选择省份", {
-				time: 2000
-			});
-			$("#seleAreaNext").focus();
-			return false;
-		}
-		if ($("#seleAreaThird").val() == "" || $("#seleAreaThird").val() == -1) {
-			$.msg("请选择市", {
-				time: 2000
-			});
-			$("#seleAreaThird").focus();
-			return false;
-		}
-		if($("#seleAreaFouth").find("option").length>1 && $("#seleAreaFouth").val() == -1){
-			$.msg("请选择区/县", {
-				time: 2000
-			});
-			$("#seleAreaFouth").focus();
-			return false;
-		}
+	if ($("#selCountry").val() == '0' || $("#selCountry").val() == "") {
+		$.msg("请选择国家", {
+			time: 2000
+		});
+		$("#selCountry").focus();
+		return false;
 	}
 
 	if ($("#Name").val() == "") {
@@ -91,7 +69,16 @@ function Check_Consignee() {
 		});
 		$("#Name").focus();
 		return false;
-	} 
+	}
+
+	if($("#detailed_city").val() == ""){
+        $.msg("城市不能为空", {
+            time: 2000
+        });
+        $("#detailed_city").focus();
+        return false;
+	}
+
 	if ($("#AddressInfo").val() == "") {
 		$.msg("详细地址不能为空", {
 			time: 2000

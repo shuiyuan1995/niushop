@@ -155,11 +155,11 @@ class Member extends BaseController
             $phone = request()->post('phone', '');
             $province = request()->post('province', '');
             $city = request()->post('city', '');
-            $district = request()->post('district', '');
+            $country = request()->post('country', '');
             $address = request()->post('address', '');
             $zip_code = request()->post('zip_code', '');
             $alias = request()->post('alias', '');
-            $retval = $member->addMemberExpressAddress($consigner, $mobile, $phone, $province, $city, $district, $address, $zip_code, $alias);
+            $retval = $member->addMemberExpressAddress($consigner, $mobile, $phone, $province, $city, $country, $address, $zip_code, $alias);
             return AjaxReturn($retval);
         } else {
             $member_detail = $this->getMemberDetail();
@@ -182,7 +182,7 @@ class Member extends BaseController
         $phone = request()->post('phone', ''); // 固定电话
         $province = request()->post('province', ''); // 省
         $city = request()->post('city', ''); // 市
-        $district = request()->post('district', ''); // 区县
+        $country = request()->post('country', ''); // 国家
         $address = request()->post('address', ''); // 详细地址
         $zip_code = request()->post('zipcode', ''); // 邮编
         $alias = ""; // 城市别名
@@ -190,10 +190,10 @@ class Member extends BaseController
         $res = null;
         if ($id == 0) {
             // 添加
-            $res = $member->addMemberExpressAddress($consigner, $mobile, $phone, $province, $city, $district, $address, $zip_code, $alias);
+            $res = $member->addMemberExpressAddress($consigner, $mobile, $phone, $province, $city, $country, $address, $zip_code, $alias);
         } else {
             // 修改
-            $res = $member->updateMemberExpressAddress($id, $consigner, $mobile, $phone, $province, $city, $district, $address, $zip_code, $alias);
+            $res = $member->updateMemberExpressAddress($id, $consigner, $mobile, $phone, $province, $city, $country, $address, $zip_code, $alias);
         }
         return AjaxReturn($res);
     }
@@ -224,11 +224,11 @@ class Member extends BaseController
             $phone = request()->post('phone', '');
             $province = request()->post('province', '');
             $city = request()->post('city', '');
-            $district = request()->post('district', '');
+            $country = request()->post('country', '');
             $address = request()->post('address', '');
-            $zip_code = request()->post('zip_code', '');
+            $zip_code = request()->post('zipcode', '');
             $alias = request()->post('alias', '');
-            $retval = $member->updateMemberExpressAddress($id, $consigner, $mobile, $phone, $province, $city, $district, $address, $zip_code, $alias);
+            $retval = $member->updateMemberExpressAddress($id, $consigner, $mobile, $phone, $province, $city, $country, $address, $zip_code, $alias);
             return AjaxReturn($retval);
         } else {
             $id = request()->get('id', '');
@@ -237,6 +237,8 @@ class Member extends BaseController
                 $this->error("当前地址不存在或者当前会员无权查看");
             }
             $member_detail = $this->getMemberDetail();
+            $country = $this->getProvince();
+            $this->assign("country",$country);
             $this->assign("member_detail", $member_detail);
             $this->assign("address_info", $info);
             return view($this->style . "Member/updateMemberAddress");
@@ -322,6 +324,20 @@ class Member extends BaseController
      * @return unknown
      */
     public function getSelectAddress()
+    {
+        $address = new Address();
+        $province_list = $address->getProvinceList();
+        $province_id = request()->post('province_id', 0);
+        $city_id = request()->post('city_id', 0);
+        $city_list = $address->getCityList($province_id);
+        $district_list = $address->getDistrictList($city_id);
+        $data["province_list"] = $province_list;
+        $data["city_list"] = $city_list;
+        $data["district_list"] = $district_list;
+        return $data;
+    }
+
+    public function getSelectCountry()
     {
         $address = new Address();
         $province_list = $address->getProvinceList();

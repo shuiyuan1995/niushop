@@ -29,16 +29,10 @@
 			<form action="" method="post" name="theForm">
 				<table width="100%" border="0" cellpadding="10" cellspacing="1" bgcolor="#eeeeee">
 					<tr>
-						<td align="right" width="10%">{:lang('member_distribution_area')}：</td>
+						<td align="right" width="10%">{:lang('member_location')}：</td>
 						<td colspan="3" align="left">
-							<select name="province" id="seleAreaNext" onchange="GetProvince();getSelCity();" class="inputBg">
-								<option value="">{:lang('member_select_province')}</option>
-							</select>
-							<select name="city" id="seleAreaThird" onchange="getSelCity();" class="inputBg">
-								<option value="">{:lang('member_select_city')}</option>
-							</select>
-							<select name="district" id="seleAreaFouth" class="inputBg">
-								<option value="-1">{:lang('goods_select_district_or_county')}</option>
+							<select name="province" id="selCountry" class="inputBg">
+								<option value="0">{:lang('member_select_country')}</option>
 							</select>
 							({:lang('member_required')})
 						</td>
@@ -46,6 +40,14 @@
 					<tr>
 						<td align="right" width="10%">{:lang('member_consignee_name')}：</td>
 						<td align="left" width="40%"><input name="consignee" type="text" class="inputBg" id="Name" />({:lang('member_required')}) </td>
+					</tr>
+					<tr>
+						<td align="right" width="10%">{:lang('member_province')}：</td>
+						<td align="left" width="40%"><input type="text" id="detailed_province" name="province_detail" class="inputBg"></td>
+					</tr>
+					<tr>
+						<td align="right" width="10%">{:lang('member_city')}：</td>
+						<td align="left" width="40%"><input type="text" id="detailed_city" name="detailed_city" class="inputBg">({:lang('member_required')})</td>
 					</tr>
 					<tr>
 						<td align="right">{:lang('member_detailed_address')}：</td>
@@ -57,7 +59,11 @@
 					</tr>
 					<tr>
 						<td align="right">{:lang('member_fixed_telephone')}：</td>
-						<td align="left"><input type="text" class="inputBg" id="phone" value="" /></td>
+						<td align="left"><input type="text" class="inputBg" name="phone" id="phone" value="" /></td>
+					</tr>
+					<tr>
+						<td align="right">{:lang('member_zip_code')}：</td>
+						<td align="left"><input type="text" class="inputBg" name="zipcode" id="zipcode" value="" /></td>
 					</tr>
 					<tr>
 						<td colspan="4" align="center"><input type="button" name="button" class="common-btn"  value="{:lang('member_new_delivery_address')}" onclick="saveAddress()"/></td>
@@ -80,29 +86,7 @@ $(function() {
 	$(".js-bread-crumb").attr("href",__URL('SHOP_MAIN/member/addresslist'));
 	$(".js-bread-crumb").text("{:lang('member_delivery_address')}");
 	$(".js-bread-crumb").parent().append('<span class="crumbs-arrow">&gt;</span><a href="{:__URL('SHOP_MAIN/member/addressinsert')}">{:lang('member_add_delivery_address')}</a>');
-	
-	var selCity = $("#seleAreaNext")[0];
-	for (var i = selCity.length - 1; i >= 0; i--) {
-		selCity.options[i] = null;
-	}
-	var opt = new Option("{:lang('member_select_province')}", "-1");
-	selCity.options.add(opt);
-	// 添加省
-	$.ajax({
-		type : "post",
-		url : __URL('SHOP_MAIN/member/getprovince'),
-		dataType : "json",
-		success : function(data) {
-			if (data != null && data.length > 0) {
-				for (var i = 0; i < data.length; i++) {
-					var opt = new Option(data[i].province_name,
-							data[i].province_id);
-					selCity.options.add(opt);
-				}
-				$("#seleAreaNext").val($("#provinceid").val());
-			}
-		}
-	});
+
 	
 	var address_id = $("#adressid").val();
 	if (address_id != 0) {
@@ -181,5 +165,24 @@ $(function() {
 		});
 	}
 });
+
+function initProvince(obj){
+    $.ajax({
+        type : "post",
+        url : __URL(SHOPMAIN + "/member/getprovince"),
+        dataType : "json",
+        success : function(data) {
+            if (data != null && data.length > 0) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += '<option value="'+data[i].id+'">'+data[i].name+'</option>';
+                }
+                $(obj).append(str);
+            }
+        }
+    });
+}
+
+initProvince("#selCountry");
 </script>
 {/block}

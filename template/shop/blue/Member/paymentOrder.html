@@ -117,7 +117,8 @@ input[type="radio"]:checked {
 									<span class="add-rside"></span>
 								</div>
 								<div class="elli add-detail">
-									<p title="{$info.address}" {if condition='$info.is_default==1'}style="color:#0689e1;"{/if}>{$info.address_info} {$info.address}</p>
+									<p title="{$info.address}" {if condition='$info.is_default==1'}style="color:#0689e1;"{/if}>{$info.country_detail} {$info.province_detail} {$info.city_detail}</p>
+                                    <p title="{$info.address}" {if condition='$info.is_default==1'}style="color:#0689e1;"{/if}>{$info.address}</p>
 								</div>
 								<div>
 									<span class="moblie"{if condition='$info.is_default==1'}style="color:#0689e1;"{/if}>{$info.mobile}</span>
