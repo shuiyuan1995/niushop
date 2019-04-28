@@ -42,7 +42,7 @@
 						{case value="1|3"}
 						<li class="name">
 							<span class="label">{:lang('member_delivery_address')}：</span>
-							<span class="value" style="line-height: 150%;">{$order['receiver_name']}，{$order['receiver_mobile']}，{notempty name="$order['fixed_telephone']"}{$order['fixed_telephone']}，{/notempty} {$order['address']}&nbsp;{if condition="$order['receiver_zip']!=''"}&nbsp;，{$order['receiver_zip']}{/if}</span>
+							<span class="value" style="line-height: 150%;">{$order['receiver_name']}，{$order['receiver_mobile']}，{notempty name="$order['fixed_telephone']"}{$order['fixed_telephone']}，{/notempty} {$order['address']}{if condition="$order['receiver_zip']!=''"}，{$order['receiver_zip']}{/if}</span>
 						</li>
 						{/case}
 						{case value="2"}

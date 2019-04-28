@@ -973,6 +973,13 @@ class Address extends BaseService implements IAddress
         }
     }
 
+    public function getCountryDetail($country_id)
+    {
+        $country = new Country();
+        $info = $country->where('id',$country_id)->find();
+        return $info['name'];
+    }
+
     public function addCountry($data)
     {
         $country = new Country();

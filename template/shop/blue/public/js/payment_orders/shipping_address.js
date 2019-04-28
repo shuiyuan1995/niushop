@@ -32,7 +32,9 @@ $(function(){
 			success : function(res){
 				if(res != null && res != ""){
 					$("#consigner").val(res.consigner);
-					getSelectAddress(res.province,res.city,res.district);
+					$("#selCountry").val(res.country);
+					$("#detailed_province").val(res.province_detail);
+                    $("#detailed_city").val(res.city_detail);
 					$("#detailed_address").val(res.address);
 					$("#zipcode").val(res.zip_code);
 					$("#mobile").val(res.mobile);
@@ -108,7 +110,7 @@ $(function(){
             var consigner = $("#consigner").val();//收件人
             var mobile = $("#mobile").val();//手机
             var phone = $("#phone").val();//固定电话
-            var detailed_address = $("#detailed_address");//详细地址
+            var detailed_address = $("#detailed_address").val();//详细地址
             var sel_country = $("#selCountry").val();//国家
             var detailed_province = $("#detailed_province").val();//省份
             var detailed_city = $("#detailed_city").val();//城市
@@ -130,7 +132,7 @@ $(function(){
 					'country' : sel_country,
 					"province" : detailed_province,
 					"city" : detailed_city,
-					},
+				},
 				success : function(res){
 					$.msg(res.message);
 					if(res.code>0){
@@ -212,7 +214,7 @@ function validationAddress(){
 		$.msg("手机号码不能为空");
 		return false;
 	}
-	var reg = /^1[34578][0-9]\d{8}$/;
+	var reg = /^1[345789][0-9]\d{8}$/;
 	if(!reg.test(mobile.val())){
 		mobile.focus();
 		$.msg("手机号码格式错误");

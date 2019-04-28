@@ -566,11 +566,11 @@ class Member extends BaseController
             $phone = request()->post('phone', '');
             $province = request()->post('province', '');
             $city = request()->post('city', '');
-            $district = request()->post('district', '');
+            $country = request()->post('country', '');
             $address = request()->post('address', '');
-            $zip_code = request()->post('zip_code', '');
+            $zip_code = request()->post('zipcode', '');
             $alias = request()->post('alias', '');
-            $retval = $member->addMemberExpressAddress($consigner, $mobile, $phone, $province, $city, $district, $address, $zip_code, $alias);
+            $retval = $member->addMemberExpressAddress($consigner, $mobile, $phone, $province, $city, $country, $address, $zip_code, $alias);
             return AjaxReturn($retval);
         } else {
             $address_id = request()->get('addressid', 0);
@@ -581,6 +581,8 @@ class Member extends BaseController
             } else {
                 $pre_url = '';
             }
+            $country = $this->getCountry();
+            $this->assign("country",$country);
             $this->assign("pre_url", $pre_url);
             $flag = request()->get('flag', '');
             $this->assign("flag", $flag);
@@ -591,6 +593,13 @@ class Member extends BaseController
             
             return view($this->style . "Member/addMemberAddress");
         }
+    }
+
+    public function getCountry()
+    {
+        $address = new Address();
+        $country_list = $address->getCountry();
+        return $country_list;
     }
 
     /**
@@ -608,9 +617,9 @@ class Member extends BaseController
             $phone = request()->post('phone', '');
             $province = request()->post('province', '');
             $city = request()->post('city', '');
-            $district = request()->post('district', '');
+            $district = request()->post('country', '');
             $address = request()->post('address', '');
-            $zip_code = request()->post('zip_code', '');
+            $zip_code = request()->post('zipcode', '');
             $alias = request()->post('alias', '');
             $retval = $member->updateMemberExpressAddress($id, $consigner, $mobile, $phone, $province, $city, $district, $address, $zip_code, $alias);
             return AjaxReturn($retval);
@@ -624,6 +633,8 @@ class Member extends BaseController
             if (empty($info)) {
                 $this->error("没有获取到地址信息");
             }
+            $country = $this->getCountry();
+            $this->assign("country",$country);
             $this->assign("address_info", $info);
             $this->assign("flag", $flag);
             $pre_url = $_SERVER['HTTP_REFERER'];
