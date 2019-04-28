@@ -73,6 +73,13 @@
 						</a>
 					</dd>
 				</dl>
+				<!-- 选中样式为a标签添加curr样式 -->
+				<a href="javascript:;"  data-type="1" title="{:lang('list_model')}" class="filter-type filter-type-list js-filter-type">
+					<span class="filter-type-icon"></span>
+				</a>
+				<a href="javascript:;" data-type="0" title="{:lang('big_picture_mode')}" class="filter-type filter-type-grid curr js-filter-type">
+					<span class="filter-type-icon"></span>
+				</a>
 				<div class="total">{:lang('goods_total')} <span class="color" id="shops_count">{$total_count}</span>{:lang('goods_goods')}&nbsp;</div>
 				<dl class="order f-right">
 					<!-- <dd class="first">
@@ -80,7 +87,7 @@
 					</dd> -->
 				</dl> 
 			</div>
-			 <div class="fore2">
+			 <!-- <div class="fore2">
 				<div class="filter-btn">
 					<span class="distribution">{:lang('goods_delivery_to')}</span>
 					<div class="region-chooser-container region-chooser" style="z-index: 3">
@@ -126,7 +133,6 @@
 					</a>
 				</div>
 				<div class="filter-mod">
-					<!-- 选中样式为a标签添加curr样式 -->
 					<div class="nch-sortbar-location">{:lang('goods_location')}：
 						<div class="select-layer">
 							<div class="holder">
@@ -157,7 +163,7 @@
 						<span class="filter-type-icon"></span>
 					</a>
 				</div>
-			</div>
+			</div> -->
 			<ul class="options">
 				<div class="filter-detailc" id="addressDraw">
 					<dl class="location-hots">

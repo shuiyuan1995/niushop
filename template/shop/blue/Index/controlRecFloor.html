@@ -16,7 +16,7 @@
 	.bland-list li:nth-child(odd){border-right:1px solid #eee;border-left:1px solid #eee;}
 	.bland-list li:nth-child(7),.bland-list li:nth-child(8){border-bottom:none;}
 	.goods-list-ul{overflow:hidden;}
-	.goods-list-ul li{background-color: #ffffff;margin-bottom: 16px;margin-right: 28px;width: 279px;float:left;text-align: center;border-left: 1px solid #eee;border-bottom: 1px solid #eee;}
+	.goods-list-ul li{width:281px;background-color: #ffffff;margin-bottom: 16px;margin-right: 28px;float:left;text-align: center;border-left: 1px solid #eee;border-bottom: 1px solid #eee;}
 	.goods-list-ul li:nth-of-type(4n+4){margin-right: 0px !important;}
 	.goods-block{float:left;overflow:hidden;width: 100%}
 	.goodslist{border-left: 1px solid #eee;}
@@ -103,11 +103,10 @@
 	</script>
 	{volist name="block_list" id="vo"}
 	{if condition ="!empty($vo['goods_list'])"}
-	<!-- 新品：newgoods -->
 	    {if condition ="$vo['id']==1"}
-	<div class="w1210 floor-list newgoods" onmouseleave ="levelGoodsList(this)">
+	<div class="w1210 floor-list" onmouseleave ="levelGoodsList(this)">
 		{else}
-	<div class="w1210 floor-list selectgoods" onmouseleave ="levelGoodsList(this)">
+	<div class="w1210 floor-list" onmouseleave ="levelGoodsList(this)">
 		{/if}
 	
 		<div class="floor">
@@ -121,7 +120,7 @@
 							<input type="hidden" class="NS-SHORT-NAME" value="{if !empty($vo['short_name'])}{$vo['short_name']}{elseif !empty($vo['category_alias'])}{php} echo mb_substr($vo['category_alias'],0,4,'utf-8'); {/php}{else}{php} echo mb_substr($vo['category_name'],0,4,'utf-8'); {/php}{/if}"/>
 						</h2>
 						<!--推荐类型-->
-						<!-- <ul class="floor-tabs-nav" style="width:82%;overflow:hidden;">
+						<ul class="floor-tabs-nav" style="width:82%;overflow:hidden;">
 							<li style="float:right;">
 								
 								<h3 style="padding:0 10px;">
@@ -129,14 +128,14 @@
 								</h3>
 								
 							</li>
-							{if condition="!empty($vo['child_category'])"}
+							<!-- {if condition="!empty($vo['child_category'])"}
 								{volist name="vo['child_category']" id="v"}
 									{if condition="!empty($v['goods_list'])"}
 									<li class="floor-tabs-selected li-hover" style="float:right;" onmouseenter ="hoverGoodsList(this,{$v['category_id']});"><a href="{:__URL('SHOP_MAIN/goods/goodslist','category_id='.$v['category_id'])}"><h3 style="padding:0 10px;">{$v['category_name']}</h3></a></li>
 									{/if}
 								{/volist}
-							{/if}
-						</ul> -->
+							{/if} -->
+						</ul>
 					</div>
 					<!-- 楼层顶部内容结束 -->
 					<hr />
@@ -167,10 +166,10 @@
 							{if condition="$k < $vo['goods_num']"}
 								{if condition="$k == (count($vo['goods_list'])-1) && ($k+1) != $vo['goods_num'] && ($k+1) != ($vo['goods_num']/2)"}
 									
-										<li class="goodslist" style="width:279px;border-right: 1px solid #eee;{if condition='($k+1) eq 1  or ($k+1) eq ($vo.goods_num/2+1)'}border-left:none;{/if}{if condition='($k+1) > ($vo.goods_num/2)'}border-bottom:none;{/if}">
+										<li class="goodslist" style="border-right: 1px solid #eee;{if condition='($k+1) eq 1  or ($k+1) eq ($vo.goods_num/2+1)'}border-left:none;{/if}{if condition='($k+1) > ($vo.goods_num/2)'}border-bottom:none;{/if}">
 									
 								{else/}
-										<li class="goodslist" style="width:279px; {if condition='($k+1) eq 1  or ($k+1) eq ($vo.goods_num/2+1)'}border-left:none;{/if}{if condition='($k+1) > ($vo.goods_num/2)'}border-bottom:none;{/if}">
+										<li class="goodslist" style=" {if condition='($k+1) eq 1  or ($k+1) eq ($vo.goods_num/2+1)'}border-left:none;{/if}{if condition='($k+1) > ($vo.goods_num/2)'}border-bottom:none;{/if}">
 								{/if}
 								<div class="goods-list-padding-block">
 									<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$v['goods_id'])}" target="_blank">
@@ -214,7 +213,7 @@
 										<img src="__TEMP__/{$style}/public/images/new.png" alt="" class="recommend">
 									{/if}
 								</div>
-									<!-- <a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$v['goods_id'])}" target="_blank">
+									<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$v['goods_id'])}" target="_blank">
 										<div class="goods-list-padding-block">
 											<div><img src="{:__IMG($default_goods_img)}" class="lazy_load" data-original="{:__IMG($v['pic_cover_mid'])}" /></div>
 											<div>{$v['goods_name']}</div>
