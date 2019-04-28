@@ -50,8 +50,8 @@ $(function() {
 					getCurrMaskLayer().find("li").removeClass("active");
 					curr_li.addClass("active");
 					var msg = curr_li.children("div:last").text();//内容
+					console.log(flag)
 					switch(flag){
-					
 						case "use-coupon":
 							//当前打开的是优惠券
 							updateUseCoupon(curr_li,curr_options);
@@ -95,8 +95,10 @@ $(function() {
 							//当前打开的是指定配送时间
 							updateShippingTime(curr_li);
 							break;
+						case "chaibao":
+							chaibao(curr_li)
+							break;
 					}
-
 					curr_options.children("span").text(msg);
 					getCurrMaskLayer().slideUp(300);
 					$(".mask-layer").fadeOut(300);
@@ -502,6 +504,20 @@ function updateInvoice(curr_li){
 			break;
 	}
 	invoice_content.children("span").text(text);
+}
+
+// 拆包判断
+function chaibao(curr_li){
+	console.log(123)
+	var msg = curr_li.children("div:last").text();//内容
+	console.log($("#baoxian1"))
+	if(msg=='是'){
+		$("#baoxianphone").show(300);
+		$("#baoxian1").show(300);
+	}else{
+		$("#baoxianphone").hide(300);
+		$("#baoxian1").hide(300);
+	}
 }
 
 /**

@@ -204,6 +204,7 @@
 		<span class="arrow-right color-gray">{:lang('member_online_payment')}</span>
 	</div>
 	{/if}
+
 	
 	<!-- 创建订单：配送方式 -->
 	{if $order_goods_type eq 1}
@@ -281,6 +282,20 @@
 		</div>
 		{/if}
 	{/if}
+
+	<div class="dividing-line"><!-- 分隔行 --></div>
+
+	<div class="item-options" data-flag="chaibao" data-select="0">
+		<label>是否拆包</label>
+		<span class="arrow-right color-gray">是</span>
+	</div>
+
+	<div class="dividing-line"><!-- 分隔行 --></div>
+
+	<div id="baoxianphone" class="item-options" data-flag="baoxian" data-select="0">
+		<label>是否购买保险</label>
+		<span class="arrow-right color-gray">是</span>
+	</div>
 
 	<div class="dividing-line"><!-- 分隔行 --></div>
 	<!-- 优惠券 -->
@@ -373,6 +388,16 @@
 		<!-- 总优惠 -->
 		<p>
 			<label>{:lang('member_total_discount')}：</label>
+			<span>￥<b id="discount_money">0.00</b></span>
+		</p>
+		<!-- chaibao -->
+		<p>
+			<label>拆包：</label>
+			<span>￥<b id="discount_money">0.00</b></span>
+		</p>
+		<!-- 保险 -->
+		<p id="baoxian1">
+			<label>保险：</label>
 			<span>￥<b id="discount_money">0.00</b></span>
 		</p>
 		<!-- 积分抵现 -->
@@ -535,6 +560,48 @@
 	</div>
 </div>
 <!-- 选择支付方式弹出框 -->
+
+<!-- 选择拆包弹出框 -->
+<div class="mask-layer-control" data-flag="chaibao">
+	<div class="header">是否拆包<span class="close"></span></div>
+	<div class="list">
+		<ul>
+			<li class="item active" data-flag="0">
+				<div class="check-img"></div>
+				<div class="single">是</div>
+			</li>
+			<li class="item" data-flag="1">
+				<div class="check-img"></div>
+				<div class="single">否</div>
+			</li>
+		</ul>
+	</div>
+	<div class="footer">
+		<button class="btn-green" style="margin: 0px;">{:lang('goods_determine')}</button>
+	</div>
+</div>
+<!-- 选择拆包弹出框 -->
+
+<!-- 选择购买保险弹出框 -->
+<div class="mask-layer-control" data-flag="baoxian">
+	<div class="header">是否购买保险<span class="close"></span></div>
+	<div class="list">
+		<ul>
+			<li class="item active" data-flag="0">
+				<div class="check-img"></div>
+				<div class="single">是</div>
+			</li>
+			<li class="item" data-flag="0">
+				<div class="check-img"></div>
+				<div class="single">否</div>
+			</li>
+		</ul>
+	</div>
+	<div class="footer">
+		<button class="btn-green" style="margin: 0px;">{:lang('goods_determine')}</button>
+	</div>
+</div>
+<!-- 选择购买保险弹出框 -->
 
 <!-- 选择配送方式弹出框 -->
 <div class="mask-layer-control" data-flag="distribution" data-is-logistics="{$shop_config.is_logistics}">
