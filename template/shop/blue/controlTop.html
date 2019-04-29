@@ -6,6 +6,7 @@
 #menu-login{text-align:center;}
 #menu-login .register{margin-right:10px;}
 .header-box{text-align: center;}
+.person-info{margin-right: 14%;}
 .top-choose{display: inline-block;margin: 10px auto;}
 .top-choose select{min-width: 90px;}
 .top-choose select:first-of-type{margin-right: 20px;}
@@ -13,7 +14,7 @@
 <div class="header-top">
 	<div class="header-box">
 		<font id="login-info" class="login-info">您好！欢迎访问我要买烟网</font>
-		<!-- <font class="person-info">网站已访问人数：20</font> -->
+		<font class="person-info">网站已访问人数：<span id="person"></span></font>
 		<div class="top-choose">
 			<select name="" id="choosemoney">
 				<option value="1">人民币</option>
@@ -81,6 +82,7 @@
 
 <script type="text/javascript">
 getTopLoginInfo();
+addperson(20);
 function getTopLoginInfo(){
 	$.ajax({
 		type:"post",
@@ -112,5 +114,13 @@ function logout(){
 			}
 		}
 	})
+}
+function addperson(per){
+	let person = per
+	$("#person").html(person)
+	setInterval(() => {
+		person += Math.floor(Math.random()*4)
+		$("#person").html(person)
+	},Math.random()*8000);
 }
 </script>

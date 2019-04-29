@@ -3,6 +3,9 @@
 	创建时间：2017年2月7日 12:22:28
 	功能描述：导航栏、菜单栏 、商品分类（与首页的样式不同，没有轮播图）
 -->
+<style>
+</style>
+
 {if condition="$is_head_goods_nav eq 1"}
 <div class="category-box">
 {else/}
@@ -67,5 +70,49 @@
 		</div> -->
 		<!-- 公共的菜单栏-->
 	{include file='shop/blue/controlCommonNav'/}
+		<div class="rightbox">
+			<div class="rightimg"></div>
+			<div id="rightbox">
+					<ul class="paomadeng">
+						<li>00001</li>
+						<li>00002</li>
+						<li>00003</li>
+						<li>00004</li>
+						<li>00005</li>
+						<li>00006</li>
+					</ul>
+			</div>
+		</div>
 	</div>
 </div>
+
+<style>
+	/* *{
+		transform: translateX()
+	} */
+</style>
+<script>
+	goup()
+	function goup(){
+		let len = $(".paomadeng li").length
+		$(".paomadeng").after($(".paomadeng"));
+		$(".paomadeng").clone().prependTo("#rightbox");
+		let index = 0
+		setInterval(function(){
+			index++;
+			$("#rightbox").css({
+				"transform": "translateY("+ -40*index +"px)",
+				"transition": "0.4s all"
+			})
+			if(index>=len){
+				setTimeout(function(){
+					$("#rightbox").css({
+						"transform": "translateY(0px)",
+						"transition": "0s all"
+					})
+					index = 0
+				},400)
+			}
+		},3000)
+	}
+</script>

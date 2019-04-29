@@ -5742,3 +5742,26 @@ img {
     font-size: 14px;
     padding-top: 30px;
 }
+.rightbox{
+	float: right;
+	line-height: 40px;
+	padding: 0;
+	height: 40px;
+	width: 205px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-size: 16px;
+	padding-left: 40px;
+	position: relative;
+	box-sizing: border-box;
+}
+.rightimg{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 40px;
+	height: 40px;
+	background: url('../images/gonggao.png') center no-repeat;
+	background-size: 20px 20px
+}
