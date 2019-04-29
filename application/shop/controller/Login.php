@@ -567,8 +567,6 @@ class Login extends Controller
                         $retval = $member->memberGetCoupon($retval_id, $res['reg_coupon'], 2);
                     }
                 }
-                $redirect = __URL(__URL__ . '/index');
-                $this->redirect($redirect);
             } else {
                 $error_array = AjaxReturn($retval);
                 $message = $error_array["message"];
@@ -577,6 +575,7 @@ class Login extends Controller
                 // return AjaxReturn($retval);
             }
         }
+        $redirect = __URL(__URL__ . '/index');
         $instanceid = 0;
         $config = new Config();
         // 验证注册配置
