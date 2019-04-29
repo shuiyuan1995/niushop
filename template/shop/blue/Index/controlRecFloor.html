@@ -6,17 +6,35 @@
 	.floor-layout .floor-content-goods .floor-middle .floor-banner ul li {height: 426px;line-height: 0px;}
 	.floor-layout .floor-content-goods .floor-middle .floor-banner ul li a{display: block;text-align: center;height: 300px;width: 100%;line-height: 290px;}
 	.goods-list-padding-block{padding:11px 0 12px 0;width:100%;margin:0px auto;position: relative;}
-	.goods-list-padding-block .goods_img{height:177px;text-align:center;}
-	.goods-list-padding-block .goods_img img{max-height:100%;max-width:100%;}
-	.goods-list-padding-block .goods_name{line-height: 20px;color: #a02b2b;text-align:center;padding: 5px 10px;font-size:20px;height: 42px;width: 90%;margin:0 auto;display: -webkit-box; /** 将对象作为伸缩盒子模型显示 **/-webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/-webkit-line-clamp: 2; /** 显示的行数 **/overflow: hidden;  /** 隐藏超出的内容 **/}
-	.goods-list-padding-block .goods_price{text-align:left;padding: 5px 10px 5px 35px;color:#a02b2b;width: 90%;margin:0 auto;font-size:20px;}
+	.goods-list-padding-block .goods_img{text-align:center;}
+	.goods-list-padding-block .goods_img img{width: 98%;}
+	.goods-list-padding-block .goods_name{
+		text-align: left;
+		padding-left: 2%;
+		height: 34px;
+    overflow: hidden;
+    color: #000;
+    margin-top: 5px;
+    display: block;
+	}
+	.goods-list-padding-block .goods_price{
+		text-align: left;
+		color: #a02b2b;
+		padding-left: 2%;
+		font-size: 16px;
+    line-height: 16px;
+    overflow: hidden;
+    margin-top: 4px;}
 	.bland-list li {border-bottom:1px solid #eee;width:49.5%;float:left;height:106px;text-align:center;}
 	.bland-list li a {height:106px;line-height:106px;}
 	.bland-list li a img{display: inline-block !important;vertical-align: middle !important;max-width: 100% !important;max-height: 100% !important;height: auto !important;}
 	.bland-list li:nth-child(odd){border-right:1px solid #eee;border-left:1px solid #eee;}
 	.bland-list li:nth-child(7),.bland-list li:nth-child(8){border-bottom:none;}
-	.goods-list-ul{overflow:hidden;}
-	.goods-list-ul li{width:281px;background-color: #ffffff;margin-bottom: 16px;margin-right: 28px;float:left;text-align: center;border-left: 1px solid #eee;border-bottom: 1px solid #eee;}
+	.goods-list-ul{overflow:hidden;margin-top: 10px;}
+	.goods-list-ul li{width:279px;background-color: #ffffff;margin-bottom: 16px;margin-right: 28px;float:left;text-align: center;border: 1px solid #eee;}
+	.goods-list-ul li:hover{
+		border: 1px solid #f85300;
+	}
 	.goods-list-ul li:nth-of-type(4n+4){margin-right: 0px !important;}
 	.goods-block{float:left;overflow:hidden;width: 100%}
 	.goodslist{border-left: 1px solid #eee;}
@@ -164,56 +182,53 @@
 							<ul class="goods-list-ul goods-list-ul-index">
 							{foreach $vo['goods_list'] as $k=>$v}
 							{if condition="$k < $vo['goods_num']"}
-								{if condition="$k == (count($vo['goods_list'])-1) && ($k+1) != $vo['goods_num'] && ($k+1) != ($vo['goods_num']/2)"}
-									
-										<li class="goodslist" style="border-right: 1px solid #eee;{if condition='($k+1) eq 1  or ($k+1) eq ($vo.goods_num/2+1)'}border-left:none;{/if}{if condition='($k+1) > ($vo.goods_num/2)'}border-bottom:none;{/if}">
-									
-								{else/}
-										<li class="goodslist" style=" {if condition='($k+1) eq 1  or ($k+1) eq ($vo.goods_num/2+1)'}border-left:none;{/if}{if condition='($k+1) > ($vo.goods_num/2)'}border-bottom:none;{/if}">
-								{/if}
-								<div class="goods-list-padding-block">
-									<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$v['goods_id'])}" target="_blank">
-										<div class="goods_img"><img src="{:__IMG($default_goods_img)}" class="lazy_load" data-original="{:__IMG($v['pic_cover_mid'])}" /></div>
+								<li class="goodslist">
+									<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$v['goods_id'])}">
+											<div class="goods-list-padding-block">
+													<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$v['goods_id'])}" target="_blank">
+														<div class="goods_img"><img src="{:__IMG($default_goods_img)}" class="lazy_load" data-original="{:__IMG($v['pic_cover_mid'])}" /></div>
+													</a>
+													{in name="$v.point_exchange_type" value="0,2"}
+														<div class="goods_price">¥{$v['promotion_price']}</div>
+													{else/}
+														{if $v['point_exchange_type'] == 1 && $v['promotion_price'] > 0}
+															<div>￥{$v.promotion_price}+{$v.point_exchange}积分</div>
+														{else/}
+															<div>{$v.point_exchange}积分</div>
+														{/if}
+													{/in}
+													<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$v['goods_id'])}" target="_blank">
+														<div class="goods_name">{$v['goods_name']}</div>
+													</a>
+													<!-- <div class="goods_itemstar">
+														<i class="gold"></i>
+														<i class="gold"></i>
+														<i class="gold"></i>
+														<i class="silver"></i>
+														<i class="silver"></i>
+													</div> -->
+													<!-- <div class="goods_add">
+														<a href="javascript:void(0);" onclick="addCart({$v.goods_id})">
+															<button class="addcar">加入购物车</button>
+														</a>
+														
+														<button class="compare"></button>
+														<button class="addcollection"></button>
+													</div> -->
+													<!-- 左上角图标 -->
+													<!-- {if condition="$v['is_hot'] eq 1"}
+														<img src="__TEMP__/{$style}/public/images/hot.png" alt="" class="recommend">
+													{/if} -->
+													<!-- {if condition="$v['is_recommend'] eq 1"}
+														<img src="__TEMP__/{$style}/public/images/recommend.png" alt="" class="recommend">
+													{/if} -->
+													<!-- {if condition="$v['is_new'] eq 1"}
+														<img src="__TEMP__/{$style}/public/images/new.png" alt="" class="recommend">
+													{/if} -->
+												</div>
 									</a>
-									<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$v['goods_id'])}" target="_blank">
-										<div class="goods_name">{$v['goods_name']}</div>
-									</a>
-									<div class="goods_itemstar">
-										<i class="gold"></i>
-										<i class="gold"></i>
-										<i class="gold"></i>
-										<i class="silver"></i>
-										<i class="silver"></i>
-									</div>
-									{in name="$v.point_exchange_type" value="0,2"}
-										<div class="goods_price">¥{$v['promotion_price']}</div>
-									{else/}
-										{if $v['point_exchange_type'] == 1 && $v['promotion_price'] > 0}
-											<div>￥{$v.promotion_price}+{$v.point_exchange}积分</div>
-										{else/}
-											<div>{$v.point_exchange}积分</div>
-										{/if}
-									{/in}
-									<div class="goods_add">
-										<a href="javascript:void(0);" onclick="addCart({$v.goods_id})">
-											<button class="addcar">加入购物车</button>
-										</a>
-										
-										<button class="compare"></button>
-										<button class="addcollection"></button>
-									</div>
-									<!-- 左上角图标 -->
-									<!-- {if condition="$v['is_hot'] eq 1"}
-										<img src="__TEMP__/{$style}/public/images/hot.png" alt="" class="recommend">
-									{/if}
-									{if condition="$v['is_recommend'] eq 1"}
-										<img src="__TEMP__/{$style}/public/images/recommend.png" alt="" class="recommend">
-									{/if}
-									{if condition="$v['is_new'] eq 1"}
-										<img src="__TEMP__/{$style}/public/images/new.png" alt="" class="recommend">
-									{/if}
-								</div>
-									<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$v['goods_id'])}" target="_blank">
+								
+									<!-- <a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$v['goods_id'])}" target="_blank">
 										<div class="goods-list-padding-block">
 											<div><img src="{:__IMG($default_goods_img)}" class="lazy_load" data-original="{:__IMG($v['pic_cover_mid'])}" /></div>
 											<div>{$v['goods_name']}</div>
@@ -236,10 +251,10 @@
 												<img src="__TEMP__/{$style}/public/images/new.png" alt="" class="recommend">
 											{/if}
 										</div>
-									</a>
+									</a> -->
 								</li>
 								
-							{/if} -->
+							{/if}
 							{/foreach}
 							</ul>
 							

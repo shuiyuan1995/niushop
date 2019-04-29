@@ -1427,7 +1427,7 @@
 	height: auto;
 	margin: 10px auto;
 	position: relative;
-	background-color: #f6f6f6;
+	/* background-color: #f6f6f6; */
 }
 
 .floor-layout .floor-con .floor-title {
