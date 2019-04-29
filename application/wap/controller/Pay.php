@@ -706,7 +706,7 @@ class Pay extends Controller
             }
         }
     }
-    //行用卡订单提交
+    //信用卡订单提交
     public function credit_card_info()
     {
     //     // //请求实例化
@@ -727,7 +727,6 @@ class Pay extends Controller
     //     // }else{
     //     //     $this->error('订单提交失败');
     //     // }
-
         $request =  Request::instance();
         
         $res = $_SESSION['typeid'];
@@ -756,7 +755,11 @@ class Pay extends Controller
         if ($result){
             // DB::table('c_card')->where(['id'=>$result])
             // ->save(['typeid'=>$res]);
-            $this->success('订单提交成功',style . 'index/index');
+            if (request()->isMobile()){
+                $this->success('订单提交成功','wap/member/index');
+            }else{
+                $this->success('订单提交成功','shop/member/index');
+            }
         }else{
             $this->error('订单提交失败');
         }

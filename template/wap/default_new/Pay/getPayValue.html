@@ -94,7 +94,7 @@ function calculate() {
 		window.location.href = "{$pay_url}/wap/pay/alipay?no=" + out_trade_no;
 	}else if (pay_type == 2) {
 		//银联卡支付
-		window.location.href = __URL("APP_MAIN/pay/unionpay?no=" + out_trade_no);
+		window.location.href = "{$web_url}/wap/pay/unionpay?typeid={$order.order_id}";
 	}else if(pay_type == -1){
 		showBox("{:lang('choose_payment_method')}","warning");
 	}
