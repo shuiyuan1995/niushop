@@ -567,6 +567,7 @@ class Login extends Controller
                         $retval = $member->memberGetCoupon($retval_id, $res['reg_coupon'], 2);
                     }
                 }
+                $this->redirect(__URL__);
             } else {
                 $error_array = AjaxReturn($retval);
                 $message = $error_array["message"];
