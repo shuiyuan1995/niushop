@@ -1176,7 +1176,6 @@ ul .mobile i, .header-box ul .menu-hd b, .header .logo-right .city .city-select 
 	width: 990px;
 	position: relative;
 	margin-left: 10px;
-	overflow: hidden;
 }
 
 .category-box .all-category ul {
@@ -1188,7 +1187,17 @@ ul .mobile i, .header-box ul .menu-hd b, .header .logo-right .city .city-select 
 .category-box .all-category li {
 	text-decoration: none;
 	z-index: 10;
+	height: 40px;
+	line-height: 40px;
 	position: relative;
+}
+.category-box .all-category li.active{
+	background: #e23435;
+	height: 42px;
+}
+
+.category-box .all-category li.active a{
+	color: #ffffff
 }
 
 .category-box .all-category li a {
@@ -1198,7 +1207,7 @@ ul .mobile i, .header-box ul .menu-hd b, .header .logo-right .city .city-select 
 	display: inline-block;
 	text-decoration: none;
 	font-size: 16px;
-	padding: 0 20px;
+	padding: 0 30px;
 }
 
 .category-box .all-category .wrap-line {
