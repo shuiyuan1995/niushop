@@ -111,6 +111,7 @@ class Pay extends Controller
         $web = $website->getWebSiteInfo();
         $pay_url = $web['pay_url'];
         $this->assign('pay_url',$pay_url);
+        $this->assign('web_url',$web['web_url']);
         
         //拼团付款限制
         $is_support_pintuan = IS_SUPPORT_PINTUAN;
@@ -201,8 +202,12 @@ class Pay extends Controller
         if (! is_numeric($out_trade_no)) {
             $this->error("没有获取到支付信息");
         }
-        
-        $red_url = str_replace("/index.php", "", __URL__);
+
+        $website = new WebSite();
+        $web = $website->getWebSiteInfo();
+        $web_url = $web['web_url'];
+
+        $red_url = str_replace("/index.php", "", $web_url);
         $red_url = str_replace("index.php", "", $red_url);
         $red_url = $red_url . "/weixinpay.php";
         $pay = new UnifyPay();
@@ -215,7 +220,7 @@ class Pay extends Controller
                     $this->error($res['return_msg']);
                     die();
                 }
-                
+
                 $this->redirect($res["mweb_url"]);
             } else {
                 $res = $pay->wchatPay($out_trade_no, 'NATIVE', $red_url);

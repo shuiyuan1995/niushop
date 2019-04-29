@@ -71,7 +71,11 @@
 <script>
 var __IMG__ = '__TEMP__/{$style}/public/images';
 $(function(){
-	
+    var str = window.location.href;
+    if (str.indexOf("{$web_url}") != -1) {
+        var url = str.replace("{$web_url}", "{$pay_url}");
+        window.location.replace(url);
+	}
 	$(".pay-type-item .codes>div>span[id]").html("<img src='" + __IMG__ + "/hgou.png'>");
 	$(".pay-type-item .codes>div:eq(0)>span[id]").html("<img src='" + __IMG__ + "/segou.png'>");
 });
@@ -132,7 +136,7 @@ function payStatu(){
 		},
 		success : function(data){
 			if(data['code'] > 0){
-				location.href="{:__URL('APP_MAIN/pay/wchatPayResult?out_trade_no='.$pay_value['out_trade_no'].'&msg=1')}";
+				location.href="{$web_url}/pay/wchatPayResult?out_trade_no=$pay_value['out_trade_no']&msg=1";
 				clearInterval(payStatus);
 			}
 		}
