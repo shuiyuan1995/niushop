@@ -71,7 +71,7 @@ $(document).ready(function(e) {
 			window.history.forward(1);
 			if($(window).width()<768){
 				//手机端
-				location.href = '{:__URL('APP_MAIN/member')}';
+				location.href = "{$web_url}/wap/member";
 			}else{
 				//PC端
 				location.href = '{:__URL('SHOP_MAIN/member')}';
@@ -84,7 +84,7 @@ $(document).ready(function(e) {
 function enterOrderList(){
 	if($(window).width()<768){
 		//手机端
-		location.href = "{$web_url}/member";
+		location.href = "{$web_url}/wap/member";
 	}else{
 		//PC端
 		location.href = '{:__URL('SHOP_MAIN/member')}';
