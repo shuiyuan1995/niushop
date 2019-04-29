@@ -54,7 +54,7 @@ function saveAddress() {
 }
 
 function Check_Consignee() {
-	var reg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+	var reg = /^[0-9]*$/;
 	if ($("#selCountry").val() == '0' || $("#selCountry").val() == "") {
 		$.msg("请选择国家", {
 			time: 2000

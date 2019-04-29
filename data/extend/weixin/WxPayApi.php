@@ -62,7 +62,7 @@ class WxPayApi
          * }
          */
         $WxPayConfig = new WxPayConfig();
-        $inputObj->SetSpbill_create_ip($_SERVER['REMOTE_ADDR']); // 终端ip
+        $inputObj->SetSpbill_create_ip(get_client_ip()); // 终端ip
         // $inputObj->SetSpbill_create_ip("1.1.1.1");
         $inputObj->SetNonce_str(self::getNonceStr()); // 随机字符串
         // 签名https://cpro.baidu.com/cpro/ui/uijs.php?en=mywWUA71T1YsFh7sT7qGujYsFhPh5HcsFhPC5H0huAbqrauGTdq9TZ0qnauJp1Y1PWPbPjI9Pym1mWNBuym1Fh_qpgf-f1R-wH0-wjD-fWR-wjD-fHT-wj0-fHn-f1R-f1R-f1n-wbchp10qpgf-f1R-wH0-wjD-fWR-wjD-fHT-wj0-fHn-f1R-f1R-f1n-wbchp1DqFRfdFRfzTA9sFRc1FRPjFRfsFRmzFRfYFRckFh_z5iNDPBNaniNjwBNAfiNjwBNaPiNjwaNanzuon1dspZ0-fWb-fHf-fWn-fYn-fYD-fHm-fWf-wbf-wjn-wWmhp1fqTA9sFRfkFRDLFRPAFRcsFRfkFRDLFRcLFRfkFhkdpvbqniuVmLKV5HDzPjRLriuk5yGBPH7xmLKzFMFB5H0hTMnqniu1uyk_ugFxpyfqniu1pyfquWPBuycduWP9PHfLnvf1PBu1IA-b5HDkPiuY5gwsmvkGmvV-ujPxpAnhIAfqnW6vPWm3rauYUgnqnHf4PWmYrjfYriuYIHddnW6vPWm3raud5y9YIZ0-nYD-nbm-nbuLILT-nbNJmWRkFHF7UhNYFMmqniuG5HF-nWnzPyRk&c=news&fv=25&itm=0&kdi0=8&kdi1=8&kdi2=8&kdi3=8&kdi4=8&lukid=1&mscf=22&n=10&nttp=1&p=baidu&ssp2=1&tsf=dtp:1&u=%2Farticle%2F14244%2Ehtm&urlid=0&jincheng1=1

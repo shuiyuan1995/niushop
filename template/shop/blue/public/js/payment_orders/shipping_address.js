@@ -214,7 +214,7 @@ function validationAddress(){
 		$.msg("手机号码不能为空");
 		return false;
 	}
-	var reg = /^1[345789][0-9]\d{8}$/;
+	var reg = /^[0-9]*$/;
 	if(!reg.test(mobile.val())){
 		mobile.focus();
 		$.msg("手机号码格式错误");
@@ -238,7 +238,7 @@ function validationAddress(){
 
 
     if(detailed_city == "") {
-        $("#selCountry").focus();
+        $("#detailed_city").focus();
         $.msg('城市不能为空');
         return false;
     }
