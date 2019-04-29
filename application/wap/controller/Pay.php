@@ -291,6 +291,10 @@ class Pay extends Controller
      */
     public function wchatPayResult()
     {
+        $website = new WebSite();
+        $web = $website->getWebSiteInfo();
+        $web_url = $web['web_url'];
+        $this->assign('web_url',$web_url);
         $out_trade_no = request()->get('out_trade_no', '');
         $msg = request()->get('msg', '');
         $this->assign("status", $msg);

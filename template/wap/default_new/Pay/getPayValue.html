@@ -136,7 +136,7 @@ function payStatu(){
 		},
 		success : function(data){
 			if(data['code'] > 0){
-				location.href="{$web_url}/pay/wchatPayResult?out_trade_no=$pay_value['out_trade_no']&msg=1";
+				location.href="{$web_url}/wap/pay/wchatPayResult?out_trade_no={$pay_value.out_trade_no}&msg=1";
 				clearInterval(payStatus);
 			}
 		}
