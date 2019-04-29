@@ -775,7 +775,7 @@ class Member extends BaseController
         $orderService = new OrderService();
         $condition = null;
         $condition['buyer_id'] = $this->uid;
-        $condition['order_type'] = 1;
+        $condition['order_type'] = ["in", "1, 3"];
         $order_status_num = $orderService->getOrderStatusNum($condition);
         $condition = null;
         $condition['order_status'] = 0;

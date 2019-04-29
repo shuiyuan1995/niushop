@@ -146,16 +146,9 @@
             });
             return false;
         }
-        if (document.querySelector("#code").value == '') {
-            layer.msg("安全码不能为空", {
-                time: 2000,
-                icon: 2
-            });
-            return false;
-        }
         if (card_id != '') {
-            var is_card = isLuhn(card_id);
-            if (is_card === false){
+            var reg = /^[0-9]*$/;
+            if(!reg.test(card_id)){
                 layer.msg("卡号格式错误", {
                     time: 2000,
                     icon: 2
@@ -163,6 +156,13 @@
                 return false;
             }
 
+        }
+        if (document.querySelector("#code").value == '') {
+            layer.msg("安全码不能为空", {
+                time: 2000,
+                icon: 2
+            });
+            return false;
         }
     }
 
