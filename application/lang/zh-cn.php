@@ -170,7 +170,7 @@ return [
     'goods_price'                     => '价格',
     'goods_total'                     => '共',
     'goods_goods'                     => '个商品',
-    'goods_delivery_to'               => '配送至',
+    'goods_delivery_to'               => '配送',
     'goods_select_district_or_county' => '请选择区/县',
     'goods_free_shipping'             => '包邮',
     'goods_show_only_goods'           => '仅显示有货',
