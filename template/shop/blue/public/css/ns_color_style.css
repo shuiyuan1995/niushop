@@ -10,7 +10,7 @@ a:hover { color: #0D84D4;}
 .header .search .hot-query li a:hover{ color: #0689e1;}
 .category-box .all-category .wrap-line{ background: #0689e1;}
 .category-box-border{ border-color: #0689e1;}
-.category-box .all-category li a.nav:hover, .category-box .all-category li a.current{ color: #0689e1 !important;}
+.category-box .all-category li a.nav:hover{ color: #0689e1 !important;}
 .category-box-border .home-category .menu-event{ background: #0689e1;}
 .category-box .home-category .menu-event.main-bg-color { background: #0689e1;}
 .category-layer .list:hover { border-left-color: #0689e1;}
