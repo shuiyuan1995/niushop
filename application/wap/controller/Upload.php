@@ -495,7 +495,7 @@ class Upload extends Controller
         if (empty($this->return['data']) || null == $this->return['data'] || "" == $this->return['data']) {
             $this->return['data'] = ""; // 数据
         }
-        return json_encode($this->return);
+        return json_encode($this->return,JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -634,7 +634,7 @@ class Upload extends Controller
             case UPLOAD_WATERMARK:
                 
                 // 水印图片
-                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 1000000 || !$this->checkImgSuffix()) {
+                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 5000000 || !$this->checkImgSuffix()) {
                     $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过5MB';
                     $flag = false;
                 }
@@ -801,7 +801,6 @@ class Upload extends Controller
         unset($tmp_array[$suffix]);
         $file_new_name = implode(".", $tmp_array);
         $newfile = md5($file_new_name . $guid) . $this->ext; // 重新命名文件
-        
         // 验证文件
         if (! $this->validationFile()) {
             return $this->ajaxFileReturn();
