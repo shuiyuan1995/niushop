@@ -710,7 +710,7 @@ class GoodsCategory extends BaseService implements IGoodsCategory
                         $order = "ng.clicks desc";
                         break;
                 }
-                $goods_list = $goods->getGoodsViewList(1, 10, [
+                $goods_list = $goods->getGoodsViewList(1, 8, [
                     "ng.category_id_1" => $v["category_id"],
                     "ng.state" => 1
                 ], $order);
@@ -729,7 +729,7 @@ class GoodsCategory extends BaseService implements IGoodsCategory
                     ], "*", "sort asc");
                     if (! empty($second_category_list)) {
                         foreach ($second_category_list as $t => $m) {
-                            $goods_list = $goods->getGoodsViewList(1, 10, [
+                            $goods_list = $goods->getGoodsViewList(1, 8, [
                                 "ng.category_id_2" => $m["category_id"],
                                 "ng.state" => 1
                             ], $order);
