@@ -88,7 +88,7 @@
 <script>
     var url = window.location.href;
     $("#nav a[href='"+url+"']").parent('li').addClass('active');
-	goup()
+	
 	function goup(){
 		let len = $(".paomadeng li").length
 		$(".paomadeng").after($(".paomadeng"));
@@ -121,7 +121,8 @@
                 for (var i=0;i<res.length;i++){
                     html += "<li>用户 "+res[i].user_name+" 已下单</li>";
 				}
-                $("#rightbox .paomadeng").html(html);
+								$("#rightbox .paomadeng").html(html);
+								goup()
             }
         });
     });
