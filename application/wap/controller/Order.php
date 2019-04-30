@@ -2301,14 +2301,4 @@ class Order extends BaseController
             return $res;
         }
     }
-
-    public function getOrder()
-    {
-        $orderService = new OrderService();
-        $condition = null;
-        $condition['order_type'] = ["in", "1,3"];
-        $order = $orderService->getOrder($condition);
-        $order = collection($order)->toArray();
-        return $order;
-    }
 }

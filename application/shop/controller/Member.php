@@ -2161,21 +2161,6 @@ class Member extends BaseController
         return AjaxReturn(1);
     }
 
-    public function visitCount()
-    {
-        $webSite = new WebSite();
-        $config = $webSite->getWebSiteInfo();
-        return $config['visit_count'];
-    }
-
-    public function updatePerson()
-    {
-        $webSite = new WebSite();
-        $count = request()->post('visit');
-        $res = $webSite->updatePerson($count);
-        return $res;
-    }
-
     /**
      * 账号安全
      */

@@ -118,7 +118,7 @@ addPerson();
 function addPerson(){
     let person;
     $.ajax({
-        url: "{:__URL('SHOP_MAIN/member/visitcount')}",
+        url: "{:__URL('SHOP_MAIN/index/visitcount')}",
         type: "post",
         success: function (res) {
             person = res;
@@ -133,7 +133,7 @@ function addPerson(){
 setInterval("updatePerson()",10000);
 function updatePerson(){
     $.ajax({
-        url: "{:__URL('SHOP_MAIN/member/updateperson')}",
+        url: "{:__URL('SHOP_MAIN/index/updateperson')}",
         type: "post",
 		data:{"visit":$("#person").text()},
         success: function (res) {

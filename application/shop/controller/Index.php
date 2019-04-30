@@ -21,6 +21,8 @@ use data\service\GoodsCategory;
 use data\service\Platform;
 use think\Cookie;
 use think\Cache;
+use data\service\WebSite as WebSite;
+use data\service\Order as OrderService;
 
 /**
  * 首页控制器
@@ -250,5 +252,30 @@ class Index extends BaseController
     public function testTag()
     {
         return view($this->style . "Index/testTag");
+    }
+
+    public function visitCount()
+    {
+        $webSite = new WebSite();
+        $config = $webSite->getWebSiteInfo();
+        return $config['visit_count'];
+    }
+
+    public function updatePerson()
+    {
+        $webSite = new WebSite();
+        $count = request()->post('visit');
+        $res = $webSite->updatePerson($count);
+        return $res;
+    }
+
+    public function getOrder()
+    {
+        $orderService = new OrderService();
+        $condition = null;
+        $condition['order_type'] = ["in", "1,3"];
+        $order = $orderService->getOrder($condition);
+        $order = collection($order)->toArray();
+        return $order;
     }
 }

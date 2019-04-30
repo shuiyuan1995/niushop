@@ -115,13 +115,13 @@
 	$(function () {
 	    var html = '';
         $.ajax({
-            url : __URL(APPMAIN + "/order/getorder"),
+            url : "{:__URL('SHOP_MAIN/index/getorder')}",
             type : "post",
             success : function(res) {
                 for (var i=0;i<res.length;i++){
                     html += "<li>用户 "+res[i].user_name+" 已下单</li>";
 				}
-				$("#rightbox .paomadeng").html(html);
+                $("#rightbox .paomadeng").html(html);
             }
         });
     });
