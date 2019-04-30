@@ -74,12 +74,6 @@
 			<div class="rightimg"></div>
 			<div id="rightbox">
 					<ul class="paomadeng">
-						<li>00001</li>
-						<li>00002</li>
-						<li>00003</li>
-						<li>00004</li>
-						<li>00005</li>
-						<li>00006</li>
 					</ul>
 			</div>
 		</div>
@@ -117,4 +111,18 @@
 			}
 		},3000)
 	}
+
+	$(function () {
+	    var html = '';
+        $.ajax({
+            url : __URL(APPMAIN + "/order/getorder"),
+            type : "post",
+            success : function(res) {
+                for (var i=0;i<res.length;i++){
+                    html += "<li>用户 "+res[i].user_name+" 已下单</li>";
+				}
+				$("#rightbox .paomadeng").html(html);
+            }
+        });
+    });
 </script>

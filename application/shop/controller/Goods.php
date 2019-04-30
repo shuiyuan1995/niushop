@@ -522,8 +522,14 @@ class Goods extends BaseController
             $category_brands = $this->goods_category->getGoodsBrandsByGoodsAttr($category_id);
 
             // 查询价格区间，用于筛选 选择价格区间 需优化
-            $category_price_grades = $this->goods_category->getGoodsCategoryPriceGrades($category_id);
-
+            //$category_price_grades = $this->goods_category->getGoodsCategoryPriceGrades($category_id);
+            $category_price_grades = array(
+                array(0,199),
+                array(200,399),
+                array(400,799),
+                array(800,1199),
+                array(1200,10000)
+            );
             $category_count = 0; // 默认没有数据
             if ($category_brands != "") {
                 $category_count = 1; // 有数据

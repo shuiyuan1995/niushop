@@ -1618,6 +1618,14 @@ class Order extends BaseService implements IOrder
         return $orderStatusNum;
     }
 
+    public function getOrder($condition='')
+    {
+        $order = new NsOrderModel();
+        $condition['order_status'] = 1; // 待发货
+        $order = $order->field('user_name')->where($condition)->select();
+        return $order;
+    }
+
     /**
      * 商品评价-添加
      *

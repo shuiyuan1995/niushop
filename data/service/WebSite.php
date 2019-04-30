@@ -106,6 +106,21 @@ class WebSite extends BaseService implements IWebSite
         return $res;
     }
 
+    function updatePerson($count)
+    {
+        $data = array(
+            'visit_count' => $count
+        );
+        $this->website = new WebSiteModel();
+        $res = $this->website->save($data, [
+            "website_id" => 1
+        ]);
+        if ($res) {
+            cache("WEBSITEINFO", null);
+        }
+        return $res;
+    }
+
     /**
      * 添加系统模块
      *

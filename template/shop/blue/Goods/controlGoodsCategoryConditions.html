@@ -142,7 +142,7 @@
 				<ul>
 					{foreach name="$category_price_grades" item="price_grades" key="k"}
 						{if condition="$price_grades[1] != 0"}
-							<li><a href="{:__URL('SHOP_MAIN/goods/goodslist?'.$url_parameter.'&min_p_jg='.$price_grades[0].'&max_p_jg='.$price_grades[1].$attr_url)}">{$price_grades[0]}&nbsp;-&nbsp;{$price_grades[1]}</a></li>
+							<li><a href="{:__URL('SHOP_MAIN/goods/goodslist?'.$url_parameter.'&min_p_jg='.$price_grades[0].'&max_p_jg='.$price_grades[1].$attr_url)}">{$price_grades[0]}{if $price_grades[1] != 10000}&nbsp;-&nbsp;{$price_grades[1]}{else/}以上{/if}</a></li>
 						{/if}
 					{/foreach}
 				</ul>

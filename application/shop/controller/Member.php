@@ -36,6 +36,7 @@ use data\service\promotion\GoodsPreference;
 use data\service\Shop;
 use data\service\UnifyPay;
 use data\service\VirtualGoods as VirtualGoodsService;
+use data\service\WebSite;
 use think\Session;
 use data\service\GroupBuy;
 use data\service\Order\OrderGroupBuy;
@@ -2158,6 +2159,21 @@ class Member extends BaseController
         $member = new MemberService();
         $member->Logout();
         return AjaxReturn(1);
+    }
+
+    public function visitCount()
+    {
+        $webSite = new WebSite();
+        $config = $webSite->getWebSiteInfo();
+        return $config['visit_count'];
+    }
+
+    public function updatePerson()
+    {
+        $webSite = new WebSite();
+        $count = request()->post('visit');
+        $res = $webSite->updatePerson($count);
+        return $res;
     }
 
     /**
