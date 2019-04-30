@@ -92,6 +92,8 @@
 	} */
 </style>
 <script>
+    var url = window.location.href;
+    $("#nav a[href='"+url+"']").parent('li').addClass('active');
 	goup()
 	function goup(){
 		let len = $(".paomadeng li").length

@@ -515,46 +515,46 @@ class Upload extends Controller
             case UPLOAD_GOODS:
                 
                 // 商品图片
-                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 3000000 || !$this->checkImgSuffix()) {
-                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过3MB';
+                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 5000000 || !$this->checkImgSuffix()) {
+                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过5MB';
                     $flag = false;
                 }
                 break;
             case UPLOAD_GOODS_SKU:
                 
                 // 商品SKU图片
-                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 1000000 || !$this->checkImgSuffix()) {
-                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过1MB';
+                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 5000000 || !$this->checkImgSuffix()) {
+                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过5MB';
                     $flag = false;
                 }
                 break;
             case UPLOAD_GOODS_BRAND:
                 
                 // 商品品牌
-                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 1000000 || !$this->checkImgSuffix()) {
-                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过1MB';
+                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 5000000 || !$this->checkImgSuffix()) {
+                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过5MB';
                     $flag = false;
                 }
                 break;
             case UPLOAD_GOODS_GROUP:
                 
                 // 商品分组
-                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 1000000 || !$this->checkImgSuffix()) {
-                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过1MB';
+                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 5000000 || !$this->checkImgSuffix()) {
+                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过5MB';
                     $flag = false;
                 }
                 break;
             case UPLOAD_GOODS_CATEGORY:
                 
                 // 商品分类
-                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 1000000 || !$this->checkImgSuffix()) {
-                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过1MB';
+                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 5000000 || !$this->checkImgSuffix()) {
+                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过5MB';
                     $flag = false;
                 }
                 break;
             case UPLOAD_COMMON:
-                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 1000000 || !$this->checkImgSuffix()) {
-                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过1MB';
+                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 5000000 || !$this->checkImgSuffix()) {
+                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过5MB';
                     $flag = false;
                 }
                 // 公共
@@ -562,40 +562,40 @@ class Upload extends Controller
             case UPLOAD_AVATOR:
                 
                 // 用户头像
-                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 1000000 || !$this->checkImgSuffix()) {
-                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过1MB';
+                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 5000000 || !$this->checkImgSuffix()) {
+                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过5MB';
                     $flag = false;
                 }
                 break;
             case UPLOAD_PAY:
                 
                 // 支付
-                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 1000000 || !$this->checkImgSuffix()) {
-                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过1MB';
+                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 5000000 || !$this->checkImgSuffix()) {
+                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过5MB';
                     $flag = false;
                 }
                 break;
             case UPLOAD_ADV:
                 
                 // 广告位
-                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 1000000 || !$this->checkImgSuffix()) {
-                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过1MB';
+                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 5000000 || !$this->checkImgSuffix()) {
+                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过5MB';
                     $flag = false;
                 }
                 break;
             case UPLOAD_EXPRESS:
                 
                 // 物流
-                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 1000000 || !$this->checkImgSuffix()) {
-                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过1MB';
+                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 5000000 || !$this->checkImgSuffix()) {
+                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过5MB';
                     $flag = false;
                 }
                 break;
             case UPLOAD_CMS:
                 
                 // 文章
-                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 1000000 || !$this->checkImgSuffix()) {
-                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过1MB';
+                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 5000000 || !$this->checkImgSuffix()) {
+                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过5MB';
                     $flag = false;
                 }
                 break;
@@ -626,8 +626,8 @@ class Upload extends Controller
             case UPLOAD_ICO:
                 
                 // 商家服务小图标
-                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 1000000 || !$this->checkImgSuffix()) {
-                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过1MB';
+                if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 5000000 || !$this->checkImgSuffix()) {
+                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过5MB';
                     $flag = false;
                 }
                 break;
@@ -635,7 +635,7 @@ class Upload extends Controller
                 
                 // 水印图片
                 if (($this->file_type != "image/gif" && $this->file_type != "image/png" && $this->file_type != "image/jpeg" && $this->file_type != "image/jpg") || $this->file_size > 1000000 || !$this->checkImgSuffix()) {
-                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过1MB';
+                    $this->return['message'] = '文件上传失败,请检查您上传的文件类型,文件大小不能超过5MB';
                     $flag = false;
                 }
                 break;
