@@ -304,7 +304,8 @@
     line-height: 40px;
     border: 1px solid #ddd;  
     padding: 1px;
-    margin-bottom: 8px;	
+		margin-bottom: 8px;	
+		overflow: hidden;
 }
 .goodslist-screen-condition dl.condition-item dd.screen-condition ul.brand_list li.brand-seled{
 	border-color: #0689e1;
