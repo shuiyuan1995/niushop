@@ -46,7 +46,7 @@ width: 20%;}
 .dsc-copyright{ background-color:#4f4f4f; color:#b5b5b5; text-align:center; padding:30px 0;}
 .dsc-copyright a{ color:#b5b5b5;}
 .dsc-copyright a:hover{ color:#ffffff;}
-.dsc-copyright .copyright_info{ padding:12px 0 16px;}
+.dsc-copyright .copyright_info{ padding: 0px 0 10px;}
 
 .copyright_auth{ font-size:12px;}
 .copyright_auth a{ display:inline-block; margin-right:10px;}
