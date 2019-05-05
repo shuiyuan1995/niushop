@@ -273,9 +273,8 @@ class Index extends BaseController
     {
         $orderService = new OrderService();
         $condition = null;
-        $condition['order_type'] = ["in", "1,3"];
+        $condition['o.order_type'] = ["in", "1,3"];
         $order = $orderService->getOrder($condition);
-        $order = collection($order)->toArray();
         return $order;
     }
 }

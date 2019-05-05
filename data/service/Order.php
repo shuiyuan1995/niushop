@@ -70,6 +70,7 @@ use data\model\NsOrderPickupModel;
 use data\model\NsPickedUpAuditorModel;
 use data\model\NfxPromoterModel;
 use data\service\Config as WebConfig;
+use think\Db;
 
 class Order extends BaseService implements IOrder
 {
@@ -1620,9 +1621,14 @@ class Order extends BaseService implements IOrder
 
     public function getOrder($condition='')
     {
-        $order = new NsOrderModel();
-        $condition['order_status'] = 1; // 待发货
-        $order = $order->field('user_name')->where($condition)->order('create_time','desc')->select();
+        $condition['o.order_status'] = 1; // 待发货
+        $order = Db::name('ns_order')
+                    ->alias('o')
+                    ->field('o.user_name,g.goods_name,g.num')
+                    ->join('ns_order_goods g','o.order_id = g.order_id')
+                    ->where($condition)
+                    ->order('create_time','desc')
+                    ->select();
         return $order;
     }
 
@@ -2764,14 +2770,11 @@ class Order extends BaseService implements IOrder
      * @param unknown $receiver_zip            
      * @param unknown $receiver_name            
      */
-    public function updateOrderReceiveDetail($order_id, $receiver_mobile, $receiver_province, $receiver_city, $receiver_district, $receiver_address, $receiver_zip, $receiver_name, $fixed_telephone = "")
+    public function updateOrderReceiveDetail($order_id, $receiver_mobile, $receiver_address, $receiver_zip, $receiver_name, $fixed_telephone = "")
     {
         $order = new NsOrderModel();
         $data = array(
             'receiver_mobile' => $receiver_mobile,
-            'receiver_province' => $receiver_province,
-            'receiver_city' => $receiver_city,
-            'receiver_district' => $receiver_district,
             'receiver_address' => $receiver_address,
             'receiver_zip' => $receiver_zip,
             'receiver_name' => $receiver_name,

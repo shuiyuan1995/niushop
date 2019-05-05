@@ -119,7 +119,7 @@
             type : "post",
             success : function(res) {
                 for (var i=0;i<res.length;i++){
-                    html += "<li>用户 "+res[i].user_name+" 已下单</li>";
+                    html += "<li>用户"+res[i].user_name+"购买"+res[i].goods_name+"</li>";
 				}
 								$("#rightbox .paomadeng").html(html);
 								goup()

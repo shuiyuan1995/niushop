@@ -935,6 +935,7 @@ class Order extends BaseController
         $order_service = new OrderService();
         $order_id = request()->post('order_id');
         $res = $order_service->getOrderReceiveDetail($order_id);
+        //var_dump($res);
         return $res;
     }
 
@@ -951,15 +952,15 @@ class Order extends BaseController
         $receiver_name = request()->post('receiver_name', '');
         $receiver_mobile = request()->post('receiver_mobile', '');
         $receiver_zip = request()->post('receiver_zip', '');
-        $receiver_province = request()->post('seleAreaNext', '');
-        $receiver_city = request()->post('seleAreaThird', '');
-        $receiver_district = request()->post('seleAreaFouth', '');
+        $receiver_country = request()->post('selCountry', '');
+        $receiver_province = request()->post('detailed_province', '');
+        $receiver_city = request()->post('detailed_city', '');
         $receiver_address = request()->post('address_detail', '');
         $fixed_telephone = request()->post("fixed_telephone", "");
         $address = new AddressService();
-        $address_info = $address ->getAddress($receiver_province, $receiver_city, $receiver_district);
-        $receiver_address = $address_info."&nbsp;".$receiver_address;
-        $res = $order_service->updateOrderReceiveDetail($order_id, $receiver_mobile, $receiver_province, $receiver_city, $receiver_district, $receiver_address, $receiver_zip, $receiver_name, $fixed_telephone);
+        $address_info = $address ->getCountryDetail($receiver_country);
+        $receiver_address = $address_info."&nbsp;".$receiver_province."&nbsp;".$receiver_city."&nbsp;".$receiver_address;
+        $res = $order_service->updateOrderReceiveDetail($order_id, $receiver_mobile, $receiver_address, $receiver_zip, $receiver_name, $fixed_telephone);
         return $res;
     }
     /**

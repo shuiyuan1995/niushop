@@ -607,7 +607,7 @@ interface IOrder
      * @param unknown $receiver_zip            
      * @param unknown $receiver_name            
      */
-    function updateOrderReceiveDetail($order_id, $receiver_mobile, $receiver_province, $receiver_city, $receiver_district, $receiver_address, $receiver_zip, $receiver_name,$fixed_telephone);
+    function updateOrderReceiveDetail($order_id, $receiver_mobile, $receiver_address, $receiver_zip, $receiver_name,$fixed_telephone);
 
     /**
      * 获取某个订单状态下订单数目

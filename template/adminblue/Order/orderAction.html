@@ -245,24 +245,23 @@ textarea{width: 350px;}
 				</div>
 				<div class="form-group">
 					<div class="pick_title">收货人邮编：</div>
-					<div class="col-lg-4"><input type="text" id="receiver_zip" class="form-control input-common" style="width:350px;margin-bottom:10px !important;" maxlength="6" onkeyup="this.value=this.value.replace(/\D/g,'')"></div>
+					<div class="col-lg-4"><input type="text" id="receiver_zip" class="form-control input-common" style="width:350px;margin-bottom:10px !important;"></div>
 				</div>
 				<div class="form-group" style="width:100%;margin-bottom: 10px;">
-					<div class="pick_title"><span class="required">*</span>收货地址：</div>
+					<div class="pick_title"><span class="required">*</span>国家：</div>
 					<div class="address_choice">
-						<select name="province" id="seleAreaNext" onchange="GetProvince();" class="select-common harf">
-							<option value="">请选择省</option>
+						<select name="province" id="selCountry" class="select-common harf">
+							<option value="0">请选择国家</option>
 						</select>
-						<select name="city" id="seleAreaThird" onchange="getSelCity();" class="select-common harf">
-							<option value="">请选择市</option>
-						</select>
-						<select name="district" id="seleAreaFouth" class="select-common harf">
-							<option value="-1">请选择区/县</option>
-						</select>
-						<input type="hidden" id="provinceid" >
-						<input type="hidden" id="cityid" >
-						<input type="hidden" id="districtid" >
 					</div>
+				</div>
+				<div class="form-group">
+					<div class="pick_title">省份：</div>
+					<div class="col-lg-4"><input type="text" id="detailed_province" class="form-control input-common" style="width:350px;margin-bottom:10px !important;"></div>
+				</div>
+				<div class="form-group">
+					<div class="pick_title"><span class="required">*</span>城市：</div>
+					<div class="col-lg-4"><input type="text" id="detailed_city" class="form-control input-common" style="width:350px;margin-bottom:10px !important;"></div>
 				</div>
 				<div class="form-group">
 					<div class="pick_title"><span class="required">*</span>详细地址：</div>
@@ -411,33 +410,6 @@ textarea{width: 350px;}
 <script>
 $(function() {
 
-	var selCity = $("#seleAreaNext")[0];
-	for (var i = selCity.length - 1; i >= 0; i--) {
-		selCity.options[i] = null;
-	}
-	var opt = new Option("请选择省", "-1");
-	selCity.options.add(opt);
-	// 添加省
-	$.ajax({
-		type : "post",
-		url : "{:__URL('ADMIN_MAIN/order/getprovince')}",
-		dataType : "json",
-		success : function(data) {
-			if (data != null && data.length > 0) {
-				for (var i = 0; i < data.length; i++) {
-					var opt = new Option(data[i].province_name,data[i].province_id);
-					selCity.options.add(opt);
-				}
-				
-				if(typeof($("#provinceid").val())!='undefined'){
-					$("#seleAreaNext").val($("#provinceid").val());
-					GetProvince();
-					$("#provinceid").val('-1');
-				}
-				$("#seleAreaNext").selectric({maxHeight:500});
-			} 
-		}
-	});
 
 	$("#shipping_type1").focus(function(){
 		$("#express_input").show();
@@ -948,19 +920,11 @@ function update_address(order_id){
 			$("#receiver_mobile").val(data['receiver_mobile']);
 			$("#fixed_telephone").val(data['fixed_telephone']);
 			$("#receiver_zip").val(data['receiver_zip']);
-			var provinceid = data['receiver_province'] > 0 ? data['receiver_province'] : -1;
-			var cityid = data['receiver_city'] > 0 ? data['receiver_city'] : -1;
-			var districtid = data['receiver_district'] > 0 ? data['receiver_district'] : -1;
-			$("#seleAreaNext").val(provinceid);
-			$("#provinceid").val(provinceid);
-			$("#cityid").val(cityid);
-			$("#districtid").val(districtid);
-			$("#seleAreaNext option[value='"+provinceid+"']").attr("selected", true);
-			$("#seleAreaNext").selectric({maxHeight:500});
-			GetProvince();
-			getSelCity();
+			initProvince("#selCountry");
 			var address_arr = data['receiver_address'].split('&nbsp;');
-			if(address_arr[3] != undefined){
+			$("#detailed_province").val(address_arr[1]);
+			$("#detailed_city").val(address_arr[2]);
+            if(address_arr[3] != undefined){
 				$("#address_detail").val(address_arr[3]);
 			}else{
 				$("#address_detail").val("");
@@ -1054,9 +1018,9 @@ function updateAddressSubmit(){
 	var receiver_name = $("#receiver_name").val();
 	var receiver_mobile = $("#receiver_mobile").val();
 	var receiver_zip = $("#receiver_zip").val();
-	var seleAreaNext = $("#seleAreaNext").val();
-	var seleAreaThird = $("#seleAreaThird").val();
-	var seleAreaFouth = $("#seleAreaFouth").val();
+	var selCountry = $("#selCountry").val();
+	var detailed_province = $("#detailed_province").val();
+	var detailed_city = $("#detailed_city").val();
 	var address_detail = $("#address_detail").val();
 	var order_id = $("#update_address_id").val();
 	var fixed_telephone = $("#fixed_telephone").val();
@@ -1066,8 +1030,8 @@ function updateAddressSubmit(){
 		return false;
 	}
 
-	if(!(/^1(3|4|5|7|8)\d{9}$/.test(receiver_mobile))){
-		showTip("请填写正确格式的手机号",'warning')
+	if(!(/^[0-9]*$/.test(receiver_mobile))){
+		showTip("请填写正确格式的手机号",'warning');
 		$("#receiver_mobile").focus();
 		return false;
 	}
@@ -1081,22 +1045,16 @@ function updateAddressSubmit(){
 		} 
 	}
 
-	if(seleAreaNext == '-1'){
-		showTip("请选择省",'warning');
+	if(selCountry == '0'){
+		showTip("请选择国家",'warning');
 		return false;
 	}
 
-	if(seleAreaThird == '-1'){
-		showTip("请选择市",'warning');
+	if(detailed_city == ''){
+		showTip("城市不能为空",'warning');
 		return false;
 	}
-	
-	if($("#seleAreaFouth option").length>1){
-		if(seleAreaFouth == '-1'){
-			showTip("请选择区/县",'warning');
-			return false;
-		}
-	}
+
 	if(address_detail == ''){
 		showTip("请填写详细收货地址",'warning');
 		return false;
@@ -1110,9 +1068,9 @@ function updateAddressSubmit(){
 			"receiver_name" : receiver_name,
 			"receiver_mobile" : receiver_mobile,
 			"receiver_zip" : receiver_zip,
-			"seleAreaNext" : seleAreaNext,
-			"seleAreaThird" : seleAreaThird,
-			"seleAreaFouth" : seleAreaFouth,
+			"selCountry" : selCountry,
+			"detailed_province" : detailed_province,
+			"detailed_city" : detailed_city,
 			"address_detail" : address_detail,
 			"fixed_telephone" : fixed_telephone
 		},
@@ -1124,6 +1082,23 @@ function updateAddressSubmit(){
 			}
 		}
 	});
+}
+
+function initProvince(obj){
+    $.ajax({
+        type : "post",
+        url : __URL(SHOPMAIN + "/member/getprovince"),
+        dataType : "json",
+        success : function(data) {
+            if (data != null && data.length > 0) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += '<option value="'+data[i].id+'">'+data[i].name+'</option>';
+                }
+                $(obj).append(str);
+            }
+        }
+    });
 }
 
 //选择省份弹出市区
