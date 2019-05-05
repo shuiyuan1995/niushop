@@ -131,9 +131,9 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 		{$goods_detail.goods_name}
 		</h1>
 		<p class="goods-introduction">{$goods_detail.introduction}</p>
-		<span class="give-the-thumbs-up" onclick="document.getElementById('share_img').style.display='block';">
+		<!--<span class="give-the-thumbs-up" onclick="document.getElementById('share_img').style.display='block';">
 			<i class="data-icon-share"></i><br/>{:lang('share')}
-		</span>
+		</span>-->
 		{if $goods_detail.point_exchange_type eq 2}
 		<p style="font-size: 12px;">
 			本商品可使用积分进行兑换，<a href="{:__URL('APP_MAIN/goods/goodsDetailPointExchange','id='.$goods_detail['goods_id'])}" style="color: #f44;border-bottom:1px solid #f44;">前去兑换</a>

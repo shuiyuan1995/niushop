@@ -140,11 +140,11 @@ class Member extends BaseController
             "newMyPath" => array(
                 lang('new_my_path'),
                 'member/newMyPath'
-            ),
+            )/*,
             "myWinningRecord" => array(
                 lang('my_winning_record'),
                 'member/myWinningRecord'
-            )
+            )*/
         );
         $is_support_pintuan = IS_SUPPORT_PINTUAN;
         if ($is_support_pintuan == 0) {
@@ -1767,7 +1767,7 @@ class Member extends BaseController
             "np_pgwr.shop_id" => $this->instance_id,
             "np_pgwr.is_winning" => 1
         ];
-        $gamesWinningRecordsList = $promotion->getUserPromotionGamesWinningRecords(1, 0, $condition);
+        $gamesWinningRecordsList = $promotion->getUserPromotionGamesWinningRecords(1, 10, $condition);
         $this->assign("gamesWinningRecordsList", $gamesWinningRecordsList);
         return view($this->style . "Member/myWinningRecord");
     }

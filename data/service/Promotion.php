@@ -68,6 +68,13 @@ class Promotion extends BaseService implements IPromotion
         parent::__construct();
     }
 
+    public function getUserPromotionGamesWinningRecords($page_index, $page_size, $condition, $order=null)
+    {
+        $model = new NsPromotionGamesWinningRecordsModel();
+        $res = $model->getUserPromotionGamesWinningRecordsViewList($page_index, $page_size, $condition, $order);
+        return $res;
+    }
+
     /**
      * (non-PHPdoc)
      *
