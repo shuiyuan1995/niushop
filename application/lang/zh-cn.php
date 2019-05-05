@@ -60,7 +60,7 @@ return [
     'back_top'                       => '返回顶部 ',
     'my_collection'                  => '我的收藏 ',
     'contact_customer_service'       => '联系客服',
-    'mall_code'                      => '商城二维码',
+    'mall_code'                      => '客服二维码',
     //底部
     'certified_guarantee'            => '正品保障',
     'seven_days'                     => '七天包退',
@@ -75,9 +75,9 @@ return [
     'open_source_mall'               => '开源商城',
     'copyright'                      => '版权所有',
     'reserve_all_rights'             => '保留一切权利',
-    'shanxi'                         => '山西',
-    'niuku'                          => '牛酷',
-    'mdt_infotech_ltd'               => '信息科技有限公司',
+    'shanxi'                         => '',
+    'niuku'                          => '玖玖车',
+    'mdt_infotech_ltd'               => '科技有限公司',
     'provide_technical_support'      => '提供技术支持',
     
     //登录
