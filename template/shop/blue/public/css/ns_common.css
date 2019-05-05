@@ -5760,7 +5760,7 @@ img {
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	font-size: 16px;
+	font-size: 12px;
 	padding-left: 40px;
 	position: relative;
 	box-sizing: border-box;
