@@ -46,7 +46,7 @@
 							<ul>
 								{foreach name="$so['child_list']" item="to"}
 								<li>
-									<a class="cate_pic" href="{:__URL('APP_MAIN/goods/goodslist','category_id='.$to['category_id'])}"><img src="__TEMP__/{$style}/public/images/category_pic_empty.png" class="lazy_load" data-original="{:__IMG($to.category_pic)}" alt=""></a>
+									<!-- <a class="cate_pic" href="{:__URL('APP_MAIN/goods/goodslist','category_id='.$to['category_id'])}"><img src="__TEMP__/{$style}/public/images/category_pic_empty.png" class="lazy_load" data-original="{:__IMG($to.category_pic)}" alt=""></a> -->
 									<p class="cate_name">{$to.category_name}</p>
 								</li>
 								{/foreach}
@@ -56,7 +56,7 @@
 						<div class="three_categorty_box">
 							<ul>
 								<li>
-									<a class="cate_pic" href="{:__URL('APP_MAIN/goods/goodslist','category_id='.$so['category_id'])}"><img src="__TEMP__/{$style}/public/images/category_pic_empty.png" class="lazy_load" data-original="{:__IMG($so.category_pic)}" alt=""></a>
+									<!-- <a class="cate_pic" href="{:__URL('APP_MAIN/goods/goodslist','category_id='.$so['category_id'])}"><img src="__TEMP__/{$style}/public/images/category_pic_empty.png" class="lazy_load" data-original="{:__IMG($so.category_pic)}" alt=""></a> -->
 									<p class="cate_name">{$so.category_name}</p>
 								</li>
 							</ul>
