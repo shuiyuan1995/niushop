@@ -21,7 +21,7 @@
 				<li><a href="{:__URL('SHOP_MAIN/goods/goodslist',$url_parameter_not_brand)}" >{:lang('goods_brand')}：<b class="color">{$brand_name}</b><i>×</i></a></li>
 				{/if}
 				{if condition="$max_price!='' "}
-				<li><a href="{:__URL('SHOP_MAIN/goods/goodslist',$url_parameter_not_price)}" >{:lang('goods_price')}：<b class="color">{$min_price}-{$max_price}</b><i>×</i></a></li>
+				<li><a href="{:__URL('SHOP_MAIN/goods/goodslist',$url_parameter_not_price)}" >{:lang('goods_price')}：<b class="color">{$min_price}{if $max_price != 10000}&nbsp;-&nbsp;{$max_price}{else/}以上{/if}</b><i>×</i></a></li>
 				{/if}
 				<!-- 取消属性 -->
 				{foreach name="attr_array" item="attr_item_vo"}

@@ -191,7 +191,7 @@ function LoadingInfo(page_index) {
 	var shipping_type = $("#shipping_type").val();
 	$.ajax({
 		type : "post",
-		url : "{:__URL('ADMIN_MAIN/order/orderlist')}",
+		url : "{:__URL('ADMIN_MAIN/order/creditcardlist')}",
 		data : {
 			"page_index" : page_index,
 			"page_size" : $("#showNumber").val(),
@@ -202,7 +202,7 @@ function LoadingInfo(page_index) {
 			"order_status" : order_status,
 			"receiver_mobile" : receiver_mobile,
 			"order_status" : order_status,
-			"payment_type" : 3,
+			"payment_type" : 7,
 			"shipping_type" : shipping_type,
 			"order_type" : order_type
 		},

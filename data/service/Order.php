@@ -1622,7 +1622,7 @@ class Order extends BaseService implements IOrder
     {
         $order = new NsOrderModel();
         $condition['order_status'] = 1; // 待发货
-        $order = $order->field('user_name')->where($condition)->select();
+        $order = $order->field('user_name')->where($condition)->order('create_time','desc')->select();
         return $order;
     }
 

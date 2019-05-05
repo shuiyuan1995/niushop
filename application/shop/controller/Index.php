@@ -97,15 +97,15 @@ class Index extends BaseController
                     $block_list[$k]["block_width"] = 100;
                     $block_list[$k]["goods_block_width"] = 19.80;
                     //显示商品个数
-                    $block_list[$k]["goods_num"] = 10;
+                    $block_list[$k]["goods_num"] = 8;
                 } elseif (($v['ad_picture'] != "" && empty($v['brand_list'])) || ($v['ad_picture'] == "" && ! empty($v['brand_list']))) {
                     $block_list[$k]["block_width"] = 80;
                     $block_list[$k]["goods_block_width"] = 24.85;
-                    $block_list[$k]["goods_num"] = 4;
+                    $block_list[$k]["goods_num"] = 8;
                 } else {
                     $block_list[$k]["block_width"] = 60;
                     $block_list[$k]["goods_block_width"] = 33.15;
-                    $block_list[$k]["goods_num"] = 6;
+                    $block_list[$k]["goods_num"] = 8;
                 }
             }
         }
