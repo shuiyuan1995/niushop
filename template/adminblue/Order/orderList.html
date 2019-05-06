@@ -87,6 +87,12 @@
 						</dd>
 					</dl>
 					<dl>
+						<dt>收货人用户名：</dt>
+						<dd>
+							<input id="nickname" class="input-common middle" type="text" />
+						</dd>
+					</dl>
+					<dl>
 						<dt>支付方式：</dt>
 						<dd>
 							<select id="payment_type" class="select-common middle">
@@ -102,7 +108,7 @@
 							</select>
 						</dd>
 					</dl>
-					<dl>
+					<!--<dl>
 						<dt>配送方式：</dt>
 						<dd>
 							<select id="shipping_type" class="select-common middle">
@@ -112,7 +118,7 @@
 								<option value="3">本地配送</option>
 							</select>
 						</dd>
-					</dl>
+					</dl>-->
 					<dl>
 						<dt></dt>
 						<dd><button onclick="searchData()" class="btn-common">搜索</button></dd>
@@ -191,6 +197,7 @@ function LoadingInfo(page_index) {
 	var order_status = $("#order_status").val();
 	var payment_type = $("#payment_type").val();
 	var shipping_type = $("#shipping_type").val();
+	var nick_name = $("#nickname").val();
 	$.ajax({
 		type : "post",
 		url : "{:__URL('ADMIN_MAIN/order/orderlist')}",
@@ -206,7 +213,8 @@ function LoadingInfo(page_index) {
 			"order_status" : order_status,
 			"payment_type" : payment_type,
 			"shipping_type" : shipping_type,
-			"order_type" : order_type
+			"order_type" : order_type,
+			"nick_name" : nick_name
 		},
 		success : function(data) {
 			if (data["data"].length > 0) {

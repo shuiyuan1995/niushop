@@ -177,16 +177,12 @@ class Login extends Controller
         }
         
         // 点击商品详情没有登录首先要获取上一页
-        $pre_url = '';
-        $bund_pre_url = $_SESSION['login_pre_url'];
-        if (empty($bund_pre_url)) {
-            if (! empty($_SERVER['HTTP_REFERER'])) {
-                $pre_url = $_SERVER['HTTP_REFERER'];
-                if (strpos($pre_url, 'login')) {
-                    $pre_url = '';
-                }
-                $_SESSION['login_pre_url'] = $pre_url;
+        if (! empty($_SERVER['HTTP_REFERER'])) {
+            $pre_url = $_SERVER['HTTP_REFERER'];
+            if (strpos($pre_url, 'login')) {
+                $pre_url = '';
             }
+            $_SESSION['login_pre_url'] = $pre_url;
         }
         
         $isNeedVerification = $this->isNeedVerification();

@@ -73,6 +73,7 @@ class Order extends BaseController
             $order_no = trim(request()->post('order_no', ''),' ');
             $order_status = trim(request()->post('order_status', ''),' ');
             $receiver_mobile = trim(request()->post('receiver_mobile', ''),' ');
+            $nick_name = trim(request()->post('nick_name', ''),' ');
             $payment_type = request()->post('payment_type', 1);
             $shipping_type = request()->post('shipping_type', 0); //配送类型
             $order_type = request()->post('order_type', '1,3');
@@ -150,7 +151,10 @@ class Order extends BaseController
             }
             if($shipping_type != 0){
                 $condition['shipping_type'] = $shipping_type;
-            }    
+            }
+            if (! empty($nick_name)) {
+                $condition['user_name'] = $nick_name;
+            }
             $condition['shop_id'] = $this->instance_id;
             $order_service = new OrderService();
             $list = $order_service->getOrderList($page_index, $page_size, $condition, 'create_time desc');
