@@ -1133,15 +1133,19 @@ class Order extends BaseController
             ),
             array(
                 'receiver_province_name',
-                '收货人所在省'
+                '收货人所在国家'
             ),
             array(
                 'receiver_city_name',
-                '收货人所在市'
+                '收货人所在省份'
             ),
             array(
                 'receiver_district_name',
-                '收货人所在县/区'
+                '收货人所在城市'
+            ),
+            array(
+                'receiver_address',
+                '收货人地址'
             )
         );
         $start_date = request()->get('start_date') == "" ? 0 : getTimeTurnTimeStamp(request()->get('start_date'));
@@ -1232,11 +1236,12 @@ class Order extends BaseController
         $list = $list["data"];
         foreach ($list as $k => $v) {
             $list[$k]["create_date"] = getTimeStampTurnTime($v["create_time"]); // 创建时间
-            $list[$k]["receiver_info"] = $v["receiver_name"] . "  " . $v["receiver_mobile"] . "  " . $v["fixed_telephone"] . " " . $v["receiver_address"] . "  " . $v["receiver_zip"]; // 创建时间
+            $list[$k]["receiver_info"] = '姓名：'.$v["receiver_name"] . "  手机：" . $v["receiver_mobile"] . "  座机：" . $v["fixed_telephone"] . " 地址：" . $v["receiver_address"] . "  邮编：" . $v["receiver_zip"]; // 创建时间
             $address_arr = explode('&nbsp;', $v['receiver_address']);
             $list[$k]["receiver_province_name"] = empty($address_arr[0]) ? "" : $address_arr[0];
             $list[$k]["receiver_city_name"] = empty($address_arr[1]) ? "" : $address_arr[1];
             $list[$k]["receiver_district_name"] = empty($address_arr[2]) ? "" : $address_arr[2];
+            $list[$k]["receiver_address"] = empty($address_arr[3]) ? "" : $address_arr[3];
  			$list[$k]['user_name'] = $v['user_name'];
             if ($v['shipping_type'] == 1) {
                 $list[$k]["shipping_type_name"] = '商家配送';

@@ -307,12 +307,15 @@ function LoadingInfo(page_index) {
 					html += '<td rowspan="'+row+'" style="text-align:center">';
 					
 					//地址
-					var address = data["data"][i]["receiver_address"];
+					var address_arr = data["data"][i]["receiver_address"].split('&nbsp;');
 					html += '<div style="text-align:left;"><span class="expressfee">'+data["data"][i]["receiver_name"]+'</span><br/><span class="expressfee">'+data["data"][i]["receiver_mobile"]+'</span>';
 					if(data["data"][i]["fixed_telephone"] != ""){
 						html += '<br><span>'+data["data"][i]["fixed_telephone"]+'</span>';
 					}
-					html += '<br/><span class="expressfee">'+address+'</span>';
+					html += '<br/><span class="expressfee">国家：'+address_arr[0]+'</span>';
+                    html += '<br/><span class="expressfee">省份：'+address_arr[1]+'</span>';
+                    html += '<br/><span class="expressfee">城市：'+address_arr[2]+'</span>';
+                    html += '<br/><span class="expressfee">街道：'+address_arr[3]+'</span>';
 					html += '</div></td>';
 					
 					html += '<td rowspan="'+row+'" style="text-align:center"><div class="cell">'+data["data"][i]["user_name"]+'<br/>';
