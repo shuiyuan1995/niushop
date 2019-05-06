@@ -3,4 +3,5 @@
 /runtime/cache/
 /*.log
 /application/database.php
+/application/config.php
 /upload
