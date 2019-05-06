@@ -70,9 +70,9 @@ class Order extends BaseController
             $start_date = request()->post('start_date') == "" ? 0 : getTimeTurnTimeStamp(request()->post('start_date'));
             $end_date = request()->post('end_date') == "" ? 0 : getTimeTurnTimeStamp(request()->post('end_date'));
             $user_name = request()->post('user_name', '');
-            $order_no = request()->post('order_no', '');
-            $order_status = request()->post('order_status', '');
-            $receiver_mobile = request()->post('receiver_mobile', '');
+            $order_no = trim(request()->post('order_no', ''),' ');
+            $order_status = trim(request()->post('order_status', ''),' ');
+            $receiver_mobile = trim(request()->post('receiver_mobile', ''),' ');
             $payment_type = request()->post('payment_type', 1);
             $shipping_type = request()->post('shipping_type', 0); //配送类型
             $order_type = request()->post('order_type', '1,3');
