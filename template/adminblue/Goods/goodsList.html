@@ -70,6 +70,7 @@ input, textarea, .uneditable-input {width: 147px;}
 				<label class='checkbox-inline'><i class='checkbox-common'><input type='checkbox' value='1' /></i> 热卖 </label>
 				<label class='checkbox-inline'><i class='checkbox-common'><input type='checkbox' value='2' /></i> 精品 </label>
 				<label class='checkbox-inline'><i class='checkbox-common'><input type='checkbox' value='3' /></i> 新品 </label>
+				<label class='checkbox-inline'><i class='checkbox-common'><input type='checkbox' value='4' /></i> 首页显示 </label>
 				</div>
 				<button class='btn-common btn-small' onclick='setRecommend();'>保存</button>
 				<button class='btn btn-small' onclick='hideSetRecommend()'>取消</button>
@@ -381,6 +382,7 @@ function LoadingInfo(page_index) {
 										html += data["data"][i]["is_hot"] == 1 ? '<i class="hot">热</i>' : '';
 										html += data["data"][i]["is_recommend"] == 1 ? '<i class="recommend">精</i>' : '';
 										html += data["data"][i]["is_new"] == 1 ? '<i class="new">新</i>' : '';
+                    					html += data["data"][i]["index_show"] == 1 ? '<i class="new">首</i>' : '';
 										if(data["data"][i]['goods_group_name'] != '' && data["data"][i]['goods_group_name'] != undefined){
 											var tmp_array = data["data"][i]['goods_group_name'].split(",");
 											$.each(tmp_array,function(k,v){	

@@ -712,7 +712,8 @@ class GoodsCategory extends BaseService implements IGoodsCategory
                 }
                 $goods_list = $goods->getGoodsViewList(1, 8, [
                     "ng.category_id_1" => $v["category_id"],
-                    "ng.state" => 1
+                    "ng.state" => 1,
+                    "ng.index_show" =>1
                 ], $order);
                 $goods_category_block_list[$k]["goods_list"] = $goods_list["data"];
                 // 是否显示品牌
@@ -781,7 +782,8 @@ class GoodsCategory extends BaseService implements IGoodsCategory
                 }
                 $condition = [
                     "ng.category_id_1" => $v["category_id"],
-                    "ng.state" => 1
+                    "ng.state" => 1,
+                    "ng.index_show" => 1
                 ];
                 $goods_list = $goods->getGoodsQueryLimit($condition, "ng.goods_id,ng_sap.pic_cover_small,ng.goods_name,ng.promotion_price,ng.state,ng.shipping_fee,ng.group_id_array,ng.point_exchange_type,ng.point_exchange", $show_num, $order);
                 

@@ -2375,9 +2375,10 @@ class Goods extends BaseService implements IGoods
             $goods_id_array = explode(',', $goods_ids);
             $goods_type = explode(',', $goods_type);
             $data = array(
-                "is_new" => $goods_type[0],
-                "is_recommend" => $goods_type[1],
-                "is_hot" => $goods_type[2]
+                "index_show" => $goods_type[0],
+                "is_new" => $goods_type[1],
+                "is_recommend" => $goods_type[2],
+                "is_hot" => $goods_type[3]
             );
             foreach ($goods_id_array as $k => $v) {
                 $goods = new NsGoodsModel();
@@ -4859,7 +4860,7 @@ class Goods extends BaseService implements IGoods
         
         $viewObj = $goods_model->alias("ng")
             ->join('sys_album_picture ng_sap', 'ng_sap.pic_id = ng.picture', 'left')
-            ->field("ng.goods_id,ng.goods_name,ng.promotion_price,ng.market_price,ng.goods_type,ng.stock,ng.introduction,ng.max_buy,ng.state,ng.is_hot,ng.is_recommend,ng.is_new,ng.sales,ng_sap.pic_cover_micro,ng.code,ng.create_time,ng.QRcode,ng.price,ng.real_sales,ng.sort,ng.group_id_array");
+            ->field("ng.goods_id,ng.goods_name,ng.promotion_price,ng.market_price,ng.goods_type,ng.stock,ng.introduction,ng.max_buy,ng.state,ng.is_hot,ng.is_recommend,ng.is_new,ng.index_show,ng.sales,ng_sap.pic_cover_micro,ng.code,ng.create_time,ng.QRcode,ng.price,ng.real_sales,ng.sort,ng.group_id_array");
         $queryList = $goods_model->viewPageQuery($viewObj, $page_index, $page_size, $condition, $order);
         $queryCount = $this->getGoodsQueryCount($condition);
         $list = $goods_model->setReturnList($queryList, $queryCount, $page_size);

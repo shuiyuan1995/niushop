@@ -909,6 +909,7 @@ function orderPickupSubmit(){
 	});
 }
 
+initProvince("#selCountry");
 //查询修改的收货地址的信息
 function update_address(order_id){
 	$.ajax({
@@ -920,8 +921,8 @@ function update_address(order_id){
 			$("#receiver_mobile").val(data['receiver_mobile']);
 			$("#fixed_telephone").val(data['fixed_telephone']);
 			$("#receiver_zip").val(data['receiver_zip']);
-			initProvince("#selCountry");
 			var address_arr = data['receiver_address'].split('&nbsp;');
+			$("#selCountry option:contains('"+address_arr[0]+"')").attr('selected','selected');
 			$("#detailed_province").val(address_arr[1]);
 			$("#detailed_city").val(address_arr[2]);
             if(address_arr[3] != undefined){
