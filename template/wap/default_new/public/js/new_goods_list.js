@@ -75,6 +75,7 @@ $(function() {
 	$(".reset").click(function(){
 		$("ul.conditions li div.condition_value a").removeClass("selected");
 		$("ul.conditions li div.condition_value a.all").addClass("selected");
+		$(".price-Section .priceInput").val('');
 	})
 
 	//点击确定按钮进行筛选
