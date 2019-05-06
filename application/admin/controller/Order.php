@@ -1014,8 +1014,8 @@ class Order extends BaseController
     public function getProvince()
     {
         $address = new Address();
-        $province_list = $address->getProvinceList();
-        return $province_list;
+        $country_list = $address->getCountry();
+        return $country_list;
     }
 
     /**

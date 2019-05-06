@@ -1088,7 +1088,7 @@ function updateAddressSubmit(){
 function initProvince(obj){
     $.ajax({
         type : "post",
-        url : __URL(SHOPMAIN + "/member/getprovince"),
+        url :"{:__URL('ADMIN_MAIN/order/getprovince')}",
         dataType : "json",
         success : function(data) {
             if (data != null && data.length > 0) {
