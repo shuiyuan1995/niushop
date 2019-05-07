@@ -734,7 +734,7 @@ class Goods extends BaseController
             $max_price = request()->post('mape', ''); // 最大 max_price
             $attr = request()->post('attr', ''); // 属性值
             $spec = request()->post('spec', ''); // 规格值
-                                                 
+                        // var_dump($min_price);var_dump($max_price);
             // 将属性条件字符串转化为数组
             $attr_array = $this->stringChangeArray($attr);
             // 规格转化为数组
@@ -776,13 +776,19 @@ class Goods extends BaseController
             if ($category_id != "") {
                 // 获取商品分类下的品牌列表、价格区间
                 $category_brands = [];
-                $category_price_grades = [];
+                $category_price_grades = array(
+                    array(0,199),
+                    array(200,399),
+                    array(400,799),
+                    array(800,1199),
+                    array(1200,'以上')
+                );
                 
                 // 查询品牌列表，用于筛选
                 $category_brands = $goods_category_service->getGoodsBrandsByGoodsAttr($category_id);
                 
                 // 查询价格区间，用于筛选
-                $category_price_grades = $goods_category_service->getGoodsCategoryPriceGrades($category_id);
+                //$category_price_grades = $goods_category_service->getGoodsCategoryPriceGrades($category_id);
                 foreach ($category_price_grades as $k => $v) {
                     $category_price_grades[$k]['price_str'] = $v[0] . '-' . $v[1];
                 }
@@ -908,16 +914,31 @@ class Goods extends BaseController
         
         // 价格区间
         if ($max_price != "") {
-            $condition["ng.promotion_price"] = [
+            if ($min_price != ""){
+                $condition["ng.promotion_price"] = [
+                    [
+                        ">=",
+                        $min_price
+                    ],
+                    [
+                        "<=",
+                        $max_price
+                    ]
+                ];
+            }else{
+                $condition["ng.promotion_price"] =
+                    [
+                        "<=",
+                        $max_price
+                    ];
+            }
+
+        }else{
+            $condition["ng.promotion_price"] =
                 [
                     ">=",
                     $min_price
-                ],
-                [
-                    "<=",
-                    $max_price
-                ]
-            ];
+                ];
         }
         
         // 属性 (条件拼装)
