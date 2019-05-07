@@ -97,11 +97,31 @@ var STATIC = "__STATIC__";
 				}
 			}
 		});
-	})
+
+        $("#email").change(function(){
+            if(!($(this).val().search(/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/)==-1)){
+                $("#isset_email").attr("value","1");
+                var user_email = $(this).val();
+                $.ajax({
+                    type: "get",
+                    url: "/wap/login/email",
+                    data: {"email":user_email},
+                    success: function(data){
+                        if(data){
+                            showBox("{:lang('mailbox_has_been_registered')}", "error");
+                            $("#isset_email").attr("value","2");
+                        }
+                    }
+                });
+            }
+        });
+	});
 	
 	var is_member_sub = false;
 	function register_member(){
 		var username = $("#username").val();
+		var email = $("#email").val();
+		var isset_email = $("#isset_email").val();
 		var password = $("#password").val();
 		var cfpassword = $("#cfpassword").val();
 		var reg = /^.{6,}$/;
@@ -111,11 +131,31 @@ var STATIC = "__STATIC__";
 			showBox("{:lang('account_cannot_be_empty')}", "error");
 			return false;
 		}
+		if(username.length<3 || username.length>16){
+            showBox("用户名3-16位", "error");
+            return false;
+        }
 		//账号验证
 		var is_username_true = verifyUsername(username);
 		if(is_username_true > 0){
 			return false;
 		}
+        if(email == ''){
+            $("#email").trigger("focus");
+            showBox("{:lang('mailbox_cannot_empty')}");
+            return false;
+        }else if(email.search(/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/)==-1){
+            $("#email").trigger("focus");
+            showBox("{:lang('member_enter_correct_email_format')}");
+            return false;
+        }
+
+        if(isset_email == "2"){
+            $("#email").trigger("focus");
+            showBox("{:lang('mailbox_already_exists')}", "error");
+            return false;
+        }
+
 		if(password == ''){
 			showBox("{:lang('password_cannot_empty')}", "error");
 			return false;
@@ -149,6 +189,7 @@ var STATIC = "__STATIC__";
 			data : {
 				"username" : username,
 				"password" : password,
+				"email" : email,
 				"captcha" : register_captcha 
 			},
 			success : function(data) {
@@ -501,6 +542,12 @@ function verifyPassword(password){
 				<div class="reg-cont" style="margin-top:45px;">
 					<label class="login-txt" for="username"><span style="padding-right:27px;">{:lang('account_number')}</span><input class="" type="text"
 						name="username" id="username" placeholder="{:lang('enter_your_account_number')}">
+					</label>
+				</div>
+				<div class="reg-cont">
+					<label class="login-txt" for="email"><span style="padding-right:27px;">{:lang('mailbox')}</span>
+						<input class="" type="text" name="email" id="email" placeholder="请输入邮箱">
+						<input type="hidden" id="isset_email">
 					</label>
 				</div>
 				<div class="reg-cont">
