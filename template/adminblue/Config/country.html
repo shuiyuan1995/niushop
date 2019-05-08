@@ -7,6 +7,46 @@
 .add-child{padding-left: 15px;background: url(ADMIN_IMG/add-child.png) no-repeat;background-position: 0 2px;}
 .add-child i{font-style: normal;display: none;}
 .add-child:hover i{display: inline-block;}
+.baoxian{
+	width: 50px;
+}
+.tianjiabtn{
+	margin-bottom: 1px !important;
+}
+.baoxianitem{
+	max-width: 420px;
+	font-size: 0px;
+}
+.baoxianitem p{
+	border: 1px solid #cccccc;
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 5px;
+	padding: 0 4px;
+	position: relative;
+	margin-right: 3px;
+	font-size: 12px;
+}
+.baoxianitem p:hover{
+	border: 1px solid rgba(82, 168, 236, 1);
+	cursor: pointer;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+.baoxianitem p:hover:after{
+	content: "×";
+	font-size: 30px;
+	color: #ffffff;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.4);
+	border-radius: 5px;
+	top: 0px;
+	left: 0px;
+	text-align: center;
+	line-height: 30px;
+}
 </style>
 {/block}
 {block name="main"}
@@ -84,7 +124,13 @@
 					</tr>
 					<tr>
 						<td align="right"><span style="color:red;margin-right:10px;">*</span>保险：</td>
-						<td>价格区间：<input type="text" id="start" style="margin-bottom: 5px;" class="input-common"/> - <input type="text" id="end" style="margin-bottom: 5px;" class="input-common"/>   保险费：<input type="text" id="price" style="margin-bottom: 5px;" class="input-common"/></td>
+						<td>
+								价格区间：<input type="number" id="start" style="margin-bottom: 5px;" class="baoxian"/> - <input type="number" id="end" style="margin-bottom: 5px;" class="baoxian"/>   保险费：<input type="number" id="price" style="margin-bottom: 5px;" class="baoxian"/>
+								<button type="button" onclick="baoxianadd()" class="btn-small btn-common tianjiabtn">添加</button>
+								<div id="baoxianitem" class="baoxianitem">
+									<p><span>100</span>-<span>200</span> <span>356</span>元</p><p><span>100</span>-<span>200</span> <span>356</span>元</p>
+								</div>
+						</td>
 					</tr>
 					<tr>
 						<td align="right">排序：</td>
@@ -155,6 +201,21 @@ function addCountry(){
 	$("#evaluate").modal('show');
 }
 
+// 添加保险
+function baoxianadd(){
+	if($("#start").val()==''||$("#end").val()==''||$("#price").val()==''){
+		return false
+	}
+	var txt = '<p><span>'+$("#start").val()+'</span>-<span>'+$("#end").val()+'</span> <span>'+$("#price").val()+'</span>元</p>'
+	$("#baoxianitem").append(txt)
+	$("#start").val('')
+	$("#end").val('')
+	$("#price").val('')
+}
+// 删除保险
+$("#baoxianitem").click(function(e){
+	$(e.target).remove()
+})
 //修改
 function updateCountry(province_id){
     $("#evaluate_id").val(province_id);

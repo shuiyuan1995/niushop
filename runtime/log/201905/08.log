@@ -1,0 +1,293 @@
+[ 2019-05-08T16:25:19+08:00 ] 127.0.0.1 127.0.0.1 GET /
+[ log ] www.shop.com/ [运行时间：0.447779s][吞吐率：2.23req/s] [内存消耗：2,915.58kb] [文件加载：58]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:48]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:53]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:55]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:58]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:61]
+[ error ] [8]Use of undefined constant REWRITE_MODEL - assumed 'REWRITE_MODEL'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:1150]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:66]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:69]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:72]
+[ error ] [8]Use of undefined constant ADMIN_MODULE - assumed 'ADMIN_MODULE'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\route.php:22]
+[ error ] [8]Use of undefined constant ADMIN_MODULE - assumed 'ADMIN_MODULE'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\route.php:25]
+[ error ] [8]Use of undefined constant ADMIN_MODULE - assumed 'ADMIN_MODULE'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\route.php:181]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run app\behavior\InitHook @app_init [ RunTime:0.003320s ]
+[ info ] [ LANG ] C:\Users\zhupeiyuan\Documents\GitHub\niushop\thinkphp\lang\zh-cn.php
+[ info ] [ LANG ] C:\Users\zhupeiyuan\Documents\GitHub\niushop/application/lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'www.shop.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'purpose' => 'prefetch',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'goods_list_display_mode=big_img',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2019-05-08T16:25:24+08:00 ] 127.0.0.1 127.0.0.1 GET /index.php?s=/admin
+[ log ] www.shop.com/index.php?s=/admin [运行时间：1.099144s][吞吐率：0.91req/s] [内存消耗：7,495.27kb] [文件加载：103]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:48]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:53]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:55]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:58]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:61]
+[ error ] [8]Use of undefined constant REWRITE_MODEL - assumed 'REWRITE_MODEL'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:1150]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:66]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:69]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:72]
+[ error ] [8]Use of undefined constant ADMIN_MODULE - assumed 'ADMIN_MODULE'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\route.php:22]
+[ error ] [8]Use of undefined constant ADMIN_MODULE - assumed 'ADMIN_MODULE'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\route.php:25]
+[ error ] [8]Use of undefined constant ADMIN_MODULE - assumed 'ADMIN_MODULE'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\route.php:181]
+[ error ] [8]Object of class data\model\AlbumPictureModel could not be converted to int[C:\Users\zhupeiyuan\Documents\GitHub\niushop\thinkphp\library\think\Model.php:322]
+[ error ] [8]Object of class data\model\AlbumPictureModel could not be converted to int[C:\Users\zhupeiyuan\Documents\GitHub\niushop\thinkphp\library\think\Model.php:322]
+[ error ] [8]Object of class data\model\AlbumPictureModel could not be converted to int[C:\Users\zhupeiyuan\Documents\GitHub\niushop\thinkphp\library\think\Model.php:322]
+[ error ] [8]Object of class data\model\AlbumPictureModel could not be converted to int[C:\Users\zhupeiyuan\Documents\GitHub\niushop\thinkphp\library\think\Model.php:322]
+[ error ] [8]Object of class data\model\AlbumPictureModel could not be converted to int[C:\Users\zhupeiyuan\Documents\GitHub\niushop\thinkphp\library\think\Model.php:322]
+[ error ] [0]模板文件不存在:C:\Users\zhupeiyuan\Documents\GitHub\niushop/application/shop\view\shop\blue\Index\index.html[C:\Users\zhupeiyuan\Documents\GitHub\niushop\thinkphp\library\think\view\driver\Think.php:80]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run app\behavior\InitHook @app_init [ RunTime:0.000689s ]
+[ info ] [ LANG ] C:\Users\zhupeiyuan\Documents\GitHub\niushop\thinkphp\lang\zh-cn.php
+[ info ] [ LANG ] C:\Users\zhupeiyuan\Documents\GitHub\niushop/application/lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'shop',
+    1 => 'index',
+    2 => 'index',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'host' => 'www.shop.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'goods_list_display_mode=big_img; PHPSESSID=mdtga85r030g8eotif0qua9b14',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\shop\controller\Index->index[ C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\shop\controller\Index.php ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.006885s ] mysql:dbname=niushop;host=192.168.1.126;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sys_config` [ RunTime:0.015596s ]
+[ sql ] [ SQL ] SELECT `value` FROM `sys_config` WHERE  `instance_id` = 0  AND `key` = 'MERCHANT_SERVICE' LIMIT 1 [ RunTime:0.003404s ]
+[ sql ] [ SQL ] SELECT `value` FROM `sys_config` WHERE  `key` = 'HOTKEY'  AND `instance_id` = 0 LIMIT 1 [ RunTime:0.003373s ]
+[ sql ] [ SQL ] SELECT `value` FROM `sys_config` WHERE  `key` = 'DEFAULTKEY'  AND `instance_id` = 0 LIMIT 1 [ RunTime:0.003205s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ns_goods_category_block` [ RunTime:0.015928s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_category_block` WHERE  `shop_id` = 0  AND `is_show` = 1 ORDER BY sort asc [ RunTime:0.007497s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ns_goods` [ RunTime:0.017968s ]
+[ sql ] [ SQL ] SELECT `ng`.`goods_id`,`ng`.`goods_name`,`ng`.`shop_id`,`ng`.`category_id`,`ng`.`brand_id`,`ng`.`group_id_array`,`ng`.`promotion_type`,`ng`.`goods_type`,`ng`.`market_price`,`ng`.`price`,`ng`.`promotion_price`,`ng`.`cost_price`,`ng`.`point_exchange_type`,`ng`.`point_exchange`,`ng`.`give_point`,`ng`.`is_member_discount`,`ng`.`shipping_fee`,`ng`.`shipping_fee_id`,`ng`.`stock`,`ng`.`max_buy`,`ng`.`min_stock_alarm`,`ng`.`clicks`,`ng`.`sales`,`ng`.`collects`,`ng`.`star`,`ng`.`evaluates`,`ng`.`shares`,`ng`.`province_id`,`ng`.`city_id`,`ng`.`picture`,`ng`.`keywords`,`ng`.`introduction`,`ng`.`description`,`ng`.`QRcode`,`ng`.`code`,`ng`.`is_stock_visible`,`ng`.`is_hot`,`ng`.`is_recommend`,`ng`.`is_new`,`ng`.`is_pre_sale`,`ng`.`is_bill`,`ng`.`state`,`ng`.`sale_date`,`ng`.`create_time`,`ng`.`update_time`,`ng`.`sort`,`ng`.`real_sales`,`ngb`.`brand_name`,`ngb`.`brand_pic`,`ngc`.`category_id`,`ngc`.`category_name`,`sap`.`pic_cover_micro`,`sap`.`pic_cover_mid`,`sap`.`pic_cover_small`,`nss`.`shop_name`,`nss`.`shop_type`,`sap`.`pic_id`,`sap`.`upload_type`,`sap`.`domain`,`sap`.`bucket`,`ng`.`is_open_presell` FROM `ns_goods` `ng` LEFT JOIN `ns_goods_category` `ngc` ON `ng`.`category_id`=`ngc`.`category_id` LEFT JOIN `ns_goods_brand` `ngb` ON `ng`.`brand_id`=`ngb`.`brand_id` LEFT JOIN `sys_album_picture` `sap` ON `ng`.`picture`=`sap`.`pic_id` LEFT JOIN `ns_shop` `nss` ON `ng`.`shop_id`=`nss`.`shop_id` WHERE  `ng`.`category_id_1` = 1  AND `ng`.`state` = 1  AND `ng`.`index_show` = 1 ORDER BY ng.sort asc,ng.create_time desc LIMIT 0,8 [ RunTime:0.016968s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ns_goods_group` [ RunTime:0.015931s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_group` WHERE  `group_id` = 0 [ RunTime:0.004617s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ns_goods_sku` [ RunTime:0.015876s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_sku` WHERE  `goods_id` = 24 [ RunTime:0.006319s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_group` WHERE  `group_id` = 0 [ RunTime:0.004832s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_sku` WHERE  `goods_id` = 20 [ RunTime:0.005670s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_group` WHERE  `group_id` = 0 [ RunTime:0.004599s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_sku` WHERE  `goods_id` = 18 [ RunTime:0.005602s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_group` WHERE  `group_id` = 0 [ RunTime:0.004710s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_sku` WHERE  `goods_id` = 17 [ RunTime:0.005723s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_group` WHERE  `group_id` = 0 [ RunTime:0.004550s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_sku` WHERE  `goods_id` = 16 [ RunTime:0.005428s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_group` WHERE  `group_id` = 0 [ RunTime:0.004204s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_sku` WHERE  `goods_id` = 15 [ RunTime:0.005146s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_group` WHERE  `group_id` = 0 [ RunTime:0.004211s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_sku` WHERE  `goods_id` = 14 [ RunTime:0.005179s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_group` WHERE  `group_id` = 0 [ RunTime:0.004214s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_sku` WHERE  `goods_id` = 13 [ RunTime:0.005622s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ns_goods` `ng` LEFT JOIN `ns_goods_category` `ngc` ON `ng`.`category_id`=`ngc`.`category_id` LEFT JOIN `ns_goods_brand` `ngb` ON `ng`.`brand_id`=`ngb`.`brand_id` LEFT JOIN `sys_album_picture` `sap` ON `ng`.`picture`=`sap`.`pic_id` WHERE  `ng`.`category_id_1` = 1  AND `ng`.`state` = 1  AND `ng`.`index_show` = 1 LIMIT 1 [ RunTime:0.003574s ]
+[ sql ] [ SQL ] SELECT `ng`.`goods_id`,`ng`.`goods_name`,`ng`.`shop_id`,`ng`.`category_id`,`ng`.`brand_id`,`ng`.`group_id_array`,`ng`.`promotion_type`,`ng`.`goods_type`,`ng`.`market_price`,`ng`.`price`,`ng`.`promotion_price`,`ng`.`cost_price`,`ng`.`point_exchange_type`,`ng`.`point_exchange`,`ng`.`give_point`,`ng`.`is_member_discount`,`ng`.`shipping_fee`,`ng`.`shipping_fee_id`,`ng`.`stock`,`ng`.`max_buy`,`ng`.`min_stock_alarm`,`ng`.`clicks`,`ng`.`sales`,`ng`.`collects`,`ng`.`star`,`ng`.`evaluates`,`ng`.`shares`,`ng`.`province_id`,`ng`.`city_id`,`ng`.`picture`,`ng`.`keywords`,`ng`.`introduction`,`ng`.`description`,`ng`.`QRcode`,`ng`.`code`,`ng`.`is_stock_visible`,`ng`.`is_hot`,`ng`.`is_recommend`,`ng`.`is_new`,`ng`.`is_pre_sale`,`ng`.`is_bill`,`ng`.`state`,`ng`.`sale_date`,`ng`.`create_time`,`ng`.`update_time`,`ng`.`sort`,`ng`.`real_sales`,`ngb`.`brand_name`,`ngb`.`brand_pic`,`ngc`.`category_id`,`ngc`.`category_name`,`sap`.`pic_cover_micro`,`sap`.`pic_cover_mid`,`sap`.`pic_cover_small`,`nss`.`shop_name`,`nss`.`shop_type`,`sap`.`pic_id`,`sap`.`upload_type`,`sap`.`domain`,`sap`.`bucket`,`ng`.`is_open_presell` FROM `ns_goods` `ng` LEFT JOIN `ns_goods_category` `ngc` ON `ng`.`category_id`=`ngc`.`category_id` LEFT JOIN `ns_goods_brand` `ngb` ON `ng`.`brand_id`=`ngb`.`brand_id` LEFT JOIN `sys_album_picture` `sap` ON `ng`.`picture`=`sap`.`pic_id` LEFT JOIN `ns_shop` `nss` ON `ng`.`shop_id`=`nss`.`shop_id` WHERE  `ng`.`category_id_1` = 2  AND `ng`.`state` = 1  AND `ng`.`index_show` = 1 ORDER BY ng.sort asc,ng.create_time desc LIMIT 0,8 [ RunTime:0.015796s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_group` WHERE  `group_id` = 0 [ RunTime:0.004243s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_sku` WHERE  `goods_id` = 25 [ RunTime:0.005781s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_group` WHERE  `group_id` = 0 [ RunTime:0.004599s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_sku` WHERE  `goods_id` = 26 [ RunTime:0.005771s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_group` WHERE  `group_id` = 0 [ RunTime:0.004626s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_sku` WHERE  `goods_id` = 28 [ RunTime:0.005520s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_group` WHERE  `group_id` = 0 [ RunTime:0.004518s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_sku` WHERE  `goods_id` = 29 [ RunTime:0.005422s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_group` WHERE  `group_id` = 0 [ RunTime:0.004844s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_sku` WHERE  `goods_id` = 30 [ RunTime:0.005757s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_group` WHERE  `group_id` = 0 [ RunTime:0.004810s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_sku` WHERE  `goods_id` = 31 [ RunTime:0.005810s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_group` WHERE  `group_id` = 0 [ RunTime:0.004640s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_sku` WHERE  `goods_id` = 32 [ RunTime:0.005865s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_group` WHERE  `group_id` = 0 [ RunTime:0.004909s ]
+[ sql ] [ SQL ] SELECT * FROM `ns_goods_sku` WHERE  `goods_id` = 2 [ RunTime:0.005491s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ns_goods` `ng` LEFT JOIN `ns_goods_category` `ngc` ON `ng`.`category_id`=`ngc`.`category_id` LEFT JOIN `ns_goods_brand` `ngb` ON `ng`.`brand_id`=`ngb`.`brand_id` LEFT JOIN `sys_album_picture` `sap` ON `ng`.`picture`=`sap`.`pic_id` WHERE  `ng`.`category_id_1` = 2  AND `ng`.`state` = 1  AND `ng`.`index_show` = 1 LIMIT 1 [ RunTime:0.003567s ]
+[ sql ] [ SQL ] SELECT `ng`.`goods_id`,`ng`.`goods_name`,`ng`.`shop_id`,`ng`.`category_id`,`ng`.`brand_id`,`ng`.`group_id_array`,`ng`.`promotion_type`,`ng`.`goods_type`,`ng`.`market_price`,`ng`.`price`,`ng`.`promotion_price`,`ng`.`cost_price`,`ng`.`point_exchange_type`,`ng`.`point_exchange`,`ng`.`give_point`,`ng`.`is_member_discount`,`ng`.`shipping_fee`,`ng`.`shipping_fee_id`,`ng`.`stock`,`ng`.`max_buy`,`ng`.`min_stock_alarm`,`ng`.`clicks`,`ng`.`sales`,`ng`.`collects`,`ng`.`star`,`ng`.`evaluates`,`ng`.`shares`,`ng`.`province_id`,`ng`.`city_id`,`ng`.`picture`,`ng`.`keywords`,`ng`.`introduction`,`ng`.`description`,`ng`.`QRcode`,`ng`.`code`,`ng`.`is_stock_visible`,`ng`.`is_hot`,`ng`.`is_recommend`,`ng`.`is_new`,`ng`.`is_pre_sale`,`ng`.`is_bill`,`ng`.`state`,`ng`.`sale_date`,`ng`.`create_time`,`ng`.`update_time`,`ng`.`sort`,`ng`.`real_sales`,`ngb`.`brand_name`,`ngb`.`brand_pic`,`ngc`.`category_id`,`ngc`.`category_name`,`sap`.`pic_cover_micro`,`sap`.`pic_cover_mid`,`sap`.`pic_cover_small`,`nss`.`shop_name`,`nss`.`shop_type`,`sap`.`pic_id`,`sap`.`upload_type`,`sap`.`domain`,`sap`.`bucket`,`ng`.`is_open_presell` FROM `ns_goods` `ng` LEFT JOIN `ns_goods_category` `ngc` ON `ng`.`category_id`=`ngc`.`category_id` LEFT JOIN `ns_goods_brand` `ngb` ON `ng`.`brand_id`=`ngb`.`brand_id` LEFT JOIN `sys_album_picture` `sap` ON `ng`.`picture`=`sap`.`pic_id` LEFT JOIN `ns_shop` `nss` ON `ng`.`shop_id`=`nss`.`shop_id` WHERE  `ng`.`category_id_1` = 3  AND `ng`.`state` = 1  AND `ng`.`index_show` = 1 ORDER BY ng.sort asc,ng.create_time desc LIMIT 0,8 [ RunTime:0.012132s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ns_goods` `ng` LEFT JOIN `ns_goods_category` `ngc` ON `ng`.`category_id`=`ngc`.`category_id` LEFT JOIN `ns_goods_brand` `ngb` ON `ng`.`brand_id`=`ngb`.`brand_id` LEFT JOIN `sys_album_picture` `sap` ON `ng`.`picture`=`sap`.`pic_id` WHERE  `ng`.`category_id_1` = 3  AND `ng`.`state` = 1  AND `ng`.`index_show` = 1 LIMIT 1 [ RunTime:0.003492s ]
+[ sql ] [ SQL ] SELECT `ng`.`goods_id`,`ng`.`goods_name`,`ng`.`shop_id`,`ng`.`category_id`,`ng`.`brand_id`,`ng`.`group_id_array`,`ng`.`promotion_type`,`ng`.`goods_type`,`ng`.`market_price`,`ng`.`price`,`ng`.`promotion_price`,`ng`.`cost_price`,`ng`.`point_exchange_type`,`ng`.`point_exchange`,`ng`.`give_point`,`ng`.`is_member_discount`,`ng`.`shipping_fee`,`ng`.`shipping_fee_id`,`ng`.`stock`,`ng`.`max_buy`,`ng`.`min_stock_alarm`,`ng`.`clicks`,`ng`.`sales`,`ng`.`collects`,`ng`.`star`,`ng`.`evaluates`,`ng`.`shares`,`ng`.`province_id`,`ng`.`city_id`,`ng`.`picture`,`ng`.`keywords`,`ng`.`introduction`,`ng`.`description`,`ng`.`QRcode`,`ng`.`code`,`ng`.`is_stock_visible`,`ng`.`is_hot`,`ng`.`is_recommend`,`ng`.`is_new`,`ng`.`is_pre_sale`,`ng`.`is_bill`,`ng`.`state`,`ng`.`sale_date`,`ng`.`create_time`,`ng`.`update_time`,`ng`.`sort`,`ng`.`real_sales`,`ngb`.`brand_name`,`ngb`.`brand_pic`,`ngc`.`category_id`,`ngc`.`category_name`,`sap`.`pic_cover_micro`,`sap`.`pic_cover_mid`,`sap`.`pic_cover_small`,`nss`.`shop_name`,`nss`.`shop_type`,`sap`.`pic_id`,`sap`.`upload_type`,`sap`.`domain`,`sap`.`bucket`,`ng`.`is_open_presell` FROM `ns_goods` `ng` LEFT JOIN `ns_goods_category` `ngc` ON `ng`.`category_id`=`ngc`.`category_id` LEFT JOIN `ns_goods_brand` `ngb` ON `ng`.`brand_id`=`ngb`.`brand_id` LEFT JOIN `sys_album_picture` `sap` ON `ng`.`picture`=`sap`.`pic_id` LEFT JOIN `ns_shop` `nss` ON `ng`.`shop_id`=`nss`.`shop_id` WHERE  `ng`.`category_id_1` = 4  AND `ng`.`state` = 1  AND `ng`.`index_show` = 1 ORDER BY ng.sort asc,ng.create_time desc LIMIT 0,8 [ RunTime:0.012085s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ns_goods` `ng` LEFT JOIN `ns_goods_category` `ngc` ON `ng`.`category_id`=`ngc`.`category_id` LEFT JOIN `ns_goods_brand` `ngb` ON `ng`.`brand_id`=`ngb`.`brand_id` LEFT JOIN `sys_album_picture` `sap` ON `ng`.`picture`=`sap`.`pic_id` WHERE  `ng`.`category_id_1` = 4  AND `ng`.`state` = 1  AND `ng`.`index_show` = 1 LIMIT 1 [ RunTime:0.003387s ]
+[ sql ] [ SQL ] SELECT `ng`.`goods_id`,`ng`.`goods_name`,`ng`.`shop_id`,`ng`.`category_id`,`ng`.`brand_id`,`ng`.`group_id_array`,`ng`.`promotion_type`,`ng`.`goods_type`,`ng`.`market_price`,`ng`.`price`,`ng`.`promotion_price`,`ng`.`cost_price`,`ng`.`point_exchange_type`,`ng`.`point_exchange`,`ng`.`give_point`,`ng`.`is_member_discount`,`ng`.`shipping_fee`,`ng`.`shipping_fee_id`,`ng`.`stock`,`ng`.`max_buy`,`ng`.`min_stock_alarm`,`ng`.`clicks`,`ng`.`sales`,`ng`.`collects`,`ng`.`star`,`ng`.`evaluates`,`ng`.`shares`,`ng`.`province_id`,`ng`.`city_id`,`ng`.`picture`,`ng`.`keywords`,`ng`.`introduction`,`ng`.`description`,`ng`.`QRcode`,`ng`.`code`,`ng`.`is_stock_visible`,`ng`.`is_hot`,`ng`.`is_recommend`,`ng`.`is_new`,`ng`.`is_pre_sale`,`ng`.`is_bill`,`ng`.`state`,`ng`.`sale_date`,`ng`.`create_time`,`ng`.`update_time`,`ng`.`sort`,`ng`.`real_sales`,`ngb`.`brand_name`,`ngb`.`brand_pic`,`ngc`.`category_id`,`ngc`.`category_name`,`sap`.`pic_cover_micro`,`sap`.`pic_cover_mid`,`sap`.`pic_cover_small`,`nss`.`shop_name`,`nss`.`shop_type`,`sap`.`pic_id`,`sap`.`upload_type`,`sap`.`domain`,`sap`.`bucket`,`ng`.`is_open_presell` FROM `ns_goods` `ng` LEFT JOIN `ns_goods_category` `ngc` ON `ng`.`category_id`=`ngc`.`category_id` LEFT JOIN `ns_goods_brand` `ngb` ON `ng`.`brand_id`=`ngb`.`brand_id` LEFT JOIN `sys_album_picture` `sap` ON `ng`.`picture`=`sap`.`pic_id` LEFT JOIN `ns_shop` `nss` ON `ng`.`shop_id`=`nss`.`shop_id` WHERE  `ng`.`category_id_1` = 5  AND `ng`.`state` = 1  AND `ng`.`index_show` = 1 ORDER BY ng.sort asc,ng.create_time desc LIMIT 0,8 [ RunTime:0.012083s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ns_goods` `ng` LEFT JOIN `ns_goods_category` `ngc` ON `ng`.`category_id`=`ngc`.`category_id` LEFT JOIN `ns_goods_brand` `ngb` ON `ng`.`brand_id`=`ngb`.`brand_id` LEFT JOIN `sys_album_picture` `sap` ON `ng`.`picture`=`sap`.`pic_id` WHERE  `ng`.`category_id_1` = 5  AND `ng`.`state` = 1  AND `ng`.`index_show` = 1 LIMIT 1 [ RunTime:0.003383s ]
+[ sql ] [ SQL ] SELECT `ng`.`goods_id`,`ng`.`goods_name`,`ng`.`shop_id`,`ng`.`category_id`,`ng`.`brand_id`,`ng`.`group_id_array`,`ng`.`promotion_type`,`ng`.`goods_type`,`ng`.`market_price`,`ng`.`price`,`ng`.`promotion_price`,`ng`.`cost_price`,`ng`.`point_exchange_type`,`ng`.`point_exchange`,`ng`.`give_point`,`ng`.`is_member_discount`,`ng`.`shipping_fee`,`ng`.`shipping_fee_id`,`ng`.`stock`,`ng`.`max_buy`,`ng`.`min_stock_alarm`,`ng`.`clicks`,`ng`.`sales`,`ng`.`collects`,`ng`.`star`,`ng`.`evaluates`,`ng`.`shares`,`ng`.`province_id`,`ng`.`city_id`,`ng`.`picture`,`ng`.`keywords`,`ng`.`introduction`,`ng`.`description`,`ng`.`QRcode`,`ng`.`code`,`ng`.`is_stock_visible`,`ng`.`is_hot`,`ng`.`is_recommend`,`ng`.`is_new`,`ng`.`is_pre_sale`,`ng`.`is_bill`,`ng`.`state`,`ng`.`sale_date`,`ng`.`create_time`,`ng`.`update_time`,`ng`.`sort`,`ng`.`real_sales`,`ngb`.`brand_name`,`ngb`.`brand_pic`,`ngc`.`category_id`,`ngc`.`category_name`,`sap`.`pic_cover_micro`,`sap`.`pic_cover_mid`,`sap`.`pic_cover_small`,`nss`.`shop_name`,`nss`.`shop_type`,`sap`.`pic_id`,`sap`.`upload_type`,`sap`.`domain`,`sap`.`bucket`,`ng`.`is_open_presell` FROM `ns_goods` `ng` LEFT JOIN `ns_goods_category` `ngc` ON `ng`.`category_id`=`ngc`.`category_id` LEFT JOIN `ns_goods_brand` `ngb` ON `ng`.`brand_id`=`ngb`.`brand_id` LEFT JOIN `sys_album_picture` `sap` ON `ng`.`picture`=`sap`.`pic_id` LEFT JOIN `ns_shop` `nss` ON `ng`.`shop_id`=`nss`.`shop_id` WHERE  `ng`.`category_id_1` = 6  AND `ng`.`state` = 1  AND `ng`.`index_show` = 1 ORDER BY ng.sort asc,ng.create_time desc LIMIT 0,8 [ RunTime:0.012142s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ns_goods` `ng` LEFT JOIN `ns_goods_category` `ngc` ON `ng`.`category_id`=`ngc`.`category_id` LEFT JOIN `ns_goods_brand` `ngb` ON `ng`.`brand_id`=`ngb`.`brand_id` LEFT JOIN `sys_album_picture` `sap` ON `ng`.`picture`=`sap`.`pic_id` WHERE  `ng`.`category_id_1` = 6  AND `ng`.`state` = 1  AND `ng`.`index_show` = 1 LIMIT 1 [ RunTime:0.003501s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ns_promotion_discount_goods` [ RunTime:0.016219s ]
+[ sql ] [ SQL ] SELECT `npdg`.`discount_goods_id`,`npdg`.`discount_id`,`npdg`.`start_time`,`npdg`.`end_time`,`npdg`.`goods_id`,`npdg`.`status`,`npdg`.`discount`,`ng`.`goods_name`,`ng`.`picture`,`ng`.`category_id_1`,`ng`.`price`,`ng`.`promotion_price`,`ng`.`market_price`,`ng`.`point_exchange_type`,`ng`.`point_exchange` FROM `ns_promotion_discount_goods` `npdg` INNER JOIN `ns_goods` `ng` ON `ng`.`goods_id`=`npdg`.`goods_id` WHERE  `ng`.`state` = 1  AND `status` = 1 ORDER BY end_time LIMIT 0,5 [ RunTime:0.005464s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ns_promotion_discount_goods` `npdg` INNER JOIN `ns_goods` `ng` ON `ng`.`goods_id`=`npdg`.`goods_id` WHERE  `ng`.`state` = 1  AND `status` = 1 LIMIT 1 [ RunTime:0.002873s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ns_promotion_discount` [ RunTime:0.015241s ]
+[ sql ] [ SQL ] SELECT `shop_id`,`shop_name`,`discount_name` FROM `ns_promotion_discount` WHERE  `discount_id` = 4 LIMIT 1 [ RunTime:0.003370s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ns_shop` [ RunTime:0.018007s ]
+[ sql ] [ SQL ] SELECT `shop_credit` FROM `ns_shop` WHERE  `shop_id` = 0 LIMIT 1 [ RunTime:0.003409s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sys_album_picture` [ RunTime:0.016124s ]
+[ sql ] [ SQL ] SELECT * FROM `sys_album_picture` WHERE  `pic_id` = 28 LIMIT 1 [ RunTime:0.008435s ]
+[ sql ] [ SQL ] SELECT `shop_id`,`shop_name`,`discount_name` FROM `ns_promotion_discount` WHERE  `discount_id` = 4 LIMIT 1 [ RunTime:0.003709s ]
+[ sql ] [ SQL ] SELECT `shop_credit` FROM `ns_shop` WHERE  `shop_id` = 0 LIMIT 1 [ RunTime:0.003292s ]
+[ sql ] [ SQL ] SELECT * FROM `sys_album_picture` WHERE  `pic_id` = 29 LIMIT 1 [ RunTime:0.008305s ]
+[ sql ] [ SQL ] SELECT `shop_id`,`shop_name`,`discount_name` FROM `ns_promotion_discount` WHERE  `discount_id` = 4 LIMIT 1 [ RunTime:0.003809s ]
+[ sql ] [ SQL ] SELECT `shop_credit` FROM `ns_shop` WHERE  `shop_id` = 0 LIMIT 1 [ RunTime:0.003502s ]
+[ sql ] [ SQL ] SELECT * FROM `sys_album_picture` WHERE  `pic_id` = 30 LIMIT 1 [ RunTime:0.008475s ]
+[ sql ] [ SQL ] SELECT `shop_id`,`shop_name`,`discount_name` FROM `ns_promotion_discount` WHERE  `discount_id` = 6 LIMIT 1 [ RunTime:0.003821s ]
+[ sql ] [ SQL ] SELECT `shop_credit` FROM `ns_shop` WHERE  `shop_id` = 0 LIMIT 1 [ RunTime:0.003317s ]
+[ sql ] [ SQL ] SELECT * FROM `sys_album_picture` WHERE  `pic_id` = 31 LIMIT 1 [ RunTime:0.008090s ]
+[ sql ] [ SQL ] SELECT `shop_id`,`shop_name`,`discount_name` FROM `ns_promotion_discount` WHERE  `discount_id` = 3 LIMIT 1 [ RunTime:0.003724s ]
+[ sql ] [ SQL ] SELECT `shop_credit` FROM `ns_shop` WHERE  `shop_id` = 0 LIMIT 1 [ RunTime:0.003388s ]
+[ sql ] [ SQL ] SELECT * FROM `sys_album_picture` WHERE  `pic_id` = 31 LIMIT 1 [ RunTime:0.007977s ]
+
+---------------------------------------------------------------
+[ 2019-05-08T16:25:24+08:00 ] 127.0.0.1 127.0.0.1 GET /favicon.ico
+[ log ] www.shop.com/favicon.ico [运行时间：0.063811s][吞吐率：15.67req/s] [内存消耗：2,918.10kb] [文件加载：58]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:48]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:53]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:55]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:58]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:61]
+[ error ] [8]Use of undefined constant REWRITE_MODEL - assumed 'REWRITE_MODEL'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:1150]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:66]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:69]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:72]
+[ error ] [8]Use of undefined constant ADMIN_MODULE - assumed 'ADMIN_MODULE'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\route.php:22]
+[ error ] [8]Use of undefined constant ADMIN_MODULE - assumed 'ADMIN_MODULE'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\route.php:25]
+[ error ] [8]Use of undefined constant ADMIN_MODULE - assumed 'ADMIN_MODULE'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\route.php:181]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run app\behavior\InitHook @app_init [ RunTime:0.000969s ]
+[ info ] [ LANG ] C:\Users\zhupeiyuan\Documents\GitHub\niushop\thinkphp\lang\zh-cn.php
+[ info ] [ LANG ] C:\Users\zhupeiyuan\Documents\GitHub\niushop/application/lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'favicon.ico',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'www.shop.com',
+  'connection' => 'keep-alive',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36',
+  'accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
+  'referer' => 'http://www.shop.com/index.php?s=/admin',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'goods_list_display_mode=big_img; PHPSESSID=mdtga85r030g8eotif0qua9b14',
+)
+[ info ] [ PARAM ] array (
+  '/favicon_ico' => '',
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2019-05-08T16:27:10+08:00 ] 127.0.0.1 127.0.0.1 GET /
+[ log ] www.shop.com/ [运行时间：0.048126s][吞吐率：20.78req/s] [内存消耗：2,915.36kb] [文件加载：58]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:48]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:53]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:55]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:58]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:61]
+[ error ] [8]Use of undefined constant REWRITE_MODEL - assumed 'REWRITE_MODEL'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:1150]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:66]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:69]
+[ error ] [8]Use of undefined constant UPLOAD - assumed 'UPLOAD'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\common.php:72]
+[ error ] [8]Use of undefined constant ADMIN_MODULE - assumed 'ADMIN_MODULE'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\route.php:22]
+[ error ] [8]Use of undefined constant ADMIN_MODULE - assumed 'ADMIN_MODULE'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\route.php:25]
+[ error ] [8]Use of undefined constant ADMIN_MODULE - assumed 'ADMIN_MODULE'[C:\Users\zhupeiyuan\Documents\GitHub\niushop\application\route.php:181]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'think',
+  'type' => '',
+  'auto_start' => true,
+  'httponly' => true,
+  'secure' => false,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run app\behavior\InitHook @app_init [ RunTime:0.000864s ]
+[ info ] [ LANG ] C:\Users\zhupeiyuan\Documents\GitHub\niushop\thinkphp\lang\zh-cn.php
+[ info ] [ LANG ] C:\Users\zhupeiyuan\Documents\GitHub\niushop/application/lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'www.shop.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'goods_list_display_mode=big_img; PHPSESSID=mdtga85r030g8eotif0qua9b14',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
