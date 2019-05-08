@@ -703,7 +703,6 @@ class Login extends Controller
             $mobile = request()->post('mobile', '');
             $sendMobile = Session::get('sendMobile');
             $captcha = request()->post("captcha", "");
-            
             if ($code_config["value"]["pc"] == 1) {
                 if (! empty($captcha)) {
                     if (! captcha_check($captcha)) {
@@ -719,7 +718,7 @@ class Login extends Controller
                     );
                 }
             }
-            
+
             if (empty($mobile)) {
                 $retval_id = $member->registerMember($user_name, $password, $email, $mobile, '', '', '', '', '');
             } else {
@@ -806,7 +805,7 @@ class Login extends Controller
     {
         if (request()->isAjax()) {
             // 获取数据库中的用户列表
-            $user_email = request()->post('email', '');
+            $user_email = request()->get('email', '');
             $member = new Member();
             $exist = $member->memberIsEmail($user_email);
             return $exist;

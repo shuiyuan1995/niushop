@@ -411,7 +411,7 @@ class Goods extends BaseController
     public function goodsList()
     {
         $category_id = request()->get('category_id', ''); // 商品分类
-        $keyword = request()->get('keyword', ''); // 关键词
+        $keyword = trim(request()->get('keyword', ''),' '); // 关键词
         $shipping_fee = request()->get('fee', ''); // 是否包邮，0：包邮；1：运费价格
         $stock = request()->get('jxsyh', ''); // 仅显示有货，大于0
         $page = request()->get('page', '1'); // 当前页

@@ -22,6 +22,26 @@ $(document).ready(function(){
 			});
 		}
 	});
+    $("#mobileregistermodel-email").change(function(){
+        if(!($(this).val().search(/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/)==-1)){
+            $('#mobileregistermodel-email').css("border","1px solid #ccc");
+            $("#email").css("color","red").text("");
+            $("#isset_email").attr("value","1");
+            var user_email = $(this).val();
+            $.ajax({
+                type: "get",
+                url: "{:__URL('SHOP_MAIN/login/email')}",
+                data: {"email":user_email},
+                success: function(data){
+                    if(data){
+                        $('#mobileregistermodel-email').css("border","1px solid red");
+                        $("#email").css("color","red").text("{:lang('mailbox_has_been_registered')}");
+                        $("#isset_email").attr("value","2");
+                    }
+                }
+            });
+        }
+    });
 	$("#password").keyup(function(){
 		var password = $("#password").val();
 		var password_length = "{$reg_config['pwd_len']}";
@@ -53,7 +73,9 @@ $(document).ready(function(){
 		var username = $("#mobileregistermodel-username").val();
 		var password = $("#password").val();
 		var repass = $("#repass").val();
+		var email = $("#mobileregistermodel-email").val();
 		var isset_username = $("#isset_username").attr("value");
+		var isset_email = $("#isset_email").attr("value");
 		var re =  /^(?!\d+$)[\da-zA-Z]*$/i;
 		var verify_code = $("#verify_code").val(); 
 		if(!(username.length >= 3 && username.length <=16)){
@@ -84,6 +106,33 @@ $(document).ready(function(){
 			$('#mobileregistermodel-username').css("border","1px solid #ccc");
 			$("#usernameyz").css("color","red").text("");
 		}
+
+        if(email == ''){
+            $("#mobileregistermodel-email").trigger("focus");
+            $('#mobileregistermodel-email').css("border","1px solid red");
+            $("#email").css("color","red").text("{:lang('mailbox_cannot_empty')}");
+            return false;
+		}else if(email.search(/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/)==-1){
+            $("#mobileregistermodel-email").trigger("focus");
+            $('#mobileregistermodel-email').css("border","1px solid red");
+            $("#email").css("color","red").text("{:lang('member_enter_correct_email_format')}");
+            return false;
+        }else{
+            $('#mobileregistermodel-email').css("border","1px solid #ccc");
+            $("#email").css("color","red").text("");
+        }
+
+        if(isset_email == "2"){
+            $("#mobileregistermodel-email").trigger("focus");
+            $('#mobileregistermodel-email').css("border","1px solid red");
+            $("#email").css("color","red").text("{:lang('mailbox_already_exists')}");
+            return false;
+        }else{
+            $("#mobileregistermodel-email").trigger("focus");
+            $('#mobileregistermodel-email').css("border","1px solid #ccc");
+            $("#email").css("color","red").text("");
+        }
+
 		var is_password_true = verifyPassword(password);
 		if(is_password_true > 0){
 			return false;

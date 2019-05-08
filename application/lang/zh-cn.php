@@ -933,6 +933,7 @@ return [
     'can_register'                   => '可以注册',
     'mail_address_cannot_empty'      => '邮件地址不能为空',
     'mailbox_already_exists'         => '邮箱已存在',
+    'mailbox_cannot_empty'           => '邮箱不能为空',
     'email_address_is_not_valid'     => '邮件地址不合法',
     'phone_number_already_exists'    => '手机号码已存在',
     'have_not_completed_operation'   => '您没有完成密码提示问题的操作',

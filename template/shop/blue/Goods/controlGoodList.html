@@ -344,7 +344,7 @@
 					{if condition="$goods['is_new'] eq 1"}
 						<img src="__TEMP__/{$style}/public/images/new.png" alt="" class="recommend">
 					{/if}
-					<div class="item-pic">
+					<div class="item-pic" id="goods_list">
 						<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$goods['goods_id'])}" title="{$goods.goods_name}" target="_blank">
 							<img src="{:__IMG($default_goods_img)}" class="lazy_load" data-original="{:__IMG($goods['pic_cover_mid'])}">
 						</a>
@@ -412,3 +412,29 @@
 		</div>
 	</form>
 </div>
+<script>
+	$(function () {
+        $("#goods_list img").each(function () {
+            var data_original = $(this).attr('data-original');
+            if (data_original != "")
+			{
+			    var res = CheckImgExists(data_original);
+			    if (res == true){
+                    $(this).attr('src',data_original);
+				}
+			}
+        })
+
+    });
+
+    function CheckImgExists(imgUrl) {
+        let ImgObj = new Image(); //判断图片是否存在
+        ImgObj.src = imgUrl;
+        //没有图片，则返回-1
+        if (ImgObj.fileSize > 0 || (ImgObj.width > 0 && ImgObj.height > 0)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
