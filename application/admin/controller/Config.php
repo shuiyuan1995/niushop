@@ -1821,6 +1821,11 @@ class Config extends BaseController
                 'url' => "config/memberwithdrawsetting",
                 'menu_name' => "提现设置",
                 "active" => 0
+            ),
+            array(
+                'url' => "config/chaibaosetting",
+                'menu_name' => "拆包费用设置",
+                "active" => 0
             )
         );
         
@@ -1857,6 +1862,48 @@ class Config extends BaseController
             $this->assign("shopSet", $shopSet);
             $this->assign("is_support_o2o", IS_SUPPORT_O2O);
             return view($this->style . "Config/shopSet");
+        }
+    }
+
+    public function chaiBaoSetting()
+    {
+        $child_menu_list = array(
+            array(
+                'url' => "config/shopset",
+                'menu_name' => "购物设置",
+                "active" => 0
+            ),
+            array(
+                'url' => "config/paymentconfig",
+                'menu_name' => "支付配置",
+                "active" => 0
+            ),
+            array(
+                'url' => "config/memberwithdrawsetting",
+                'menu_name' => "提现设置",
+                "active" => 0
+            ),
+            array(
+                'url' => "config/chaibaosetting",
+                'menu_name' => "拆包费用设置",
+                "active" => 1
+            )
+        );
+
+        $this->assign('child_menu_list', $child_menu_list);
+        $Config = new WebConfig();
+        if (request()->isAjax()) {
+            $shop_id = $this->instance_id;
+            $chai_price = request()->post("chai_bao", 0);
+            $is_use = request()->post('is_use',0);
+            $retval = $Config->SetChaiConfig($shop_id,$chai_price,$is_use);
+            return AjaxReturn($retval);
+        } else {
+            // 拆包费用
+            $shop_id = $this->instance_id;
+            $shopSet = $Config->getChaiBaoConfig($shop_id);
+            $this->assign("list", $shopSet);
+            return view($this->style . "Config/chaiBaoSetting");
         }
     }
 
@@ -2025,6 +2072,11 @@ class Config extends BaseController
                     'url' => "config/memberwithdrawsetting",
                     'menu_name' => "提现设置",
                     "active" => 1
+                ),
+                array(
+                    'url' => "config/chaibaosetting",
+                    'menu_name' => "拆包费用设置",
+                    "active" => 0
                 )
             );
             $this->assign("child_menu_list", $child_menu_list);
@@ -2138,6 +2190,11 @@ class Config extends BaseController
             array(
                 'url' => "config/memberwithdrawsetting",
                 'menu_name' => "提现设置",
+                "active" => 0
+            ),
+            array(
+                'url' => "config/chaibaosetting",
+                'menu_name' => "拆包费用设置",
                 "active" => 0
             )
         );
