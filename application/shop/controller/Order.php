@@ -60,7 +60,7 @@ class Order extends BaseController
         $member = new Member();
         $address = $member->getDefaultExpressAddress();
         $coin = 0; // 购物币
-        
+
         // 查询商品限购
         $purchase_restriction = $order->getGoodsPurchaseRestrictionForOrder($goods_sku_list);
         if (! empty($purchase_restriction)) {
