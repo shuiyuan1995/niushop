@@ -133,7 +133,7 @@ class Order extends BaseService
             $buyer = new UserModel();
             $buyer_info = $buyer->getInfo([
                 'uid' => $this->uid
-            ], 'nick_name');
+            ], 'nick_name,user_email');
             // 订单商品费用
             
             $goods_money = $order_goods_preference->getGoodsSkuListPrice($goods_sku_list);
@@ -305,6 +305,7 @@ class Order extends BaseService
                 'order_from' => $order_from,
                 'buyer_id' => $this->uid,
                 'user_name' => $buyer_info['nick_name'],
+                'user_email' => $buyer_info['user_email'],
                 'buyer_ip' => $buyer_ip,
                 'buyer_message' => $buyer_message,
                 'buyer_invoice' => $buyer_invoice,

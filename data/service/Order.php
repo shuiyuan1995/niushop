@@ -295,7 +295,7 @@ class Order extends BaseService implements IOrder
                 }
                 $order_list['data'][$k]['shipping_type_name'] = array();
                 $order_list['data'][$k]['shipping_type_name'] = OrderStatus::getShippingTypeName($order_list['data'][$k]['shipping_type']);
-                
+
                 // 查询订单操作
                 foreach ($order_status as $k_status => $v_status) {
                     
@@ -1605,6 +1605,8 @@ class Order extends BaseService implements IOrder
         $orderStatusNum['deposit_wait_pay'] = $order->where($condition)->count();
         $condition['order_status'] = 7; // 备货中
         $orderStatusNum['instock'] = $order->where($condition)->count();
+        $condition['order_status'] = 8; // 待处理信用卡订单
+        $orderStatusNum['wait_todo'] = $order->where($condition)->count();
         $condition['order_status'] = - 1; // 退款中
         $orderStatusNum['refunding'] = $order->where($condition)->count();
         $condition['order_status'] = - 2; // 已退款

@@ -22,6 +22,7 @@
 				<ul>
 					<li {if condition="$status eq 'all'"} class="nav_active" {/if} va="all"><a href="{:__URL('SHOP_MAIN/member/orderlist?status=all')}" >{:lang('whole')}(<span class="num" id="all">{$statusNum['all']}</span>)</a></li>
 					<li {if condition="$status eq '0'"} class="nav_active" {/if} va="0"><a href="{:__URL('SHOP_MAIN/member/orderlist?status=0')}">{:lang('member_pending_payment')}(<span class="num" id="wait_pay">{$statusNum['wait_pay']}</span>)</a></li>
+					<li {if condition="$status eq '6'"} class="nav_active" {/if} va="0"><a href="{:__URL('SHOP_MAIN/member/orderlist?status=6')}">待处理(<span class="num" id="wait_todo">{$statusNum['wait_todo']}</span>)</a></li>
 					<li {if condition="$status eq '1'"} class="nav_active" {/if} va="1"><a href="{:__URL('SHOP_MAIN/member/orderlist?status=1')}">{:lang('member_shipment_pending')}(<span class="num" id="wait_delivery">{$statusNum['wait_delivery']}</span>)</a></li>
 					<li {if condition="$status eq '2'"} class="nav_active" {/if} va="2"><a href="{:__URL('SHOP_MAIN/member/orderlist?status=2')}">{:lang('member_goods_received')}(<span class="num" id="wait_recieved">{$statusNum['wait_recieved']}</span>)</a></li>
 					<li {if condition="$status eq '3'"} class="nav_active" {/if} va="3"><a href="{:__URL('SHOP_MAIN/member/orderlist?status=3')}">{:lang('member_received_goods')}(<span class="num" id="recieved">{$statusNum['recieved']}</span>)</a></li>

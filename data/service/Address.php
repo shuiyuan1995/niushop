@@ -28,7 +28,9 @@ use data\model\NsOffpayAreaModel;
 use data\model\ProvinceModel as Province;
 use data\service\BaseService as BaseService;
 use data\model\CountryModel as Country;
+use data\model\InsuranceModel as Insurance;
 use think\Cache;
+use think\Db;
 
 class Address extends BaseService implements IAddress
 {
@@ -990,10 +992,11 @@ class Address extends BaseService implements IAddress
         Cache::rm("country");
         if ($data['id']){
             $res = $country->isUpdate(true)->save($data);
+            $id = $data['id'];
         }else{
-            $res = $country->data($data)->save();
+            $id = Db::name('sys_country')->insertGetId($data);
         }
-        return $res;
+        return $id;
     }
 
     public function updateCountryAjax($data)
@@ -1014,5 +1017,29 @@ class Address extends BaseService implements IAddress
         $country = new Country();
         $res= $country->where('id',$id)->delete();
         return $res;
+    }
+
+    public function addInsurance($ins)
+    {
+        foreach ($ins as $k => $v){
+            if (isset($ins[$k]['id'])){
+                $res = Db::name('sys_insurance')->update($ins[$k]);
+            }else{
+                $res = Db::name('sys_insurance')->insert($ins[$k]);
+            }
+        }
+        return $res;
+    }
+
+    public function getInsurance($country_id)
+    {
+        $rows = Db::name('sys_insurance')->where('country_id',$country_id)->order('start_price','asc')->select();
+        return $rows;
+    }
+
+    public function delInsurance($id)
+    {
+        $rows = Db::name('sys_insurance')->where('id',$id)->delete();
+        return $rows;
     }
 }

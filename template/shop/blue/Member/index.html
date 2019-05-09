@@ -43,6 +43,17 @@
 							{/if}
 						{/if}
 					</li>
+					<!--<li onclick="location.href='{:__URL('SHOP_MAIN/member/orderlist?status=6')}'">
+						<i class="icon i-obligation"></i>
+						<span>待处理</span>
+						{if condition="$order_status_num['wait_todo']>0"}
+						{if condition="$order_status_num['wait_todo']>99"}
+						<div>99</div>
+						{else/}
+						<div>{$order_status_num['wait_todo']}</div>
+						{/if}
+						{/if}
+					</li>-->
 					<li onclick="location.href='{:__URL('SHOP_MAIN/member/orderlist?status=1')}'">
 						<i class="icon i-send-the-goods"></i>
 						<span>{:lang('member_shipment_pending')}</span>
@@ -192,6 +203,7 @@
 				<header>
 					<ul>
 						<li onclick="location.href='{:__URL('SHOP_MAIN/member/orderlist?status=0')}';">{:lang('member_pending_payment')}<span>({$order_status_num['wait_pay']})</span></li>
+						<li onclick="location.href='{:__URL('SHOP_MAIN/member/orderlist?status=6')}';">待处理<span>({$order_status_num['wait_todo']})</span></li>
 						<li onclick="location.href='{:__URL('SHOP_MAIN/member/orderlist?status=5')}';">{:lang('member_pending_evaluation')}<span>({$order_status_num['wait_evaluate']})</span></li>
 					</ul>
 				</header>

@@ -2005,6 +2005,16 @@ class Config extends BaseService implements IConfig
         return $array;
     }
 
+    public function getChaiBaoConfig($shop_id)
+    {
+        $chai_bao_price = $this->getConfig($shop_id,"CHAI_BAO_PRICE");
+        if ($chai_bao_price){
+            return $chai_bao_price;
+        }else{
+            return '';
+        }
+    }
+
     public function SetSeoConfig($shop_id, $seo_title, $seo_meta, $seo_desc, $seo_other)
     {
         $array[0] = array(
@@ -2211,6 +2221,19 @@ class Config extends BaseService implements IConfig
         		'value' => $shouhoudate,
         		'desc' => '可以售后的时间段',
         		'is_use' => 1
+        );
+        $res = $this->setConfig($array);
+        return $res;
+    }
+
+    public function SetChaiConfig($shop_id,$chai_price,$is_use)
+    {
+        $array[0] = array(
+            'instance_id' => $this->instance_id,
+            'key' => 'CHAI_BAO_PRICE',
+            'value' => $chai_price,
+            'desc' => '拆包费用',
+            'is_use' => $is_use
         );
         $res = $this->setConfig($array);
         return $res;

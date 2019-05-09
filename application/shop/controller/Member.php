@@ -412,6 +412,9 @@ class Member extends BaseController
                     );
                     $condition['is_evaluate'] = 0;
                     break;
+                case 6:
+                    $condition['order_status'] = 8;
+                    break;
                 default:
                     break;
             }
@@ -434,7 +437,6 @@ class Member extends BaseController
                 $orderList = $orderService->getOrderList($page, $page_size, $condition, 'create_time desc');
             }
         } else {
-            
             $orderList = $orderService->getOrderList($page, $page_size, $condition, 'create_time desc');
         }
         $Config = new Config();
