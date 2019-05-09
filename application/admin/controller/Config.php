@@ -1622,12 +1622,35 @@ class Config extends BaseController
         $data['name'] = $this->request->post('countryName');
         $data['sort'] = $this->request->post('regionSort');
         $data['id'] = $this->request->post('evaluate_id');
+        $insurance = $this->request->post('baoxian');
+        $insurance = json_decode($insurance,true);
+        $ins = array();
 
         $address = new Address();
         $result = $address->addCountry($data);
         if ($result == 'exists'){
-            return returnAjax(1,'已经存在');
+            if ($data['id']){
+                foreach ($insurance as $k => $v){
+                    if (isset($insurance[$k]['id'])) $ins[$k]['id'] = $v['id'];
+                    $ins[$k]['start_price'] = $v['start'];
+                    $ins[$k]['end_price'] = $v['end'];
+                    $ins[$k]['country_id'] = $data['id'];
+                    $ins[$k]['insurance_price'] = $v['price'];
+                }
+                $address->addInsurance($ins);
+                return returnAjax(0,'修改保险成功');
+            }else{
+                return returnAjax(1,'已经存在');
+            }
         }elseif ($result){
+            foreach ($insurance as $k => $v){
+                if (isset($insurance[$k]['id'])) $ins[$k]['id'] = $v['id'];
+                $ins[$k]['start_price'] = $v['start'];
+                $ins[$k]['end_price'] = $v['end'];
+                $ins[$k]['country_id'] = $result;
+                $ins[$k]['insurance_price'] = $v['price'];
+            }
+            $address->addInsurance($ins);
             return returnAjax(0,$data['id']?'修改成功':'添加成功');
         }else{
             return returnAjax(1,$data['id']?'修改失败':'添加失败');
@@ -1658,6 +1681,37 @@ class Config extends BaseController
             return returnAjax(0,'删除成功');
         }
         return returnAjax(1,'删除失败');
+    }
+
+    public function getInsurance()
+    {
+        if ($this->request->isAjax()){
+            $country_id = request()->post('province_id');
+            $address = new Address();
+            $result = $address->getInsurance($country_id);
+            if ($result){
+                return $result;
+            }
+            return '';
+        }else{
+            return returnAjax(1,'请求错误');
+        }
+
+    }
+
+    public function delInsurance()
+    {
+        if ($this->request->isAjax()){
+            $id = request()->post('id');
+            $address = new Address();
+            $result = $address->delInsurance($id);
+            if ($result){
+                return true;
+            }
+            return false;
+        }else{
+            return returnAjax(1,'请求错误');
+        }
     }
 
     public function selectCityListAjax()
