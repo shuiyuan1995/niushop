@@ -236,6 +236,18 @@ function updateCountry(province_id){
 function addOrUpdateAjax(){
 	var countryName = $("#countryName").val();
 	var evaluate_id = $("#evaluate_id").val();
+	var data = $("#baoxianitem p").map(function(val){
+		var a = $("#baoxianitem p").eq(val).find('span')[0].innerText
+		var b = $("#baoxianitem p").eq(val).find('span')[1].innerText
+		var c = $("#baoxianitem p").eq(val).find('span')[2].innerText
+		return {
+			a:a,
+			b:b,
+			c:c
+		}
+	})
+	console.log(data)
+	return false
 	if($("#regionSort").val().length == 0){
 		var regionSort = 0;
 	}else{
