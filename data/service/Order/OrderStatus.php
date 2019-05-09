@@ -240,6 +240,41 @@ class OrderStatus extends BaseService
                 )
             ),
             array(
+                'status_id' => '8',
+                'status_name' => '待处理',
+                'is_refund' => 0,
+                'operation' => array(
+                    '0' => array(
+                        'no' => 'delivery',
+                        'color' => 'green',
+                        'name' => '发货'
+                    ),
+                    '1' => array(
+                        'no' => 'seller_memo',
+                        'color' => '#666666',
+                        'name' => '备注'
+                    ),
+                    '2' => array(
+                        'no' => 'update_address',
+                        'color' => '#51A351',
+                        'name' => '修改地址'
+                    ) ,
+                    '3' => array(
+                        'no' => 'update_pay_status',
+                        'color' => '#51A351',
+                        'name' => '修改支付方式'
+                    ),
+                    '4' => array(
+                        'no' => 'update_delivery_status',
+                        'color' => '#51A351',
+                        'name' => '修改发货状态'
+                    )
+
+
+                ),
+                'member_operation' => array()
+            ),
+            array(
                 'status_id' => '-1',
                 'status_name' => '退款中',
                 'is_refund' => 1,

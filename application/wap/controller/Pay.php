@@ -746,24 +746,27 @@ class Pay extends Controller
             'typeid'=>$res
         ];
 
-        
-        // var_dump($res);
-        // var_dump($arr);
-        // exit;
-        $goods = new UnionpayModel;
-        $result = $goods->insertData($arr);
-        if ($result){
-            // DB::table('c_card')->where(['id'=>$result])
-            // ->save(['typeid'=>$res]);
-            if (request()->isMobile()){
-                $this->success('订单提交成功','wap/member/index');
+        $time = time();
+        Db::startTrans();
+        try {
+            $result = Db::name('c_card')->where('typeid',$res)->find();
+            if ($result){
+                Db::name('c_card')->where('typeid',$res)->update($arr);
             }else{
-                $this->success('订单提交成功','shop/member/index');
+                Db::name('c_card')->insert($arr);
             }
-        }else{
+            Db::name('ns_order')->where('order_id',$res)->update(['order_status' => 8]);
+            // 提交事务
+            Db::commit();
+        } catch (\Exception $e) {
+            // 回滚事务
+            Db::rollback();
             $this->error('订单提交失败');
         }
-
-
+        if (request()->isMobile()){
+            $this->success('订单提交成功','wap/member/index');
+        }else{
+            $this->success('订单提交成功','shop/member/index');
+        }
     }
 }

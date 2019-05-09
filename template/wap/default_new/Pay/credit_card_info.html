@@ -98,8 +98,8 @@
             });
             return false;
         }
-        if (month < current_month || year < current_year){
-            layer.msg("日期错误", {
+        if ((year < current_year) || (month < current_month && year == current_year)){
+            layer.msg("请重新选择失效日期", {
                 time: 2000,
                 icon: 2
             });
