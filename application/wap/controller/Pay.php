@@ -205,7 +205,7 @@ class Pay extends Controller
 
         $website = new WebSite();
         $web = $website->getWebSiteInfo();
-        $web_url = $web['web_url'];
+        $web_url = $web['pay_url'];
 
         $red_url = str_replace("/index.php", "", $web_url);
         $red_url = str_replace("index.php", "", $red_url);
