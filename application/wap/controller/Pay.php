@@ -205,7 +205,7 @@ class Pay extends Controller
 
         $website = new WebSite();
         $web = $website->getWebSiteInfo();
-        $web_url = $web['web_url'];
+        $web_url = $web['pay_url'];
 
         $red_url = str_replace("/index.php", "", $web_url);
         $red_url = str_replace("index.php", "", $red_url);
@@ -342,7 +342,7 @@ class Pay extends Controller
         if (! isWeixin()) {
             $website = new WebSite();
             $web = $website->getWebSiteInfo();
-            $notify_url = str_replace("/index.php", '', $web['web_url']);
+            $notify_url = str_replace("/index.php", '', $web['pay_url']);
             $notify_url = str_replace("index.php", '', $notify_url);
             $notify_url = $notify_url . "/alipay.php";
             $return_url = $web['web_url'] . '/wap/Pay/aliPayReturn';
