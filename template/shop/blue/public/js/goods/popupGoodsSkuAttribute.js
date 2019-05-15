@@ -177,8 +177,8 @@ function setSelectAttr(goods_id){
 				$(".spe-btn .sure-btn").css("border","1px solid #d8d8d8");
 			}else{
 				is_post = true;
-				$(".spe-btn .sure-btn").css("background-color","#0689e1");
-				$(".spe-btn .sure-btn").css("border","1px solid #0689e1");
+				$(".spe-btn .sure-btn").css("background-color","#eb852a");
+				$(".spe-btn .sure-btn").css("border","1px solid #eb852a");
 			}
 		}
 	});

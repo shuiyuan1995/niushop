@@ -318,7 +318,7 @@ span.big {
 	display: block;
 	width: 120px;
 	height: 42px;
-	background-color: #0689e1;
+	background-color: #eb852a;
 	border-radius: 0;
 	behavior: url(../images/ie-css3.htc);
 	text-align: center;
@@ -558,7 +558,7 @@ i.icon-add-add {
 }
 
 .zhifu-box ul li .selected, .zhifu-box ul li a:hover {
-	border: 2px solid #0689e1;
+	border: 2px solid #eb852a;
 	padding: 0px;
 }
 

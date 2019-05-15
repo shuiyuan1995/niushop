@@ -117,7 +117,7 @@
 }
 
 .banner ul.full-screen-slides-pagination .current {
-	background: #0689e1;
+	background: #eb852a;
 }
 /*焦点区域右侧*/
 .banner .right-sidebar {
@@ -333,7 +333,7 @@
 	margin: auto;
 	text-align: center;
 	padding: 12px 24px;
-	background: #0689e1;
+	background: #eb852a;
 	color: #fff;
 	border-radius: 3px;
 	font-size: 14px;
@@ -1402,7 +1402,7 @@
 }
 
 .hiSlider-pages a.active {
-	background: #0689e1;
+	background: #eb852a;
 	opacity: .8;
 	filter: alpha(opacity : 80);
 }
@@ -2701,9 +2701,9 @@
 }
 
 .message-operation .login {
-	background: #0689e1;
+	background: #eb852a;
 	color: #ffffff;
-	border: 1px solid #0689e1;
+	border: 1px solid #eb852a;
 	width: 90px;
 	height: 28px;
 	display: inline-block;

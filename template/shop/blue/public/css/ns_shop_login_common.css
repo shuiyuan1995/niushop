@@ -1127,7 +1127,7 @@ i, cite, em, strong, th {
 
 .all-cat .list:hover {
 	background: #f9f9f9;
-	border-left: 1px solid #e23435;
+	border-left: 1px solid #eb852a;
 }
 
 .all-cat .list .cat .cat-name {
@@ -1226,7 +1226,7 @@ i, cite, em, strong, th {
 }
 
 .all-cat .list .categorys .item-channels a:hover i {
-	background: #e23435;
+	background: #eb852a;
 }
 
 .all-cat .list .categorys .subitems {

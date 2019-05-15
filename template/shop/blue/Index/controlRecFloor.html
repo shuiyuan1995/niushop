@@ -133,7 +133,7 @@
 					<!-- 楼层顶部内容开始 -->
 					<div class="floor-title">
 						<!--推荐名称-->
-						<h2 class="category-block-h2" style="{if $vo['color'] == '#ffffff'}border-left:5px solid #0689e1;{else}border-left:5px solid {$vo['color']};{/if}height:29px;line-height:29px;">
+						<h2 class="category-block-h2" style="{if $vo['color'] == '#ffffff'}border-left:5px solid #eb852a;{else}border-left:5px solid {$vo['color']};{/if}height:29px;line-height:29px;">
 							<a href=javascript:;" target="_blank" >{$vo['category_alias']}</a>
 							<input type="hidden" class="NS-SHORT-NAME" value="{if !empty($vo['short_name'])}{$vo['short_name']}{elseif !empty($vo['category_alias'])}{php} echo mb_substr($vo['category_alias'],0,4,'utf-8'); {/php}{else}{php} echo mb_substr($vo['category_name'],0,4,'utf-8'); {/php}{/if}"/>
 						</h2>
@@ -169,7 +169,7 @@
 											<a href="{$vo['ad_list']['url']}" target="_blank">
 												<img class="lazy" src="{:__IMG($vo['ad_list']['picture'])}">
 											</a>
-											<div style="height:100px;color:#fff;font-size:15px;{if $vo['ad_list']['background'] == '#ffffff'}background:#0689e1;{else}background:{$vo['ad_list']['background']};{/if}"><p  class="ad-title">{$vo['ad_list']['title']}</p><p class="ad-subtitle">{$vo['ad_list']['subtitle']}</p></div>
+											<div style="height:100px;color:#fff;font-size:15px;{if $vo['ad_list']['background'] == '#ffffff'}background:#eb852a;{else}background:{$vo['ad_list']['background']};{/if}"><p  class="ad-title">{$vo['ad_list']['title']}</p><p class="ad-subtitle">{$vo['ad_list']['subtitle']}</p></div>
 										</li>
 									</ul>
 							</div>

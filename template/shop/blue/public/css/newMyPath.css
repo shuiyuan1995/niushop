@@ -116,8 +116,8 @@ body{font:12px/1.5 Microsoft YaHei,'Hiragino Sans GB',tahoma,aria,sans-serif;-we
 
 .filter-bar .cat-selector .cats .J_Scroll_Cats:last-child{padding-bottom: 17px;}
 .filter-bar .cat-selector .cats .cat{display:block;color:#666;text-decoration:none;height:30px;line-height:30px;padding:0 18px;margin:0 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.filter-bar .cat-selector .cats .cat:hover{background:#c7e9ff;color:#0689e1}
-.filter-bar .cat-selector.checked .current-cat{z-index:20;color:#0689e1;border:1px solid #ccc;border-bottom:0;margin-bottom:-1px}
+.filter-bar .cat-selector .cats .cat:hover{background:#c7e9ff;color:#eb852a}
+.filter-bar .cat-selector.checked .current-cat{z-index:20;color:#eb852a;border:1px solid #ccc;border-bottom:0;margin-bottom:-1px}
 .filter-bar .cat-selector.checked .current-cat .arrow{background-position:0 -262px}
 .filter-bar .cat-selector.checked .cats{visibility:visible}
 .filter-bar .all-date{display:none;float:left;margin-left:30px;cursor:pointer}
@@ -234,7 +234,7 @@ body{margin:0 auto}
 .goods-area-box .goods-img{max-width:195px;max-height:195px;margin:0 auto;margin:0\9}
 .goods-area-box .goods-delete,.goods-area-box .goods-status{position:absolute}
 .goods-area-box .goods-delete{top:0;right:0;z-index:2;display:inline-block;height:44px;width:44px;background:url(//img.alicdn.com/tps/i3/TB1gTDRGFXXXXagXXXX301JJFXX-4-4.png) 0 0;background:rgba(0,0,0,.6);color:#fff}
-.goods-area-box .goods-delete:hover{background-color:#0689e1}
+.goods-area-box .goods-delete:hover{background-color:#eb852a}
 .goods-area-box .goods-status{left:0;bottom:0;color:#666;height:30px;line-height:30px;width:100%;filter:progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr='#CCFFFFFF', endColorstr='#CCFFFFFF');background:rgba(255,255,255,.8);*background:#fff;_filter:Alpha(opacity=80)}
 :root .goods-area-box .goods-status{filter:progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr='#00FFFFFF', endColorstr='#00FFFFFF')}
 .goods-area-box .goods-status .desc{display:block;text-align:center;color:#333;text-decoration:none;height:30px;overflow:hidden}

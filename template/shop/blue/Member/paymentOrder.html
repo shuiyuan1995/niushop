@@ -8,25 +8,25 @@
 .edit-address ul li label {width: 85px;}
 #delivery-time{padding:20px 0;}
 #delivery-time .item>span{font-weight: bold;color: #ff4000;padding:0 10px;letter-spacing: 1px;}
-#delivery-time .item>a{color:#0689e1;margin-right:5px;}
+#delivery-time .item>a{color:#eb852a;margin-right:5px;}
 #delivery-time .item>.delete-delivery-time{display: none;}
 .mask-layer-delivery-time{display:none;z-index:100000;position: fixed;top:50%;background: #ffffff;width: 660px;outline: 5px solid rgba(0,0,0,.1);left:50%;margin-left:-330px;}
 .mask-layer-delivery-time header{background: #f3f3f3;padding:10px;font-size: 14px;}
 .mask-layer-delivery-time header>a{float: right;font-size: 16px;line-height: 17px;}
 .mask-layer-delivery-time ul{margin:0;padding:10px;}
 .mask-layer-delivery-time ul li{float: left;border: 1px solid #ebebeb;height: 43px;text-align: center;width: 70px;line-height: 20px;cursor: pointer;padding:5px 10px;margin:-1px 0 0 -1px;transition: all .3s;}
-.mask-layer-delivery-time ul li:hover{background: #dbf1ff;color: #0689e1;border-color: #dbf1ff;}
-.mask-layer-delivery-time ul li.selected{background: #0689e1;color: #fff;border-color: #0689e1;}
+.mask-layer-delivery-time ul li:hover{background: #dbf1ff;color: #eb852a;border-color: #dbf1ff;}
+.mask-layer-delivery-time ul li.selected{background: #eb852a;color: #fff;border-color: #eb852a;}
 .mask-layer-delivery-time ul li span.data{display: block;}
 .mask-layer-delivery-time .distribution-time-out{padding:5px 10px;}
 .mask-layer-delivery-time .distribution-time-out .tit{font-size: 14px;padding: 0 0 10px 0;}
 .mask-layer-delivery-time .distribution-time-out .time-out-list span{float: left;border: 1px solid #ebebeb;height: 23px;text-align: center;width: 70px;line-height: 23px;cursor: pointer;padding:5px 10px;margin:-1px 0 0 -1px;transition: all .3s;}
-.mask-layer-delivery-time .distribution-time-out .time-out-list span:hover{background: #dbf1ff;color: #0689e1;border-color: #dbf1ff;}
-.mask-layer-delivery-time .distribution-time-out .time-out-list span.selected{background: #0689e1;color: #fff;border-color: #0689e1;}
+.mask-layer-delivery-time .distribution-time-out .time-out-list span:hover{background: #dbf1ff;color: #eb852a;border-color: #dbf1ff;}
+.mask-layer-delivery-time .distribution-time-out .time-out-list span.selected{background: #eb852a;color: #fff;border-color: #eb852a;}
 .mask-layer-delivery-time footer{padding: 10px;color:#999;}
 .mask-layer-delivery-time footer .operation{padding:15px 0 5px;text-align: right;}
 .mask-layer-delivery-time footer .operation .btn-confirm,.mask-layer-delivery-time footer .operation .btn-cancle{border: 0;padding: 5px 15px;cursor: pointer;transition:all .3s;height:20px;margin-left:5px;}
-.mask-layer-delivery-time footer .operation .btn-confirm{background: #0689e1;color: #ffffff;}
+.mask-layer-delivery-time footer .operation .btn-confirm{background: #eb852a;color: #ffffff;}
 .mask-layer-delivery-time footer .operation .btn-confirm:hover{background: #0D84D4;}
 .mask-layer-delivery-time footer .operation .btn-cancle{background: #ddd;color:#333333;}
 .mask-layer-delivery-time footer .operation .btn-cancle:hover{background: #d2d2d2;}
@@ -113,15 +113,15 @@ input[type="radio"]:checked {
 							<div class="add-box">
 								<span class="remove vivi-blue js-shipping-address-remove" data-id="{$info.id}">X</span>
 								<div class="name-add">
-									<span class="name" {if condition='$info.is_default==1'}style="color:#0689e1;"{/if}>{$info.consigner}</span>
+									<span class="name" {if condition='$info.is_default==1'}style="color:#eb852a;"{/if}>{$info.consigner}</span>
 									<span class="add-rside"></span>
 								</div>
 								<div class="elli add-detail">
-									<p title="{$info.address}" {if condition='$info.is_default==1'}style="color:#0689e1;"{/if}>{$info.country_detail} {$info.province_detail} {$info.city_detail}</p>
-                                    <p title="{$info.address}" {if condition='$info.is_default==1'}style="color:#0689e1;"{/if}>{$info.address}</p>
+									<p title="{$info.address}" {if condition='$info.is_default==1'}style="color:#eb852a;"{/if}>{$info.country_detail} {$info.province_detail} {$info.city_detail}</p>
+                                    <p title="{$info.address}" {if condition='$info.is_default==1'}style="color:#eb852a;"{/if}>{$info.address}</p>
 								</div>
 								<div>
-									<span class="moblie"{if condition='$info.is_default==1'}style="color:#0689e1;"{/if}>{$info.mobile}</span>
+									<span class="moblie"{if condition='$info.is_default==1'}style="color:#eb852a;"{/if}>{$info.mobile}</span>
 									<a href="javascript:void(0);" class="chang-default change vivi-blue js-update-shipping-address" data-id="{$info.id}">{:lang('member_modify_address')}</a>
 								</div>
 							</div>

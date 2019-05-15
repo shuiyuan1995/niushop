@@ -189,7 +189,7 @@ function validationInfo(goodsid,flag){
 			$("#hidden_skuname").val(goods_sku.attr("skuname"));
 			$("#hidden_sku_price").val( goods_sku.attr("price"));
 		}else if($("#hidden_skuid").val() == ""){
-			$(".js-skulist").css("border","2px solid #0689e1");
+			$(".js-skulist").css("border","2px solid #eb852a");
 			$(".js-skulist .choose-title").show();
 			$("html,body").animate({
 				scrollTop: $(".js-skulist").offset().top-200 },

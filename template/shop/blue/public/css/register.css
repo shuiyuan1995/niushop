@@ -91,14 +91,14 @@
     display: inline-block;
     height: 36px;
     width: 110px;
-    background: #0689e1;
-    border: 1px solid #0689e1;
+    background: #eb852a;
+    border: 1px solid #eb852a;
     color: #fff;
     border-radius: 2px;
     cursor: pointer;
 }
 .perfectInfo-btn{
 	background: #fff;
-	color: #0689e1;
+	color: #eb852a;
 	margin-left: 10px;
 }

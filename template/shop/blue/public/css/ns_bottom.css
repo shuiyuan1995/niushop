@@ -13,23 +13,23 @@
 width: 20%;}
 .footer .service-list .service-tit{width:30px; height:30px;font-size:0; margin-right:12px;display: inline-block;}
 .footer .service-list .service-tit .iconfont{ font-size:30px;color:#8c8c8c;}
-.footer .service-list .service-txt{ font-size:16px; line-height:16px;margin:7px 0; color:#0689e1;/*#8c8c8c*/display: inline-block;}
+.footer .service-list .service-txt{ font-size:16px; line-height:16px;margin:7px 0; color:#eb852a;/*#8c8c8c*/display: inline-block;}
 .footer .service-list li:last-child,.footer .service-list li.last{ margin-right:0;}
 .footer .service-list li:last-child .service-txt,.footer .service-list li.last .service-txt{ border-right:0;}
 .footer .service-list span:last-child{border-left:0px !important;}
 .footer .dsc-help{ padding:20px 0; overflow:hidden;}
 .footer .help-list{ float:left; width:850px;}
 .footer .help-item{ float:left; width:170px; line-height:25px;}
-.footer .help-item h3{ font-size:16px; color:#555555;/*#0689e1*/ margin-bottom:15px;font-weight:normal;}
+.footer .help-item h3{ font-size:16px; color:#555555;/*#eb852a*/ margin-bottom:15px;font-weight:normal;}
 .footer .help-item li a{ color:#8c8c8c;}
-.footer .help-item li a:hover{ color:#0689e1;/*#e23435*/}
+.footer .help-item li a:hover{ color:#eb852a;/*#eb852a*/}
 .footer .help-cover{ float:left; width:350px;}
 .footer .help-ctn{ float:left; width:130px;}
 .footer .help-ctn .help-ctn-mt{ margin-bottom:15px;}
 .footer .help-ctn .help-ctn-mt span{ display:block; font-size:14px; color:#8c8c8c;}
-.footer .help-ctn .help-ctn-mt strong{ font-size:16px; color:#0689e1; font-weight:normal;}
+.footer .help-ctn .help-ctn-mt strong{ font-size:16px; color:#eb852a; font-weight:normal;}
 .footer .help-ctn .help-ctn-mb{ float:left; margin-top:6px;}
-.footer .help-ctn .help-ctn-mb .btn-ctn{ display:block; width:130px; height:30px; line-height:30px; background-color:#0689e1; text-align:center; color:#fff; font-size:14px;}
+.footer .help-ctn .help-ctn-mb .btn-ctn{ display:block; width:130px; height:30px; line-height:30px; background-color:#eb852a; text-align:center; color:#fff; font-size:14px;}
 .footer .help-ctn .help-ctn-mb .btn-ctn .iconfont{ display:inline-block; font-size:24px; vertical-align:middle; margin-right:5px;}
 .footer .help-scan{ float:right; width:110px;background:#fff; position:relative;}
 .footer .help-scan .title{ color:#323232; line-height:35px;}

@@ -835,7 +835,7 @@
 }
 
 .choose-title b {
-	color: #0689e1;
+	color: #eb852a;
 	text-align: right;
 	position: absolute;
 	right: 10px;
@@ -1411,11 +1411,11 @@
 
 .combo-package-promotion nav li:hover,.combo-package-promotion nav li.selected
 	{
-	color: #0689e1;
+	color: #eb852a;
 }
 
 .combo-package-promotion nav li.selected {
-	border-bottom: 2px solid #0689e1;
+	border-bottom: 2px solid #eb852a;
 }
 
 .combo-package-promotion .tab-content {
@@ -1528,7 +1528,7 @@
 	height: 28px;
 	line-height: 28px;
 	padding: 0 22px;
-	background-color: #0689e1;
+	background-color: #eb852a;
 	color: #fff;
 	display: inline-block;
 	text-align: center;
@@ -2556,8 +2556,8 @@ h3.left-title {
 }
 
 .comment-type .tab-nav li.current {
-	color: #0689e1;
-	border-bottom: 2px solid #0689e1;
+	color: #eb852a;
+	border-bottom: 2px solid #eb852a;
 	position: relative;
 	bottom: -1px;
 	cursor: default;
@@ -3192,8 +3192,8 @@ h3.left-title {
 } */
 .receive-coupons .coupon i {
     padding: 0 3px;
-    border: 1px solid #0689e1;
-    color: #0689e1;
+    border: 1px solid #eb852a;
+    color: #eb852a;
     border-radius: 2px;
     font-size: 12px;
     line-height: 14px;
@@ -3208,7 +3208,7 @@ h3.left-title {
 }
 
 .receive-coupons .coupon p a {
-	color: #0689E1;
+	color: #eb852a;
 }
 
 .receive-coupons .coupon p a:hover {
@@ -3262,7 +3262,7 @@ h3.left-title {
 }
 
 .tip-info .right p.my_coupon a {
-	color: #0689E1;
+	color: #eb852a;
 }
 
 #goods_attr_list table {

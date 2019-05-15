@@ -177,7 +177,7 @@
 
 .spot-goods ul li .hide .detail .number .p2 a {
 	padding: 3px 10px;
-	background: #0689e1;
+	background: #eb852a;
 	color: #fff;
 	text-decoration: none
 }
@@ -195,7 +195,7 @@
 }
 
 .spot-goods ul li.open .hide .index {
-	background: #0689e1
+	background: #eb852a
 }
 
 .act-banner {
@@ -218,7 +218,7 @@
 }
 
 .act-list ul li:hover {
-	border: solid 1px #0689e1;
+	border: solid 1px #eb852a;
 }
 
 .act-list ul li.first {
@@ -299,7 +299,7 @@
 }
 
 .act-list ul li .info .discount span {
-	background: #0689e1;
+	background: #eb852a;
 	padding: 3px 10px;
 	color: #ffffff;
 }
@@ -352,7 +352,7 @@
 	border-right: 1px solid #E7E3E7;
 	line-height: 22px;
 	font-family: verdana;
-	color: #0689e1;
+	color: #eb852a;
 }
 
 #filter .pagin {

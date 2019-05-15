@@ -211,7 +211,7 @@ ul .mobile i, .header-box ul .menu-hd b, .header .logo-right .city .city-select 
 
 .header-box .login-info a.login {
 	padding-left: 10px;
-	color: #0689e1;
+	color: #eb852a;
 }
 /*右侧信息*/
 .header-box ul {
@@ -1192,7 +1192,7 @@ ul .mobile i, .header-box ul .menu-hd b, .header .logo-right .city .city-select 
 	position: relative;
 }
 .category-box .all-category li.active{
-	background: #e23435;
+	background: #eb852a;
 	height: 42px;
 }
 
@@ -1344,7 +1344,7 @@ ul .mobile i, .header-box ul .menu-hd b, .header .logo-right .city .city-select 
 
 .category-layer .list .categorys::-webkit-scrollbar-thumb,
 	.category-layer .list .categorys::-webkit-scrollbar-thumb {
-	background-color: #0689e1;
+	background-color: #eb852a;
 }
 
 .category-layer .list .categorys::-webkit-scrollbar-track,
@@ -4056,7 +4056,7 @@ ul.images-group li .inputstyle {
 
 .login-wrap .login-tit .regist-link {
 	font-size: 12px;
-	color: #0689e1;
+	color: #eb852a;
 }
 
 .login-wrap .login-tit .regist-link em {
@@ -4669,7 +4669,7 @@ ul.images-group li .inputstyle {
 }
 
 .choose dl.attr dd li a:hover, .choose dl.attr dd li.selected a {
-	border: 2px solid #0689e1;
+	border: 2px solid #eb852a;
 	margin: -1px;
 }
 
@@ -5549,7 +5549,7 @@ img {
 	width: 120px;
 	height: 30px;
 	line-height: 30px;
-	background: #0689e1;
+	background: #eb852a;
 	margin-right: 25px;
 	margin-left: 10px;
 	color: #ffffff;

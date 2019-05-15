@@ -83,7 +83,7 @@
 								{if condition="$order_item.gift_flag == 0"}
 								{if condition="$order.payment_type eq 4"}
 									{if condition="$order.is_refund eq 1 AND $order_item.refund_status eq 0 AND $order.order_status eq 2"}
-										<div><a href="{:__URL('SHOP_MAIN/member/refunddetail','order_goods_id='.$order_item['order_goods_id'])}" style="border: 1px solid #0689e1;padding: 3px 8px;color: #0689e1;line-height: 45px;">{:lang('list_of_refund_return')}</a></div>
+										<div><a href="{:__URL('SHOP_MAIN/member/refunddetail','order_goods_id='.$order_item['order_goods_id'])}" style="border: 1px solid #eb852a;padding: 3px 8px;color: #eb852a;line-height: 45px;">{:lang('list_of_refund_return')}</a></div>
 										{elseif condition="$order_item.refund_status neq 0"}
 										<div><a href="{:__URL('SHOP_MAIN/member/refunddetail','order_goods_id='.$order_item['order_goods_id'])}" style="border: 1px solid #03A9F4;padding: 3px 8px;color: #03A9F4;line-height: 35px;">{:lang('member_view_refund')}</a></div>
 										{if condition="$order_item.refund_status neq 5 and $order_item.refund_status neq -2"}
@@ -92,7 +92,7 @@
 									{/if}
 								{else /}
 									{if condition="$order.is_refund eq 1 AND $order_item.refund_status eq 0"}
-										<div><a href="{:__URL('SHOP_MAIN/member/refunddetail','order_goods_id='.$order_item['order_goods_id'])}" style="border: 1px solid #0689e1;padding: 3px 8px;color: #0689e1;line-height: 45px;">{:lang('list_of_refund_return')}</a></div>
+										<div><a href="{:__URL('SHOP_MAIN/member/refunddetail','order_goods_id='.$order_item['order_goods_id'])}" style="border: 1px solid #eb852a;padding: 3px 8px;color: #eb852a;line-height: 45px;">{:lang('list_of_refund_return')}</a></div>
 										{elseif condition="$order_item.refund_status neq 0"}
 										<div><a href="{:__URL('SHOP_MAIN/member/refunddetail','order_goods_id='.$order_item['order_goods_id'])}" style="border: 1px solid #03A9F4;padding: 3px 8px;color: #03A9F4;line-height: 35px;">{:lang('member_view_refund')}</a></div>
 										{if condition="$order_item.refund_status neq 5 and $order_item.refund_status neq -2"}
@@ -102,10 +102,10 @@
 								{/if}
 								{if condition="$order.order_status eq 4  && $order_item['customer_info'] == ''"}
 									{if condition ="($order.finish_time + $shou_array.shou_time) > $shou_array.time || $shou_array.shouhou == 0"}
-										<div><a href="{:__URL('SHOP_MAIN/member/customerService','order_goods_id='.$order_item['order_goods_id'])}"  style="border: 1px solid #0689e1;padding: 3px 8px;color: #0689e1;line-height: 45px;">申请售后</a></div>
+										<div><a href="{:__URL('SHOP_MAIN/member/customerService','order_goods_id='.$order_item['order_goods_id'])}"  style="border: 1px solid #eb852a;padding: 3px 8px;color: #eb852a;line-height: 45px;">申请售后</a></div>
 									{/if}
 								{elseif condition="$order.order_status eq 4  && $order_item['customer_info'] != ''"}
-								<div><a href="{:__URL('SHOP_MAIN/member/customerService','order_goods_id='.$order_item['order_goods_id'])}"  style="border: 1px solid #0689e1;padding: 3px 8px;color: #0689e1;line-height: 45px;">查看售后</a></div>
+								<div><a href="{:__URL('SHOP_MAIN/member/customerService','order_goods_id='.$order_item['order_goods_id'])}"  style="border: 1px solid #eb852a;padding: 3px 8px;color: #eb852a;line-height: 45px;">查看售后</a></div>
 								{/if}
 								{/if}
 							</div>

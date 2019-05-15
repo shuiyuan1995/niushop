@@ -110,8 +110,8 @@
 	border-radius: 3px;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
-	border: 1px solid #0689e1;
-	background: #0689e1;
+	border: 1px solid #eb852a;
+	background: #eb852a;
 	cursor: pointer;
 	margin-right: 20px;
 }
@@ -213,7 +213,7 @@
 
 #speDiv .attr-list .attr-radio.curr {
 	background: url(../images/bg_attr_sel_zyh.png) no-repeat bottom right;
-	border: 1px solid #0689e1;
+	border: 1px solid #eb852a;
 }
 
 #speDiv .attr-list .attr-radio label {
@@ -251,7 +251,7 @@
 	font-weight: normal;
 }
 .goodslist-screen-condition .title h4 b{
-	color: #0689e1;
+	color: #eb852a;
 }
 .goodslist-screen-condition dl.condition-item{
 	display: block;
@@ -308,7 +308,7 @@
 		overflow: hidden;
 }
 .goodslist-screen-condition dl.condition-item dd.screen-condition ul.brand_list li.brand-seled{
-	border-color: #0689e1;
+	border-color: #eb852a;
 	border-width: 2px;
 	padding: 0px;
 }
@@ -339,12 +339,12 @@
 	transform: translate(-50%,-50%);
 }
 .goodslist-screen-condition dl.condition-item dd.screen-condition ul.brand_list li:hover{
-	border-color: #0689e1;
+	border-color: #eb852a;
 	border-width: 2px;
 	padding: 0px;
 }
 .goodslist-screen-condition dl.condition-item dd.screen-condition ul.brand_list li:hover a{
-	color: #0689e1;
+	color: #eb852a;
 }
 .goodslist-screen-condition dl.condition-item dd.screen-condition ul.brand_list li:hover a .brand_pic{
 	display: none;
@@ -418,10 +418,10 @@
     background-color: #fff;
 }
 .goodslist-screen-condition dl.condition-item dd.screen-condition ul.selected-condition li:hover a{
-	border-color: #0689e1;	
+	border-color: #eb852a;	
 }
 .goodslist-screen-condition dl.condition-item dd.screen-condition ul.selected-condition li:hover a i{
-	background: #0689e1;
+	background: #eb852a;
 	color: #fff;	
 }
 
@@ -443,11 +443,11 @@
 	line-height: 35px;
 }
 .more-screen-condition:hover{
-	border-color: #0689e1;
+	border-color: #eb852a;
 }
 .more-screen-condition:hover .more-option
 {
-	border-color: #0689e1;
+	border-color: #eb852a;
 	border-top-color: #fff;
-	color: #0689e1;
+	color: #eb852a;
 }

@@ -13,7 +13,7 @@
 /*首页秒杀  更多 by yanxin*/
 .sk-more{height:23px; line-height:23px; padding:0 25px; float:right; font-size:14px;}
 .sk-more a{color:#666666;float:left}
-.sk-more a:hover{color:#0689e1;}
+.sk-more a:hover{color:#eb852a;}
 .sk-more i.arrow{background:url(../images/right_arrow_sec.png) no-repeat; width:15px; height:16px; float:right; margin-top:7px; margin-left:10px}
 .seckill-channel .box-bd{ margin-top:10px; height:330px; overflow:hidden; position:relative;}
 .seckill-channel .box-bd li{ float:left; width:232px; margin-right:13px;}
@@ -22,15 +22,15 @@
 .seckill-channel .box-bd .p-img .brand-time{width:100%;height: 35px;line-height: 35px;color: #999;position: absolute;font-family: verdana;font-size: 12px;left: 0;bottom: 0;background-color: #eee;opacity: 0.9;text-align: center;}
 .seckill-channel .box-bd .p-name{ height:38px; line-height:38px; width:100%;font-size:14px;}
 .seckill-channel .box-bd .p-name a{ color:#555; display:block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
-.seckill-channel .box-bd .p-name a:hover{ color:#e23435;}
+.seckill-channel .box-bd .p-name a:hover{ color:#eb852a;}
 .seckill-channel .box-bd .p-over{ height:60px; width:100%; position:relative;}
 .seckill-channel .box-bd .p-info{ width: 125px; height: 0;border-top: none;border-top: 60px solid #eee;border-right: transparent 60px solid;border-left: none; position:absolute; left:0;}
 .seckill-channel .box-bd .p-info .p-price{ float:left; width:145px; height:48px; padding-top:12px; position:absolute; top:-60px;}
 .seckill-channel .box-bd .p-info .p-price span{ display:block; padding-left:16px;}
 .seckill-channel .box-bd .p-info .shop-price{ line-height:20px;}
-.seckill-channel .box-bd .p-btn{ width: 86px; height: 0;border-top: 30px solid #0689e1;;border-bottom: 30px solid #0689e1;border-left: transparent 20px solid;border-right: none; position:absolute; right:0;}
+.seckill-channel .box-bd .p-btn{ width: 86px; height: 0;border-top: 30px solid #eb852a;;border-bottom: 30px solid #eb852a;border-left: transparent 20px solid;border-right: none; position:absolute; right:0;}
 .seckill-channel .box-bd .p-btn a{ color:#fff; font-size:14px; display:block; width:76px; height:60px; line-height:0px;  padding-left:10px; position:absolute;}
-.seckill-channel .box-bd .p-btn:hover{border-bottom-color:#0689e1;}
+.seckill-channel .box-bd .p-btn:hover{border-bottom-color:#eb852a;}
 .seckill-channel .box-bd .prev,.seckill-channel .box-bd .next{ width: 30px;height: 70px;position: absolute;top: 50%;margin-top: -35px;background: rgba(0,0,0,.3);z-index: 2;text-align: center;color: rgba(255,255,255,.8);display: none;}
 .icon-limit{background: url("../images/limited_time_arrow.png") no-repeat;width:30px;height:70px;display:inline-block;}
 .i-limited-arrow-left{

@@ -44,7 +44,7 @@ body {
 }
 
 .item-options[data-flag="shipping_time"] .update,.delete {
-	color: #0689e1;
+	color: #eb852a;
 	margin-right: 4px;
 }
 
