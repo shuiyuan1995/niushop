@@ -220,6 +220,27 @@
 					<span class="price">{$order['point']}</span>
 				</div>
 				{/if}
+
+				{if condition="$order['is_chaibao']>0"}
+				<div>
+					<span>拆包费：</span>
+					<span class="price">￥{$order['chaibao_money']}</span>
+				</div>
+				{/if}
+
+				{if condition="$order['is_insurance']>0"}
+				<div>
+					<span>保险费：</span>
+					<span class="price">￥{$order['insurance_money']}</span>
+				</div>
+				{/if}
+
+				{if condition="$order['point']>0"}
+				<div>
+					<span>{:lang('member_use_integral')}：</span>
+					<span class="price">{$order['point']}</span>
+				</div>
+				{/if}
 				
 				<div>
 					<span>{:lang('member_actual_payment')}：</span>

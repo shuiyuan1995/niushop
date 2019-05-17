@@ -1088,6 +1088,9 @@ class Member extends BaseController
         // 配送时间段
         $config = new Config();
         $distribution_time_out = $config -> getConfig(0, "DISTRIBUTION_TIME_SLOT");
+        $chaibao_price = $config -> getConfig(0, "CHAI_BAO_PRICE")['value'];
+        $chaibao_price = sprintf("%.2f",$chaibao_price);
+        $this->assign('chai_price',$chaibao_price);
         if(!empty($distribution_time_out["value"])){
             $this->assign("distribution_time_out", json_decode($distribution_time_out["value"], true));
         }else{
@@ -1169,7 +1172,12 @@ class Member extends BaseController
         $count_money = $order->getGoodsSkuListPrice($goods_sku_list); // 商品金额
         $this->assign("count_money", sprintf("%.2f", $count_money)); // 商品金额
         
-        $addresslist = $member->getMemberExpressAddressList(1, 0, '', ' is_default DESC'); // 地址查询
+        $addresslist = $member->getMemberExpressAddressList(1, 0, ''); // 地址查询
+
+        $country = $member->getDefaultAddress();
+        $insurance = $order->getInsurance($country,$goods_sku_list);
+        $this->assign("ins_money", sprintf("%.2f", $insurance)); // 保险费
+
         if (empty($addresslist["data"])) {
             $this->assign("address_list", 0);
         } else {

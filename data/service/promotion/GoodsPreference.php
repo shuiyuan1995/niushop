@@ -34,6 +34,7 @@ use data\service\Config;
 use data\model\NsGoodsLadderPreferentialModel;
 use data\model\BaseModel;
 use data\model\NsGoodsMemberDiscountModel;
+use think\Db;
 
 /**
  * 商品优惠价格操作类(运费，商品优惠)(没有考虑订单优惠活动例如满减送)
@@ -74,7 +75,33 @@ class GoodsPreference extends BaseService
             return $price;
         }
     }
-    
+
+    public function getInsurance($country,$goods_sku_list)
+    {
+        $price = 0;
+        $goods_sku_list_array = explode(",", $goods_sku_list);
+        foreach ($goods_sku_list_array as $k => $v) {
+            $ins_data = explode(":", $v);
+            $sku_id = $ins_data[0];
+            $sku_count = $ins_data[1];
+            $sku_price = $this->getGoodsSkuPrice($sku_id);
+            $sku_price = $this->getGoodsLadderPreferentialPrice($sku_id, $sku_count, $sku_price);
+            $ins = $this->selectIns($country,$sku_price);
+            $ins = $ins/100;
+            $price = $price + $sku_price * $ins * $sku_count;
+        }
+        return $price;
+    }
+
+    public function selectIns($country,$price){
+        $res = Db::name('sys_insurance')
+            ->where('country_id',$country)
+            ->where('start_price','<=',$price)
+            ->where('end_price','>=',$price)
+            ->value('insurance_price');
+        return $res;
+    }
+
     /**
      * 根据商品sku获取预售总价格
      * @param unknown $goods_sku_list

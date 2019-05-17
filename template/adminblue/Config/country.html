@@ -125,7 +125,7 @@
 					<tr>
 						<td align="right"><span style="color:red;margin-right:10px;">*</span>保险：</td>
 						<td>
-								价格区间：<input type="number" id="start" style="margin-bottom: 5px;" class="baoxian"/> - <input type="number" id="end" style="margin-bottom: 5px;" class="baoxian"/>   保险费：<input type="number" id="price" style="margin-bottom: 5px;" class="baoxian"/>
+								价格区间：<input type="number" id="start" style="margin-bottom: 5px;" class="baoxian"/> - <input type="number" id="end" style="margin-bottom: 5px;" class="baoxian"/>   保险费：<input type="number" id="price" style="margin-bottom: 5px;" class="baoxian"/>%
 								<button type="button" onclick="baoxianadd()" class="btn-small btn-common tianjiabtn">添加</button>
 								<div id="baoxianitem" class="baoxianitem">
 
@@ -215,7 +215,7 @@ function baoxianadd(){
         showTip('保险费不能为负','warning');
         return false
     }
-    var txt = '<p><span>'+$("#start").val()+'</span>-<span>'+$("#end").val()+'</span> <span>'+$("#price").val()+'</span>元</p>';
+    var txt = '<p><span>'+$("#start").val()+'</span>-<span>'+$("#end").val()+'</span> <span>'+$("#price").val()+'</span>%</p>';
     $("#baoxianitem").append(txt);
     $("#start").val('');
     $("#end").val('');
@@ -254,7 +254,7 @@ function updateCountry(province_id){
             var txt = '';
             if (length > 0){
                 for (var i=0; i < length; i++){
-                    txt += '<p data-id="'+data[i].id+'"><span>'+data[i].start_price+'</span>-<span>'+data[i].end_price+'</span> <span>'+data[i].insurance_price+'</span>元</p>';
+                    txt += '<p data-id="'+data[i].id+'"><span>'+data[i].start_price+'</span>-<span>'+data[i].end_price+'</span> <span>'+data[i].insurance_price+'</span>%</p>';
 				}
                 $("#baoxianitem").append(txt);
 			}

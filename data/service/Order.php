@@ -339,7 +339,7 @@ class Order extends BaseService implements IOrder
      * (non-PHPdoc)
      * @see \data\api\IOrder::orderCreate()
      */
-    public function orderCreate($order_type, $out_trade_no, $pay_type, $shipping_type, $order_from, $buyer_ip, $buyer_message, $buyer_invoice, $shipping_time, $receiver_mobile, $receiver_province, $receiver_city, $receiver_district, $receiver_address, $receiver_zip, $receiver_name, $point, $coupon_id, $user_money, $goods_sku_list, $platform_money, $pick_up_id, $shipping_company_id, $coin = 0, $fixed_telephone = "", $distribution_time_out)
+    public function orderCreate($order_type, $out_trade_no, $pay_type, $shipping_type, $order_from, $buyer_ip, $buyer_message, $buyer_invoice, $shipping_time, $receiver_mobile, $receiver_province, $receiver_city, $receiver_district, $receiver_address, $receiver_zip, $receiver_name, $point, $coupon_id, $user_money, $goods_sku_list, $platform_money, $pick_up_id, $shipping_company_id, $coin = 0, $fixed_telephone = "", $distribution_time_out,$is_chai,$chai_price,$is_ins,$ins_price)
     {
         $order = new OrderBusiness();
         if ($pay_type == 4) {
@@ -350,7 +350,7 @@ class Order extends BaseService implements IOrder
                 return ORDER_CASH_DELIVERY;
             }
         }
-        $retval = $order->orderCreate($order_type, $out_trade_no, $pay_type, $shipping_type, $order_from, $buyer_ip, $buyer_message, $buyer_invoice, $shipping_time, $receiver_mobile, $receiver_province, $receiver_city, $receiver_district, $receiver_address, $receiver_zip, $receiver_name, $point, $coupon_id, $user_money, $goods_sku_list, $platform_money, $pick_up_id, $shipping_company_id, $coin, $fixed_telephone, 0, $distribution_time_out);
+        $retval = $order->orderCreate($order_type, $out_trade_no, $pay_type, $shipping_type, $order_from, $buyer_ip, $buyer_message, $buyer_invoice, $shipping_time, $receiver_mobile, $receiver_province, $receiver_city, $receiver_district, $receiver_address, $receiver_zip, $receiver_name, $point, $coupon_id, $user_money, $goods_sku_list, $platform_money, $pick_up_id, $shipping_company_id, $coin, $fixed_telephone, 0, $distribution_time_out,$is_chai,$chai_price,$is_ins,$ins_price);
         runhook("Notify", "orderCreate", array(
             "order_id" => $retval
         ));
@@ -1352,6 +1352,14 @@ class Order extends BaseService implements IOrder
         $money = $goods_preference->getGoodsSkuListPrice($goods_sku_list);
         return $money;
     }
+
+    public function getInsurance($country,$goods_sku_list)
+    {
+        $goods_preference = new GoodsPreference();
+        $ins = $goods_preference->getInsurance($country,$goods_sku_list);
+        return $ins;
+    }
+
 
     /**
      * 获取组合商品sku列表价格

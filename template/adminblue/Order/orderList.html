@@ -239,6 +239,10 @@ function LoadingInfo(page_index) {
 					var goods_code = data["data"][i]["order_item_list"][0]["code"];
 					var gift_flag = data['data'][i]['order_item_list'][0]['gift_flag'];//赠品标识，0：不是赠品，1：是赠品
 					var shipping_type_name = data['data'][i]['shipping_type_name']['type_name'];//配送方式
+                    var is_chai = data['data'][i]['is_chaibao'] ? '已拆包' : '未拆包';//是否拆包
+                    var is_ins = data['data'][i]['is_insurance'] ? '已买保险' : '未买保险';//是否保险
+                    var chai_price = data['data'][i]['chaibao_money'];//拆包费
+                    var ins_price = data['data'][i]['insurance_money'];//保险费
 
 					var row=1;//订单数量，用于设置跨行
 					if(data["data"][i]["order_item_list"].length!=null){
@@ -246,17 +250,17 @@ function LoadingInfo(page_index) {
 					}
 
 					html += '<tr>';
-					
+
 					html += '<td rowspan="'+row+'"><i class="checkbox-common"><input id="'+out_trade_no+'" type="checkbox"  value="'+order_id+'" name="sub"></i></td>';
-					
+
 					html += '<td>';
-					
+
 					html += '<div style="font-size: 12px;color: #126AE4;margin-bottom:5px;">';
 // 					html +='<span>订单编号：'+order_no+' 交易号：'+out_trade_no+'</span><span>下单时间：'+create_time+'</span>';
 					html +='<span>订单编号：'+order_no+'</span>&nbsp;<span>下单时间：'+create_time+'</span>';
-					
+
 					html += '</div>';
-					
+
 					html += '<div class="product-img"><img src="'+__IMG(pic_cover_micro)+'"></div>';
 					html += '<div class="product-infor">';
 					html += '<a href="'+__URL('SHOP_MAIN/goods/goodsinfo?goodsid='+goods_id)+'" target="_blank" style="color:#333;">'+goods_name+'</a>';
@@ -266,19 +270,19 @@ function LoadingInfo(page_index) {
 					if(goods_code != null && goods_code != ""){
 						html += '<p class="specification"><span style="color:#8e8c8c;font-size:12px;">编码&nbsp;&nbsp;'+goods_code+'</span></p></div>';
 					}
-					
+
 					//添加赠品标识
 					if(gift_flag > 0){
 						html += '<i style="font-size:12px;margin:5px 5px 0 0;padding:1px 4px;border-radius:3px;display:inline-block;color:#FFF;background-color:#FF6600;height:16px;line-height: 16px;overflow:hidden;font-style:normal;">赠品</i>';
 					}
-					
+
 					html += '</div></td>';
-					
+
 					//订单数量大于1个，调整样式
 					html += '<td>';
 						html += '<div class="cell" style="display: inline-block;"><span>'+price+'元</span></div>';
 						html += '<div class="cell" style="display: inline-block;float:right;">'+num+'件</div>';
-					
+
 					//
 
 					if(data["data"][i]["order_item_list"][0]['adjust_money'] != 0){
@@ -306,14 +310,16 @@ function LoadingInfo(page_index) {
 						}
 					}
 					html += '</td>';
-					
+
 					html += '<td rowspan="'+row+'" style="text-align:center">';
 					html += '<div class="cell"><b class="netprice" style="color: #FF6600;font-size: 14px;font-weight: normal;">'+order_money+'</b><br/>';
 					html += '<span class="expressfee">(含配送费:'+shipping_money+'元)</span><br/>';
+					html += '(含<span class="expressfee" style="color: #FF6600;">'+is_chai+'</span>:'+chai_price+'元)<br/>';
+                    html += '(含<span class="expressfee" style="color: #FF6600;">'+is_ins+'</span>:'+ins_price+'元)<br/>';
 					html += '<span class="expressfee">'+data["data"][i]["pay_type_name"]+'</span></div></td>';
-					
+
 					html += '<td rowspan="'+row+'" style="text-align:center">';
-					
+
 					//地址
 					var address_arr = data["data"][i]["receiver_address"].split('&nbsp;');
 					html += '<div style="text-align:left;"><span class="expressfee">'+data["data"][i]["receiver_name"]+'</span><br/><span class="expressfee">'+data["data"][i]["receiver_mobile"]+'</span>';
@@ -326,19 +332,19 @@ function LoadingInfo(page_index) {
                     html += '<br/><span class="expressfee">街道：'+address_arr[3]+'</span>';
                     html += '<br/><span class="expressfee">邮编：'+data["data"][i]["receiver_zip"]+'</span>';
 					html += '</div></td>';
-					
+
 					html += '<td rowspan="'+row+'" style="text-align:center"><div class="cell">'+data["data"][i]["user_name"]+'<br/>';
 					html += data["data"][i]["user_email"]+'<br/>';
 					html += '<i class="'+data["data"][i]["order_from_tag"]+'" style="color:#666;"><i></div></td>';
-					
+
 					html += '<td rowspan="'+row+'"><div class="business-status" style="text-align:center">'+data["data"][i]["status_name"]+'<br></div></td>';
 					html += '<td rowspan="'+row+'"><div class="business-status" style="text-align:center">'+ shipping_type_name +'<br></div></td>';
 					html += '<td rowspan="'+row+'" style="text-align:center;">';
-					
+
 					if(order_type == '7'){
 						html += '<a style="display:block;margin-bottom:5px;" href="'+__URL('ADMIN_MAIN/order/bargainOrderDetail?order_id='+order_id)+'">订单详情</a>';
 					}else{
-						html += '<a style="display:block;margin-bottom:5px;" href="'+__URL('ADMIN_MAIN/order/orderdetail?order_id='+order_id)+'">订单详情</a>';	
+						html += '<a style="display:block;margin-bottom:5px;" href="'+__URL('ADMIN_MAIN/order/orderdetail?order_id='+order_id)+'">订单详情</a>';
 					}
 					/*if(order_type == '7'){
 						html += '<a style="display:block;margin-bottom:5px;"onclick="operation(\'update_pay_status\',14)" >修改订单状态</a>';
@@ -376,7 +382,7 @@ function LoadingInfo(page_index) {
 						var price = data["data"][i]["order_item_list"][j]["price"];//价格
 						var num = data["data"][i]["order_item_list"][j]["num"];//购买数量
 						var gift_flag = data["data"][i]["order_item_list"][j]["gift_flag"];//赠品标识，0：不是赠品，1：是赠品
-						
+
 						var goods_code = data["data"][i]["order_item_list"][j]["code"];
 						html += '<tr calss="js-child-order">';
 						html += '<td colspan="1">';
@@ -389,7 +395,7 @@ function LoadingInfo(page_index) {
 						if(goods_code != null && goods_code != ''){
 							html += '<p class="specification"><span style="color:#8e8c8c;font-size:12px;">'+goods_code+'</span></p>';
 						}
-						
+
 						//添加赠品标识
 						if(gift_flag > 0){
 							html += '<i style="font-size:12px;margin:5px 5px 0 0;padding:1px 4px;border-radius:3px;display:inline-block;color:#FFF;background-color:#FF6600;height:16px;line-height: 16px;overflow:hidden;font-style:normal;">赠品</i>';

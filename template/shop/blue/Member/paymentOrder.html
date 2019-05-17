@@ -109,7 +109,7 @@ input[type="radio"]:checked {
 				<div class="sh-address js-shipping-address">
 					<ul>
 						{foreach name = "address_list" item = "info" key = "k"}
-						<li class="other-add {if condition='$info.is_default==1'}default-add{/if}" data-id="{$info.id}" data-province-id="{$info.province}" data-city-id="{$info.city}">
+						<li class="other-add {if condition='$info.is_default==1'}default-add{/if}" data-id="{$info.id}" data-city-id="{$info.country}">
 							<div class="add-box">
 								<span class="remove vivi-blue js-shipping-address-remove" data-id="{$info.id}">X</span>
 								<div class="name-add">
@@ -540,9 +540,9 @@ input[type="radio"]:checked {
 					</div>
 				</div>
 			</div>
-		</div> 
+		</div>
 
-		<div class="style-zhifu order-invoice" id="baoxian">
+		<!-- <div class="style-zhifu order-invoice" id="baoxian">
 				<div class="cart-title">
 					<h3>
 						<span>是否购买保险</span>
@@ -564,7 +564,7 @@ input[type="radio"]:checked {
 						</div>
 					</div>
 				</div>
-			</div> 
+		</div> -->
 		
 		{if condition="count($shop_config.order_invoice_content_list)"}
 		<div class="style-zhifu order-invoice">
@@ -694,12 +694,12 @@ input[type="radio"]:checked {
 							{/if}
 							<p class="slivergrey">
 								<span>拆包：</span>
-								<span class="txtmoney">￥<b id="express">0.00</b></span>
+								<span class="txtmoney">￥<b id="chaibao">0.00</b></span>
 							</p>
-							<p id="baoxianfei" class="slivergrey">
+							<!--<p id="baoxianfei" class="slivergrey">
 								<span>保险：</span>
-								<span class="txtmoney">￥<b id="express">0.00</b></span>
-							</p>
+								<span class="txtmoney">￥<b id="insurance">0.00</b></span>
+							</p>-->
 							<!-- 总优惠 -->
 							<p class="slivergrey">
 								<span>{:lang('member_total_discount')}：</span>
@@ -780,6 +780,12 @@ input[type="radio"]:checked {
 							<input type="hidden" id="hidden_pick_up_money" value="{$pick_up_money}"/>
 							<input type="hidden" id="hidden_is_logistice" value="{$shop_config.is_logistics}" />
 							<input type="hidden" id="hidden_shipping_time" value="0" />
+                            <input type="hidden" id="hide_chai" value="{$chai_price}">
+                            <input type="hidden" id="is_chai" value="1">
+                            <input type="hidden" id="chai" value="{$chai_price}">
+                            <input type="hidden" id="hide_ins" value="{$ins_money}">
+                            <input type="hidden" id="is_ins" value="0">
+                            <input type="hidden" id="ins" value="0.00">
 							<!-- 组合套餐 -->
 							{if $order_tag eq 'combination_packages' }
 							<input type="hidden" id="hidden_combo_package_id" value="{$combo_detail.id}" />

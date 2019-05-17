@@ -1150,6 +1150,14 @@ class Order extends BaseController
             array(
                 'receiver_address',
                 '收货人地址'
+            ),
+            array(
+                'is_chaibao',
+                '拆包'
+            ),
+            array(
+                'is_insurance',
+                '保险'
             )
         );
         $start_date = request()->get('start_date') == "" ? 0 : getTimeTurnTimeStamp(request()->get('start_date'));
@@ -1236,7 +1244,7 @@ class Order extends BaseController
             $order_type
         ); // 普通订单
         $order_service = new OrderService();
-        $list = $order_service->getOrderList(1, 0, $condition, 'create_time desc');
+        $list = $order_service->getOrderList(1, 0, $condition, 'create_time asc');
         $list = $list["data"];
         foreach ($list as $k => $v) {
             $list[$k]["create_date"] = getTimeStampTurnTime($v["create_time"]); // 创建时间
@@ -1253,6 +1261,16 @@ class Order extends BaseController
                 $list[$k]["shipping_type_name"] = '门店自提';
             } else {
                 $list[$k]["shipping_type_name"] = '';
+            }
+            if ($v['is_chaibao'] == 0) {
+                $list[$k]["is_chaibao"] = '未拆包';
+            } else{
+                $list[$k]["is_chaibao"] = '已拆包';
+            }
+            if ($v['is_insurance'] == 0) {
+                $list[$k]["is_insurance"] = '未购买';
+            } else{
+                $list[$k]["is_insurance"] = '已购买';
             }
             if ($v['pay_status'] == 0) {
                 $list[$k]["pay_status_name"] = '待付款';

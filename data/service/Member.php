@@ -52,6 +52,7 @@ use data\service\promotion\PromoteRewardRule;
 use data\service\WebSite;
 use Prophecy\Exception\Exception;
 use think\Cookie;
+use think\Db;
 use think\Session;
 
 class Member extends User implements IMember
@@ -601,7 +602,7 @@ public function registerMember($user_name, $password, $email, $mobile, $user_qq_
         $express_address = new NsMemberExpressAddressModel();
         $data = $express_address->pageQuery($page_index, $page_size, [
             'uid' => $this->uid
-        ], 'id desc', '*');
+        ], 'is_default desc,id asc', '*');
         // 处理地址信息
         if (! empty($data)) {
             foreach ($data['data'] as $key => $val) {
@@ -609,6 +610,17 @@ public function registerMember($user_name, $password, $email, $mobile, $user_qq_
                 $country_info = $address->getCountryDetail($val['country']);
                 $data['data'][$key]['country_detail'] = $country_info;
             }
+        }
+        return $data;
+    }
+
+    public function getDefaultAddress()
+    {
+        $express_address = new NsMemberExpressAddressModel();
+        $data = $express_address->where(array('uid' => $this->uid,'is_default' =>1))->find();
+        // 处理地址信息
+        if (! empty($data)) {
+            $data = $data['country'];
         }
         return $data;
     }
