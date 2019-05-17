@@ -122,7 +122,7 @@
 						<td align="right"><span style="color:red;margin-right:10px;">*</span>国家名称：</td>
 						<td><input type="text" id="countryName" style="margin-bottom: 5px;" class="input-common"/></td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<td align="right"><span style="color:red;margin-right:10px;">*</span>保险：</td>
 						<td>
 								价格区间：<input type="number" id="start" style="margin-bottom: 5px;" class="baoxian"/> - <input type="number" id="end" style="margin-bottom: 5px;" class="baoxian"/>   保险费：<input type="number" id="price" style="margin-bottom: 5px;" class="baoxian"/>
@@ -131,7 +131,7 @@
 
 								</div>
 						</td>
-					</tr>
+					</tr> -->
 					<tr>
 						<td align="right">排序：</td>
 						<td><input type="number" id="regionSort" onkeyup="this.value=this.value.replace(/\D/g,'')" class="input-common harf" /></td>
@@ -202,40 +202,40 @@ function addCountry(){
 }
 
 // 添加保险
-function baoxianadd(){
-    if($("#start").val()==''||$("#end").val()==''||$("#price").val()==''){
-        showTip('价格，保险不能为空','warning');
-        return false
-    }
-    if($("#start").val() > $("#end").val()){
-        showTip('起始价格不能大于结束价格','warning');
-        return false
-    }
-    if($("#price").val() < 0){
-        showTip('保险费不能为负','warning');
-        return false
-    }
-    var txt = '<p><span>'+$("#start").val()+'</span>-<span>'+$("#end").val()+'</span> <span>'+$("#price").val()+'</span>元</p>';
-    $("#baoxianitem").append(txt);
-    $("#start").val('');
-    $("#end").val('');
-    $("#price").val('');
-}
+// function baoxianadd(){
+//     if($("#start").val()==''||$("#end").val()==''||$("#price").val()==''){
+//         showTip('价格，保险不能为空','warning');
+//         return false
+//     }
+//     if($("#start").val() > $("#end").val()){
+//         showTip('起始价格不能大于结束价格','warning');
+//         return false
+//     }
+//     if($("#price").val() < 0){
+//         showTip('保险费不能为负','warning');
+//         return false
+//     }
+//     var txt = '<p><span>'+$("#start").val()+'</span>-<span>'+$("#end").val()+'</span> <span>'+$("#price").val()+'</span>元</p>';
+//     $("#baoxianitem").append(txt);
+//     $("#start").val('');
+//     $("#end").val('');
+//     $("#price").val('');
+// }
 // 删除保险
-$("#baoxianitem").click(function(e){
-	if(e.target.nodeName=="P"){
-        var id = $(e.target).attr('data-id');
-        var ajaxUrl ="{:__URL('ADMIN_MAIN/config/delInsurance')}";
-        $.ajax({
-            type : "post",
-            url : ajaxUrl,
-            data : {"id" : id},
-            success : function(data){
-            }
-        });
-        $(e.target).remove()
-	}
-});
+// $("#baoxianitem").click(function(e){
+// 	if(e.target.nodeName=="P"){
+//         var id = $(e.target).attr('data-id');
+//         var ajaxUrl ="{:__URL('ADMIN_MAIN/config/delInsurance')}";
+//         $.ajax({
+//             type : "post",
+//             url : ajaxUrl,
+//             data : {"id" : id},
+//             success : function(data){
+//             }
+//         });
+//         $(e.target).remove()
+// 	}
+// });
 //修改
 function updateCountry(province_id){
     $("#evaluate_id").val(province_id);
