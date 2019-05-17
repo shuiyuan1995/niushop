@@ -220,20 +220,20 @@ $(function(){
 		calculateTotalAmount();
 	})
 
-	/**
-	 * 选择是否购买保险
-	 */
-	$("#baoxian_method .js-select li").click(function(){
-		return false;
-		if($(this).attr("data-code") == "no_config"){
-			return;
-		}
-		$("#baoxian_method .js-select li i").hide();
-		$("#baoxian_method .js-select li a").removeClass("selected");
-		$(this).children("i").show();
-		$(this).children("a").addClass("selected");
-		calculateTotalAmount();
-	})
+	// /**
+	//  * 选择是否购买保险
+	//  */
+	// $("#baoxian_method .js-select li").click(function(){
+	// 	return false;
+	// 	if($(this).attr("data-code") == "no_config"){
+	// 		return;
+	// 	}
+	// 	$("#baoxian_method .js-select li i").hide();
+	// 	$("#baoxian_method .js-select li a").removeClass("selected");
+	// 	$(this).children("i").show();
+	// 	$(this).children("a").addClass("selected");
+	// 	calculateTotalAmount();
+	// })
 	
 	/**
 	 * 选择发票内容
