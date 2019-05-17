@@ -239,6 +239,8 @@ function LoadingInfo(page_index) {
 					var goods_code = data["data"][i]["order_item_list"][0]["code"];
 					var gift_flag = data['data'][i]['order_item_list'][0]['gift_flag'];//赠品标识，0：不是赠品，1：是赠品
 					var shipping_type_name = data['data'][i]['shipping_type_name']['type_name'];//配送方式
+                    var is_chai = data['data'][i]['is_chaibao'] ? '已拆包' : '未拆包';//是否拆包
+                    var chai_price = data['data'][i]['chaibao_money'];//拆包费
 
 					var row=1;//订单数量，用于设置跨行
 					if(data["data"][i]["order_item_list"].length!=null){
@@ -310,6 +312,7 @@ function LoadingInfo(page_index) {
 					html += '<td rowspan="'+row+'" style="text-align:center">';
 					html += '<div class="cell"><b class="netprice" style="color: #FF6600;font-size: 14px;font-weight: normal;">'+order_money+'</b><br/>';
 					html += '<span class="expressfee">(含配送费:'+shipping_money+'元)</span><br/>';
+                    html += '(含<span class="expressfee" style="color: #FF6600;">'+is_chai+'</span>:'+chai_price+'元)<br/>';
 					html += '<span class="expressfee">'+data["data"][i]["pay_type_name"]+'</span></div></td>';
 					
 					html += '<td rowspan="'+row+'" style="text-align:center">';

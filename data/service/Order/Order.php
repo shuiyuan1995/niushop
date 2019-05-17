@@ -110,7 +110,7 @@ class Order extends BaseService
      * @param unknown $goods_sku_list            
      * @return number|Exception
      */
-    public function orderCreate($order_type, $out_trade_no, $pay_type, $shipping_type, $order_from, $buyer_ip, $buyer_message, $buyer_invoice, $shipping_time, $receiver_mobile, $receiver_province, $receiver_city, $receiver_district, $receiver_address, $receiver_zip, $receiver_name, $point, $coupon_id, $user_money, $goods_sku_list, $platform_money, $pick_up_id, $shipping_company_id, $coin, $fixed_telephone = "", $presell_money = 0, $distribution_time_out)
+    public function orderCreate($order_type, $out_trade_no, $pay_type, $shipping_type, $order_from, $buyer_ip, $buyer_message, $buyer_invoice, $shipping_time, $receiver_mobile, $receiver_province, $receiver_city, $receiver_district, $receiver_address, $receiver_zip, $receiver_name, $point, $coupon_id, $user_money, $goods_sku_list, $platform_money, $pick_up_id, $shipping_company_id, $coin, $fixed_telephone = "", $presell_money = 0, $distribution_time_out,$is_chai,$chai_price)
     {
         $this->order->startTrans();
         
@@ -242,7 +242,7 @@ class Order extends BaseService
             }
             
             // 订单费用(具体计算)
-            $order_money = $goods_money + $deliver_price - $promotion_money - $coupon_money;
+            $order_money = $goods_money + $deliver_price - $promotion_money - $coupon_money + $chai_price;
             
             if ($order_money < 0) {
                 $order_money = 0;
@@ -343,7 +343,9 @@ class Order extends BaseService
                 "give_point_type" => $give_point_type,
                 'shipping_company_id' => $shipping_company_id,
                 'fixed_telephone' => $fixed_telephone,
-                'distribution_time_out' => $distribution_time_out
+                'distribution_time_out' => $distribution_time_out,
+                'is_chaibao' => $is_chai,
+                'chaibao_money' => $chai_price,
             ); // 固定电话
                // datetime NOT NULL DEFAULT 'CURRENT_TIMESTAMP' COMMENT '订单创建时间',
             if ($pay_status == 2) {

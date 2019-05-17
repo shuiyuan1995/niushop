@@ -119,6 +119,8 @@ $(function(){
 				shipping_type = 3;
 			}
 			var distribution_time_out = $("#delivery-time .time-out-list span.selected").text();
+            var is_chai = $("#is_chai").val();
+            var chai_price = $("#chai").val();
 			$.ajax({
 				url : __URL(SHOPMAIN + "/order/ordercreate"),
 				type : "post",
@@ -134,7 +136,9 @@ $(function(){
 					'express_company_id' : $("#express_company").val(),
 					'shipping_time' : $("#hidden_shipping_time").val(),
 					'shipping_type' : shipping_type,
-					'distribution_time_out' : distribution_time_out
+					'distribution_time_out' : distribution_time_out,
+                    'is_chai' : is_chai,
+                    'chai_price' : chai_price,
 				},
 				success : function(res) {
 					if (res.code > 0) {
@@ -210,11 +214,14 @@ $(function(){
 		switch($(this).attr("data-code")){
 			case "merchant_distribution":
 				$("#baoxian").show(300);
-				$("#baoxianfei").show(300);
+                $("#chai").val($("#hide_chai").val());
+                $("#is_chai").val(1);
+                $("#chaibao").text($("#chai").val());
 			break;
 			case "afhalen":
-				$("#baoxian").hide(300);
-				$("#baoxianfei").hide(300);
+                $("#chai").val("0.00");
+                $("#is_chai").val(0);
+                $("#chaibao").text($("#chai").val());
 			break;
 		}
 		calculateTotalAmount();
@@ -413,6 +420,7 @@ function init(){
 	})
 	
 	$(".js-total-money").text(total_money.toFixed(2));//总计
+    $("#chaibao").text($("#chai").val());
 	/**
 	 * 选中第一个配送方式对应的更新数据
 	 * 2017年6月28日 17:33:19
@@ -691,6 +699,8 @@ function calculateTotalAmount(){
 	var order_invoice_tax_money = 0;//发票税额 显示
 	var tax_sum = parseFloat($("#hidden_count_money").val());//计算发票税额计算：（商品总计+运-优惠活动-优惠券）*发票税率
 	var express = 0; //运费
+    var chaibao = parseFloat($("#chai").val());//拆包费
+    money += chaibao;
 	// 运费
 	//如果选择的是门店自提，则不计算运费
 	if(getPickupId()>0){

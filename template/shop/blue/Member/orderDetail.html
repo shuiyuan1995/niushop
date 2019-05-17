@@ -5,6 +5,7 @@
 <script src="__TEMP__/{$style}/public/js/plugin/jquery.pure.tooltips.js"></script>
 <style>
 .goods-items td{padding:2px 5px;}
+.price_font{font-size: 15px;}
 </style>
 {/block}
 {block name="main"}
@@ -314,36 +315,43 @@
 			</div>
 			<table width="100%" border="0" cellpadding="10" cellspacing="1" bgcolor="#eeeeee">
 				<tr>
-					
-				<td colspan="7" align="right" >
-					<span>{:lang('member_total_commodity_value')}：￥{$order['goods_money']}，</span>
-					
-					{if condition="$order['user_platform_money']>0"}
-					<span>{:lang('member_balance_payment')}：￥{$order['user_platform_money']}，</span>
-					{/if}
-					
-					{if condition="$order['coupon_money']>0"}
-					<span>{:lang('member_coupons')}：￥{$order['coupon_money']}，</span>
-					{/if}
-					
-					{if condition="$order['tax_money']>0"}
-					<span>{:lang('member_invoice_tax')}：￥{$order['tax_money']}，</span>
-					{/if}
-					
-					{if condition="$order['promotion_money']>0"}
-						{switch name="$order['promotion_type']"}
-							{case value="MANJIAN"}<span>{:lang('member_full_discount')}：￥{$order['promotion_money']}，</span>{/case}
-							{case value="ZUHETAOCAN"}<span>{:lang('member_taocan_discount')}：￥{$order['promotion_money']}，</span>{/case}
-						{/switch}
-					{/if}
-					
-					{if condition="$order['point']>0"}
-					<span>{:lang('member_use_integral')}：{$order['point']}，</span>
-					{/if}
-					
-					<span> {:lang('member_actual_payment')}：<b style="color: #f44;">￥{$order['pay_money']}</b></span>
-					<span>（{:lang('free_shipping')} ￥{$order['shipping_money']}）</span>
-				</td>
+
+					<td colspan="7" align="right" >
+						<span class="price_font">{:lang('member_total_commodity_value')}：￥{$order['goods_money']}</span><br/>
+						<span class="price_font">{:lang('goods_freight')}：￥{$order['shipping_money']}</span><br/>
+						{if condition="$order['user_platform_money']>0"}
+						<span class="price_font">{:lang('member_balance_payment')}：￥{$order['user_platform_money']}</span><br/>
+						{/if}
+
+						{if condition="$order['coupon_money']>0"}
+						<span class="price_font">{:lang('member_coupons')}：￥{$order['coupon_money']}</span><br/>
+						{/if}
+
+						{if condition="$order['tax_money']>0"}
+						<span class="price_font">{:lang('member_invoice_tax')}：￥{$order['tax_money']}</span><br/>
+						{/if}
+
+						{if condition="$order['promotion_money']>0"}
+							{switch name="$order['promotion_type']"}
+								{case value="MANJIAN"}<span class="price_font">{:lang('member_full_discount')}：￥{$order['promotion_money']}</span><br/>{/case}
+								{case value="ZUHETAOCAN"}<span class="price_font">{:lang('member_taocan_discount')}：￥{$order['promotion_money']}</span><br/>{/case}
+							{/switch}
+						{/if}
+
+						{if condition="$order['point']>0"}
+						<span class="price_font">{:lang('member_use_integral')}：{$order['point']}</span><br/>
+						{/if}
+
+						{if condition="$order['is_chaibao']>0"}
+						<span class="price_font">拆包费：￥{$order['chaibao_money']}</span><br>
+						{/if}
+
+						{if condition="$order['is_insurance']>0"}
+						<span class="price_font">保险费：￥{$order['insurance_money']}</span><br>
+						{/if}
+
+						<span class="price_font"> {:lang('member_actual_payment')}：<b style="color: #f44;">￥{$order['pay_money']}</b></span>
+					</td>
 				</tr>
 			</table>
 		</div>

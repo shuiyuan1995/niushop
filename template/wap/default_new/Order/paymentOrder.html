@@ -393,7 +393,7 @@
 		<!-- chaibao -->
 		<p>
 			<label>拆包：</label>
-			<span>￥<b id="discount_money">0.00</b></span>
+			<span>￥<b id="chaibao">0.00</b></span>
 		</p>
 		<!-- 保险 -->
 		<!-- <p id="baoxian1">
@@ -468,6 +468,9 @@
 		<input type="hidden" id="hidden_order_invoice_tax" value="{$shop_config.order_invoice_tax}"/>
 		<input type="hidden" id="hidden_pick_up_money" value="{$pick_up_money}"/>
 		<input type="hidden" id="hidden_shipping_time" value="0" />
+		<input type="hidden" id="hide_chai" value="{$chai_price}">
+		<input type="hidden" id="is_chai" value="1">
+		<input type="hidden" id="chai" value="{$chai_price}">
 		<!-- 组合套餐 -->
 		{if $order_tag eq 'combination_packages' }
 		<input type="hidden" id="hidden_combo_package_id" value="{$combo_detail[id]}">

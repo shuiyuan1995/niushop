@@ -39,7 +39,6 @@ $(function() {
 	 * 2017年6月21日 14:16:57 王永杰
 	 */
 	$(".item-options[data-flag]").click(function() {
-		if($(this).attr('id')=='baoxianphone') return false
 		var curr_options = $(this);//当前点击的项
 		var flag = curr_options.attr('data-flag');
 		if(flag != undefined){
@@ -97,7 +96,7 @@ $(function() {
 							updateShippingTime(curr_li);
 							break;
 						case "chaibao":
-							chaibao(curr_li)
+							chaibao(curr_li);
 							break;
 					}
 					curr_options.children("span").text(msg);
@@ -184,6 +183,7 @@ function init(){
 	
 	//商品数量
 	$(".js-goods-num").text($("div[data-subtotal]").length);
+    $("#chaibao").text($("#chai").val());
 	
 	//商品总计
 	var total_money = 0;
@@ -509,16 +509,17 @@ function updateInvoice(curr_li){
 
 // 拆包判断
 function chaibao(curr_li){
-	console.log(123)
 	var msg = curr_li.children("div:last").text();//内容
-	console.log($("#baoxian1"))
 	if(msg=='是'){
-		$("#baoxianphone").show(300);
-		$("#baoxian1").show(300);
+        $("#chai").val($("#hide_chai").val());
+        $("#is_chai").val(1);
+        $("#chaibao").text($("#chai").val());
 	}else{
-		$("#baoxianphone").hide(300);
-		$("#baoxian1").hide(300);
+        $("#chai").val("0.00");
+        $("#is_chai").val(0);
+        $("#chaibao").text($("#chai").val());
 	}
+	calculateTotalAmount();
 }
 
 /**
@@ -705,6 +706,8 @@ function calculateTotalAmount(){
 	var tax_sum = parseFloat($("#hidden_count_money").val());//计算发票税额计算：（商品总计+运-优惠活动-优惠券）*发票税率
 	var account_balance = 0;//可用余额
 	var old_total_money = parseFloat($("#realprice").attr("data-old-keep-total-money"));//原合计
+    var chaibao = parseFloat($("#chai").val());//拆包费
+    money += chaibao;
 
 	//如果选择的是门店自提，则不计算运费
 	if(getPickupId() > 0){
@@ -861,6 +864,8 @@ function submitOrder() {
 			shipping_type = 3;
 		}
 		var distribution_time_out = $(".time-out-list span.selected").text();
+        var is_chai = $("#is_chai").val();
+        var chai_price = $("#chai").val();
 		$.ajax({
 			url : __URL(APPMAIN + "/order/ordercreate"),
 			type : "post",
@@ -876,7 +881,9 @@ function submitOrder() {
 				'shipping_company_id' : shipping_company_id,
 				'shipping_time' : $("#hidden_shipping_time").val(),
 				'shipping_type' : shipping_type,
-				'distribution_time_out' : distribution_time_out
+				'distribution_time_out' : distribution_time_out,
+                'is_chai' : is_chai,
+                'chai_price' : chai_price,
 			},
 			success : function(res) {
 				if (res.code > 0) {

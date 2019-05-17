@@ -114,6 +114,9 @@ class Order extends BaseController
         // 配送时间段
         $config = new Config();
         $distribution_time_out = $config -> getConfig(0, "DISTRIBUTION_TIME_SLOT");
+        $chaibao_price = $config -> getConfig(0, "CHAI_BAO_PRICE")['value'];
+        $chaibao_price = sprintf("%.2f",$chaibao_price);
+        $this->assign('chai_price',$chaibao_price);
         if(!empty($distribution_time_out["value"])){
             $this->assign("distribution_time_out", $distribution_time_out["value"]);
         }else{
@@ -944,6 +947,8 @@ class Order extends BaseController
         $shipping_company_id = request()->post("shipping_company_id", 0); // 物流公司
         $shipping_time = request()->post("shipping_time", 0); // 配送时间
         $shipping_type = request()->post("shipping_type", 1); // 配送方式，1：物流，2：自提 3：本地配送
+        $is_chai = request()->post('is_chai');//是否拆包
+        $chai_price = request()->post('chai_price');//拆包价格
         
         $member = new Member();
         $address = $member->getDefaultExpressAddress();
@@ -960,7 +965,7 @@ class Order extends BaseController
             return $res;
         } else {
             
-            $order_id = $order->orderCreate('1', $out_trade_no, $pay_type, $shipping_type, '1', $buyer_ip, $leavemessage, $buyer_invoice, $shipping_time, $address['mobile'], $address['province'], $address['city'], $address['district'], $address["country_detail"].'&nbsp;'.$address['province_detail'].'&nbsp;'.$address['city_detail'].'&nbsp;'.$address['address'], $address['zip_code'], $address['consigner'], $integral, $use_coupon, 0, $goods_sku_list, $user_money, $pick_up_id, $shipping_company_id, $coin, $address["phone"], $distribution_time_out);
+            $order_id = $order->orderCreate('1', $out_trade_no, $pay_type, $shipping_type, '1', $buyer_ip, $leavemessage, $buyer_invoice, $shipping_time, $address['mobile'], $address['province'], $address['city'], $address['district'], $address["country_detail"].'&nbsp;'.$address['province_detail'].'&nbsp;'.$address['city_detail'].'&nbsp;'.$address['address'], $address['zip_code'], $address['consigner'], $integral, $use_coupon, 0, $goods_sku_list, $user_money, $pick_up_id, $shipping_company_id, $coin, $address["phone"], $distribution_time_out,$is_chai,$chai_price);
             $_SESSION['unpaid_goback'] = __URL(__URL__ . "/wap/order/orderdetail?orderId=" . $order_id);
             // 订单创建标识，表示当前生成的订单详情已经创建好了。用途：订单创建成功后，返回上一个界面的路径是当前创建订单的详情，而不是首页
             $_SESSION['order_create_flag'] = 1;
