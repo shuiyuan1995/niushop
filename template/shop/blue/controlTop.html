@@ -138,7 +138,7 @@ function updatePerson(){
     $.ajax({
         url: "{:__URL('SHOP_MAIN/index/updateperson')}",
         type: "post",
-		data:{"visit":$("#addperson").text()},
+		data:{"addPerson":$("#addperson").text()},
         success: function (res) {
         }
     })
