@@ -264,7 +264,7 @@ class Index extends BaseController
     public function updatePerson()
     {
         $webSite = new WebSite();
-        $count = request()->post('visit');
+        $count = request()->post('addPerson');
         $res = $webSite->updatePerson($count);
         return $res;
     }

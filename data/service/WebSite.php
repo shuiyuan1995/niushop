@@ -26,6 +26,7 @@ use data\model\InstanceModel as InstanceModel;
 use data\model\InstanceTypeModel;
 use data\model\UserModel;
 use data\model\AdminUserModel;
+use think\Db;
 use think\Session;
 use data\model\SysUrlRouteModel;
 use think\Cache;
@@ -108,13 +109,7 @@ class WebSite extends BaseService implements IWebSite
 
     function updatePerson($count)
     {
-        $data = array(
-            'visit_count' => $count
-        );
-        $this->website = new WebSiteModel();
-        $res = $this->website->save($data, [
-            "website_id" => 1
-        ]);
+        $res = Db::name('sys_website')->where('website_id',1)->setInc('visit_count',$count);
         if ($res) {
             cache("WEBSITEINFO", null);
         }

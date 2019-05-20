@@ -1088,6 +1088,9 @@ class Member extends BaseController
         // 配送时间段
         $config = new Config();
         $distribution_time_out = $config -> getConfig(0, "DISTRIBUTION_TIME_SLOT");
+        $chaibao_price = $config -> getConfig(0, "CHAI_BAO_PRICE")['value'];
+        $chaibao_price = sprintf("%.2f",$chaibao_price);
+        $this->assign('chai_price',$chaibao_price);
         if(!empty($distribution_time_out["value"])){
             $this->assign("distribution_time_out", json_decode($distribution_time_out["value"], true));
         }else{

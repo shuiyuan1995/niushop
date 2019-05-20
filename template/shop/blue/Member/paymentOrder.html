@@ -694,7 +694,7 @@ input[type="radio"]:checked {
 							{/if}
 							<p class="slivergrey">
 								<span>拆包：</span>
-								<span class="txtmoney">￥<b id="express">0.00</b></span>
+								<span class="txtmoney">￥<b id="chaibao">0.00</b></span>
 							</p>
 							<!-- <p id="baoxianfei" class="slivergrey">
 								<span>保险：</span>
@@ -780,6 +780,9 @@ input[type="radio"]:checked {
 							<input type="hidden" id="hidden_pick_up_money" value="{$pick_up_money}"/>
 							<input type="hidden" id="hidden_is_logistice" value="{$shop_config.is_logistics}" />
 							<input type="hidden" id="hidden_shipping_time" value="0" />
+							<input type="hidden" id="hide_chai" value="{$chai_price}">
+                            <input type="hidden" id="is_chai" value="1">
+                            <input type="hidden" id="chai" value="{$chai_price}">
 							<!-- 组合套餐 -->
 							{if $order_tag eq 'combination_packages' }
 							<input type="hidden" id="hidden_combo_package_id" value="{$combo_detail.id}" />

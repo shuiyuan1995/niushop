@@ -52,6 +52,8 @@ textarea{width: 350px;}
 				<span class="amountpay-price" id="goodsmoney"></span>元&nbsp;&nbsp;&nbsp;
 				<span class="amountpay-label">商品优惠：</span>
 				<span class="amountpay-price" id="discountmoney"></span>元&nbsp;&nbsp;&nbsp;
+				<span class="amountpay-label">拆包费：</span>
+				<span class="amountpay-price" id="chaibaomoney"></span>元&nbsp;&nbsp;&nbsp;
 				<span class="amountpay-label">运费：</span>
 				<span class="amountpay-price" id="modifiedFreight"></span>元
 			</li>
@@ -772,6 +774,7 @@ function modifyPrice(order_id,orderFreight){
 				$("#goodsmoneyhidden").val(Total);
 				var discount_money =order_info.point_money*1.00+order_info.coupon_money*1.00+order_info.user_money*1.00+order_info.promotion_money*1.00;
 				$("#discountmoney").html(discount_money);
+                $("#chaibaomoney").html(order_info.chaibao_money);
 				$("#changeTotal").html(order_info.pay_money); 
 				$("#hiedchangeTotal").html(Total);
 			}
@@ -810,8 +813,10 @@ function caculatePrice(){
 	var modifiedFreight = $("#modifiedFreight").html(); 
 	// 获取优惠金额
 	var discountmoney = $("#discountmoney").html();
+    //拆包费
+    var chaibaomoney = $("#chaibaomoney").html();
 	//计算实收款
-	new_hiedchangeTotal = (parseFloat(new_goods_money)+parseFloat(modifiedFreight)-parseFloat(discountmoney)).toFixed(2);
+	new_hiedchangeTotal = (parseFloat(new_goods_money)+parseFloat(modifiedFreight)-parseFloat(discountmoney)+parseFloat(chaibaomoney)).toFixed(2);
 	$("#changeTotal").html(new_hiedchangeTotal);
 }
 	
