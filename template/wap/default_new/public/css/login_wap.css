@@ -208,7 +208,7 @@ body.panel-active{
 .head-title{margin: 0 80px;height: 44px;line-height: 50px;color: #333;font-size: 16px;text-align: center;}
 .nk_logo{display: block;text-align: center;line-height: 140px;}	
 .nk_top{line-height:40px;}
-.nk_top .nk_cell{float:left;width:50%; text-align: center;background:#FFFFFF;color:gray;font-size: 14px;}	
+.nk_top .nk_cell{float:left;width:100%; text-align: center;background:#FFFFFF;color:gray;font-size: 14px;}	
 .nk_top .nk_cell_one{float:left;width:100%; text-align: center;background:#FFFFFF;color:gray;}
 .nk_top .nk_cell span,.nk_top .nk_cell_one span{height: 35px;display: inline-block;padding: 0 5px;}		
 .nk_top .nk_cell.active span,.nk_top .nk_cell_one.active span{color: #FF4E05;border-bottom: 1px solid #FF4E05;}
