@@ -22,10 +22,12 @@ use data\service\Member as MemberService;
 use data\service\Platform;
 use data\service\promotion\PromoteRewardRule;
 use data\service\WebSite;
+use data\service\FrQrcode;
 use think\Cookie;
 use data\service\Promotion;
 use data\service\Shop;
 use think\Cache;
+use app\common\Des;
 
 class Index extends BaseController
 {
@@ -51,6 +53,24 @@ class Index extends BaseController
      */
     public function index()
     {
+        //GHGldy2Jq0OZ4HOrtKsUoA==
+        if (isset($_GET['frm'])){
+            $from = request()->get('frm');
+            $from = Des::decrypt($from,'www.51jiyan.com');
+            if ($from == 'qrcode'){
+                $ip = get_client_ip();
+                $ip = '125.84.90.89';
+                $location = judge_ip($ip);
+                $data['ip'] = $location['ip'];
+                $data['country'] = $location['country'];
+                $data['region'] = $location['region'];
+                $data['city'] = $location['city'];
+                //$data['from_time'] = time();
+                $data['ip'] = $location['ip'];
+                $obj = new FrQrcode();
+                $obj->addQrcodeFrom($data);
+            }
+        }
         $platform = new Platform();
         $good_category = new GoodsCategory();
         $goods = new Goods();
