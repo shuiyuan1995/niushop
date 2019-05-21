@@ -39,7 +39,10 @@ class FrQrcode implements IFrQrcode
             $list['data'] = $data;
             return $list;
         }else{
-            return '';
+            $list['total_count'] = 0;
+            $list['page_count'] = 0;
+            $list['data'] = '';
+            return $list;
         }
     }
 
