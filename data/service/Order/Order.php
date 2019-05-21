@@ -2536,7 +2536,7 @@ class Order extends BaseService
     }
     public function createOrderNo($shop_id)
     {
-        $time_str = date('YmdHi');
+        $time_str = 'm'.date('YmdHi');
         $num = 0;
         $max_no=Cache::get($shop_id."_".$time_str);
         if(!isset($max_no) || empty($max_no)){
