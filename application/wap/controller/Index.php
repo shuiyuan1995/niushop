@@ -59,7 +59,6 @@ class Index extends BaseController
             $from = Des::decrypt($from,'www.51jiyan.com');
             if ($from == 'qrcode'){
                 $ip = get_client_ip();
-                $ip = '125.84.90.89';
                 $location = judge_ip($ip);
                 $data['ip'] = $location['ip'];
                 $data['country'] = $location['country'];
