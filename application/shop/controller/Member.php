@@ -1089,6 +1089,8 @@ class Member extends BaseController
         $config = new Config();
         $distribution_time_out = $config -> getConfig(0, "DISTRIBUTION_TIME_SLOT");
         $chaibao_price = $config -> getConfig(0, "CHAI_BAO_PRICE")['value'];
+        $goods_count = $this->goods_count();
+        $chaibao_price = ceil($goods_count/2) * $chaibao_price;
         $chaibao_price = sprintf("%.2f",$chaibao_price);
         $this->assign('chai_price',$chaibao_price);
         if(!empty($distribution_time_out["value"])){
@@ -1125,7 +1127,34 @@ class Member extends BaseController
         }
         return $time_desc;
     }
-    
+
+    public function goods_count()
+    {
+        $order_tag = $_SESSION['order_tag'];
+        switch ($order_tag) {
+            // 立即购买
+            case "buy_now":
+                $res = $this->buyNowSession();
+                break;
+            case "cart":
+                // 加入购物车
+                $res = $this->addShoppingCartSession();
+                break;
+            case "presell_buy": //预售
+                $res = $this->buyNowSession();
+                break;
+        }
+        $goods_sku_list = $res["goods_sku_list"];
+        $goods_sku_list = trim($goods_sku_list);
+        $data = explode(',',$goods_sku_list);
+        $goods_count = 0;
+        foreach ($data as $k=>$v){
+            $sku = explode(':',$v);
+            $goods_count += $sku[1];
+        }
+        return $goods_count;
+    }
+
     /**
      * 待付款订单需要的数据
      * 2017年6月28日 15:00:54 王永杰 

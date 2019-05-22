@@ -70,9 +70,9 @@
                 <span>选择信用卡:</span>
                 <select name="ckind" id="cart_type">
                     <option value="Visa">Visa</option>
-                    <option value="Master">Master card</option>
-                    <option value="Discover">Discover</option>
-                    <option value="Amex">Amex</option>
+                    <option value="Master card">Master card</option>
+                    <!--<option value="Discover">Discover</option>
+                    <option value="Amex">Amex</option>-->
                 </select>
             </label>
             <label for="">
@@ -125,6 +125,7 @@
         let date = new Date();
         let month = document.querySelector("#month").value;
         let year = document.querySelector("#year").value;
+        let cart_type = document.querySelector('#cart_type').value;
         let current_month = date.getMonth()+1;
         let current_year = date.getFullYear();
         if (document.querySelector("#user").value == '') {
@@ -149,9 +150,20 @@
             return false;
         }
         if (card_id != '') {
-            var reg = /^[0-9]*$/;
+            if (cart_type == 'Visa'){
+                var reg = /^4[0-9]*$/;
+            }else if(cart_type == 'Master card'){
+                var reg = /^5[0-9]*$/;
+            }
             if(!reg.test(card_id)){
                 layer.msg("卡号格式错误", {
+                    time: 2000,
+                    icon: 2
+                });
+                return false;
+            }
+            if (card_id.length != 16){
+                layer.msg("卡号长度错误", {
                     time: 2000,
                     icon: 2
                 });
@@ -161,6 +173,12 @@
         }
         if (document.querySelector("#code").value == '') {
             layer.msg("安全码不能为空", {
+                time: 2000,
+                icon: 2
+            });
+            return false;
+        }else if(document.querySelector("#code").value.length != 3){
+            layer.msg("安全码长度错误", {
                 time: 2000,
                 icon: 2
             });
