@@ -71,7 +71,11 @@
 						<span class="g-name">{$vo.goods_name}</span>
 					</div>
 				</div>
-				<div class="goods-price"><span class="sale">{:lang('promotional_price')}<em>{$vo.display_price}</em></span>
+				<div class="goods-price">
+					<span class="sale" style="font-size: 20px;"><b style="color: #E84C3D;">{$vo.display_price}</b></span>&nbsp;
+					{if condition="$vo.market_price gt 0"}
+					<span class="sale" style="font-size: 16px;"><s><b style="color: #aaaaaa;">￥{$vo.market_price}</b></s></span>
+					{/if}
 					<!-- <span class="depreciate"><i class="fa fa-down"></i>{:lang('straight_down')}：¥{$vo.sale_down}</span> -->
 				</div>
 <!-- 				</div> -->
