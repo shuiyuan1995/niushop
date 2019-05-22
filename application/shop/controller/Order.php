@@ -54,7 +54,7 @@ class Order extends BaseController
         $shipping_type = request()->post("shipping_type",1); // 配送方式，1：商家配送，2：自提  3：本地配送
         $shipping_time = request()->post("shipping_time", 0); // 配送时间
         $express_company_id = request()->post("express_company_id", 0); // 物流公司
-        $buyer_ip = request()->ip();
+        $buyer_ip = get_client_ip();
         $distribution_time_out = request()->post('distribution_time_out', ''); // 配送指定时间段
         $is_chai = request()->post('is_chai');//是否拆包
         $chai_price = request()->post('chai_price');//拆包价格

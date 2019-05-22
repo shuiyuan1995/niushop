@@ -953,7 +953,7 @@ class Order extends BaseController
         $member = new Member();
         $address = $member->getDefaultExpressAddress();
         $coin = 0; // 购物币
-        $buyer_ip = request()->ip();
+        $buyer_ip = get_client_ip();
         $distribution_time_out = request()->post("distribution_time_out", '');
         // 查询商品限购
         $purchase_restriction = $order->getGoodsPurchaseRestrictionForOrder($goods_sku_list);
