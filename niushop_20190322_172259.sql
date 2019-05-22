@@ -5267,7 +5267,7 @@ CREATE TABLE `sys_website` (
 
 LOCK TABLES `sys_website` WRITE;
 /*!40000 ALTER TABLE `sys_website` DISABLE KEYS */;
-INSERT INTO `sys_website` VALUES (1,'我要买烟网','upload/common/1553162993.png','开源商城','','',1,'山西省太原市','public/static/images/default_img_url/qrcode.png','http://www.niushop.com.cn/','','400-886-7993','','',1,'','对不起，牛酷商城维护中，大家敬请期待...',1,4,1477452112,1553162999,0,'','','','',1);
+INSERT INTO `sys_website` VALUES (1,'我要买烟网','upload/common/1553162993.png','开源商城','','',1,'山西省太原市','public/static/images/default_img_url/qrcode.png','https://www.51buyan.com/','','400-886-7993','','',1,'','对不起，牛酷商城维护中，大家敬请期待...',1,4,1477452112,1553162999,0,'','','','',1);
 /*!40000 ALTER TABLE `sys_website` ENABLE KEYS */;
 UNLOCK TABLES;
 
