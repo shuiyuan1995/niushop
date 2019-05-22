@@ -12,7 +12,7 @@ $(function(){
 			var copyright_meta = "";
 			if($is_load>0){
 				$("#copyright_logo").attr("src", STATIC + data["default_logo"]);
-				$("#copyright_companyname").attr("href", "http://www.niushop.com.cn");
+				$("#copyright_companyname").attr("href", "https://www.51buyan.com");
 				$("#copyright_companyname").html("山西牛酷信息科技有限公司&nbsp;提供技术支持");
 				$("#copyright_desc").html("Copyright © 2015-2025 NIUSHOP开源商城&nbsp;版权所有 保留一切权利");
 			}else{
