@@ -42022,3 +42022,53 @@
 [ sql ] [ SQL ] UPDATE `sys_website`  SET `visit_count`=visit_count+1  WHERE  `website_id` = 1 [ RunTime:0.028860s ]
 
 ---------------------------------------------------------------
+[ 2019-05-22T16:09:10+08:00 ] ::1 ::1 POST /index/updateperson.html
+[ log ] localhost/index/updateperson.html [运行时间：0.070693s][吞吐率：14.15req/s] [内存消耗：3,716.70kb] [文件加载：74]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'niu',
+  'type' => '',
+  'auto_start' => true,
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run app\behavior\InitHook @app_init [ RunTime:0.000505s ]
+[ info ] [ LANG ] E:\www\niushop\thinkphp\lang\zh-cn.php
+[ info ] [ LANG ] E:\www\niushop/application/lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'shop',
+    1 => 'index',
+    2 => 'updateperson',
+  ),
+  'convert' => false,
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=fd9f8936f238d7416e9bef68; Hm_lvt_8192ac76ec210831261969885bee2413=1558505294; Hm_lpvt_8192ac76ec210831261969885bee2413=1558511461; page_cookie=%7B%22page_index%22%3A1%2C%22show_number%22%3A%2216%22%2C%22url%22%3A%22http%3A%2F%2Flocalhost%2Fadmin%2Fgoods%2Fgoodslist.html%22%7D',
+  'connection' => 'close',
+  'content-length' => '11',
+  'x-requested-with' => 'XMLHttpRequest',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'referer' => 'http://localhost/discount.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0',
+  'host' => 'localhost',
+)
+[ info ] [ PARAM ] array (
+  '/index/updateperson_html' => '',
+  'addPerson' => '0',
+  'action' => 'updateperson',
+)
+[ info ] [ RUN ] app\shop\controller\Index->updatePerson[ E:\www\niushop\application\shop\controller\Index.php ]
+[ info ] [ LOG ] INIT file
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000732s ] mysql:dbname=niushop;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `sys_website` [ RunTime:0.017304s ]
+[ sql ] [ SQL ] SELECT * FROM `sys_website` LIMIT 1 [ RunTime:0.000518s ]
+[ sql ] [ SQL ] UPDATE `sys_website`  SET `visit_count`=visit_count+0  WHERE  `website_id` = 1 [ RunTime:0.000528s ]
+
+---------------------------------------------------------------
