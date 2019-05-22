@@ -1303,7 +1303,7 @@ return [
     'cool_cow_technology_reminder'                                        => '牛酷科技提醒',
     'very_sorry'                                                          => '很抱歉',
     'official_website'                                                    => '官方网站',
-    'cool_cow_technology'                                                 => '牛酷科技',
+    'cool_cow_technology'                                                 => '我要寄烟网',
     'ten_years_experience_in_the_development_of_the_electricity_supplier_juxian_collection' => '十年电商开发经验汇集巨献',
     'integral_commodity'                                                  => '积分商品',
     'coupon_collection'                                                   => '优惠券领取',
