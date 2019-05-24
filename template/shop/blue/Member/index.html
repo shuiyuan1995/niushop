@@ -203,7 +203,8 @@
 				<header>
 					<ul>
 						<li onclick="location.href='{:__URL('SHOP_MAIN/member/orderlist?status=0')}';">{:lang('member_pending_payment')}<span>({$order_status_num['wait_pay']})</span></li>
-						<li onclick="location.href='{:__URL('SHOP_MAIN/member/orderlist?status=6')}';">待处理<span>({$order_status_num['wait_todo']})</span></li>
+						<li onclick="location.href='{:__URL('SHOP_MAIN/member/orderlist?status=6')}';">待刷卡<span>({$order_status_num['wait_todo']})</span></li>
+						<li onclick="location.href='{:__URL('SHOP_MAIN/member/orderlist?status=7')}';">刷卡失败<span>({$order_status_num['todo_fail']})</span></li>
 						<li onclick="location.href='{:__URL('SHOP_MAIN/member/orderlist?status=5')}';">{:lang('member_pending_evaluation')}<span>({$order_status_num['wait_evaluate']})</span></li>
 					</ul>
 				</header>

@@ -1615,6 +1615,9 @@ class Order extends BaseService implements IOrder
         $orderStatusNum['instock'] = $order->where($condition)->count();
         $condition['order_status'] = 8; // 待处理信用卡订单
         $orderStatusNum['wait_todo'] = $order->where($condition)->count();
+        $condition['order_status'] = 9; // 理信用卡刷卡失败订单
+        $condition9 = array_merge($condition,array('is_deleted'=>0));
+        $orderStatusNum['todo_fail'] = $order->where($condition9)->count();
         $condition['order_status'] = - 1; // 退款中
         $orderStatusNum['refunding'] = $order->where($condition)->count();
         $condition['order_status'] = - 2; // 已退款
@@ -2909,7 +2912,10 @@ class Order extends BaseService implements IOrder
         if ($operator_type == 1) {
             // 商家删除 目前之针对已关闭订单
             $res = $order_model->save($data, [
-                "order_status" => 5,
+                "order_status" => [
+                    "in",
+                    [5,9]
+                ],
                 "order_id" => [
                     "in",
                     $order_id_array
@@ -2919,7 +2925,10 @@ class Order extends BaseService implements IOrder
         } elseif ($operator_type == 2) {
             // 用户删除
             $res = $order_model->save($data, [
-                "order_status" => 5,
+                "order_status" => [
+                    "in",
+                    [5,9]
+                ],
                 "order_id" => [
                     "in",
                     $order_id_array

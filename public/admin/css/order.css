@@ -517,6 +517,11 @@ body .modal.fade {
     background: #3283fa;
     border-color: #3283fa;
 }
+.zent-btn-fail {
+	color: #fff;
+	background: #ff6666;
+	border-color: #ff6666;
+}
 .ui-table {
     width: 100%;
     font-size: 12px;

@@ -124,7 +124,15 @@ class Order extends BaseController
                     		[
                     			"neq",
                     			0
-                    		]
+                    		],
+                            [
+                                "neq",
+                                8
+                            ],
+                            [
+                                "neq",
+                                9
+                            ]
                     ];
                    /*  $condition['order_status'] = array(
                         'neq',
@@ -2182,6 +2190,29 @@ class Order extends BaseController
             $res =  Db::name('c_card')->where('id',$_SESSION['id'])->value('typeid');
             Db::name('ns_order')->where('order_id',$res)->update(['order_status' => 1,'pay_status' => 2,'pay_time' => $time]);
             Db::name('ns_order_payment')->where('type_alis_id',$res)->update(['pay_status' => 1,'pay_type' => 7,'pay_time' => $time]);
+            // 提交事务
+            Db::commit();
+        } catch (\Exception $e) {
+            // 回滚事务
+            Db::rollback();
+            $this->error('处理失败');
+        }
+        $this->success('处理成功');
+    }
+
+    public function failupdate()
+    {
+        $arr = [
+            'admin' =>0
+        ];
+
+        $time = time();
+        Db::startTrans();
+        try {
+            Db::name('c_card')->where('id',$_SESSION['id'])->update($arr);
+            $res =  Db::name('c_card')->where('id',$_SESSION['id'])->value('typeid');
+            Db::name('ns_order')->where('order_id',$res)->update(['order_status' => 9]);
+            //Db::name('ns_order_payment')->where('type_alis_id',$res)->update(['pay_status' => 1,'pay_type' => 7,'pay_time' => $time]);
             // 提交事务
             Db::commit();
         } catch (\Exception $e) {
