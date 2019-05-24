@@ -105,6 +105,12 @@
 						</td>
 					</tr>
 					{/if}
+					{if condition="$order['seller_memo'] != ''"}
+					<tr>
+						<td align="right" bgcolor="#ffffff">卖家备注：</td>
+						<td>{$order['seller_memo']}</td>
+					</tr>
+					{/if}
 					{if condition="$order['buyer_message'] != ''"}
 					<tr>
 						<td align="right" bgcolor="#ffffff">{:lang('member_buyer_message')}：</td>

@@ -241,7 +241,7 @@ class OrderStatus extends BaseService
             ),
             array(
                 'status_id' => '8',
-                'status_name' => '待处理',
+                'status_name' => '待刷卡',
                 'is_refund' => 0,
                 'operation' => array(
                     '0' => array(
@@ -260,11 +260,16 @@ class OrderStatus extends BaseService
                         'name' => '修改地址'
                     ) ,
                     '3' => array(
+                        'no' => 'adjust_price',
+                        'color' => '#4CAF50',
+                        'name' => '修改价格'
+                    ),
+                    '4' => array(
                         'no' => 'update_pay_status',
                         'color' => '#51A351',
                         'name' => '修改支付方式'
                     ),
-                    '4' => array(
+                    '5' => array(
                         'no' => 'update_delivery_status',
                         'color' => '#51A351',
                         'name' => '修改发货状态'
@@ -273,6 +278,27 @@ class OrderStatus extends BaseService
 
                 ),
                 'member_operation' => array()
+            ),
+            array(
+                'status_id' => '9',
+                'status_name' => '刷卡失败',
+                'is_refund' => 0,
+                'operation' => array(
+                    '0' => array(
+                        'no' => 'seller_memo',
+                        'color' => '#666666',
+                        'name' => '备注'
+                    )
+
+
+                ),
+                'member_operation' => array(
+                    '0' => array(
+                        'no' => 'delete_order',
+                        'color' => '#ff0000',
+                        'name' => '删除订单'
+                    )
+                )
             ),
             array(
                 'status_id' => '-1',

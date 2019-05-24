@@ -43,7 +43,7 @@
 					</tr>
 					<tr>
 						<td align="right" width="10%">{:lang('member_province')}：</td>
-						<td align="left" width="40%"><input type="text" id="detailed_province" name="province_detail" class="inputBg"></td>
+						<td align="left" width="40%"><input type="text" id="detailed_province" name="province_detail" class="inputBg">({:lang('member_required')})</td>
 					</tr>
 					<tr>
 						<td align="right" width="10%">{:lang('member_city')}：</td>
@@ -63,7 +63,7 @@
 					</tr>
 					<tr>
 						<td align="right">{:lang('member_zip_code')}：</td>
-						<td align="left"><input type="text" class="inputBg" name="zipcode" id="zipcode" value="" /></td>
+						<td align="left"><input type="text" class="inputBg" name="zipcode" id="zipcode" value="" />(爱尔兰非必填)</td>
 					</tr>
 					<tr>
 						<td colspan="4" align="center"><input type="button" name="button" class="common-btn"  value="{:lang('member_new_delivery_address')}" onclick="saveAddress()"/></td>

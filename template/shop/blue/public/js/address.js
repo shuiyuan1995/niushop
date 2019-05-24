@@ -71,6 +71,14 @@ function Check_Consignee() {
 		return false;
 	}
 
+    if ($("#detailed_province").val() == ''){
+        $("#detailed_province").focus();
+        $.msg("省份不能为空", {
+            time: 2000
+        });
+        return false;
+    }
+
 	if($("#detailed_city").val() == ""){
         $.msg("城市不能为空", {
             time: 2000
@@ -112,7 +120,16 @@ function Check_Consignee() {
 			return false; 
 		} 
 	}
-	
+
+    if ($("#selCountry option:selected").text() != '爱尔兰')
+    {
+        if($("#zipcode").val() == ''){
+            $("#zipcode").focus();
+            $.msg('请填写邮编');
+            return false;
+        }
+    }
+
 	return true;
 }
 

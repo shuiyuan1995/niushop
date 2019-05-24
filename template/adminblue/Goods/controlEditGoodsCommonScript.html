@@ -198,7 +198,7 @@ function setUeditorImg(upload_path) {
 //查询商品品牌列表
 function getGoodsBrandList(brand_name,search_name){
 	var page_index = 1;
-	var page_size = 20;
+	var page_size = 200;
 	$.ajax({
 		type : "post",
 		url : "{:__URL('ADMIN_MAIN/goods/getGoodsBrandList')}",

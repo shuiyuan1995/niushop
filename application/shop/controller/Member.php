@@ -415,6 +415,9 @@ class Member extends BaseController
                 case 6:
                     $condition['order_status'] = 8;
                     break;
+                case 7:
+                    $condition['order_status'] = 9;
+                    break;
                 default:
                     break;
             }

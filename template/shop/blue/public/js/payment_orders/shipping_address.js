@@ -236,6 +236,11 @@ function validationAddress(){
         return false;
     }
 
+    if(detailed_province == "") {
+        $("#detailed_province").focus();
+        $.msg('省份不能为空');
+        return false;
+    }
 
     if(detailed_city == "") {
         $("#detailed_city").focus();
@@ -248,6 +253,15 @@ function validationAddress(){
 		$.msg('详细地址不能为空');
 		return false;
 	}
-	
+
+    if ($("#selCountry option:selected").text() != '爱尔兰')
+    {
+        if(zipcode == ''){
+            $("#zipcode").focus();
+            $.msg('请填写邮编');
+            return false;
+        }
+    }
+
 	return true;
 }

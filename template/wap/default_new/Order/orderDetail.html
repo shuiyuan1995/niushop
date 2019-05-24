@@ -115,6 +115,26 @@
 		{/if}
 	{/if}
 
+	{if condition="$order['seller_memo'] !=''"}
+	<section class="order-detail-remark">
+		<div class="remark-out clear">
+			<div class="remark-l order-detail-l">
+				<i class="icon-talks-small"></i>
+			</div>
+			<div class="remark-r order-detail-r">
+				<ul class="remark-r-ul">
+					<li class="name">
+						<span class="label">卖家备注</span>
+					</li>
+					<li>
+						<span class="label">{$order['seller_memo']}</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	{/if}
+
 	<section class="order-detail-remark">
 		<div class="remark-out clear">
 			<div class="remark-l order-detail-l">

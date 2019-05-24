@@ -157,7 +157,8 @@ class Pay extends Controller
         $zero1 = time(); // 当前时间 ,注意H 是24小时 h是12小时
         $zero2 = $pay_value['create_time'];
         if ($zero1 > ($zero2 + ($this->shop_config['order_buy_close_time'] * 60))) {
-            $this->error("订单已关闭");
+            $order_model->ModifyTableField('out_trade_no',$out_trade_no,'order_status','5');
+            $this->error("订单已超时");
         } else {
             $this->assign('pay_value', $pay_value);
             if (request()->isMobile()) {
@@ -623,6 +624,7 @@ class Pay extends Controller
         $member = new Member();
         $pay = new UnifyPay();
         $config = new Config();
+        $order_model = new NsOrderModel();
         $uid = $member->getCurrUserId();
         
         if(request() -> isAjax()){
@@ -696,7 +698,8 @@ class Pay extends Controller
             $zero1 = time(); // 当前时间 ,注意H 是24小时 h是12小时
             $zero2 = $pay_value['create_time'];
             if ($zero1 > ($zero2 + ($this->shop_config['order_buy_close_time'] * 60))) {
-                $this->error("订单已关闭");
+                $order_model->ModifyTableField('out_trade_no',$out_trade_no,'order_status','5');
+                $this->error("订单已超时");
             }else{
                 if (request()->isMobile()) {
                     return view($this->style . 'Pay/wapPay');
