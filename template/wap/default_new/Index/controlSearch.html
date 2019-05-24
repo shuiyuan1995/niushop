@@ -1,8 +1,13 @@
 <script src="__TEMP__/{$style}/public/js/public_assembly.js"></script>
-<div class="controlSearch" onclick="location.href='{:__URL("APP_MAIN/index/search")}'">
+<div class="controlSearch">
 	<div class="control-search-input">
-		<input type="text" class="search-input custom-search-input" placeholder="{:lang('search_goods')}">
-		<button type="button" class="search-button custom-search-button">{:lang('search')}</button>
+		<input type="text" id="keyword" class="search-input custom-search-input" placeholder="{:lang('search_goods')}">
+		<button type="button" id="search" class="search-button custom-search-button">{:lang('search')}</button>
 		<input type="hidden" value="{$shop_id}" id="hidden_shop_id"/>
 	</div>
 </div>
+<script type="text/javascript">
+    $("#search").click(function () {
+        location.href= __URL(APPMAIN+"/goods/goodssearchlist?search_name="+$("#keyword").val()+"&shop_id="+$("#hidden_shop_id").val());
+    });
+</script>
