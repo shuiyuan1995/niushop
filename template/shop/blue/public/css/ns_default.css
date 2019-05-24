@@ -1445,7 +1445,7 @@
 	float: left;
 	position: relative;
 }
-.floor-layout .floor-con .floor-title h2::after{
+/* .floor-layout .floor-con .floor-title h2::after{
 	content: '';
 	position: absolute;
 	top: 0px;
@@ -1455,7 +1455,7 @@
 	display: block;
 	background: url(/template/shop/blue/public/images/move.gif) center no-repeat;
 	background-size: cover;
-}
+} */
 
 .floor-layout .floor-con .floor-title h2 span {
 	width: auto;
