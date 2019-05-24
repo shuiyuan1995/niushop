@@ -27,6 +27,7 @@ use data\service\Order as OrderService;
 use data\service\promotion\GoodsExpress;
 use data\service\Promotion;
 use data\service\Shop as ShopService;
+use data\service\SearchRank;
 use Qiniu\json_decode;
 use think\Cache;
 use data\service\GroupBuy;
@@ -429,6 +430,12 @@ class Goods extends BaseController
         $spec = request()->get('spec', ''); // 规格值
         $this->assign("attr_str", $attr);
         $this->assign("spec_str", $spec);
+
+        //保存搜索关键词
+        if (!empty($keyword)){
+            $search = new SearchRank();
+            $search->addKeyword($keyword);
+        }
 
         // 将属性条件字符串转化为数组
         $attr_array = $this->stringChangeArray($attr);

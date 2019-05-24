@@ -34,6 +34,7 @@ use data\service\Bargain;
 use data\service\User;
 use data\service\Config;
 use data\service\Shop;
+use data\service\SearchRank;
 
 /**
  * 商品相关
@@ -623,7 +624,7 @@ class Goods extends BaseController
                 default:
                     break;
             }
-            
+
             // 参数过滤
             
             // 如果排序方式不为空，则进行过滤
@@ -655,9 +656,12 @@ class Goods extends BaseController
             $search_name = request()->get('search_name', '');
             $controlType = request()->get('controlType', ''); // 什么类型 1最新 2精品 3推荐
             $controlTypeName = request()->get('controlTypeName', ''); // 什么类型 1最新 2精品 3推荐
-            
+
+            //保存搜索关键词
             if (! empty($search_name)) {
                 $search_title = $search_name;
+                $search = new SearchRank();
+                $search->addKeyword($search_name);
             } else {
                 $search_title = $controlTypeName;
             }
