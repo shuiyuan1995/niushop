@@ -33,6 +33,13 @@
 i.title-border{display: inline-block;width: 3px;height: 20px;vertical-align: middle;margin-right: 5px;margin-top: -3px;}
 i.goods_tab{font-style: normal;font-size: 12px!important;;background: #f44;color: #fff;padding: 1px 3px;margin-right: 2px;border-radius: 2px;font-weight: normal!important;}
 i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;color: #f44;padding: 1px 3px;margin-left: 5px;border-radius: 2px;border:1px solid #f44;display: inline-block;line-height: 1!important;font-weight: normal!important;}
+.copyright_info{font-size: 12px;}
+.zhengxin{
+	display: flex;
+}
+.zhengxin li img{
+	width: 100%;
+}
 </style>
 {/block}
 
@@ -239,6 +246,29 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 		<a href="javascript:;" onclick="locationShop();">{:lang("pc_version")}</a>
 		<a href="{:__URL('APP_MAIN/member/index')}">{:lang("member_member_center")}</a>
 	</div>
+	<p class="copyright_info">
+		<span>Copyright © 2019-2022 我要寄烟网 版权所有</span>
+	</p>
+	<p class="copyright_info">
+		<span>悠驾实业有限公司</span>
+	</p>
+	<p class="copyright_info">
+		<span>渝ICP备16006952号-1</span>
+	</p>
+	<ul class="zhengxin">
+		<li>
+			<img src="/template/shop/blue/public/images/2.png" alt="">
+		</li>
+		<li>
+			<img src="/template/shop/blue/public/images/3.png" alt="">
+		</li>
+		<li>
+			<img src="/template/shop/blue/public/images/4.png" alt="">
+		</li>
+		<li>
+			<img src="/template/shop/blue/public/images/5.png" alt="">
+		</li>
+	</ul>
 	{include file="wap/default_new/controlCopyRight" /}
 </div>
 {/block}
