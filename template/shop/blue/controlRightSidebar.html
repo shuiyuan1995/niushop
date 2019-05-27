@@ -106,7 +106,8 @@ function showLoginLayer(){
 						</a>
 					</li>
 					<li class="quick-area">
-						<a class="quick-links-a" href="{$custom_service['value']['service_addr']}" title="{:lang('contact_customer_service')}" target="_blank">
+						<!--<a class="quick-links-a" href="{$custom_service['value']['service_addr']}" title="{:lang('contact_customer_service')}" target="_blank">-->
+						<a class="quick-links-a" href='{if condition="$member"}https://tb.53kf.com/code/client/10195577/1?u_cust_id={$member.uid}&u_cust_name={$member.member_name}&u_custom_info={$member.memo}{else/}https://tb.53kf.com/code/client/10195577/1{/if}' title="{:lang('contact_customer_service')}" target="_blank">
 							<!-- http://wpa.qq.com/msgrd?v=3&uin={$web_info['web_qq']}&site=qq&menu=yes -->
 							<i class="customer-service"></i>
 						</a>

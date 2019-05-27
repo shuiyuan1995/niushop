@@ -161,6 +161,8 @@ class Goods extends BaseController
         }
         
         $this->assign("customservice_config", $customservice_config);
+        $member_info = $member->getMemberInfo();
+        $this->assign('member',$member_info);
         // $this->assign('service_addr',$list['value']['service_addr']);
         // 查询点赞记录表，获取详情再判断当天该店铺下该商品该会员是否已点赞
         $click_detail = $goods->getGoodsSpotFabulous($shop_id, $uid, $goods_id);

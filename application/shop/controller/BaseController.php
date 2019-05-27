@@ -79,6 +79,8 @@ class BaseController extends Controller
         $this->assign("title_before", '');
         
         if (! request()->isAjax()) {
+            $member = $this->user->getMemberInfo();
+            $this->assign('member',$member);
             
             // 弹出框标题
             if (empty($web_info['web_popup_title'])) {

@@ -41,7 +41,7 @@
 <div class="sliding" {if condition="$brand_adv['is_use'] eq 0"}style="margin-top:45px;"{/if}>
 	<ul id="slider">
 		{foreach name="goods_brand_list" item = "goods_brand" key = "k"}
-		<li {if condition="$k ==0"}class = "defaualt selected" {/if}onclick="showCategorySecond({$goods_brand.brand_id},this,1)">{$goods_brand.brand_name}</li>
+		<li {if condition="$k ==0"}class = "defaualt selected" {/if} id="{$goods_brand.brand_initial}" onclick="showCategorySecond({$goods_brand.brand_id},this,1)">{$goods_brand.brand_name}</li>
 		{/foreach}
 	</ul>
 </div>
