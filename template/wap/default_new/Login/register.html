@@ -429,14 +429,15 @@ function verifyUsername(username){
 		usernme_verify_array  = username_verify.split(",");
 	}
 	usernme_verify_array.push(",");
-	$.each(usernme_verify_array,function(k,v){
-		if($.trim(v) != ""){
+    usernme_verify_array.push(" ");
+    $.each(usernme_verify_array,function(k,v){
+		//if($.trim(v) != ""){
 			if(username.indexOf(v) >= 0){
 				is_true = 1;
 				showBox("{:lang('username_cannot_includ')}"+v+"{:lang('such_characters')}", "error");
 				return false;
 			}
-		}
+		//}
 	});
 	return is_true;
 }
