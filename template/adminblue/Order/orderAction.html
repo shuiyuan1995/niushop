@@ -291,7 +291,7 @@ textarea{width: 350px;}
 				<h3>修改支付方式</h3>
 			</div>
 			<div class="modal-body">
-					<select id="payment_type" name="payment_type" class="select-common middle">
+					<select id="payment_types" name="payment_type" class="select-common middle">
 						<option value="">全部</option>
 						<option value="0">在线支付</option>
 						<option value="1">微信</option>
@@ -319,21 +319,20 @@ textarea{width: 350px;}
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				<h3>修改发货方式</h3>
+				<h3>修改发货状态</h3>
 			</div>
 			<div class="modal-body">
-				<select id="order_status" name="order_status" class="select-common middle">
+				<select id="order_statu" name="order_status" class="select-common middle">
 					<option value="">全部</option>
-					<option value="0">待发货</option>
-					<option value="1">已发货</option>
-					<option value="2">已收货</option>
-					<option value="3">备货中</option>
+					<option value="1">待发货</option>
+					<option value="2">已发货</option>
+					<option value="3">已收货</option>
 				</select>
 			</div>
 
 			<div class="modal-footer">
 				<input type="hidden" id="update_delivery_status_id" />
-				<button type="button" class="btn-common btn-big" onclick="">修改</button>
+				<button type="button" class="btn-common btn-big" onclick="updateDeliveryStatusSubmit()">修改</button>
 				<button type="button" class="btn-common-white btn-big" data-dismiss="modal">关闭</button>
 			</div>
 		</div>
@@ -963,7 +962,7 @@ function update_pay_status(order_id) {
 }
 //提交修改支付方式
 function updatePayStatusSubmit() {
-	var payment_type = $("#payment_type").val();
+	var payment_type = $("#payment_types").val();
 	var order_id = $("#update_pay_status_id").val();
 
 	$.ajax({
@@ -989,7 +988,7 @@ function update_delivery_status(order_id) {
 		url : "{:__URL('ADMIN_MAIN/order/getDeliveryStatus')}",
 		data : { "order_id" : order_id },
 		success : function(data){
-			$("#shipping_status").val(data['order_status']);
+			$("#order_statu").val(data['order_status']);
 			$("#update_delivery_status").modal('show');
 			$("#update_delivery_status .modal-body table tbody tr").remove();
 			$("#update_delivery_status_id").val(order_id);
@@ -998,7 +997,11 @@ function update_delivery_status(order_id) {
 }
 //提交修改发货状态
 function updateDeliveryStatusSubmit() {
-	var order_status = $("#order_status").val();
+    var order_status = $("#order_statu").val();
+    if (order_status == ''){
+        showMessage('error', '请选择发货状态！');
+        return false;
+    }
 	var order_id = $("#update_delivery_status_id").val();
 
 	$.ajax({
@@ -1009,11 +1012,11 @@ function updateDeliveryStatusSubmit() {
 			"order_status" : order_status,
 		},
 		success : function(data){
-			if (data > 0) {
-				showMessage('success', '修改发货方式成功',window.location.reload());
-			}else{
-				showMessage('error', '修改发货式失败');
-			}
+            if (data > 0) {
+                showMessage('success', '修改发货状态成功',window.location.reload());
+            }else{
+                showMessage('error', '修改发货状态失败');
+            }
 		}
 	});
 
@@ -1242,17 +1245,17 @@ function delete_order(order_id){
 }
  
 //显示运单
-function updateExpress(order_id){
+function updateExpress(order_id,key){
 	$.ajax({
 		type : "post",
 		url : "{:__URL('ADMIN_MAIN/order/orderdeliverydata')}",
 		data : {'order_id':order_id},
 		success : function(data) {
-			$("#order_goods_express_id").val(data['order_info']['goods_packet_list'][0]['express_id']);
+			$("#order_goods_express_id").val(data['order_info']['goods_packet_list'][key]['express_id']);
 			var receiver_info = '收货信息：'+data['order_info']['address']+'&nbsp;'+data['order_info']['receiver_address']+'&nbsp;'+data['order_info']['receiver_name']+'&nbsp;'+data['order_info']['receiver_mobile'];//收货信息
 			$("#receiver_infos").html(receiver_info);
-			var express_company_id = data['order_info']['goods_packet_list'][0]['express_company_id'];
-			var express_code = data['order_info']['goods_packet_list'][0]['express_code'];
+			var express_company_id = data['order_info']['goods_packet_list'][key]['express_company_id'];
+			var express_code = data['order_info']['goods_packet_list'][key]['express_code'];
 			var co_html = '';
 			co_html += '<option value="0">请选择物流公司</option>';
 			for(var i=0;i<data['express_company_list'].length;i++){

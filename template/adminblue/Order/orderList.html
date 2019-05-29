@@ -348,7 +348,7 @@ function LoadingInfo(page_index) {
 					}else{
 						html += '<a style="display:block;margin-bottom:5px;" onclick="operation(\'update_pay_status\',14)">修改订单状态</a>';
 					}*/
-					if(order_type == '7'){
+					/*if(order_type == '7'){
 						html += '<a style="display:block;margin-bottom:5px;" href="'+__URL('ADMIN_MAIN/order/bargainOrderDetail?order_id='+order_id)+'">修改支付状态</a>';
 					}else{
 						html += '<a style="display:block;margin-bottom:5px;" href="'+__URL('ADMIN_MAIN/order/orderdetail?order_id='+order_id)+'">修改支付状态</a>';
@@ -357,7 +357,7 @@ function LoadingInfo(page_index) {
 						html += '<a style="display:block;margin-bottom:5px;" href="'+__URL('ADMIN_MAIN/order/bargainOrderDetail?order_id='+order_id)+'">修改发货状态</a>';
 					}else{
 						html += '<a style="display:block;margin-bottom:5px;" href="'+__URL('ADMIN_MAIN/order/orderdetail?order_id='+order_id)+'">修改发货状态</a>';
-					}
+					}*/
 
 					if(data["data"][i]["operation"] != ''){
 						for(var m = 0; m < data["data"][i]["operation"].length; m++){

@@ -245,31 +245,26 @@ class OrderStatus extends BaseService
                 'is_refund' => 0,
                 'operation' => array(
                     '0' => array(
-                        'no' => 'delivery',
-                        'color' => 'green',
-                        'name' => '发货'
-                    ),
-                    '1' => array(
                         'no' => 'seller_memo',
                         'color' => '#666666',
                         'name' => '备注'
                     ),
-                    '2' => array(
+                    '1' => array(
                         'no' => 'update_address',
                         'color' => '#51A351',
                         'name' => '修改地址'
                     ) ,
-                    '3' => array(
+                    '2' => array(
                         'no' => 'adjust_price',
                         'color' => '#4CAF50',
                         'name' => '修改价格'
                     ),
-                    '4' => array(
+                    '3' => array(
                         'no' => 'update_pay_status',
                         'color' => '#51A351',
                         'name' => '修改支付方式'
                     ),
-                    '5' => array(
+                    '4' => array(
                         'no' => 'update_delivery_status',
                         'color' => '#51A351',
                         'name' => '修改发货状态'

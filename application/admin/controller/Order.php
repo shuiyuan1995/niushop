@@ -1008,6 +1008,17 @@ class Order extends BaseController
         return $res;
     }
 
+    /**
+     * 查询发货状态
+     */
+    public function getDeliveryStatus()
+    {
+        $order_service = new OrderService();
+        $order_id = request()->post('order_id');
+        $res = $order_service->getDeliveryStatus($order_id);
+        return $res;
+    }
+
     /***更新发货状态
      * @return bool
      */
@@ -2193,14 +2204,14 @@ class Order extends BaseController
 
     public function failupdate()
     {
-        $arr = [
+        /*$arr = [
             'admin' =>0
-        ];
+        ];*/
 
         $time = time();
         Db::startTrans();
         try {
-            Db::name('c_card')->where('id',$_SESSION['id'])->update($arr);
+            //Db::name('c_card')->where('id',$_SESSION['id'])->update($arr);
             $res =  Db::name('c_card')->where('id',$_SESSION['id'])->value('typeid');
             Db::name('ns_order')->where('order_id',$res)->update(['order_status' => 9]);
             //Db::name('ns_order_payment')->where('type_alis_id',$res)->update(['pay_status' => 1,'pay_type' => 7,'pay_time' => $time]);
