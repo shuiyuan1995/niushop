@@ -3846,7 +3846,7 @@ class Order extends BaseService implements IOrder
     {
         $order = new NsOrderModel();
         $data = array(
-            'shipping_type' => $order_status,
+            'order_status' => $order_status,
         );
         $retval = $order->save($data, [
             'order_id' => $order_id

@@ -298,7 +298,7 @@
 						<div class="ui-centered-image" style="width: 48px; height: 48px;float: left;margin-right: 10px;">
 							<img src="{:__IMG($goodsvo['picture_info']['pic_cover_micro'])}" style="max-width: 48px;max-height: 48px;">
 						</div>
-						<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$goodsvo['goods_id'])}" target="_blank">{$goodsData.goods_name}</a>
+						<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$goodsvo['goods_id'])}" target="_blank">{$goodsvo.goods_name}</a>
 					</td>
 					<td align="center" bgcolor="#ffffff">
 					{if condition = "$goodsvo['sku_name'] neq ''"}
