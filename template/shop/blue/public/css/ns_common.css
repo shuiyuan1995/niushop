@@ -6,9 +6,9 @@ html, body, td, input, textarea, select, button, ul, ol, li, dl, dt, dd,
 }
 
 body {
-	/* background: url(../images/allbg.jpg) !important;
-	background-size: 100% 100% !important; */
-	background: #ffffff !important;
+	background: url(../images/allbg.jpg) !important;
+	background-size: 100% 100% !important;
+	/* background: #ffffff !important; */
 	color: #666;
 	margin: 0 auto;
 	width: auto;
@@ -680,7 +680,7 @@ ul .mobile i, .header-box ul .menu-hd b, .header .logo-right .city .city-select 
 	min-width: 1210px;
 	height: 100px;
 	padding: 10px 0px 10px;
-	background: #fff;
+	/* background: #fff; */
 	margin: 0 auto;
 }
 /******头部Logo*******/
@@ -1087,6 +1087,7 @@ ul .mobile i, .header-box ul .menu-hd b, .header .logo-right .city .city-select 
 	border: solid 1px #F0F0F0;
 	margin-right: 0;
 	padding: 10px;
+	background: rgba(255,255,255,0.8)
 }
 
 .header .header-right a span {
@@ -1129,7 +1130,7 @@ ul .mobile i, .header-box ul .menu-hd b, .header .logo-right .city .city-select 
 	width: 100%;
 	min-width: 1210px;
 	height: 40px;
-	background: #fff;
+	background:rgba(255,255,255,0.6);
 }
 
 .category-box-border {
