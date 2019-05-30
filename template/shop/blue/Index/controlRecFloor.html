@@ -138,7 +138,7 @@
 							<input type="hidden" class="NS-SHORT-NAME" value="{if !empty($vo['short_name'])}{$vo['short_name']}{elseif !empty($vo['category_alias'])}{php} echo mb_substr($vo['category_alias'],0,4,'utf-8'); {/php}{else}{php} echo mb_substr($vo['category_name'],0,4,'utf-8'); {/php}{/if}"/>
 						</h2>
 						<!--推荐类型-->
-						<ul class="floor-tabs-nav" style="width:82%;overflow:hidden;">
+						<ul class="floor-tabs-nav" style="overflow:hidden;">
 							<li style="float:right;">
 								
 								<h3 style="padding:0 10px;">
