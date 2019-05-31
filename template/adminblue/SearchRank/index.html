@@ -26,7 +26,7 @@
 			<button onclick="dataExcel()" value="导出数据" class="btn-common-white"  >导出数据</button>
 		</th>
 		<th style="width:50%;"> 
-			<span>访问时间：</span>
+			<span>搜索时间：</span>
 			<input type="text" id="startDate" class="input-common middle" placeholder="请选择开始日期" onclick="WdatePicker()" />
 			&nbsp;-&nbsp;
 			<input type="text" id="endDate" placeholder="请选择结束日期" class="input-common middle" onclick="WdatePicker()" />
@@ -179,18 +179,17 @@ function dataExcel(){
     var start_date = $("#startDate").val();
     var end_date = $("#endDate").val();
 	$.ajax({
-		url : "{:__URL('ADMIN_MAIN/QrCodeFrom/excelList')}",
+		url : "{:__URL('ADMIN_MAIN/SearchRank/excelList')}",
 		type : "post",
 		data : {
             "start_date" : start_date,
 			"end_date" : end_date
 		},
 		success : function (data){
-			console.log(data);
 			if(data['data'] != ""){
 				window.location.href=__URL("ADMIN_MAIN/SearchRank/dataExcel?start_date="+start_date+"&end_date="+end_date);
 			}else{
-				showTip("没有导出的会员数据",'error');
+				showTip("没有导出的数据",'error');
 			}
 		}
 	})	
