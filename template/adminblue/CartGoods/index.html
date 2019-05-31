@@ -22,28 +22,27 @@
 	
 	<tr>
 		<th style="text-align: left;width: 20%;">
-			<button class="btn-common-delete" onclick="batchDelete()" >批量删除</button>
+			<!--<button class="btn-common-delete" onclick="batchDelete()" >批量删除</button>-->
 			<button onclick="dataExcel()" value="导出数据" class="btn-common-white"  >导出数据</button>
 		</th>
-		<th style="width:50%;"> 
-			<span>搜索时间：</span>
+		<!--<th style="width:50%;">
+			<span>访问时间：</span>
 			<input type="text" id="startDate" class="input-common middle" placeholder="请选择开始日期" onclick="WdatePicker()" />
 			&nbsp;-&nbsp;
 			<input type="text" id="endDate" placeholder="请选择结束日期" class="input-common middle" onclick="WdatePicker()" />
 			<button onclick="searchData()" value="搜索" class="btn-common" >搜索</button>
-			<!-- 更多搜索下拉框 -->
+			&lt;!&ndash; 更多搜索下拉框 &ndash;&gt;
 			<div class="more-search-container">
 				<dl>
 					<dt></dt>
 					<dd><button onclick="searchData()" class="btn-common">搜索</button></dd>
 				</dl>
 			</div>
-		</th>
+		</th>-->
 	</tr>
 </table>
 <table class="table-class">
 	<colgroup>
-	<col style="width: 2%;">
 	<col style="width: 23%;">
 	<col style="width: 8%;">
 	<col style="width: 20%;">
@@ -51,11 +50,10 @@
 	</colgroup>
 	<thead>
 		<tr align="center">
-			<th><i class="checkbox-common"><input type="checkbox" onclick="CheckAll(this)"></i></th>
-			<th style="text-align:left;">搜索关键词</th>
-			<th>搜索次数</th>
-			<th>最后搜索时间</th>
-			<th>操作</th>
+			<th style="text-align:left;">商品名称</th>
+			<th>商品单价</th>
+			<th>商品数量</th>
+			<th>商品总价</th>
 		</tr>
 	</thead>
 	<tbody id="productTbody"></tbody>
@@ -71,29 +69,40 @@ function LoadingInfo(page_index) {
 
         $.ajax({
             type : "post",
-            url : "{:__URL('ADMIN_MAIN/SearchRank/index')}",
+            url : "{:__URL('ADMIN_MAIN/CartGoods/index')}",
             data : {
                 "page_index" : page_index, "page_size" : $("#showNumber").val(),
 				"start_date" : start_date, "end_date" : end_date
             },
             success : function(data) {
-                if (data['data'].length > 0) {
+                let array = Object.keys(data['data']);
+                if (array.length > 0) {
                     $(".table-class tbody").empty();
-                    for (var i = 0; i < data['data'].length; i++) {
+                    for(let i in data['data']){
+                        let key = i;
+                        let datas = data['data'][i];
                         var html = '';
+
                         html += '<tr align="center">';
-                        html += '<td><i class="checkbox-common"><input name="sub" type="checkbox" value="'+ data['data'][i]["id"]+'"></i></td>';
                         html += '<td align="left">';
                         html += '<div style="float:left;" class="member-div">';
-                        html += '<label style="float:none;width:100%">'+data['data'][i]['keyword']+'</label>';
+                        html += '<label style="float:none;width:100%">用户名：'+key+'</label>';
                         html += '</div>';
                         html += '</td>';
-                        html += '<td style="text-align:center;">'+ data['data'][i]["search_times"] +'</td>';
-                        html += '<td>' +data['data'][i]['search_time']+'</td>';
-                        html += '<td>';
-						html += '<a onclick="delete_user('+ data['data'][i]["id"]+')">删除</a><br/>';
-                        html += '</td>';
                         html += '</tr>';
+
+                        for (let j = 0,len = datas.length ; j < len ;j++){
+							html += '<tr align="center">';
+							html += '<td align="left">';
+							html += '<div style="float:left;" class="member-div">';
+							html += '<label style="float:none;width:100%">'+datas[j]['goods_name']+'</label>';
+							html += '</div>';
+							html += '</td>';
+							html += '<td style="text-align:center;">￥'+ datas[j]['price'] +'</td>';
+							html += '<td>' +datas[j]['num']+'</td>';
+							html += '<td style="text-align:center;">￥'+ (datas[j]['price']*datas[j]['num']).toFixed(2) +'</td>';
+							html += '</tr>';
+                        }
                         $(".table-class tbody").append(html);
                     }
                 } else {
@@ -125,7 +134,7 @@ function delete_user(id){
 			"确定": function() {
 				$.ajax({
 					type : "post",
-					url : "{:__URL('ADMIN_MAIN/SearchRank/delete')}",
+					url : "{:__URL('ADMIN_MAIN/CartGoods/delete')}",
 					data : { "id" : id.toString() },
 					dataType : "json",
 					success : function(data) {
@@ -179,18 +188,17 @@ function dataExcel(){
     var start_date = $("#startDate").val();
     var end_date = $("#endDate").val();
 	$.ajax({
-		url : "{:__URL('ADMIN_MAIN/SearchRank/excelList')}",
+		url : "{:__URL('ADMIN_MAIN/CartGoods/excelList')}",
 		type : "post",
 		data : {
             "start_date" : start_date,
 			"end_date" : end_date
 		},
 		success : function (data){
-			console.log(data);
 			if(data['data'] != ""){
 				window.location.href=__URL("ADMIN_MAIN/SearchRank/dataExcel?start_date="+start_date+"&end_date="+end_date);
 			}else{
-				showTip("没有导出的数据",'error');
+				showTip("没有导出的会员数据",'error');
 			}
 		}
 	})	
