@@ -358,6 +358,12 @@ function check_mobile(){
 	margin-top: 5px;
 	font-size: 14px;
 }
+.jizhu{
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+	margin-left: 10%;
+}
 </style>
 </head>
 <body>
@@ -411,7 +417,7 @@ function check_mobile(){
 							</div>
 						</label>
 					</div>	
-	
+						<label class="jizhu" for="jizhu"><input id="jizhu" type="checkbox" name="item"> 记住密码</label>
 					<button id="login-button" class="lang-btn" onclick="check()" style="margin-top: 30px;">{:lang("login")}</button>
 					<a href="{:__URL('APP_MAIN/login/register')}">
 					<button class="lang-btn register_immediately">{:lang("register_immediately")}</button></a>
