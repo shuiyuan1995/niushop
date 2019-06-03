@@ -232,6 +232,7 @@ class Login extends Controller
             $mobile = request()->post('mobile', '');
             $sms_captcha = request()->post('sms_captcha', '');
             $captcha = request()->post("captcha", "");
+            $remember = request()->post('remember','');
             
             if ($this->isNeedVerification()) {
                 if (! empty($captcha)) {
@@ -262,6 +263,15 @@ class Login extends Controller
                 }
             }
             if ($retval == 1) {
+                if ($remember == 1){
+                    cookie('username',base64_encode($user_name),30*60*60*24);
+                    cookie('pswd',base64_encode($password),30*60*60*24);
+                    cookie('remember','on',30*60*60*24);
+                }else{
+                    cookie('username',null);
+                    cookie('pswd',null);
+                    cookie('remember',null);
+                }
                 if (! empty($_SESSION['login_pre_url'])) {
                     $retval = [
                         'code' => 1,
@@ -290,6 +300,12 @@ class Login extends Controller
             $retval['error_num'] = $err_num;
             return $retval;
         }
+        $user_name = base64_decode(cookie('username'));
+        $password = base64_decode(cookie('pswd'));
+        $remember = cookie('remember');
+        $this->assign('user_name',$user_name);
+        $this->assign('pass',$password);
+        $this->assign('remember',$remember);
         $this->getWchatBindMemberInfo();
         // 没有登录首先要获取上一页
         $pre_url = '';
