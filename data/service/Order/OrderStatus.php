@@ -240,6 +240,19 @@ class OrderStatus extends BaseService
                 )
             ),
             array(
+                'status_id' => '-1',
+                'status_name' => '退款中',
+                'is_refund' => 1,
+                'operation' => array(
+                    '0' => array(
+                        'no' => 'seller_memo',
+                        'color' => '#666666',
+                        'name' => '备注'
+                    )
+                ),
+                'member_operation' => array()
+            ),
+            array(
                 'status_id' => '8',
                 'status_name' => '待刷卡',
                 'is_refund' => 0,
