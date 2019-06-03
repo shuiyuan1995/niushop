@@ -123,6 +123,7 @@ class Login extends Controller
         if (request()->isPost()) {
             $username = request()->post('username', '');
             $password = request()->post('password', '');
+            $remember = request()->post('remember','');
             if ($this->isNeedVerification()) {
                 $vertification = request()->post('vertification', '');
                 if (! captcha_check($vertification)) {
@@ -153,6 +154,15 @@ class Login extends Controller
                 $res = $this->user->login($username, $password);
             }
             if ($res == 1) {
+                if ($remember == 1){
+                    cookie('username',base64_encode($user_name),30*60*60*24);
+                    cookie('pswd',base64_encode($password),30*60*60*24);
+                    cookie('remember','on',30*60*60*24);
+                }else{
+                    cookie('username',null);
+                    cookie('pswd',null);
+                    cookie('remember',null);
+                }
                 if (! empty($_SESSION['login_pre_url'])) {
                     $retval = [
                         'code' => 1,
@@ -187,7 +197,13 @@ class Login extends Controller
         
         $isNeedVerification = $this->isNeedVerification();
         $this->assign("is_need_verification", $isNeedVerification);
-        
+        $user_name = base64_decode(cookie('username'));
+        $password = base64_decode(cookie('pswd'));
+        $remember = cookie('remember');
+        $this->assign('user_name',$user_name);
+        $this->assign('pass',$password);
+        $this->assign('remember',$remember);
+
         // 获取商场logo
         $website = new WebSite();
         $web_info = $website->getWebSiteInfo();

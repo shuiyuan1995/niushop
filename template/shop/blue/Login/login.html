@@ -123,13 +123,13 @@
 					<div class="err J_errbox" id="hint" style="display:none;"></div>
 					<div class="inputbox J_focus">
 						<div class="imgbg"></div>
-						<input type="text" class="input_login" name="txtName" id="txtName" placeholder="{:lang('cell_phone_number')}/{:lang('member_name')}/{:lang('mailbox')}" /> 
+						<input type="text" class="input_login" name="txtName" id="txtName" value="{$user_name}" placeholder="{:lang('cell_phone_number')}/{:lang('member_name')}/{:lang('mailbox')}" />
 					</div>
 					<div class="inputbox J_focus">
 						<div class="imgbg pwd"></div>
-						<input type="password" class="input_login pwd J_loginword" name="txtPWD" id="txtPWD" placeholder="{:lang('please_input_password')}" />
+						<input type="password" class="input_login pwd J_loginword" name="txtPWD" id="txtPWD" value="{$pass}" placeholder="{:lang('please_input_password')}" />
 					</div>
-						<label style="margin-left: 23px;" for="jizhu"><input id="jizhu" type="checkbox" name="item"> 记住密码</label>
+						<label style="margin-left: 23px;" for="jizhu"><input id="jizhu" {if condition="$remember eq 'on'"} checked="checked"{/if} type="checkbox" name="item" value="1"> 记住密码</label>
 					<div class="inputbox J_focus verification-code" {if condition="!$is_need_verification"}style="display:none;"{/if}>
 <!-- 						<div class="imgbg"></div> -->
 						<input type="text" id="vertification" class="input_login vertification" name="vertification" placeholder="{:lang('please_enter_verification_code')}" style="padding-left:15px;width:285px;" />
@@ -340,6 +340,7 @@ function btnlogin() {
 	ClearCookie(); //时清除之前的cookie
 	var userName = $.trim($('#txtName').val());
 	var password = $.trim($('#txtPWD').val());
+    var remember = $('#jizhu:checked').val();
 	var vertification = $.trim($('#vertification').val());
 	if(userName == "{:lang('enter_your_account_number')}" || userName == "" || userName == null || userName == undefined) {
 		$("#hint").css("display", "block");
@@ -364,6 +365,7 @@ function btnlogin() {
 	$.post("{:__URL('SHOP_MAIN/login/index')}", {
 		"username" : userName,
 		"password" : password,
+        'remember' : remember,
 		"vertification" : vertification
 	}, function(data) {
 		if (data['code'] == 1) {
