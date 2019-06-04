@@ -244,7 +244,7 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 		<a href="{:__URL('APP_MAIN/login/register')}">{:lang("register")}</a>
 		{/empty}
 		<a href="javascript:;" onclick="locationShop();">{:lang("pc_version")}</a>
-		<span onclick="_53App.getApp('chat').openSdkUrl('float');">联系客服</span>
+		<span onclick="window.location.href='{if condition="$member"}https://tb.53kf.com/code/client/10195577/1?u_cust_id={$member.uid}&u_cust_name={$member.member_name}&u_custom_info={$member.memo}{else/}https://tb.53kf.com/code/client/10195577/1{/if}'">联系客服</span>
 		<!-- <a href="{:__URL('APP_MAIN/member/index')}">{:lang("member_member_center")}</a> -->
 	</div>
 	<p class="copyright_info">
