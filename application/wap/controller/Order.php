@@ -1563,6 +1563,9 @@ class Order extends BaseController
         if (! empty($web_info['web_phone'])) {
             $list['value']['web_phone'] = $web_info['web_phone'];
         }
+        $member = new MemberService();
+        $member_info = $member->getMemberInfo();
+        $this->assign('member',$member_info);
         $this->assign("list", $list);
         
         return view($this->style . 'Order/orderDetail');
