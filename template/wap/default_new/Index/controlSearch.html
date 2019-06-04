@@ -1,5 +1,25 @@
 <script src="__TEMP__/{$style}/public/js/public_assembly.js"></script>
+
+<style>
+	.logintop{
+		padding: 0 5%;
+	}
+	.login{
+		width: 118px;
+		max-height: 40px;
+	}
+	.login img{
+		width: 100%;
+		max-height: 35px;
+	}
+</style>
+
 <div class="controlSearch">
+	<div class="logintop">
+		<div class="login">
+			<img src="{:__IMG($web_info['logo'])}" alt="login">
+		</div>
+	</div>
 	<div class="control-search-input">
 		<input type="text" id="keyword" class="search-input custom-search-input" placeholder="{:lang('search_goods')}">
 		<button type="button" id="search" class="search-button custom-search-button">{:lang('search')}</button>
