@@ -274,7 +274,8 @@
 	<div class="order-tablink">
 		<div class="tablink-box">
 			<div class="tablink">
-				<a href="{$list['value']['service_addr']}"><span class="kefu">联系客服</span></a>
+				<!--<a href="{$list['value']['service_addr']}"><span class="kefu">联系客服</span></a>-->
+				<a href='{if condition="$member"}https://tb.53kf.com/code/client/10195577/2?u_cust_id={$member.uid}&u_cust_name={$member.member_name}&u_custom_info={$member.memo}{else/}https://tb.53kf.com/code/client/10195577/2{/if}'><span class="kefu">联系客服</span></a>
 			</div>
 			<div class="tablink">
 				<a href="tel:{$list['value']['web_phone']}"><span class="call">拨打电话</span></a>
