@@ -1309,7 +1309,7 @@ body, .detail_info_wrap .detail_item, .sku_wrap, .layer_detail_full .layer_detai
 	padding: 10px 0 4px 0;
 }
 
-.foot-nav .nav a {
+.foot-nav .nav a,.foot-nav .nav span {
 	padding: 0 10px;
 	border-right: 1px solid #ddd;
 	display: inline-block !important;
@@ -1319,6 +1319,9 @@ body, .detail_info_wrap .detail_item, .sku_wrap, .layer_detail_full .layer_detai
 	text-align: center;
 	vertical-align: middle;
 	width: auto !important;
+}
+.foot-nav .nav span{
+	border-right: none;
 }
 
 .foot-nav .nav a:last-child {
