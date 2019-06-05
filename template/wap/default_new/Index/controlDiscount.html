@@ -117,16 +117,24 @@
 	display: flex;
 	border: 1px solid #eb852a;
 	font-size: 12px;
+	width: 114px;
 }
 .price .right_price{
 	padding: 1px 3px;
 	color: #bbbbbb;
 	text-decoration: line-through;
 }
+.controltype{
+	display: flex;
+	justify-content: space-between;
+	padding: 0 5%;
+	box-sizing: border-box;
+}
 </style>
 <div class="group-list-box">
 	<div class="controltype" onclick="location.href='{:__URL("APP_MAIN/index/discount")}'">
 		<span class="title">限时折扣</span>
+		<span>更多</span>
 	</div>
 	<div class="discount-list">
 		<ul>
