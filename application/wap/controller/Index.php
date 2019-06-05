@@ -77,6 +77,9 @@ class Index extends BaseController
         $member = new MemberService();
         $this->web_site = new WebSite();
         $shop_id = $this->instance_id;
+
+        $member_info = $member->getMemberInfo();
+        $this->assign('member',$member_info);
         
         //首页导航
         $shop = new Shop();
