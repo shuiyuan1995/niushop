@@ -319,7 +319,7 @@ class Notify
             $user_name=$user_obj["nick_name"];
             $goods_name=$order_goods_obj["goods_name"];
             $goods_sku=$order_goods_obj["sku_name"];
-            $order_no=$order_obj["out_trade_no"];
+            $order_no=$order_obj["order_no"];
             $order_money=$order_obj["order_money"];
             $goods_money=$order_goods_obj["goods_money"];
             $mobile=$order_obj["receiver_mobile"];
@@ -458,8 +458,10 @@ class Notify
         $order_obj=$order_model->get($order_id);
         $shop_id=$order_obj["shop_id"];
         $buyer_id=$order_obj["buyer_id"];
-        $user_name=$order_obj["receiver_name"];
-        $order_no=$order_obj["out_trade_no"];
+        $user_model=new UserModel();
+        $user_obj=$user_model->get($buyer_id);
+        $user_name=$order_obj["nick_name"];
+        $order_no=$order_obj["order_no"];
         $order_money=$order_obj["order_money"];
         $mobile=$order_obj["receiver_mobile"];
         $goods_money=$order_obj["goods_money"];
@@ -519,8 +521,10 @@ class Notify
         $order_obj=$order_model->get($order_id);
         $shop_id=$order_obj["shop_id"];
         $buyer_id=$order_obj["buyer_id"];
-        $user_name=$order_obj["receiver_name"];
-        $order_no=$order_obj["out_trade_no"];
+        $user_model = new UserModel();
+        $user_obj = $user_model->get($buyer_id);
+        $user_name=$user_obj["nick_name"];
+        $order_no=$order_obj["order_no"];
         $order_money=$order_obj["order_money"];
         $mobile=$order_obj["receiver_mobile"];
         $goods_money=$order_obj["goods_money"];
@@ -544,8 +548,6 @@ class Notify
             }
         }
             // 邮件发送
-        $user_model = new UserModel();
-        $user_obj = $user_model->get($buyer_id);
         if (! empty($user_obj)) {
             $email = $user_obj["user_email"];
             if (! empty($email) && $this->email_is_open == 1) {
