@@ -106,9 +106,7 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 			<span class="price-title js-price-title ">{:lang('goods_discount')}</span>
 			<span class="goods-unit-style">/{if condition ="empty($goods_detail['goods_unit'])"}件{else/}{$goods_detail['goods_unit']}{/if}</span>
 		</div>
-		{if condition="$goods_detail.market_price>0"}
-		<em class="original-price">{$goods_detail.market_price}</em>
-		{/if}
+		<em class="original-price">￥{$goods_detail.price}</em>
 		<div class="font-size-12 overview-countdown js-activity-tips started " data-status="started">
 			<div class="countdown-title">{:lang('distance_ends')}</div>
 			<div class="js-discount-time countdown" data-countdown="3542691">

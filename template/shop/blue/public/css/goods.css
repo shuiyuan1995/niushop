@@ -271,6 +271,12 @@
 	margin-right: 50px;
 }
 
+.goods-price .show-price .old-price {
+	font-weight: normal;
+	text-decoration: line-through;
+	margin-right: 50px;
+}
+
 .goods-price  a.bonus {
 	width: 60px;
 	height: 35px;

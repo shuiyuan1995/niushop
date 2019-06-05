@@ -61,6 +61,9 @@ class Order extends BaseController
         
         $member = new Member();
         $address = $member->getDefaultExpressAddress();
+        if (trim($address['country_detail'],',') != '爱尔兰' && $address['zip_code'] == ''){
+            return AjaxReturn(-9003);
+        }
         $coin = 0; // 购物币
 
         // 查询商品限购
