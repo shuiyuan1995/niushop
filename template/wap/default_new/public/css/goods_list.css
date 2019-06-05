@@ -160,7 +160,7 @@
     -o-transform: rotate(222deg);
 }
 .info .goods-info{
-	padding: 0 0 15px 0;
+	/* padding: 0 0 15px 0; */
 }
 .info .goods-info .goods_price{
 	font-size: 13px;
