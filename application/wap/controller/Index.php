@@ -53,11 +53,11 @@ class Index extends BaseController
      */
     public function index()
     {
-        //GHGldy2Jq0OZ4HOrtKsUoA==
+        //ZnJvbXFyY29kZQ==
         if (isset($_GET['frm'])){
             $from = request()->get('frm');
-            $from = Des::decrypt($from,'https://www.51jiyan.com/');
-            if ($from == 'qrcode'){
+            $from = base64_decode($from);
+            if ($from == 'fromqrcode'){
                 $ip = get_client_ip();
                 $location = judge_ip($ip);
                 $data['ip'] = $location['ip'];
