@@ -190,7 +190,7 @@
   <canvas class="snow" id="snow" width="1920" height="917"></canvas>
   <div class="main-text">
     <h1>天啊。<br>页面在雪地里失踪了。</h1>
-	<div class="main-text-a"><a href="https://www.51jiyan.com">&lt; 返回首页</a></div>
+	<div class="main-text-a"><a href="javascript:void(0);" onclick="index()">&lt; 返回首页</a></div>
   </div>
   <div class="ground">
     <div class="mound"> 
@@ -210,7 +210,13 @@
 			document.addEventListener('DOMContentLoaded', fn);
 		}
 	}
-	
+
+    function index() {
+        var url = window.location.host;
+        var protocol = window.location.protocol;
+        window.location.href = protocol+"//"+url;
+    }
+
 	function makeSnow(el) {
 		var ctx = el.getContext('2d');
 		var width = 0;
