@@ -44,7 +44,7 @@
 }
 .group-list-box .discount-list ul li div.goods_info{
 	display: inline-block;
-	width: 60%;
+	width: 65%;
 	float: left;
 	height: 110px;
 }
@@ -82,13 +82,13 @@
     text-overflow: ellipsis;
 }
 .group-list-box .discount-list ul li div.goods_info .goods_price{
-	background: #f44;
+	background: #eb852a;
 	color: #fff;
-	border-radius: 3px;
-	margin: 5px 0 0 5px;
+	/* border-radius: 3px; */
+	/* margin: 5px 0 0 5px; */
 	padding:1px 3px;
 	display: inline-block;
-	font-size: 13px;
+	font-size: 12px;
 }
 .group-list-box .discount-list ul li div.goods_info .goods_price i{
 	font-size: 12px;
@@ -96,9 +96,9 @@
 }
 .group-list-box .discount-list ul li div.goods_pic{
 	display: inline-block;
-	width: 40%;
+	width: 35%;
 	position: relative;
-	float: left;
+	float: right;
 	height: 110px;
 }
 .group-list-box .discount-list ul li div.goods_pic a
@@ -112,6 +112,16 @@
 .group-list-box .discount-list ul li div.goods_pic a img{
 	max-width: 100%;
 	max-height: 100%;
+}
+.price{
+	display: flex;
+	border: 1px solid #eb852a;
+	font-size: 12px;
+}
+.price .right_price{
+	padding: 1px 3px;
+	color: #bbbbbb;
+	text-decoration: line-through;
 }
 </style>
 <div class="group-list-box">
@@ -135,7 +145,10 @@
 									<span class="seconds">36</span>
 								</time>
 								<p class="goods_name">{$vo.goods_name}</p>
-								<span class="goods_price"><i>￥</i>{$vo.promotion_price}</span>
+								<p class="price">
+									<span class="goods_price"><i>￥</i>{$vo.promotion_price}</span>
+									<span class="right_price"><i>￥</i>{$vo.promotion_price}</span>
+								</p>
 							</div>
 							<div class="goods_pic">
 								<a href="{:__URL('APP_MAIN/goods/goodsdetail?id='.$vo['goods_id'])}">
