@@ -50,6 +50,13 @@
             border: none;
             background: #3bbae5;
         }
+        .careful{
+            padding: 10px 0;
+        }
+        .careful span{
+            color: red;
+            margin-right: 4px;
+        }
     </style>
     <link rel="stylesheet" href="__TEMP__/{$style}/public/css/layer.css" id="layuicss-skinlayercss">
 </head>
@@ -112,6 +119,7 @@
                 <span>安全码:</span>
                 <input id="code" type="text" name="pwd" maxlength="4">
             </label>
+            <p class="careful"><span>*</span>请添加客服微信，以便及时为您反馈支付情况并提供更好的售后服务。（客服微信号： woyaojiyan）</p>
             <button type="submit">提交</button>
             <!-- <a href="APP_MAIN/pay/credit_card_info" onclick="aa()" id="btn-success">提交</a> -->
         </form>

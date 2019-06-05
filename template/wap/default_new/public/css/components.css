@@ -131,11 +131,12 @@
 }
 
 .controlSearch .control-search-input .search-input {
-	width: 75%;
+	width: 86%;
 	height: 22px;
 	line-height: 22px;
 	margin: 8px 0;
-	padding: 0 15px;
+	padding: 0 15px 0 54px;
+	box-sizing: border-box;
 	border: none;
 	background: #f1f1f1;
 	color: #999;
