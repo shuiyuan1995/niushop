@@ -22,6 +22,11 @@ class CartList implements ICartList
                     ->where('buyer_id',$v['buyer_id'])
                     ->order('c.cart_id','desc')
                     ->select();
+                foreach ($data[$v['member_name']] as $key => $value){
+                    if (!empty($value['ip'])){
+                        $data[$v['member_name']][$key]['ip'] = long2ip($value['ip']);
+                    }
+                }
             }
             $page_count = 1;
         }else{
@@ -34,6 +39,11 @@ class CartList implements ICartList
                                             ->order('c.cart_id','desc')
                                             ->page($page_index,$page_size)
                                             ->select();
+                foreach ($data[$v['member_name']] as $key => $value){
+                    if (!empty($value['ip'])){
+                        $data[$v['member_name']][$key]['ip'] = long2ip($value['ip']);
+                    }
+                }
             }
             $page_count = ceil($count/$page_size);
         }

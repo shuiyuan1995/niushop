@@ -444,8 +444,12 @@ class Goods extends BaseController
         $picture = $cart_detail['picture'];
         $this->is_member = $this->user->getSessionUserIsMember();
         if (! empty($this->uid) && $this->is_member == 1) {
+            $ip = get_client_ip();
+            $location = judge_ip($ip);
+            $ip = ip2long($ip);
+            $country = $location['country'].' '.$location['region'];
             $goods = new GoodsService();
-            $retval = $goods->addCart($uid, $shop_id, $shop_name, $goods_id, $goods_name, $sku_id, $sku_name, $price, $num, $picture, 0);
+            $retval = $goods->addCart($uid, $shop_id, $shop_name, $goods_id, $goods_name, $sku_id, $sku_name, $price, $num, $picture, 0, $ip, $country);
         } else {
             $retval = array(
                 "code" => - 1,

@@ -1336,7 +1336,11 @@ class Goods extends BaseController
         $cost_price = $cart_detail['cost_price'];
         $picture_id = $cart_detail['picture_id'];
         $_SESSION['order_tag'] = ""; // 清空订单
-        $retval = $goods->addCart($uid, $shop_id, $web_info['title'], $goods_id, $goods_name, $sku_id, $sku_name, $price, $count, $picture_id, 0);
+        $ip = get_client_ip();
+        $location = judge_ip($ip);
+        $ip = ip2long($ip);
+        $country = $location['country'].' '.$location['region'];
+        $retval = $goods->addCart($uid, $shop_id, $web_info['title'], $goods_id, $goods_name, $sku_id, $sku_name, $price, $count, $picture_id, 0, $ip, $country);
         return $retval;
     }
 

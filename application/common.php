@@ -399,6 +399,21 @@ function get_client_ip() {
     return preg_match ( '/[\d\.]{7,15}/', $ip, $matches ) ? $matches [0] : '';
 }
 
+function judge_ip($ip)
+{
+    $url = "http://ip.taobao.com/service/getIpInfo.php?ip=".$ip;
+    $res = file_get_contents($url);
+    if (!empty($res)) {
+        $ipData = json_decode($res,true);
+        if ($ipData['code'] == 0){
+            return $ipData['data'];
+        }else{
+            return false;
+        }
+    }
+    return false;
+}
+
 /**
  * 根据 ip 获取 当前城市
  */
