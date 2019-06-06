@@ -44,10 +44,10 @@ min-height: 450px;}
 							<div class="goods_content">
 								<span class="goods_name"><a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$v['goods_id'])}" >{$v['goods_name']}</a></span>
 								{in name="$v.point_exchange_type" value="0,2"}
-									<span class="goods_price">￥{$v['promotion_price']}</span>
+									<span class="goods_price">¥{$v['promotion_price']}</span>
 								{else/}
 									{if $v['point_exchange_type'] == 1 && $v['promotion_price'] > 0}
-										<span class="goods_price">￥{$v.promotion_price}+{$v.point_exchange}积分</span>
+										<span class="goods_price">¥{$v.promotion_price}+{$v.point_exchange}积分</span>
 									{else/}
 										<span class="goods_price">{$v.point_exchange}积分</span>
 									{/if}

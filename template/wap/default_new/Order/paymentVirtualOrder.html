@@ -31,7 +31,7 @@
 					<div class="right-col">
 						<input type="hidden" name="goods_skuid" value="{$list.sku_id}" />
 						<input type="hidden" name="goods_point_exchange"/>
-						￥<span>{$list.price}
+						¥<span>{$list.price}
 						{if condition="$list.point_exchange_type==1 "}
 							{if condition=" $list.point_exchange>0"}
 								+{$list.point_exchange}{:lang('goods_integral')}
@@ -85,7 +85,7 @@
 	
 	{if condition="$shop_config['order_balance_pay'] == 1"}
 	<div class="item-options">
-		<label>{:lang('member_use_balance')}<b class="account_balance">￥{$member_account.balance}</b></label>
+		<label>{:lang('member_use_balance')}<b class="account_balance">¥{$member_account.balance}</b></label>
 		<span>
 			{:lang('use')}<input type="text" id="account_balance" data-max="{$member_account.balance}" placeholder="0.00"/>{:lang('element')}
 		</span>
@@ -138,19 +138,19 @@
 		<h3>{:lang('member_settlement_information')}</h3>
 		<p>
 			<label>{:lang('goods_total')}<b class="orange-bold js-goods-num">1</b>{:lang('member_kinds_of_goods')}&nbsp;{:lang('member_total')}</label>
-			<span>￥<b class="js-total-money">0.00</b></span>
+			<span>¥<b class="js-total-money">0.00</b></span>
 		</p>
 		
 		<p>
 			<label>{:lang('member_total_discount')}</label>
-			<span>￥<b id="discount_money">0.00</b></span>
+			<span>¥<b id="discount_money">0.00</b></span>
 		</p>
 		
 		
 		{if condition="count($shop_config.order_invoice_content_list)>0"}
 		<p>
 			<label>{:lang('member_invoice_tax')}：</label>
-			<span>￥<b id="invoice_tax_money">0.00</b></span>
+			<span>¥<b id="invoice_tax_money">0.00</b></span>
 		</p>
 		{/if}
 		
@@ -158,7 +158,7 @@
 		{if condition="$shop_config['order_balance_pay'] == 1"}
 		<p>
 			<label>{:lang('member_use_balance')}：</label>
-			<span>￥<b id="use_balance">0.00</b></span>
+			<span>¥<b id="use_balance">0.00</b></span>
 		</p>
 		{/if}
 	</div>
@@ -177,7 +177,7 @@
 <div class="order-total-pay bottom-fix">
 	<div class="pay-container clearfix">
 		<span class="c-gray-darker font-size-12">{:lang('member_amount_payable')}：</span>
-		<span class="font-size-16 theme-price-color">￥<b id="realprice">0.00</b></span>
+		<span class="font-size-16 theme-price-color">¥<b id="realprice">0.00</b></span>
 		{if condition="$count_point_exchange>0"}
 		<span class="font-size-16 theme-price-color" id="count-point">+{$count_point_exchange}{:lang('goods_integral')}</span>
 		{/if}

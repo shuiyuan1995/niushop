@@ -266,7 +266,7 @@ function addControl(self,control_data){
 			var temp_section_count = 4;
 			var temp_common_html = '<div>';
 			temp_common_html += '<span>此处是商品名称</span>';
-			temp_common_html += '<em>￥' + getRandomPrice() + '</em>';
+			temp_common_html += '<em>¥' + getRandomPrice() + '</em>';
 			temp_common_html += '<button class="control-goods-buy-style">';
 				temp_common_html += '<img src="' + _STATIC + "/custom_template/img/goods_buy_button_style1.png" + '"/>';
 			temp_common_html += '</button>';
@@ -581,8 +581,8 @@ function getGoodsListBigStyleHTML(control_data){
 					html += '<div class="control-goods-price">';
 				}
 				
-				if(!empty(control_data) && control_data.goods_show_goods_price == 0) html += '<em style="display:none;">￥' + getRandomPrice() + '</em>';
-				else html += '<em>￥' + getRandomPrice() + '</em>';
+				if(!empty(control_data) && control_data.goods_show_goods_price == 0) html += '<em style="display:none;">¥' + getRandomPrice() + '</em>';
+				else html += '<em>¥' + getRandomPrice() + '</em>';
 				
 				var buy_img = _STATIC + "/custom_template/img/goods_buy_button_style1.png";
 				if(!empty(control_data) && !empty(control_data.goods_buy_button_src)){
@@ -634,8 +634,8 @@ function getGoodsListSmallStyleHTML(control_data){
 					html += '<div class="control-goods-price">';
 				}
 
-					if(!empty(control_data) && control_data.goods_show_goods_price == 0) html += '<em style="display:none;">￥' + getRandomPrice() + '</em>';
-					else html += '<em>￥' + getRandomPrice() + '</em>';
+					if(!empty(control_data) && control_data.goods_show_goods_price == 0) html += '<em style="display:none;">¥' + getRandomPrice() + '</em>';
+					else html += '<em>¥' + getRandomPrice() + '</em>';
 					
 					var buy_img = _STATIC + "/custom_template/img/goods_buy_button_style1.png";
 					if(!empty(control_data) && !empty(control_data.goods_buy_button_src)){

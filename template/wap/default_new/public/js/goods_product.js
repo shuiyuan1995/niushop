@@ -11,11 +11,11 @@ $(function() {
 		var is_full_payment = $('#is_full_payment').is(":checked");
 		if(!is_full_payment){
 			price = $("#hidden_presell").val();
-			$("#price").text("￥" + price);
+			$("#price").text("¥" + price);
 			$("#hiddSkuprice").val(price);
 		}else{
 			price =parseFloat($("#goods_sku0").attr("price"));
-			$("#price").text("￥" + price);
+			$("#price").text("¥" + price);
 			$("#hiddSkuprice").val(price);
 		}
 	})
@@ -627,15 +627,15 @@ function echoSpecData(){
 				active = $("#submit_ok").attr("tag");
 				if (active == 'addCart' || active == 'buyBtn1' || active == 'theSelected' || active == 'js_point_exchange') {
 					price = $this.attr("price");
-					$("#price").text("￥" + price);
+					$("#price").text("¥" + price);
 					$("#hiddSkuprice").val(price);	
 				}else if(active == "spelling"){
 					price = $("#hidden_pintuan_price").val();
-					$("#price").text("￥" + price);
+					$("#price").text("¥" + price);
 					$("#hiddSkuprice").val(price);
 				}else if (active == "groupbuy") {
 					price = $("#hide_group_buy_price").val();
-					$("#price").text("￥" + price);
+					$("#price").text("¥" + price);
 					$("#hiddSkuprice").val(price);
 				}else if(active == 'bargainBtn'){
 					$("#num").attr("max",1).val(1);
@@ -648,7 +648,7 @@ function echoSpecData(){
 		if (active == 'addCart' || active == 'buyBtn1' || active == 'theSelected' || active == 'js_point_exchange' || active == 'bargainBtn') {
 			var price_num = price_section_arr.length;
 			if(price_num > 1 && price_section_arr[0] != price_section_arr[price_num -1]){
-				$("#price").text("￥" + price_section_arr[0] + '-' + price_section_arr[price_num - 1]);
+				$("#price").text("¥" + price_section_arr[0] + '-' + price_section_arr[price_num - 1]);
 			}
 		}
 	}
@@ -658,11 +658,11 @@ $('#is_full_payment').click(function(){
 	var is_full_payment = $('#is_full_payment').is(":checked");
 	if(!is_full_payment){
 		price = $("#hidden_presell").val();
-		$("#price").text("￥" + price);
+		$("#price").text("¥" + price);
 		$("#hiddSkuprice").val(price);
 	}else{
 		price = $this.attr("price");
-		$("#price").text("￥" + price);
+		$("#price").text("¥" + price);
 		$("#hiddSkuprice").val(price);
 	}
 })

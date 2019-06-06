@@ -172,7 +172,7 @@
 					<br/>
 					<div class="pro-pric">
 						<span>{:lang('goods_price')}:</span>
-						<span style="color:#333333;">￥{$goodsData.price}</span>
+						<span style="color:#333333;">¥{$goodsData.price}</span>
 						{if $goodsData.gift_flag > 0}
 						<i style="font-size:12px;padding:1px 4px;border-radius:3px;display:inline-block;color:#FFF;background-color:#de533c;height:16px;line-height: 16px;overflow:hidden;font-style:normal;margin-left:5px;position:relative;top:3px;">赠品</i>
 						{/if}
@@ -195,32 +195,32 @@
 			<div class="money-row">
 				<div>
 					<span>{:lang('member_total_commodity_value')}：</span>
-					<span class="price">￥{$order['goods_money']}</span>
+					<span class="price">¥{$order['goods_money']}</span>
 				</div>
 				
 				<div>
 					<span>{:lang('goods_freight')}：</span>
-					<span class="price">￥{$order['shipping_money']}</span>
+					<span class="price">¥{$order['shipping_money']}</span>
 				</div>
 				
 				{if condition="$order['user_platform_money']>0"}
 				<div>
 					<span>{:lang('member_balance_payment')}：</span>
-					<span class="price">￥{$order['user_platform_money']}</span>
+					<span class="price">¥{$order['user_platform_money']}</span>
 				</div>
 				{/if}
 				
 				{if condition="$order['coupon_money']>0"}
 				<div>
 					<span>{:lang('member_coupons')}：</span>
-					<span class="price">￥{$order['coupon_money']}</span>
+					<span class="price">¥{$order['coupon_money']}</span>
 				</div>
 				{/if}
 				
 				{if condition="$order['tax_money']>0"}
 				<div>
 					<span>{:lang('member_invoice_tax')}：</span>
-					<span class="price">￥{$order['tax_money']}</span>
+					<span class="price">¥{$order['tax_money']}</span>
 				</div>
 				{/if}
 				
@@ -230,7 +230,7 @@
 						{case value="MANJIAN"}<span>{:lang('member_full_discount')}：</span>{/case}
 						{case value="ZUHETAOCAN"}<span>{:lang('member_taocan_discount')}：</span>{/case}
 					{/switch}
-					<span class="price">￥{$order['promotion_money']}</span>
+					<span class="price">¥{$order['promotion_money']}</span>
 				</div>
 				{/if}
 				
@@ -244,14 +244,14 @@
 				{if condition="$order['is_chaibao']>0"}
 				<div>
 					<span>拆包费：</span>
-					<span class="price">￥{$order['chaibao_money']}</span>
+					<span class="price">¥{$order['chaibao_money']}</span>
 				</div>
 				{/if}
 
 				{if condition="$order['is_insurance']>0"}
 				<div>
 					<span>保险费：</span>
-					<span class="price">￥{$order['insurance_money']}</span>
+					<span class="price">¥{$order['insurance_money']}</span>
 				</div>
 				{/if}
 
@@ -264,7 +264,7 @@
 				
 				<div>
 					<span>{:lang('member_actual_payment')}：</span>
-					<span class="price"><b style="color:#f44;">￥{$order['pay_money']}</b></span>
+					<span class="price"><b style="color:#f44;">¥{$order['pay_money']}</b></span>
 				</div>
 			</div>
 		</div>

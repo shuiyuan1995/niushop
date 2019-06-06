@@ -1162,7 +1162,7 @@ class Login extends Controller
                 $goods = new GoodsService();
                 $goods_detail = $goods->getGoodsDetail($goods_id);
                 $share_content["share_title"] = $goods_detail["goods_name"];
-                $share_content["share_contents"] = $config["goods_param_1"] . "￥" . $goods_detail["price"] . ";" . $config["goods_param_2"];
+                $share_content["share_contents"] = $config["goods_param_1"] . "¥" . $goods_detail["price"] . ";" . $config["goods_param_2"];
                 $share_content['share_nick_name'] = $current_user;
                 if (count($goods_detail["img_list"]) > 0) {
                     $share_logo = Request::instance()->domain() . config('view_replace_str.__UPLOAD__') . '/' . $goods_detail["img_list"][0]["pic_cover_mid"]; // 用商品的第一个图片

@@ -74,7 +74,7 @@ function refreshShopCart(){
 				$(".js-cart-count").text(data.length);//购物车中的数量
 			}
 			$(".js-count").text(data.length);
-			$(".js-total").text("￥"+total);
+			$(".js-total").text("¥"+total);
 			$(".js-cart-list").html(str);
 		}
 	});

@@ -278,7 +278,7 @@ function LoadingInfo(pageIndex) {
 					html += '<td align="left">' + data["data"][i]["bank_name"] + '</td>';
 					html += '<td align="left">' + (data["data"][i]["account_number"] == "" ? "-" : data["data"][i]["account_number"]) + '</td>';
 					html += '<td align="left">' + data["data"][i]["realname"] + '</td>';
-					html += '<td   align="right" id="cash-'+ data["data"][i]["id"] +'" data-transfer-money="' + data["data"][i]["cash"] + '">￥' + data["data"][i]["cash"] + '</td>';
+					html += '<td   align="right" id="cash-'+ data["data"][i]["id"] +'" data-transfer-money="' + data["data"][i]["cash"] + '">¥' + data["data"][i]["cash"] + '</td>';
 					
 					html += '<td>' + status + '</td>';
 					html += '<td>' + timeStampTurnTime(data["data"][i]["ask_for_date"]) + '</td>';

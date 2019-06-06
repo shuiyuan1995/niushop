@@ -185,11 +185,11 @@ function add_num(cart_id, max_buy, goodsid, obj, stock) {
 	}
 	calculated_price(obj, temp_num, goodsid);
 	goods_obj.val(temp_num);
-	var price = $("#goods_price_" + cart_id).text().replace("￥","");// 商品单价
+	var price = $("#goods_price_" + cart_id).text().replace("¥","");// 商品单价
 	if (is_update) {
 		var total_price = temp_num * price;
 		total_price = total_price.toFixed(2);
-		$("#subtotal_" + cart_id).text("￥" + total_price);
+		$("#subtotal_" + cart_id).text("¥" + total_price);
 		$("#subtotal_" + cart_id).attr("data-total", total_price);
 		getCopeSum();// 刷新应付总额
 		updateGoodsNumber(cart_id, temp_num,goods_obj);// 更新商品数量
@@ -209,10 +209,10 @@ function minus_num(cart_id, max_buy, stock, min_buy, goodsid, obj) {
 		number--;
 		obj.val(number);
 		calculated_price(obj, number, goodsid);
-		var price = $("#goods_price_" + cart_id).text().replace("￥","");// 商品单价
+		var price = $("#goods_price_" + cart_id).text().replace("¥","");// 商品单价
 		var total_price = number * price;
 		total_price = total_price.toFixed(2);
-		$("#subtotal_" + cart_id).text("￥" + total_price);
+		$("#subtotal_" + cart_id).text("¥" + total_price);
 		$("#subtotal_" + cart_id).attr("data-total", total_price);
 		getCopeSum();// 刷新应付总额
 		updateGoodsNumber(cart_id, number,obj);// 更新商品数量	
@@ -272,9 +272,9 @@ function change_price(cart_id, max_buy, goodsid, obj, stock, min) {
 		
 		$(obj).val(temp_num);
 	 	calculated_price(obj, temp_num, goodsid);
-		var price = $("#goods_price_" + cart_id).text().replace("￥","");// 商品单价
+		var price = $("#goods_price_" + cart_id).text().replace("¥","");// 商品单价
 		if (is_update) {
-			$("#subtotal_" + cart_id).text("￥" + temp_num * price);
+			$("#subtotal_" + cart_id).text("¥" + temp_num * price);
 			$("#subtotal_" + cart_id).attr("data-total", temp_num * price);
 			getCopeSum();// 刷新应付总额
 			updateGoodsNumber(cart_id, temp_num,$(obj));// 更新商品数量
@@ -287,7 +287,7 @@ function calculated_price(obj, num, goodsid){
 	var goods_ladder_preferential = $("#goods_ladder_preferential").val();
 	var arr = JSON.parse(goods_ladder_preferential);
 	var parentTr = $(obj).parents("tr");
-	var price = parseFloat(parentTr.find("[id^='goods_price_']").attr("data-price").replace("￥",""));
+	var price = parseFloat(parentTr.find("[id^='goods_price_']").attr("data-price").replace("¥",""));
 	console.log(price);
 	if(arr.length > 0){
 		for (var i = 0; i < arr.length; i++) {
@@ -300,5 +300,5 @@ function calculated_price(obj, num, goodsid){
 			}
 		}
 	}
-	parentTr.find("[id^='goods_price_']").text("￥"+price.toFixed(2));
+	parentTr.find("[id^='goods_price_']").text("¥"+price.toFixed(2));
 }

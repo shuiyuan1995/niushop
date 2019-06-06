@@ -2517,7 +2517,7 @@ function addControl(self,control_data){
 			var temp_section_count = 4;
 			var temp_common_html = '<div>';
 			temp_common_html += '<span>此处是商品名称</span>';
-			temp_common_html += '<em>￥' + getRandomPrice() + '</em>';
+			temp_common_html += '<em>¥' + getRandomPrice() + '</em>';
 			temp_common_html += '<button class="control-goods-buy-style">';
 
 			if(!empty(control_data)){
@@ -2659,19 +2659,19 @@ function addControl(self,control_data){
 				
 				html += '<div class="coupon">';
 					html += '<img src="' + STATIC + '/wapCustomTemplate/images/index_coupon.png' + '" class="background_img">';
-					html += '<p><span>￥</span>' + getRandomPrice() + '</p>';
+					html += '<p><span>¥</span>' + getRandomPrice() + '</p>';
 					html += '<img src="' + STATIC + '/wapCustomTemplate/images/already_received.png' + '" class="already_received">';
 				html += '</div>';
 	
 				html += '<div class="coupon">';
 					html += '<img src="' + STATIC + '/wapCustomTemplate/images/index_coupon.png' + '" class="background_img">';
-					html += '<p><span>￥</span>' + getRandomPrice() + '</p>';
+					html += '<p><span>¥</span>' + getRandomPrice() + '</p>';
 					html += '<img src="' + STATIC + '/wapCustomTemplate/images/already_received.png' + '" class="already_received">';
 				html += '</div>';
 			}else if(style == 2){
 				for(var j=0;j<3;j++){
 					html += '<div class="coupons-style2">';
-						html += '<span class="money-number">￥' + getRandomPrice() + '</span>';
+						html += '<span class="money-number">¥' + getRandomPrice() + '</span>';
 						html += '<p class="explanation">满15.00可用</p>';
 						html += '<span class="get">领取</span>';
 					html += '</div>';
@@ -2855,8 +2855,8 @@ function getGoodsListBigStyleHTML(control_data){
 
 				}
 
-				if(!empty(control_data) && control_data.goods_show_goods_price == 0) html += '<em style="display:none;">￥' + getRandomPrice() + '</em>';
-				else html += '<em>￥' + getRandomPrice() + '</em>';
+				if(!empty(control_data) && control_data.goods_show_goods_price == 0) html += '<em style="display:none;">¥' + getRandomPrice() + '</em>';
+				else html += '<em>¥' + getRandomPrice() + '</em>';
 
 				var buy_img = STATIC + "/wapCustomTemplate/images/goods_buy_button_style1.png";
 				if(!empty(control_data) && !empty(control_data.goods_buy_button_src)){
@@ -2908,8 +2908,8 @@ function getGoodsListSmallStyleHTML(control_data){
 					html += '<div class="control-goods-price">';
 				}
 
-					if(!empty(control_data) && control_data.goods_show_goods_price == 0) html += '<em style="display:none;">￥' + getRandomPrice() + '</em>';
-					else html += '<em>￥' + getRandomPrice() + '</em>';
+					if(!empty(control_data) && control_data.goods_show_goods_price == 0) html += '<em style="display:none;">¥' + getRandomPrice() + '</em>';
+					else html += '<em>¥' + getRandomPrice() + '</em>';
 
 					var buy_img = STATIC + "/wapCustomTemplate/images/goods_buy_button_style1.png";
 					if(!empty(control_data) && !empty(control_data.goods_buy_button_src)){
@@ -5410,19 +5410,19 @@ function updateCouponsHTML(){
 		
 		html += '<div class="coupon">';
 			html += '<img src="' + STATIC + '/wapCustomTemplate/images/index_coupon.png' + '" class="background_img">';
-			html += '<p><span>￥</span>' + getRandomPrice() + '</p>';
+			html += '<p><span>¥</span>' + getRandomPrice() + '</p>';
 			html += '<img src="' + STATIC + '/wapCustomTemplate/images/already_received.png' + '" class="already_received">';
 		html += '</div>';
 
 		html += '<div class="coupon">';
 			html += '<img src="' + STATIC + '/wapCustomTemplate/images/index_coupon.png' + '" class="background_img">';
-			html += '<p><span>￥</span>' + getRandomPrice() + '</p>';
+			html += '<p><span>¥</span>' + getRandomPrice() + '</p>';
 			html += '<img src="' + STATIC + '/wapCustomTemplate/images/already_received.png' + '" class="already_received">';
 		html += '</div>';
 	}else if(coupons.style == 2){
 		for(var j=0;j<3;j++){
 			html += '<div class="coupons-style2">';
-				html += '<span class="money-number">￥' + getRandomPrice() + '</span>';
+				html += '<span class="money-number">¥' + getRandomPrice() + '</span>';
 				html += '<p class="explanation">满15.00可用</p>';
 				html += '<span class="get">领取</span>';
 			html += '</div>';

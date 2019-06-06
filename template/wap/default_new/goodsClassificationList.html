@@ -214,7 +214,7 @@ function showChildGoods(obj,category_id){
 					html +=	'<img class="js-lazy" src="__UPLOAD__/'+data['data'][i]['pic_cover_small']+'" style="display: block;"></a>';
 					html += '<div class="custom-tag-list-goods-detail">';
 					html += '<a href="'+__URL('APP_MAIN/goods/goodsdetail?id='+data["data"][i]["goods_id"])+'" class="custom-tag-list-goods-title">'+data['data'][i]['goods_name']+'</a>';
-					html += '<span class="custom-tag-list-goods-price">￥'+data['data'][i]['promotion_price']+'</span>';
+					html += '<span class="custom-tag-list-goods-price">¥'+data['data'][i]['promotion_price']+'</span>';
 					html += '<a class="custom-tag-list-goods-buy js-custom-tag-list-goods-buy" href="javascript:CartGoodsInfo('+data['data'][i]['goods_id']+','+data['data'][i]['state']+')" data-buyway="1" data-alias="m2nx2p6x" data-postage="0" data-id="22569525" data-isvirtual="0">';
 					html += '<img src="__TEMP__/{$style}/public/images/add-cart.png"></a></div></li>';
 				}
@@ -263,7 +263,7 @@ function pullUpAction(){
 						html +=	'<img class="js-lazy" src="__UPLOAD__/'+data['data'][i]['pic_cover_small']+'" style="display: block;"></a>';
 						html += '<div class="custom-tag-list-goods-detail">';
 						html += '<a href="'+__URL('APP_MAIN/goods/goodsdetail?id='+data["data"][i]["goods_id"])+'" class="custom-tag-list-goods-title">'+data['data'][i]['goods_name']+'</a>';
-						html += '<span class="custom-tag-list-goods-price">￥'+data['data'][i]['promotion_price']+'</span>';
+						html += '<span class="custom-tag-list-goods-price">¥'+data['data'][i]['promotion_price']+'</span>';
 						html += '<a class="custom-tag-list-goods-buy js-custom-tag-list-goods-buy" href="javascript:CartGoodsInfo('+data['data'][i]['goods_id']+','+data['data'][i]['state']+')" data-buyway="1" data-alias="m2nx2p6x" data-postage="0" data-id="22569525" data-isvirtual="0">';
 						html += '<img src="__TEMP__/{$style}/public/images/add-cart.png"></a></div></li>';
 					}

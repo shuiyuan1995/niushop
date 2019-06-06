@@ -66,10 +66,10 @@
 										</td>
 										<td align="center" width="15%">
 											<font class="cart_jmprice" id="goods_price_{$cart_info.cart_id}" data-price="{$cart_info.promotion_price}">
-											￥{$cart_info.price}
+											¥{$cart_info.price}
 											</font>
 										</td>
-										<td align="center" width="15%"><font class="cart_jmprice" id="subtotal_{$cart_info.cart_id}" data-total="{$cart_info.price*$cart_info.num}" data-integral="{if condition='$cart_info.point_exchange_type==1'}{$cart_info.point_exchange*$cart_info.num}{else/}0{/if}"  data-price="{$cart_info.price}">￥{$cart_info.price*$cart_info.num}</font></td>
+										<td align="center" width="15%"><font class="cart_jmprice" id="subtotal_{$cart_info.cart_id}" data-total="{$cart_info.price*$cart_info.num}" data-integral="{if condition='$cart_info.point_exchange_type==1'}{$cart_info.point_exchange*$cart_info.num}{else/}0{/if}"  data-price="{$cart_info.price}">¥{$cart_info.price*$cart_info.num}</font></td>
 										<td align="center" width="10%">
 											<a href="javascript:deleteShoppingCartById({$cart_info.cart_id},true)" class="f6">{:lang('goods_delete')}</a>
 										</td>
@@ -86,7 +86,7 @@
 					<tr>
 						<td bgcolor="#ffffff" align="right" style="padding:10px 15px 0 0;">
 							<a class="choose_gift" href="javascript:void(0);" onclick="choose_gift(0)"><b class="gift_68"></b>选择赠品</a>
-							<span id="zk_0">根据优惠活动<a href="http://www.0838g.com/activity.php"><font color="red">[自营商品]热卖手机满10000减2000</font></a>，您可以享受折扣 ￥2000.00</span></td>
+							<span id="zk_0">根据优惠活动<a href="http://www.0838g.com/activity.php"><font color="red">[自营商品]热卖手机满10000减2000</font></a>，您可以享受折扣 ¥2000.00</span></td>
 					</tr>
 				</tbody>
 			</table> -->
@@ -102,7 +102,7 @@
 					<td align="right" width="80">
 						<a href="javascript:;" class="jmclear js-clear-cart">{:lang('goods_empty_cart')}</a>
 					</td>
-					<td align="right" id="cart_money_info"> {:lang('goods_total_payable')}： <span>￥0.00</span></td>
+					<td align="right" id="cart_money_info"> {:lang('goods_total_payable')}： <span>¥0.00</span></td>
 					<td align="right" width="150">
 						<a href="javascript:selcart_submit();" class="jmcheckout js-settlement">{:lang('goods_settle_accounts')}</a>
 					</td>
@@ -123,7 +123,7 @@
 				<li>
 					<p class="pic"><a href="" target="_blank"><img src=""></a></p>
 					<p class="name"><a href="" target="_blank">小学生，待查</a></p>
-					<p><font class="price">￥9999.00</font></p>
+					<p><font class="price">¥9999.00</font></p>
 					<a class="j_AddCart" href="javascript:addToCart(353)"></a>
 				</li>
 			</ul>
@@ -131,7 +131,7 @@
 				<li>
 					<p class="pic"><a href="" target="_blank"><img src=""></a></p>
 					<p class="name"><a href="" target="_blank">秋季条纹商务</a></p>
-					<p><font class="price">￥29.00</font></p>
+					<p><font class="price">¥29.00</font></p>
 					<a class="j_AddCart" href="javascript:addToCart(344)"></a>
 				</li>
 			</ul>

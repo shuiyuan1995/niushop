@@ -59,7 +59,7 @@ function verify() {
 	} else {
 		$(".error").hide();
 	}
-	pattern= new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？_]");
+	pattern= new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#¥……&*（）——|{}【】‘；：”“'。，、？_]");
 	if(pattern.test(admin_name)){
 		$("#admin_name").parents("dd").find(".error").eq(1).show();
 		return false;
