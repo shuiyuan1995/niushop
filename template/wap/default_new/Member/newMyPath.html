@@ -55,10 +55,10 @@ function LoadingInfo(){
 							list_html += '<div class="content-block">';
 								list_html += '<a href="'+ __URL('APP_MAIN/goods/goodsdetail?id=' + list[i]['goods_id']) +'" class="goods-name">'+ list[i]['goods_info']['goods_name'] +'</a>';
 								if(list[i]['goods_info']['point_exchange_type'] == 0 || list[i]['goods_info']['point_exchange_type'] == 2){
-									list_html += '<span class="price">￥'+ list[i]['goods_info']['promotion_price'] +'</span>';
+									list_html += '<span class="price">¥'+ list[i]['goods_info']['promotion_price'] +'</span>';
 								}else{
 									if(list[i]['goods_info']['point_exchange_type'] == 1 && list[i]['goods_info']['promotion_price'] > 0){
-										list_html += '<span class="price">￥'+ list[i]['goods_info']['promotion_price'] +'+'+ list[i]['goods_info']['point_exchange']+'积分</span>';
+										list_html += '<span class="price">¥'+ list[i]['goods_info']['promotion_price'] +'+'+ list[i]['goods_info']['point_exchange']+'积分</span>';
 									}else{
 										list_html += '<span class="price">'+ list[i]['goods_info']['point_exchange'] +'积分</span>';
 									}

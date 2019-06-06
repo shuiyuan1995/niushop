@@ -114,7 +114,7 @@
 					<br/>
 					<div class="pro-pric">
 						<span>{:lang('goods_price')}:</span>
-						<span style="color:#333333;">￥{$goodsData.price}</span>
+						<span style="color:#333333;">¥{$goodsData.price}</span>
 					</div>
 					<div class="pro-pric">
 						<span class="color"></span>
@@ -133,34 +133,34 @@
 			<div class="money-row">
 				<div>
 					<span>{:lang('member_total_commodity_value')}：</span>
-					<span class="price">￥{$order['goods_money']}</span>
+					<span class="price">¥{$order['goods_money']}</span>
 				</div>
 				
 				{if condition="$order['user_platform_money']>0"}
 				<div>
 					<span>{:lang('member_balance_payment')}：</span>
-					<span class="price">￥{$order['user_platform_money']}</span>
+					<span class="price">¥{$order['user_platform_money']}</span>
 				</div>
 				{/if}
 				
 				{if condition="$order['coupon_money']>0"}
 				<div>
 					<span>{:lang('member_coupons')}：</span>
-					<span class="price">￥{$order['coupon_money']}</span>
+					<span class="price">¥{$order['coupon_money']}</span>
 				</div>
 				{/if}
 				
 				{if condition="$order['tax_money']>0"}
 				<div>
 					<span>{:lang('member_invoice_tax')}：</span>
-					<span class="price">￥{$order['tax_money']}</span>
+					<span class="price">¥{$order['tax_money']}</span>
 				</div>
 				{/if}
 				
 				{if condition="$order['promotion_money']>0"}
 				<div>
 					<span>{:lang('member_full_discount')}：</span>
-					<span class="price">￥{$order['promotion_money']}</span>
+					<span class="price">¥{$order['promotion_money']}</span>
 				</div>
 				{/if}
 				
@@ -173,7 +173,7 @@
 				
 				<div>
 					<span>{:lang('member_actual_payment')}：</span>
-					<span class="price"><b style="color:#f44;">￥{$order['pay_money']}</b></span>
+					<span class="price"><b style="color:#f44;">¥{$order['pay_money']}</b></span>
 				</div>
 			</div>
 		</div>

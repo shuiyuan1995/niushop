@@ -123,10 +123,10 @@ class GoodsDiscount extends BaseService
                 $picture_info = $picture->get($v['picture']);
                 $goods_list['data'][$k]['picture'] = $picture_info;
                 if($v['point_exchange_type'] == 0 || $v['point_exchange_type'] == 2){
-                    $goods_list['data'][$k]['display_price'] = '￥'.$v["promotion_price"];
+                    $goods_list['data'][$k]['display_price'] = '¥'.$v["promotion_price"];
                 }else{
                     if($v['point_exchange_type'] == 1 && $v["promotion_price"] > 0){
-                        $goods_list['data'][$k]['display_price'] = '￥'.$v["promotion_price"].'+'.$v["point_exchange"].'积分';
+                        $goods_list['data'][$k]['display_price'] = '¥'.$v["promotion_price"].'+'.$v["point_exchange"].'积分';
                     }else{
                         $goods_list['data'][$k]['display_price'] = $v["point_exchange"].'积分';
                     }

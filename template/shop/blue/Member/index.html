@@ -267,7 +267,7 @@
 							</a>
 							<div class="item">
 							<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$cart['goods_id'])}" target="_blank" title="{$cart.goods_name}" class="name">{$cart.goods_name}</a>
-							<p>售价：<strong>￥{$cart.price}</strong></p>
+							<p>售价：<strong>¥{$cart.price}</strong></p>
 							</div>
 						</li>
 						{/foreach}
@@ -301,7 +301,7 @@
 									{else/}
 									<img src="__TEMP__/{$style}/public/images/goods/default_goods_img.png" alt="{$goods.goods_name}" />
 									{/if}
-									<strong>￥{$goods.promotion_price}</strong>
+									<strong>¥{$goods.promotion_price}</strong>
 								</a>
 								<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$goods['goods_id'])}" title="{$goods.goods_name}" target="_blank" class="name">{$goods.goods_name}</a>
 							</li>

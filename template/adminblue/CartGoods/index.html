@@ -101,14 +101,14 @@ function LoadingInfo(page_index) {
 							html += '<label style="float:none;width:100%">'+datas[j]['goods_name']+'</label>';
 							html += '</div>';
 							html += '</td>';
-							html += '<td style="text-align:center;">￥'+ datas[j]['price'] +'</td>';
+							html += '<td style="text-align:center;">¥'+ datas[j]['price'] +'</td>';
 							html += '<td>' +datas[j]['num']+'</td>';
 							if (datas[j]['ip'] != 0){var ip = datas[j]['ip']}else{var ip = '0.0.0.0'}
                             html += '<td>' +ip+'</td>';
                             html += '<td>' +datas[j]['country']+'</td>';
                             if(datas[j]['add_time'] != '0000-00-00 00:00:00'){var time = datas[j]['add_time']}else{var time = '--'};
                             html += '<td>' +time+'</td>';
-							html += '<td style="text-align:center;">￥'+ (datas[j]['price']*datas[j]['num']).toFixed(2) +'</td>';
+							html += '<td style="text-align:center;">¥'+ (datas[j]['price']*datas[j]['num']).toFixed(2) +'</td>';
 							html += '</tr>';
                         }
                         $(".table-class tbody").append(html);

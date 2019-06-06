@@ -103,16 +103,16 @@
 				<!--商品不同的价格-->
 				<!--<div class="show-price" {if condition="$goods_info['market_price'] == 0 || $goods_info['market_price'] eq $goods_info['promotion_price']"}style="display:none;"{/if}>
 					<span class="price">{:lang('original_cost')}</span>
-					<font class="market-price">￥{$goods_info.market_price}</font>
+					<font class="market-price">¥{$goods_info.market_price}</font>
 				</div>-->
 				<div class="show-price">
 					<span class="price">原价</span>
-					<font class="old-price">￥{$goods_info.price}</font>
+					<font class="old-price">¥{$goods_info.price}</font>
 				</div>
 				<div class="realy-price">
 					<div class="now-prices">
 						<span class="price">{:lang('goods_selling_price')}</span>
-						<strong class="p-price second-color" id="price" data-price="{$goods_info.promotion_price}">￥{$goods_info.promotion_price}</strong>
+						<strong class="p-price second-color" id="price" data-price="{$goods_info.promotion_price}">¥{$goods_info.promotion_price}</strong>
 						<!-- 单位 -->
 						{if condition ='!empty($goods_info.goods_unit)'}
 							<span class="p-price second-color">/{$goods_info.goods_unit}</span>
@@ -125,7 +125,7 @@
 				<div class="realy-price">
 					<div class="now-prices">
 						<span class="price">{:lang('goods_membership_price')}</span>
-						<strong class="p-price second-color" id="member_price">￥{$goods_info.member_price}</strong>
+						<strong class="p-price second-color" id="member_price">¥{$goods_info.member_price}</strong>
 						{if condition="$goods_info.point_exchange_type==1 && $goods_info.point_exchange>0"}
 							<strong class="p-price second-color" style="font-size:15px;" id="member_point">+{$goods_info.point_exchange}{:lang('goods_integral')}</strong>
 						{/if}
@@ -490,7 +490,7 @@
 						<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$vo['main_goods']['goods_id'])}" target="_blank">{$vo.main_goods.goods_name}</a>
 					</div>
 					<div class="p-price" style="padding:0 0 5px;">
-						<strong>￥{$vo.main_goods.price}</strong>
+						<strong>¥{$vo.main_goods.price}</strong>
 					</div>
 					<i class="plus">+</i>
 				</div>
@@ -510,7 +510,7 @@
 									<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$to['goods_id'])}" target="_blank" title="{$to.goods_name}">{$to.goods_name}</a>
 								</div>
 								<div class="p-price" style="padding:0 0 5px;">
-									<strong>￥{$to.price}</strong>
+									<strong>¥{$to.price}</strong>
 								</div>
 							</li>
 							{/foreach}
@@ -522,15 +522,15 @@
 				<div class="p-price">
 					<p style="line-height: 25px;">
 						<span>原价</span>
-						<s>￥{$vo.original_price}</s>
+						<s>¥{$vo.original_price}</s>
 					</p>
 					<p style="line-height: 25px;">
 						<span>节省</span>
-						<span>￥{$vo.save_the_price}</span>
+						<span>¥{$vo.save_the_price}</span>
 					</p>
 					<p style="line-height: 25px;">
 						<span>套餐价</span>
-						<strong>￥{$vo.combo_package_price}</strong>
+						<strong>¥{$vo.combo_package_price}</strong>
 					</p>
 				</div>
 				{if condition="$vo['main_goods']['stock'] > 0"}

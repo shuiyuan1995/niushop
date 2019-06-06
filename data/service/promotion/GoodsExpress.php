@@ -451,7 +451,7 @@ class GoodsExpress extends BaseService
             } else {
                 // 如果禁用选择物流公司查询默认或者第一条，只显示运费即可
                 if (! empty($express_company_list)) {
-                    return "￥" . $express_company_list[0]['express_fee'];
+                    return "¥" . $express_company_list[0]['express_fee'];
                 }
             }
         }

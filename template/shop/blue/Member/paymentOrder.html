@@ -194,9 +194,9 @@ input[type="radio"]:checked {
 	<!-- 								<p></p> -->
 								</div>
 							</div>
-							<div class="col col3 goods-price">￥{$cart_info.price}</div>
+							<div class="col col3 goods-price">¥{$cart_info.price}</div>
 							<div class="col col4 good-num">{$cart_info.num}</div>
-							<div class="col col5 orange-bold xiaoji" data-subtotal="{$cart_info.subtotal}" style="border-bottom-style: none;">￥{$cart_info.subtotal}</div>
+							<div class="col col5 orange-bold xiaoji" data-subtotal="{$cart_info.subtotal}" style="border-bottom-style: none;">¥{$cart_info.subtotal}</div>
 						</div>
 						{/foreach}
 					</div>
@@ -235,9 +235,9 @@ input[type="radio"]:checked {
 									</div>
 								</div>
 								{if $point_exchange_type eq 1}
-								<div class="col col3 goods-price">{if $cart_info.price > 0}￥{$cart_info.price}+{/if}{$cart_info.point_exchange}积分</div>
+								<div class="col col3 goods-price">{if $cart_info.price > 0}¥{$cart_info.price}+{/if}{$cart_info.point_exchange}积分</div>
 								<div class="col col4 good-num">{$cart_info.num}</div>
-								<div class="col col5 orange-bold xiaoji" data-subtotal="{$cart_info.subtotal}" style="border-bottom-style: none;">{if $cart_info.subtotal > 0}￥{$cart_info.subtotal}+{/if}{$cart_info.total_point}积分</div>
+								<div class="col col5 orange-bold xiaoji" data-subtotal="{$cart_info.subtotal}" style="border-bottom-style: none;">{if $cart_info.subtotal > 0}¥{$cart_info.subtotal}+{/if}{$cart_info.total_point}积分</div>
 								{else/}
 								<div class="col col3 goods-price">{$cart_info.point_exchange}积分</div>
 								<div class="col col4 good-num">{$cart_info.num}</div>
@@ -273,9 +273,9 @@ input[type="radio"]:checked {
 										</p>
 									</div>
 								</div>
-								<div class="col col3 goods-price"><s>￥{$gift_info.gift_goods.price}</s></div>
+								<div class="col col3 goods-price"><s>¥{$gift_info.gift_goods.price}</s></div>
 								<div class="col col4 good-num">{$gift_info.count}</div>
-								<div class="col col5 orange-bold xiaoji" style="border-bottom-style: none;">￥0</div>
+								<div class="col col5 orange-bold xiaoji" style="border-bottom-style: none;">¥0</div>
 							</div>
 						{/foreach}
 					</div>
@@ -313,9 +313,9 @@ input[type="radio"]:checked {
 	<!-- 								<p></p> -->
 								</div>
 							</div>
-							<div class="col col3 goods-price">￥{$cart_info.price}</div>
+							<div class="col col3 goods-price">¥{$cart_info.price}</div>
 							<div class="col col4 good-num">{$cart_info.num}</div>
-							<div class="col col5 orange-bold xiaoji" data-subtotal="{$cart_info.subtotal}" style="border-bottom-style: none;">￥{$cart_info.subtotal}</div>
+							<div class="col col5 orange-bold xiaoji" data-subtotal="{$cart_info.subtotal}" style="border-bottom-style: none;">¥{$cart_info.subtotal}</div>
 						</div>
 						{/foreach}
 				
@@ -328,9 +328,9 @@ input[type="radio"]:checked {
 									</p>
 								</div>
 							</div>
-							<div class="col col3 goods-price combo_package_detail">￥{$combo_detail.combo_package_price}</div>
+							<div class="col col3 goods-price combo_package_detail">¥{$combo_detail.combo_package_price}</div>
 							<div class="col col4 good-num combo_package_detail">{$combo_buy_num}</div>
-							<div class="col col5 orange-bold combo_package_detail" style="border-bottom-style: none;">￥{$combo_detail.combo_package_price * $combo_buy_num}</div>
+							<div class="col col5 orange-bold combo_package_detail" style="border-bottom-style: none;">¥{$combo_detail.combo_package_price * $combo_buy_num}</div>
 						</div>
 					</div>
 				</div>
@@ -675,13 +675,13 @@ input[type="radio"]:checked {
 							<!-- 总计 -->
 							<p class="slivergrey">
 								<span>{:lang('goods_total')}<b class="orange-bold js-goods-num">0</b>{:lang('member_kinds_of_goods')} {:lang('member_total')}：</span>
-								<span class="txtmoney">￥<b class="js-total-money">0.00</b></span>
+								<span class="txtmoney">¥<b class="js-total-money">0.00</b></span>
 							</p>
 							<!-- 预售金 -->
 							{if $order_tag eq 'presell_buy'}	
 							<p class="slivergrey">
 								<span>{:lang('goods_presell')}：</span>
-								<span class="txtmoney">￥<b id="presell_money">0.00</b></span>
+								<span class="txtmoney">¥<b id="presell_money">0.00</b></span>
 							</p>
 							{/if}
 							
@@ -689,41 +689,41 @@ input[type="radio"]:checked {
 							{if $order_goods_type == 1}
 							<p class="slivergrey">
 								<span>{:lang('goods_freight')}：</span>
-								<span class="txtmoney">￥<b id="express">0.00</b></span>
+								<span class="txtmoney">¥<b id="express">0.00</b></span>
 							</p>
 							{/if}
 							<p class="slivergrey">
 								<span>拆包：</span>
-								<span class="txtmoney">￥<b id="chaibao">0.00</b></span>
+								<span class="txtmoney">¥<b id="chaibao">0.00</b></span>
 							</p>
 							<!-- <p id="baoxianfei" class="slivergrey">
 								<span>保险：</span>
-								<span class="txtmoney">￥<b id="express">0.00</b></span>
+								<span class="txtmoney">¥<b id="express">0.00</b></span>
 							</p> -->
 							<!-- 总优惠 -->
 							<p class="slivergrey">
 								<span>{:lang('member_total_discount')}：</span>
-								<span class="txtmoney">￥<b id="discount_money">0.00</b></span>
+								<span class="txtmoney">¥<b id="discount_money">0.00</b></span>
 							</p>
 							{if $point_config["is_open"] == 1}
 							<!-- 积分可抵 -->
 							<p class="slivergrey">
 								<span>积分抵现：</span>
-								<span class="txtmoney">￥<b id="point_money">{$point_money}</b></span>
+								<span class="txtmoney">¥<b id="point_money">{$point_money}</b></span>
 							</p>
 							{/if}
 							<!-- 发票税额 -->
 							{if condition="count($shop_config.order_invoice_content_list)"}
 							<p class="slivergrey">
 								<span>{:lang('member_invoice_tax')}：</span>
-								<span class="txtmoney">￥<b id="invoice_tax_money">0.00</b></span>
+								<span class="txtmoney">¥<b id="invoice_tax_money">0.00</b></span>
 							</p>
 							{/if}
 							<!-- 余额 -->
 							<!-- {if condition="$shop_config['order_balance_pay']"}
 							<p class="slivergrey">
 								<span>{:lang('member_use_balance')}：</span>
-								<span class="txtmoney">￥<b id="use_balance">0.00</b></span>
+								<span class="txtmoney">¥<b id="use_balance">0.00</b></span>
 							</p>
 							{/if} -->
 							
@@ -759,7 +759,7 @@ input[type="radio"]:checked {
 							
 								<p>
 									<span class="slivergrey">{:lang('member_amount_payable')}：</span>
-									<span class="orange-bold big">￥<b id="realprice">0.00</b></span>
+									<span class="orange-bold big">¥<b id="realprice">0.00</b></span>
 									{if $order_tag == 'js_point_exchange'}
 										<span class="orange-bold big" id="and"><b>+</b></span>
 										<span class="orange-bold big" id="count-point"><b>{$count_point_exchange}{:lang('goods_integral')}</b></span>

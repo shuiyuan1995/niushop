@@ -131,7 +131,7 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 				<footer>
 					<p>{$vo.goods_name}</p>
 					<div>
-					<span class="tuangou-money">￥{$vo.tuangou_money}</span><br>
+					<span class="tuangou-money">¥{$vo.tuangou_money}</span><br>
 					<span class="original-money">单买价&nbsp;{$vo.promotion_price}元</span>
 					<button>去拼单&nbsp;&gt;</button>
 					</div>
@@ -169,7 +169,7 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 								<a href="{:__URL('APP_MAIN/goods/goodsdetail?id='.$goods['goods_id'])}">{$goods.goods_name}</a>
 							</p>
 							<div class="goods-info">
-								<span class="goods_price"><em style="color: #fb3a2f;">￥{$goods.promotion_price}</em></span>
+								<span class="goods_price"><em style="color: #fb3a2f;">¥{$goods.promotion_price}</em></span>
 								<a href="javascript:CartGoodsInfo({$goods.goods_id},{$goods.state})" class="add-cart"></a>
 							</div>
 						</div>
@@ -215,10 +215,10 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 								<div class="goods-info">
 									<span class="goods_price">
 										{in name="$list.point_exchange_type" value="0,2"}
-										<em style="color: #fb3a2f;">￥{$list.promotion_price}</em>
+										<em style="color: #fb3a2f;">¥{$list.promotion_price}</em>
 										{else/}
 											{if $list['point_exchange_type'] == 1 && $list['promotion_price'] > 0}
-												<em style="color: #fb3a2f;">￥{$list.promotion_price}+{$list.point_exchange}积分</em>
+												<em style="color: #fb3a2f;">¥{$list.promotion_price}+{$list.point_exchange}积分</em>
 											{else/}
 												<em style="color: #fb3a2f;">{$list.point_exchange}积分</em>
 											{/if}

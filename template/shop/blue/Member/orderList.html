@@ -76,7 +76,7 @@
 						</td>
 						<td align="center" class="baobei no-border-right order_goods_attr"><div class="goods_desc goods_desc_t last" style="line-height:50px;">{$order_item.sku_name} </div></td>
 						
-						<td align="center" class="baobei no-border-right order_goods_info" style="padding:0;"><div class="goods_desc price  last" style="padding-left:0px; line-height:50px;"> ￥{$order_item.price} </div></td>
+						<td align="center" class="baobei no-border-right order_goods_info" style="padding:0;"><div class="goods_desc price  last" style="padding-left:0px; line-height:50px;"> ¥{$order_item.price} </div></td>
 						<td align="center" class="baobei no-border-right order_goods_info" style="padding:0;"><div class="goods_desc last" style="padding-left:0px;line-height:50px;"> {$order_item.num} </div> </td>
 						<td align="center" class="after-service baobei no-border-right order_goods_info" valign="middle">
 							<div class="goods_desc last">
@@ -111,7 +111,7 @@
 							</div>
 						</td>
 						{if condition="$k eq 1"}
-						<td rowspan="{$order.order_item_list|count}" align="center" class="amount no-border-right"><p class="post-type"><strong>￥{$order.order_money}</strong></p></td>
+						<td rowspan="{$order.order_item_list|count}" align="center" class="amount no-border-right"><p class="post-type"><strong>¥{$order.order_money}</strong></p></td>
 						<td rowspan="{$order.order_item_list|count}" align="center" class="trade-status no-border-right">
 							<div>{$order.status_name}</div>
 							<a href="{:__URL('SHOP_MAIN/member/orderdetail','orderid='.$order['order_id'])}" class="main-color">{:lang('member_order_details')}</a><br/>

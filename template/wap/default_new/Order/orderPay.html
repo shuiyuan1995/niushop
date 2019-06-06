@@ -18,7 +18,7 @@
 			style="width: 60px; height: 60px;" />
 	</div>
 	<div style="float: left; line-height: 28px;">
-		<p>￥{$order_detail.pay_money}</p>
+		<p>¥{$order_detail.pay_money}</p>
 		<p>{$order_detail.shop_name}</p>
 	</div>
 </div>
@@ -43,7 +43,7 @@
 <!--   需要微信支付，此处移至待付款订单，显示下面按钮 begin -->
 <section class="s-btn"
 	style="position: fixed; left: 0; right: 0; bottom: 0; height: 50px; padding: 0; z-index: 5;">
-	<button class="alipay" type="button" onclick="calculate()">{:lang('confirm_payment')}￥{$order_detail.pay_money}</button>
+	<button class="alipay" type="button" onclick="calculate()">{:lang('confirm_payment')}¥{$order_detail.pay_money}</button>
 </section>
 <script>
 	var __IMG__ = '__TEMP__/{$style}/public/images';

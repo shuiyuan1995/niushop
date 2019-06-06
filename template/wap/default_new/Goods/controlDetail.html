@@ -102,11 +102,11 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 	<input type="hidden" id="end_time"  value="{$goods_detail['promotion_detail']['end_time'] | getTimeStampTurnTime}"/>
 	<div class="goods-price">
 		<div class="current-price activity-price">
-			<span>￥</span><i class="js-goods-price price">{$goods_detail.promotion_price}</i>
+			<span>¥</span><i class="js-goods-price price">{$goods_detail.promotion_price}</i>
 			<span class="price-title js-price-title ">{:lang('goods_discount')}</span>
 			<span class="goods-unit-style">/{if condition ="empty($goods_detail['goods_unit'])"}件{else/}{$goods_detail['goods_unit']}{/if}</span>
 		</div>
-		<em class="original-price">￥{$goods_detail.price}</em>
+		<em class="original-price">¥{$goods_detail.price}</em>
 		<div class="font-size-12 overview-countdown js-activity-tips started " data-status="started">
 			<div class="countdown-title">{:lang('distance_ends')}</div>
 			<div class="js-discount-time countdown" data-countdown="3542691">
@@ -142,7 +142,7 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 		{if condition = "$goods_detail.market_price gt 0 && $goods_detail.market_price neq $goods_detail.promotion_price"}
 		<div class="price_wrap">	
 			<span class="price" price="{$goods_detail.market_price}">			
-				<span style="font-size:14px;display: inline-block;vertical-align: middle;text-decoration: line-through;color:#999;">市场价：￥{$goods_detail.market_price}</span>	
+				<span style="font-size:14px;display: inline-block;vertical-align: middle;text-decoration: line-through;color:#999;">市场价：¥{$goods_detail.market_price}</span>	
 			</span>
 		</div>
 		{/if}
@@ -150,7 +150,7 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 		{if condition = "$goods_detail.market_price gt 0 && $goods_detail.market_price neq $goods_detail.member_price"}
 		<div class="price_wrap">	
 			<span class="price" price="{$goods_detail.market_price}">			
-				<span style="font-size:14px;display: inline-block;vertical-align: middle;text-decoration: line-through;color:#999;">市场价：￥{$goods_detail.market_price}</span>	
+				<span style="font-size:14px;display: inline-block;vertical-align: middle;text-decoration: line-through;color:#999;">市场价：¥{$goods_detail.market_price}</span>	
 			</span>
 		</div>
 		{/if}
@@ -159,14 +159,14 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 		<span class="tit" id="priceTitle"></span> 
 		<span class="price" price="{$goods_detail.promotion_price}">
 			{if condition="$goods_detail.promotion_price <= $goods_detail.member_price"}
-			<span style="font-size:14px;display: inline-block;vertical-align: middle;">￥{$goods_detail.promotion_price}</span>
+			<span style="font-size:14px;display: inline-block;vertical-align: middle;">¥{$goods_detail.promotion_price}</span>
 			{else/}
-			<span style="font-size:14px;display: inline-block;vertical-align: middle;">会员价：￥{$goods_detail.member_price}</span>
+			<span style="font-size:14px;display: inline-block;vertical-align: middle;">会员价：¥{$goods_detail.member_price}</span>
 			{/if}
 		</span>
 		{if condition="$goods_detail.is_open_presell eq 1"}
 		<span class="price" style="font-size:14px;" price="{$goods_detail.promotion_price}">{:lang('goods_deposit')}
-			<span style="font-size:14px;display: inline-block;vertical-align: middle;">￥{$goods_detail.presell_price}</span>
+			<span style="font-size:14px;display: inline-block;vertical-align: middle;">¥{$goods_detail.presell_price}</span>
 		</span>
 		{/if}
 		
@@ -300,7 +300,7 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 		<div class="goods">
 			<a href="{:__URL('APP_MAIN/goods/goodsdetail','id='.$comboPackageGoodsArray['main_goods']['goods_id'])}">
 				<img src="{:__IMG($default_goods_img)}" class="lazy_load g-img" data-original="{:__IMG($comboPackageGoodsArray['main_goods']['pic_cover_mid'])}" alt="">
-				<p class="g-price">￥{$comboPackageGoodsArray.main_goods.price}</p>
+				<p class="g-price">¥{$comboPackageGoodsArray.main_goods.price}</p>
 			</a>
 		</div>
 		<i class="fa fa-plus" aria-hidden="true"></i>
@@ -309,7 +309,7 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 			<div class="goods" style="margin-right: 5%;">
 				<a href="{:__URL('APP_MAIN/goods/goodsdetail','id='.$vo['goods_id'])}">
 					<img src="{:__IMG($default_goods_img)}" class="lazy_load g-img" data-original="{:__IMG($vo['pic_cover_mid'])}" alt="">
-					<p class="g-price">￥{$vo['price']}</p>
+					<p class="g-price">¥{$vo['price']}</p>
 				</a>
 			</div>
 			{/if}
@@ -374,7 +374,7 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 			<div class="pro-info">
 				<p class="name" >{$goods_detail.goods_name}</p>
 				<p class="pro-price" id="price">
-					￥{if condition="$goods_detail.promotion_price < $goods_detail.member_price"}{$goods_detail.promotion_price}{else/}{$goods_detail.member_price}{/if}
+					¥{if condition="$goods_detail.promotion_price < $goods_detail.member_price"}{$goods_detail.promotion_price}{else/}{$goods_detail.member_price}{/if}
 					{if condition="$goods_detail.point_exchange_type==1 && $goods_detail.point_exchange>0"}
 					<span style="font-size:16px;display: inline-block;vertical-align: middle;">+{$goods_detail.point_exchange}{:lang('goods_integral')}</span>
 					{/if}
@@ -465,7 +465,7 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 			<li>
 				<div class="js-coupon" data-max-fetch="{$vo.max_fetch}" data-receive-quantity="{$vo.receive_quantity}" data-coupon-id="{$vo.coupon_type_id}">
 					<div class="coupon-price">
-						<p class="price">￥{$vo.money}</p>
+						<p class="price">¥{$vo.money}</p>
 						<p class="desc">立即领取</p>
 					</div>
 					<div class="coupon-lose">
@@ -555,7 +555,7 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 			<li>
 				<div class="js-coupon" data-max-fetch="{$vo.max_fetch}" data-receive-quantity="{$vo.receive_quantity}" data-coupon-id="{$vo.coupon_type_id}">
 					<div class="coupon-price">
-						<p class="price">￥{$vo.money}</p>
+						<p class="price">¥{$vo.money}</p>
 						<p class="desc">立即领取</p>
 					</div>
 					<div class="coupon-lose">

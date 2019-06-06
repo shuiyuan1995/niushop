@@ -50,7 +50,7 @@ i.shipping-fee{font-style: normal;font-size: 12px;background: #fff;color: #f44;p
 				
 				<div class="control-goods-price">
 					{if condition="$custom_template_v['style_data']['goods_list']['goods_show_goods_price'] eq 1"}
-						<em onclick="location.href='{:__URL('APP_MAIN/goods/goodsdetail?id='.$v['goods_id'])}'">￥{$v["promotion_price"]}
+						<em onclick="location.href='{:__URL('APP_MAIN/goods/goodsdetail?id='.$v['goods_id'])}'">¥{$v["promotion_price"]}
 						{if condition="$v.shipping_fee==0"}
 						<i class="shipping-fee">包邮</i>
 						{/if}

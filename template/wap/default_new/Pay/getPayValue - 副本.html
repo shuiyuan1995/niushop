@@ -15,7 +15,7 @@
 {block name="main"}
 <div class="head-info">
 	<div class="head-pay">{:lang('towards')}{$shopname}{:lang('pay')}</div>
-	<div class="head-pay-value">￥{$pay_value.pay_money}</div>
+	<div class="head-pay-value">¥{$pay_value.pay_money}</div>
 </div>
 
 <div class="pay-type-item">
@@ -79,7 +79,7 @@
 {include file="wap/default_new/controlCopyRight"}
 
 <section class="s-btn" style="position: fixed; left: 0; right: 0; bottom: 0; height: 50px; padding: 0; z-index: 5;">
-	<button class="alipay" type="button" onclick="calculate()">{:lang('confirm_payment')}￥{$pay_value.pay_money}</button>
+	<button class="alipay" type="button" onclick="calculate()">{:lang('confirm_payment')}¥{$pay_value.pay_money}</button>
 </section>
 <script>
 var __IMG__ = '__TEMP__/{$style}/public/images';
