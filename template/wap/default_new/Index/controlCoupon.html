@@ -84,7 +84,7 @@
 	<div  class="coupon-all">
 		{volist name="coupon_list" id="vo" }
 		<div class="receive-coupons" data-max-fetch="{$vo.max_fetch}" data-received-num="{if !empty($uid)}{$vo.received_num}{else/}0{/if}" onclick="coupon_receive(this,{$vo.coupon_type_id})">
-			<big class="money-number">￥{$vo['money']}</big>
+			<big class="money-number">¥{$vo['money']}</big>
 			<p class="explanation">满{$vo.at_least}可用</p>
 			<span class="get">领取</span>
 		</div>

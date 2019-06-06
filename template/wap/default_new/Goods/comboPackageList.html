@@ -31,7 +31,7 @@
 			<div class="data_info">
 				<p class="goods_name">{$vo.main_goods.goods_name}</p>
 				<div class="price_share">
-					<span class="price">￥{$vo.main_goods.price}</span>
+					<span class="price">¥{$vo.main_goods.price}</span>
 				</div>
 				{if condition="count($vo['main_goods']['sku_list']) > 1"}
 				<p class="select_sku" onclick="selectSku({$vo.main_goods.goods_id},{$vo.id});"><span class="select_sku_{$vo.main_goods.goods_id}">{:lang("please_select_goods_sku")}</span><i class="fa fa-angle-right fa-lg"></i></p>
@@ -49,7 +49,7 @@
 			<div class="data_info">
 				<p class="goods_name">{$to.goods_name}</p>
 				<div class="price_share">
-					<span class="price">￥{$to.price}</span>
+					<span class="price">¥{$to.price}</span>
 				</div>
 				{if condition="count($to['sku_list']) > 1"}
 				<p class="select_sku" onclick="selectSku({$to['goods_id']},{$vo.id});"><span class="select_sku_{$to['goods_id']}">{:lang("please_select_goods_sku")}</span><i class="fa fa-angle-right fa-lg"></i></p>
@@ -65,11 +65,11 @@
 <div style="height: 50px;"></div>
 <div class="combo_package_buttom">
 	<div class="combo_package_info">
-		<p><span class="package_price">{:lang("package_price")}<b>￥<span id="package_price"></span></b></span></span></p>
+		<p><span class="package_price">{:lang("package_price")}<b>¥<span id="package_price"></span></b></span></span></p>
 		<p>
 			<span class="original_price">{:lang("original_price")}
-				<s>￥<span id="original_price"></span></s>
-		   		<span class="save_the_price">{:lang("save_the_price")}￥
+				<s>¥<span id="original_price"></span></s>
+		   		<span class="save_the_price">{:lang("save_the_price")}¥
 		   			<span id="save_the_price"></span>
 		   		</span>
 		   	</span>
@@ -128,7 +128,7 @@
 			stock_arr.push($(this).attr("stock"));
 			price_arr.push($(this).attr("price"));
 			$(this).prev(".data_info").find("span[class^='select_sku_']").text("已选规格："+$(this).attr("skuname"));
-			$(this).prev(".data_info").find("span.price").text("￥"+$(this).attr("price"));
+			$(this).prev(".data_info").find("span.price").text("¥"+$(this).attr("price"));
 		})
 		var original_price = parseFloat(eval(price_arr.join("+"))).toFixed(2)  //商品原价
 		var save_the_price = parseFloat(parseFloat(original_price) - parseFloat(package_price)).toFixed(2); //节省价

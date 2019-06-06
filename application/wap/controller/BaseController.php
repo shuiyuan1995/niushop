@@ -390,7 +390,7 @@ class BaseController extends Controller
                 $goods = new GoodsService();
                 $goods_detail = $goods->getGoodsDetail($goods_id);
                 $share_content["share_title"] = $goods_detail["goods_name"];
-                $share_content["share_contents"] = $config["goods_param_1"] . "￥" . $goods_detail["price"] . ";" . $config["goods_param_2"];
+                $share_content["share_contents"] = $config["goods_param_1"] . "¥" . $goods_detail["price"] . ";" . $config["goods_param_2"];
                 $share_content['share_nick_name'] = $current_user;
                 if (count($goods_detail["img_list"]) > 0) {
                     if (strstr($goods_detail["img_list"][0]["pic_cover_mid"], "http")) {
@@ -444,7 +444,7 @@ class BaseController extends Controller
                 $bargain_goods = $bargain_service->getBargainGoodsInfo($launch_info['bargain_id'], $launch_info['goods_id']);
 
                 $share_content["share_title"] = '我正在'.$launch_info['bargain_min_money'].'元拿'.$bargain_goods["goods_name"] . '就差你一刀了';
-                $share_content["share_contents"] = '原价：' . "￥" . $launch_info["goods_money"] . ";";
+                $share_content["share_contents"] = '原价：' . "¥" . $launch_info["goods_money"] . ";";
                 $share_content['share_nick_name'] = $current_user;
                 
                 $album = new Album();

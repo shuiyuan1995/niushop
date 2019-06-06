@@ -139,9 +139,9 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 <div class="goods-pintuan-detail">
 	<div class="tuangou-price-info">
 		{if condition="$tuangou_group_count==0"}
-		<h1 class="tuangou-money">￥{if condition="$goods_detail.promotion_price < $goods_detail.member_price"}{$goods_detail.promotion_price}{else/}{$goods_detail.member_price}{/if}</h1>
+		<h1 class="tuangou-money">¥{if condition="$goods_detail.promotion_price < $goods_detail.member_price"}{$goods_detail.promotion_price}{else/}{$goods_detail.member_price}{/if}</h1>
 		{else/}
-		<h1 class="tuangou-money">￥{$goods_pintuan['tuangou_money']}</h1>
+		<h1 class="tuangou-money">¥{$goods_pintuan['tuangou_money']}</h1>
 		{/if}
 <!-- 		<span class="spelling-number"><strong>1</strong>人拼单</span> -->
 	</div>
@@ -326,7 +326,7 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 			<div class="pro-info">
 				<p class="name" >{$goods_detail.goods_name}</p>
 				<p class="pro-price" id="price">
-					￥{if condition="$goods_detail.promotion_price < $goods_detail.member_price"}{$goods_detail.promotion_price}{else/}{$goods_detail.member_price}{/if}
+					¥{if condition="$goods_detail.promotion_price < $goods_detail.member_price"}{$goods_detail.promotion_price}{else/}{$goods_detail.member_price}{/if}
 					{if condition="$goods_detail.point_exchange_type==1 && $goods_detail.point_exchange>0"}
 					<span style="font-size:16px;display: inline-block;vertical-align: middle;">+{$goods_detail.point_exchange}{:lang('goods_integral')}</span>
 					{/if}

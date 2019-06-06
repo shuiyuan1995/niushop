@@ -274,12 +274,12 @@ $().ready(function() {
 					var price = parseFloat($(sku_id).attr("price"));
 					var promotion_price = parseFloat($(sku_id).attr("promotion_price"));
 					var member_price = parseFloat($(sku_id).attr("member_price"));
-					$("#price").text("￥" + promotion_price.toFixed(2));
+					$("#price").text("¥" + promotion_price.toFixed(2));
 					$("#price").attr("data-price", promotion_price.toFixed(2));
-					$("#member_price").text("￥"+member_price.toFixed(2));
+					$("#member_price").text("¥"+member_price.toFixed(2));
 					$("#member_price").attr("data-price", member_price.toFixed(2));
 
-					$(".market-price").text("￥" + original_price.toFixed(2));//商品原价
+					$(".market-price").text("¥" + original_price.toFixed(2));//商品原价
 					$("#hidden_sku_price").val(price);
 					$(".js-goods-number").text("{:lang('goods_stock')}"+select_stock+"{if condition ='empty($goods_info.goods_unit)'}件{else/}{$goods_info.goods_unit}{/if}");
 					if($("#hidden_max_buy").val()==0 || parseInt($("#hidden_max_buy").val()) > parseInt($("#hidden_stock").val())){
@@ -312,8 +312,8 @@ $().ready(function() {
 			$("#hidden_skuid").val("");
 			var price_num = price_section_arr.promotion_price.length;
 			if(price_num > 1 && price_section_arr.promotion_price[0] != price_section_arr.promotion_price[price_num -1]){
-				$("#price").text("￥" + price_section_arr.promotion_price[0] + '-' + price_section_arr.promotion_price[price_num - 1]);
-				$("#member_price").text("￥" + price_section_arr.member_price[0] + '-' + price_section_arr.member_price[price_num - 1]);
+				$("#price").text("¥" + price_section_arr.promotion_price[0] + '-' + price_section_arr.promotion_price[price_num - 1]);
+				$("#member_price").text("¥" + price_section_arr.member_price[0] + '-' + price_section_arr.member_price[price_num - 1]);
 			}
 		}
 	}
@@ -662,6 +662,6 @@ function calculated_price(num, obj){
 			}
 		}
 	}
-	$(obj).text("￥"+price.toFixed(2));
+	$(obj).text("¥"+price.toFixed(2));
 }
 </script>

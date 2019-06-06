@@ -29,7 +29,7 @@
 		<div class="coupon" style="background: #34D71E;" onclick="coupon_receive(this,{$vo.coupon_type_id})">
 	{/if}
 		<img src="__STATIC__/wapCustomTemplate/images/index_coupon.png" class="background_img">
-		<p><span>￥</span>{$vo.money}</p>
+		<p><span>¥</span>{$vo.money}</p>
 		<img src="__STATIC__/wapCustomTemplate/images/already_received.png" class="already_received">
 	</div>
 	{/volist}
@@ -38,7 +38,7 @@
 <div class="coupon-all2">
 	{volist name="coupon_list" id="vo"}
 	<div class="coupons-style2" onclick="coupon_receive(this,{$vo.coupon_type_id})">
-		<span class="money-number">￥{$vo.money}</span>
+		<span class="money-number">¥{$vo.money}</span>
 		<p class="explanation">满{$vo.at_least}可用</p>
 		<span class="get">领取</span>
 	</div>

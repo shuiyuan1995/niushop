@@ -101,9 +101,9 @@ function LoadingInfo(page_index) {
 							html += '<label style="float:none;width:100%">'+datas[j]['goods_name']+'</label>';
 							html += '</div>';
 							html += '</td>';
-							html += '<td style="text-align:center;">￥'+ datas[j]['price'] +'</td>';
+							html += '<td style="text-align:center;">¥'+ datas[j]['price'] +'</td>';
 							html += '<td>' +datas[j]['num']+'</td>';
-							html += '<td style="text-align:center;">￥'+ (datas[j]['price']*datas[j]['num']).toFixed(2) +'</td>';
+							html += '<td style="text-align:center;">¥'+ (datas[j]['price']*datas[j]['num']).toFixed(2) +'</td>';
 							html += '</tr>';
                         }
                         $(".table-class tbody").append(html);

@@ -128,9 +128,9 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 		<span class="price" price="{$goods_detail.promotion_price}">
 			{if $goods_detail.point_exchange_type eq 1}
 				{if condition="$goods_detail.promotion_price < $goods_detail.member_price"}
-				<span style="font-size:14px;display: inline-block;vertical-align: middle;">￥{$goods_detail.promotion_price}</span>
+				<span style="font-size:14px;display: inline-block;vertical-align: middle;">¥{$goods_detail.promotion_price}</span>
 				{else/}
-				<span style="font-size:14px;display: inline-block;vertical-align: middle;">会员价：￥{$goods_detail.member_price}</span>
+				<span style="font-size:14px;display: inline-block;vertical-align: middle;">会员价：¥{$goods_detail.member_price}</span>
 				{/if}
 
 				{if condition="$goods_detail.point_exchange_type==1 && $goods_detail.point_exchange>0"}
@@ -241,7 +241,7 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 		<div class="goods">
 			<a href="{:__URL('APP_MAIN/goods/goodsdetail','id='.$comboPackageGoodsArray['main_goods']['goods_id'])}">
 				<img src="{:__IMG($default_goods_img)}" class="lazy_load g-img" data-original="{:__IMG($comboPackageGoodsArray['main_goods']['pic_cover_mid'])}" alt="">
-				<p class="g-price">￥{$comboPackageGoodsArray.main_goods.price}</p>
+				<p class="g-price">¥{$comboPackageGoodsArray.main_goods.price}</p>
 			</a>
 		</div>
 		<i class="fa fa-plus" aria-hidden="true"></i>
@@ -250,7 +250,7 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 			<div class="goods" style="margin-right: 5%;">
 				<a href="{:__URL('APP_MAIN/goods/goodsdetail','id='.$vo['goods_id'])}">
 					<img src="{:__IMG($default_goods_img)}" class="lazy_load g-img" data-original="{:__IMG($vo['pic_cover_mid'])}" alt="">
-					<p class="g-price">￥{$vo['price']}</p>
+					<p class="g-price">¥{$vo['price']}</p>
 				</a>
 			</div>
 			{/if}
@@ -327,7 +327,7 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 				<p class="name" >{$goods_detail.goods_name}</p>
 					{if $goods_detail.point_exchange_type eq 1}
 					<p class="pro-price">
-						<span  id="price">￥{if condition="$goods_detail.promotion_price < $goods_detail.member_price"}{$goods_detail.promotion_price}{else/}{$goods_detail.member_price}{/if}
+						<span  id="price">¥{if condition="$goods_detail.promotion_price < $goods_detail.member_price"}{$goods_detail.promotion_price}{else/}{$goods_detail.member_price}{/if}
 						</span>
 						{if condition="$goods_detail.point_exchange_type eq 1 && $goods_detail.point_exchange>0"}
 						<span style="font-size:16px;display: inline-block;">+{$goods_detail.point_exchange}{:lang('goods_integral')}</span>
@@ -416,7 +416,7 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 			<li>
 				<div class="js-coupon" data-max-fetch="{$vo.max_fetch}" data-receive-quantity="{$vo.receive_quantity}" data-coupon-id="{$vo.coupon_type_id}">
 					<div class="coupon-price">
-						<p class="price">￥{$vo.money}</p>
+						<p class="price">¥{$vo.money}</p>
 						<p class="desc">立即领取</p>
 					</div>
 					<div class="coupon-lose">

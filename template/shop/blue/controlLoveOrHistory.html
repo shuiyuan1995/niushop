@@ -44,10 +44,10 @@
 					</div>
 					<div class="p-comm">
 						{in name="$vo.point_exchange_type" value="0,2"}
-							<span class="p-price second-color">￥{$vo.price}</span>
+							<span class="p-price second-color">¥{$vo.price}</span>
 						{else/}
 							{if $vo['point_exchange_type'] == 1 && $vo['promotion_price'] > 0}
-								<span class="p-price second-color">￥{$vo.promotion_price}+{$vo.point_exchange}积分</span>
+								<span class="p-price second-color">¥{$vo.promotion_price}+{$vo.point_exchange}积分</span>
 							{else/}
 								<span class="p-price second-color">{$vo.point_exchange}积分</span>
 							{/if}
@@ -74,10 +74,10 @@
 						</div>
 						<div class="p-comm">
 							{in name="$vo.point_exchange_type" value="0,2"}
-								<span class="p-price money-color">￥{$vo.price}</span>
+								<span class="p-price money-color">¥{$vo.price}</span>
 							{else/}
 								{if $vo['point_exchange_type'] == 1 && $vo['promotion_price'] > 0}
-									<span class="p-price money-color">￥{$vo.promotion_price}+{$vo.point_exchange}积分</span>
+									<span class="p-price money-color">¥{$vo.promotion_price}+{$vo.point_exchange}积分</span>
 								{else/}
 									<span class="p-price money-color">{$vo.point_exchange}积分</span>
 								{/if}

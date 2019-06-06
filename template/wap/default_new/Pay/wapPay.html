@@ -13,11 +13,11 @@
 {block name="main"}
 <div class="head-info">
 	<div class="head-pay">支付金额</div>
-	<div class="head-pay-value">￥{$need_pay_money}</div>
+	<div class="head-pay-value">¥{$need_pay_money}</div>
 </div>
 
 <div class="available-balance">
-	<span>可用余额：￥{$member_balance}元</span>
+	<span>可用余额：¥{$member_balance}元</span>
 	<span class="balance_checkbox"> 
 		<input type="checkbox" class="switch_checkbox" id="is_use_balance" checked>
 		<label for="is_use_balance" class="switch_label">
@@ -94,12 +94,12 @@ $("#is_use_balance").change(function(){
 		pay_money = $("#pay_money").val(),
 		pay_type = $("#pay_type").val();;
 	if($(this).is(":checked")){
-		$(".head-pay-value").text("￥"+need_pay_money);
+		$(".head-pay-value").text("¥"+need_pay_money);
 		if(need_pay_money == 0 && pay_type == -1){
 			$(".alipay").show();
 		}
 	}else{
-		$(".head-pay-value").text("￥"+pay_money);
+		$(".head-pay-value").text("¥"+pay_money);
 		if(need_pay_money == 0 && pay_type == -1){
 			$(".alipay").hide();
 		}

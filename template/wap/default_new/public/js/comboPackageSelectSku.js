@@ -40,7 +40,7 @@ $(function() {
 
 					$("#combo_id_"+combo_id).find("[class='goods_"+sku_info.curr_goods_id+"']").attr({"price":sku_info.curr_price,"stock":sku_info.curr_stock,"sku_id":sku_info.curr_sku_id,"skuname":sku_info.curr_sku_name});
 					$("#combo_id_"+combo_id).find("[class='goods_"+sku_info.curr_goods_id+"']").prev(".data_info").find(".select_sku_"+sku_info.curr_goods_id).text("已选规格："+sku_info.curr_sku_name);
-					$("#combo_id_"+combo_id).find("[class='goods_"+sku_info.curr_goods_id+"']").prev(".data_info").find("span.price").text("￥"+sku_info.curr_price);
+					$("#combo_id_"+combo_id).find("[class='goods_"+sku_info.curr_goods_id+"']").prev(".data_info").find("span.price").text("¥"+sku_info.curr_price);
 					$("#combo_id_"+combo_id).find("[class='goods_"+sku_info.curr_goods_id+"']").parent(".goods_info").find(".pic").attr('src',img_src);
 
 					$(".combo_package_content .combo_package_name input[type='checkbox']").prop("checked",false);
@@ -146,7 +146,7 @@ function echoSpecData(){
 			active = $("#submit_ok").attr("tag");
 			if (active == 'addCart' || active == 'buyBtn1') {
 				price = $this.attr("price");
-				$("#price").text("￥" + price);
+				$("#price").text("¥" + price);
 				$("#hiddSkuprice").val(price);
 			} else if (active == "groupbuy") {
 			}

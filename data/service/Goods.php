@@ -125,10 +125,10 @@ class Goods extends BaseService implements IGoods
                 $list["data"][$k]['promotion_info'] = $goods_promotion_info;
                 
                 if ($v['point_exchange_type'] == 0 || $v['point_exchange_type'] == 2) {
-                    $list['data'][$k]['display_price'] = '￥' . $v["promotion_price"];
+                    $list['data'][$k]['display_price'] = '¥' . $v["promotion_price"];
                 } else {
                     if ($v['point_exchange_type'] == 1 && $v["promotion_price"] > 0) {
-                        $list['data'][$k]['display_price'] = '￥' . $v["promotion_price"] . '+' . $v["point_exchange"] . '积分';
+                        $list['data'][$k]['display_price'] = '¥' . $v["promotion_price"] . '+' . $v["point_exchange"] . '积分';
                     } else {
                         $list['data'][$k]['display_price'] = $v["point_exchange"] . '积分';
                     }
@@ -4935,10 +4935,10 @@ class Goods extends BaseService implements IGoods
             $list['data'][$k]['sku_list'] = array();
             $list['data'][$k]['gorup_list'] = $this->getGoodsTabByGoodsGroupId($list['data'][$k]['group_id_array']);
             if ($v['point_exchange_type'] == 0 || $v['point_exchange_type'] == 2) {
-                $list['data'][$k]['display_price'] = '￥' . $v["promotion_price"];
+                $list['data'][$k]['display_price'] = '¥' . $v["promotion_price"];
             } else {
                 if ($v['point_exchange_type'] == 1 && $v["promotion_price"] > 0) {
-                    $list['data'][$k]['display_price'] = '￥' . $v["promotion_price"] . '+' . $v["point_exchange"] . '积分';
+                    $list['data'][$k]['display_price'] = '¥' . $v["promotion_price"] . '+' . $v["point_exchange"] . '积分';
                 } else {
                     $list['data'][$k]['display_price'] = $v["point_exchange"] . '积分';
                 }

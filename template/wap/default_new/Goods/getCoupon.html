@@ -18,7 +18,7 @@
 			<div class="wx-code"><img src="{:__IMG($code_path)}" alt="" ></div>
 			<div class="get-coupon">
 				<span style="font-size: 18px;color: #333;">{$data['coupon_name']}</span><br>
-				<span style="color: #ff4444;font-size: 26px;"><b>￥{$data['money']}</b></span><br>
+				<span style="color: #ff4444;font-size: 26px;"><b>¥{$data['money']}</b></span><br>
 				<span style="color: #999">{if condition="$data['range_type'] eq 1"}全场产品可使用{else/}仅限购买部分商品{/if}(&nbsp;满{$data['at_least']}使用)</span><br>
 				<span class="get-span" onclick="getcoupon({$data['coupon_type_id']})">领取</span>
 				<i>注:扫描二维码或点击右上角进行分享</i>

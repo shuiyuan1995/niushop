@@ -283,24 +283,24 @@
 	<tfoot>
 		<tr>
 			<td colspan="9" class="text-right">
-				<span>商品总金额：￥{$order['goods_money']}，</span>
+				<span>商品总金额：¥{$order['goods_money']}，</span>
 				
 				{if condition="$order['user_platform_money']>0"}
-				<span>余额支付：￥{$order['user_platform_money']}，</span>
+				<span>余额支付：¥{$order['user_platform_money']}，</span>
 				{/if}
 				
 				{if condition="$order['coupon_money']>0"}
-				<span>优惠券：￥{$order['coupon_money']}，</span>
+				<span>优惠券：¥{$order['coupon_money']}，</span>
 				{/if}
 				
 				{if condition="$order['tax_money']>0"}
-				<span>发票税额：￥{$order['tax_money']}，</span>
+				<span>发票税额：¥{$order['tax_money']}，</span>
 				{/if}
 				
 				{if condition="$order['promotion_money']>0"}
 					{switch name="$order['promotion_type']"}
-					{case value="MANJIAN"}<span>满减优惠：￥{$order['promotion_money']}，</span>{/case}
-					{case value="ZUHETAOCAN"}<span>套餐优惠：￥{$order['promotion_money']}，</span>{/case}
+					{case value="MANJIAN"}<span>满减优惠：¥{$order['promotion_money']}，</span>{/case}
+					{case value="ZUHETAOCAN"}<span>套餐优惠：¥{$order['promotion_money']}，</span>{/case}
 					{/switch}
 				{/if}
 				
@@ -308,8 +308,8 @@
 				<span>使用积分：{$order['point']}，</span>
 				{/if}
 				
-				<span> 实际需支付：<b class="real-pay c-red">￥{$order['pay_money']}</b></span>
-				<span>（含运费 ￥{$order['shipping_money']}）</span>
+				<span> 实际需支付：<b class="real-pay c-red">¥{$order['pay_money']}</b></span>
+				<span>（含运费 ¥{$order['shipping_money']}）</span>
 			</td>
 		</tr>
 	</tfoot>
