@@ -12,7 +12,7 @@
 .sliding ul li {padding: 10px 10px 0 10px;display: inline-block;background: #ffffff;border-right: 2px solid #f8f8f8;width:25%;}
 .sliding ul li img{width:60px;height:60px;}
 .members_goodspic{border-bottom:1px solid #f3f3f3;}
-.info p.goods-title{padding-top:5px;}
+.info p.goods-title{padding-top:5px;height: 40px;}
 .info p.goods-price{margin:0;margin-bottom:8px;}
 .info .goods-info .goods_price{float: none;}
 .controltype{height:35px;margin:0;width:100%;line-height:32.5px;}
@@ -131,7 +131,7 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 				<footer>
 					<p>{$vo.goods_name}</p>
 					<div>
-					<span class="tuangou-money">￥{$vo.tuangou_money}</span><br>
+					<span class="tuangou-money">¥{$vo.tuangou_money}</span><br>
 					<span class="original-money">单买价&nbsp;{$vo.promotion_price}元</span>
 					<button>去拼单&nbsp;&gt;</button>
 					</div>
@@ -169,7 +169,7 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 								<a href="{:__URL('APP_MAIN/goods/goodsdetail?id='.$goods['goods_id'])}">{$goods.goods_name}</a>
 							</p>
 							<div class="goods-info">
-								<span class="goods_price"><em style="color: #fb3a2f;">￥{$goods.promotion_price}</em></span>
+								<span class="goods_price"><em style="color: #fb3a2f;">¥{$goods.promotion_price}</em></span>
 								<a href="javascript:CartGoodsInfo({$goods.goods_id},{$goods.state})" class="add-cart"></a>
 							</div>
 						</div>
@@ -215,10 +215,10 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 								<div class="goods-info">
 									<span class="goods_price">
 										{in name="$list.point_exchange_type" value="0,2"}
-										<em style="color: #fb3a2f;">￥{$list.promotion_price}</em>
+										<em style="color: #fb3a2f;">¥{$list.promotion_price}</em>
 										{else/}
 											{if $list['point_exchange_type'] == 1 && $list['promotion_price'] > 0}
-												<em style="color: #fb3a2f;">￥{$list.promotion_price}+{$list.point_exchange}积分</em>
+												<em style="color: #fb3a2f;">¥{$list.promotion_price}+{$list.point_exchange}积分</em>
 											{else/}
 												<em style="color: #fb3a2f;">{$list.point_exchange}积分</em>
 											{/if}
@@ -254,6 +254,26 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 	</p>
 	<p class="copyright_info">
 		<span>渝ICP备15008049号-1</span>
+	</p>
+	<p class="copyright_info">
+		<span>支持使用</span>
+	</p>
+	<ul class="zhengxin">
+		<li>
+			<img src="/template/shop/blue/public/images/6.jpg" alt="">
+		</li>
+		<li>
+			<img src="/template/shop/blue/public/images/7.jpg" alt="">
+		</li>
+		<li>
+			<img src="/template/shop/blue/public/images/8.jpg" alt="">
+		</li>
+		<li>
+			<img src="/template/shop/blue/public/images/9.jpg" alt="">
+		</li>
+	</ul>
+	<p class="copyright_info">
+		<span>网站信誉</span>
 	</p>
 	<ul class="zhengxin">
 		<li>

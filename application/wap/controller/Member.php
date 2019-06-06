@@ -1663,10 +1663,10 @@ class Member extends BaseController
             $goods_collection_list = $member->getMemberGoodsFavoritesList($page, PAGESIZE, $condition, "fav_time desc");
             foreach ($goods_collection_list['data'] as $k => $v) {
                 if($v['point_exchange_type'] == 0 || $v['point_exchange_type'] == 2){
-                    $goods_collection_list['data'][$k]['display_price'] = '￥'.$v["promotion_price"];
+                    $goods_collection_list['data'][$k]['display_price'] = '¥'.$v["promotion_price"];
                 }else{
                     if($v['point_exchange_type'] == 1 && $v["promotion_price"] > 0){
-                        $goods_collection_list['data'][$k]['display_price'] = '￥'.$v["promotion_price"].'+'.$v["point_exchange"].'积分';
+                        $goods_collection_list['data'][$k]['display_price'] = '¥'.$v["promotion_price"].'+'.$v["point_exchange"].'积分';
                     }else{
                         $goods_collection_list['data'][$k]['display_price'] = $v["point_exchange"].'积分';
                     }

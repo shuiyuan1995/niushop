@@ -192,7 +192,7 @@
 														<div class="goods_price">¥{$v['promotion_price']}</div>
 													{else/}
 														{if $v['point_exchange_type'] == 1 && $v['promotion_price'] > 0}
-															<div>￥{$v.promotion_price}+{$v.point_exchange}积分</div>
+															<div>¥{$v.promotion_price}+{$v.point_exchange}积分</div>
 														{else/}
 															<div>{$v.point_exchange}积分</div>
 														{/if}
@@ -236,7 +236,7 @@
 												<div>¥{$v['promotion_price']}</div>
 											{else/}
 												{if $v['point_exchange_type'] == 1 && $v['promotion_price'] > 0}
-													<div>￥{$v.promotion_price}+{$v.point_exchange}积分</div>
+													<div>¥{$v.promotion_price}+{$v.point_exchange}积分</div>
 												{else/}
 													<div>{$v.point_exchange}积分</div>
 												{/if}
@@ -277,7 +277,7 @@
 																<div>¥{$list['promotion_price']}</div>
 															{else/}
 																{if $list['point_exchange_type'] == 1 && $list['promotion_price'] > 0}
-																	<div>￥{$list.promotion_price}+{$list.point_exchange}积分</div>
+																	<div>¥{$list.promotion_price}+{$list.point_exchange}积分</div>
 																{else/}
 																	<div>{$list.point_exchange}积分</div>
 																{/if}

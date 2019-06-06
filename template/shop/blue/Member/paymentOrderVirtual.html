@@ -71,9 +71,9 @@
 								</p>
 							</div>
 						</div>
-						<div class="col col3 goods-price">￥{$cart_info.price}</div>
+						<div class="col col3 goods-price">¥{$cart_info.price}</div>
 						<div class="col col4 good-num">{$cart_info.num}</div>
-						<div class="col col5 orange-bold xiaoji" data-subtotal="{$cart_info.subtotal}" style="border-bottom-style: none;">￥{$cart_info.subtotal}</div>
+						<div class="col col5 orange-bold xiaoji" data-subtotal="{$cart_info.subtotal}" style="border-bottom-style: none;">¥{$cart_info.subtotal}</div>
 					</div>
 					{/foreach}
 				</div>
@@ -212,22 +212,22 @@
 						<div class="calu-box">
 							<p class="slivergrey">
 								<span>{:lang('goods_total')}<b class="orange-bold js-goods-num">0</b>{:lang('member_kinds_of_goods')} {:lang('member_total')}：</span>
-								<span class="txtmoney">￥<b class="js-total-money">0.00</b></span>
+								<span class="txtmoney">¥<b class="js-total-money">0.00</b></span>
 							</p>
 							<p class="slivergrey">
 								<span>{:lang('member_total_discount')}：</span>
-								<span class="txtmoney">￥<b id="discount_money">0.00</b></span>
+								<span class="txtmoney">¥<b id="discount_money">0.00</b></span>
 							</p>
 							{if condition="count($shop_config.order_invoice_content_list)"}
 							<p class="slivergrey">
 								<span>{:lang('member_invoice_tax')}：</span>
-								<span class="txtmoney">￥<b id="invoice_tax_money">0.00</b></span>
+								<span class="txtmoney">¥<b id="invoice_tax_money">0.00</b></span>
 							</p>
 							{/if}
 							{if condition="$shop_config['order_balance_pay']"}
 							<p class="slivergrey">
 								<span>{:lang('member_use_balance')}：</span>
-								<span class="txtmoney">￥<b id="use_balance">0.00</b></span>
+								<span class="txtmoney">¥<b id="use_balance">0.00</b></span>
 							</p>
 							{/if}
 						</div>
@@ -237,7 +237,7 @@
 							<div class="lside">
 								<p>
 									<span class="slivergrey">{:lang('member_amount_payable')}：</span>
-									<span class="orange-bold big">￥<b id="realprice">0.00</b>
+									<span class="orange-bold big">¥<b id="realprice">0.00</b>
 										{if condition="$count_point_exchange "}<b>+{$count_point_exchange}{:lang('goods_integral')}</b>{/if}
 									</span>
 								</p>

@@ -254,7 +254,7 @@
 						{$goodsData.sku_name}
 					{/if}
 					</td>
-					<td align="center" bgcolor="#ffffff">￥{$goodsData.price}</td>
+					<td align="center" bgcolor="#ffffff">¥{$goodsData.price}</td>
 					<td align="center" bgcolor="#ffffff">{$presell_order.presell_money}</td>
 					{if $presell_order['is_full_payment'] eq 0}
 					<td align="center" bgcolor="#ffffff">{:number_format($order.order_money - $presell_order.presell_money, 2)}</td>
@@ -306,7 +306,7 @@
 						{$goodsvo.sku_name}
 					{/if}
 					</td>
-					<td align="center" bgcolor="#ffffff">￥{$goodsvo.price}</td>
+					<td align="center" bgcolor="#ffffff">¥{$goodsvo.price}</td>
 					<td align="center" bgcolor="#ffffff">{$goodsvo.num}</td>
 					<td align="center" bgcolor="#ffffff">{$goodsvo.goods_money}</td>
 					<td align="center" bgcolor="#ffffff">{$goodsvo.shipping_status_name}</td>
@@ -324,24 +324,24 @@
 				<tr>
 					
 				<td colspan="7" align="right" >
-					<span>{:lang('member_total_commodity_value')}：￥{$order['goods_money']}，</span>
+					<span>{:lang('member_total_commodity_value')}：¥{$order['goods_money']}，</span>
 					
 					{if condition="$order['user_platform_money']>0"}
-					<span>{:lang('member_balance_payment')}：￥{$order['user_platform_money']}，</span>
+					<span>{:lang('member_balance_payment')}：¥{$order['user_platform_money']}，</span>
 					{/if}
 					
 					{if condition="$order['coupon_money']>0"}
-					<span>{:lang('member_coupons')}：￥{$order['coupon_money']}，</span>
+					<span>{:lang('member_coupons')}：¥{$order['coupon_money']}，</span>
 					{/if}
 					
 					{if condition="$order['tax_money']>0"}
-					<span>{:lang('member_invoice_tax')}：￥{$order['tax_money']}，</span>
+					<span>{:lang('member_invoice_tax')}：¥{$order['tax_money']}，</span>
 					{/if}
 					
 					{if condition="$order['promotion_money']>0"}
 						{switch name="$order['promotion_type']"}
-							{case value="MANJIAN"}<span>{:lang('member_full_discount')}：￥{$order['promotion_money']}，</span>{/case}
-							{case value="ZUHETAOCAN"}<span>{:lang('member_taocan_discount')}：￥{$order['promotion_money']}，</span>{/case}
+							{case value="MANJIAN"}<span>{:lang('member_full_discount')}：¥{$order['promotion_money']}，</span>{/case}
+							{case value="ZUHETAOCAN"}<span>{:lang('member_taocan_discount')}：¥{$order['promotion_money']}，</span>{/case}
 						{/switch}
 					{/if}
 					
@@ -349,11 +349,11 @@
 					<span>{:lang('member_use_integral')}：{$order['point']}，</span>
 					{/if}
 					{if $presell_order['is_full_payment'] eq 0}
-					<span> {:lang('retainage_price')}：￥{$order['pay_money']}</span>
+					<span> {:lang('retainage_price')}：¥{$order['pay_money']}</span>
 					{else/}
-					<span>实际支付：<b style="color: #f44;">￥{$presell_order['presell_pay']}</b></span>
+					<span>实际支付：<b style="color: #f44;">¥{$presell_order['presell_pay']}</b></span>
 					{/if}
-					<span>（{:lang('free_shipping')} ￥{$order['shipping_money']}）</span>
+					<span>（{:lang('free_shipping')} ¥{$order['shipping_money']}）</span>
 				</td>
 				</tr>
 			</table>

@@ -299,7 +299,7 @@
 				<li class="goodsName">
 					<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$goods['goods_id'])}" target="_blank" title="{$goods.goods_name}">{$goods.goods_name}</a>
 				</li>
-				<li class="list_price">{:lang('goods_market_value')}： <font class="market">￥{$goods.market_price}</font><br> {:lang('goods_shop_price')}： <font class="shop">{$goods.display_price}</font> <br></li>
+				<li class="list_price">{:lang('goods_market_value')}： <font class="market">¥{$goods.market_price}</font><br> {:lang('goods_shop_price')}： <font class="shop">{$goods.display_price}</font> <br></li>
 				<li class="action">
 					<a href="javascript:;" class="action-btn collet-btn  curr" onclick="collectionGoods({$goods.goods_id},'goods','{$goods.goods_name}',this,true)"> 
 					{if condition="$goods.is_favorite>0"}{:lang('goods_collected')}

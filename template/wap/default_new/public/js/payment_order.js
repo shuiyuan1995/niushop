@@ -57,7 +57,7 @@ $(function() {
 							msg = "不使用优惠券";
 							var money = 0;
 							if(curr_li.attr("data-id") != undefined && curr_li.attr("data-money") != undefined){
-								msg = "￥"+parseFloat(curr_li.attr("data-money")).toFixed(2);
+								msg = "¥"+parseFloat(curr_li.attr("data-money")).toFixed(2);
 							}
 							break;
 							
@@ -271,7 +271,7 @@ function init(){
 	msg = "不使用优惠券";
 	var money = 0;
 	if(curr_li.attr("data-id") != undefined && curr_li.attr("data-money") != undefined){
-		msg = "￥"+parseFloat(curr_li.attr("data-money")).toFixed(2);
+		msg = "¥"+parseFloat(curr_li.attr("data-money")).toFixed(2);
 	}
 	curr_options.children("span").text(msg);
 	
