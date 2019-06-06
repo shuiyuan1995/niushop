@@ -185,7 +185,16 @@ class Login extends Controller
             $retval['error_num'] = $err_num;
             return $retval;
         }
-        
+        //已登录，请勿重复登录
+        if (session('appuid') != ''){
+            if (! empty($_SERVER['HTTP_REFERER'])) {
+                $url = $_SERVER['HTTP_REFERER'];
+                //header("Location:$url");
+                $this->error('你已登录！',$url);
+            }else{
+                $this->error('你已登录！','index/index');
+            }
+        }
         // 点击商品详情没有登录首先要获取上一页
         if (! empty($_SERVER['HTTP_REFERER'])) {
             $pre_url = $_SERVER['HTTP_REFERER'];

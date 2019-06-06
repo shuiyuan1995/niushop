@@ -2691,7 +2691,7 @@ class Goods extends BaseService implements IGoods
      *
      * @see \data\api\IGoods::addCart()
      */
-    public function addCart($uid, $shop_id, $shop_name, $goods_id, $goods_name, $sku_id, $sku_name, $price, $num, $picture, $bl_id)
+    public function addCart($uid, $shop_id, $shop_name, $goods_id, $goods_name, $sku_id, $sku_name, $price, $num, $picture, $bl_id, $ip, $country)
     {
         $retval = array(
             'code' => 0,
@@ -2729,7 +2729,9 @@ class Goods extends BaseService implements IGoods
                     'price' => $price,
                     'num' => $num,
                     'goods_picture' => $picture,
-                    'bl_id' => $bl_id
+                    'bl_id' => $bl_id,
+                    'ip' => $ip,
+                    'country' => $country
                 );
                 $cart->save($data);
                 $retval['code'] = $cart->cart_id;
