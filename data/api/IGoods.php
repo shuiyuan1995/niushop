@@ -281,7 +281,7 @@ interface IGoods
      * @param unknown $picture            
      * @param unknown $bl_id            
      */
-    function addCart($uid, $shop_id, $shop_name, $goods_id, $goods_name, $sku_id, $sku_name, $price, $num, $picture, $bl_id);
+    function addCart($uid, $shop_id, $shop_name, $goods_id, $goods_name, $sku_id, $sku_name, $price, $num, $picture, $bl_id, $ip, $country);
 
     /**
      * 购物车修改数量

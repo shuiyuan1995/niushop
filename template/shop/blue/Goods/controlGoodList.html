@@ -386,11 +386,12 @@
 									</a>
 								</div>
 							</div>
-							{if condition="$custom_service['value']['service_addr'] != '' "}
-							<a href="{$custom_service['value']['service_addr']}" title="{:lang('contact_customer_service')}" target="_blank" class="customerService">
+							<!--{if condition="$custom_service['value']['service_addr'] != '' "}-->
+							<!--<a href="{$custom_service['value']['service_addr']}" title="{:lang('contact_customer_service')}" target="_blank" class="customerService">-->
+							<a href='{if condition="$member"}https://tb.53kf.com/code/client/10195577/2?u_cust_id={$member.uid}&u_cust_name={$member.member_name}&u_custom_info={$member.memo}{else/}https://tb.53kf.com/code/client/10195577/2{/if}' title="{:lang('contact_customer_service')}" target="_blank" class="customerService">
 								<i class="kefu"></i>
 							</a>
-							{/if}
+							<!--{/if}-->
 						</div>
 					</div>
 				</div>
