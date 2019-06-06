@@ -1410,7 +1410,7 @@
 .floor {
 	width: 100%;
 	position: relative;
-	background: #ffffff;
+	/* background: #ffffff; */
 }
 
 .banner-ad {
@@ -1445,7 +1445,7 @@
 	float: left;
 	position: relative;
 }
-/* .floor-layout .floor-con .floor-title h2::after{
+.floor-layout .floor-con .floor-title h2::after{
 	content: '';
 	position: absolute;
 	top: 0px;
@@ -1455,14 +1455,14 @@
 	display: block;
 	background: url(/template/shop/blue/public/images/move.gif) center no-repeat;
 	background-size: cover;
-} */
+}
 
 .floor-layout .floor-con .floor-title h2 span {
 	width: auto;
 	min-width: 30px;
 	height: 35px;
 	line-height: 35px;
-	/*background:url(../images/common-icon.png) no-repeat -225px -185px; color: #fff;*/
+	background:url(../images/common-icon.png) no-repeat -225px -185px; color: #fff;
 	font-size: 20px;
 	text-indent: 3px;
 	display: inline-block;

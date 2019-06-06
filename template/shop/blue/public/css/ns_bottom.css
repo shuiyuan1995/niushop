@@ -3,7 +3,7 @@
 .w:after,.w:before{ content: ".";display: block;height: 0;clear: both;visibility: hidden;}
 .w1200 { width: 1200px; }
 /* footer start */
-.footer{ background-color:#eee; margin-top:80px;}
+.footer{  margin-top:80px;}
 .footer .service-list{ overflow:hidden; border-bottom:1px solid #d2d2d2; padding:15px 0; text-align:center; font-size:0;}
 .footer .service-list li{display:inline-block; line-height: 39px;
     overflow: hidden;
