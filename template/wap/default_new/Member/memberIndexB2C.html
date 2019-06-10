@@ -231,26 +231,13 @@ background:url(__TEMP__/{$style}/public/images/Coupon.png) no-repeat;width: 22px
 			<span>商品信息</span>
 			<span>销量</span>
 		</li>
-		<li>
-			<span>1</span>
-			<span>红塔山 经典1956 软盒...</span>
-			<span>63</span>
-		</li>
-		<li>
-			<span>2</span>
-			<span>红塔山 经典1956 硬盒...</span>
-			<span>62</span>
-		</li>
-		<li>
-			<span>3</span>
-			<span>黄金叶 金满堂 硬盒... </span>
-			<span>60</span>
-		</li>
-		<li>
-			<span>4</span>
-			<span>利群 红 硬盒 </span>
-			<span>60</span>
-		</li>
+        {volist name="goods_list" id="vo" key="k" }
+        <li>
+            <span>{$k}</span>
+            <span><a href="{:__URL('SHOP_MAIN/wap/goods/goodsdetail','id='.$vo['goods_id'])}" target="_self"><?php echo strlen($vo["goods_name"])>20 ? mb_substr($vo["goods_name"],0,20,'utf-8')."...":$vo["goods_name"]; ?></a></span>
+            <span>{$vo.real_sales}</span>
+        </li>
+        {/volist}
 	</ul>
 	<ul class="yonghu">
 		<li>
@@ -259,30 +246,14 @@ background:url(__TEMP__/{$style}/public/images/Coupon.png) no-repeat;width: 22px
 			<span>数量（条）</span>
 			<span>金额（元）</span>
 		</li>
+		{volist name="user_rank" id="vo" key="k" }
 		<li>
-			<span>1</span>
-			<span>红塔山 经典1956 软盒...</span>
-			<span>63</span>
-			<span>63</span>
+			<span><?php echo strlen($vo["member_name"])>20 ? mb_substr($vo["member_name"],0,20,'utf-8')."...":$vo["member_name"]; ?></span>
+			<span>{$vo.country}</span>
+			<span>{$vo.goods_count}</span>
+			<span>{$vo.money}</span>
 		</li>
-		<li>
-			<span>2</span>
-			<span>红塔山 经典1956 硬盒...</span>
-			<span>62</span>
-			<span>63</span>
-		</li>
-		<li>
-			<span>3</span>
-			<span>黄金叶 金满堂 硬盒... </span>
-			<span>60</span>
-			<span>63</span>
-		</li>
-		<li>
-			<span>4</span>
-			<span>利群 红 硬盒 </span>
-			<span>60</span>
-			<span>63</span>
-		</li>
+		{/volist}
 	</ul>
 </div>-->
 {/niu:memberinfo}

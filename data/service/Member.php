@@ -53,6 +53,7 @@ use data\service\WebSite;
 use Prophecy\Exception\Exception;
 use think\Cookie;
 use think\Session;
+use think\Db;
 
 class Member extends User implements IMember
 {
@@ -109,7 +110,8 @@ public function registerMember($user_name, $password, $email, $mobile, $user_qq_
                 'uid' => $res,
                 'member_name' => $user_info_obj["nick_name"],
                 'member_level' => $member_level,
-                'reg_time' => time()
+                'reg_time' => time(),
+                'reg_ip' => get_client_ip()
             );
             $retval = $member->save($data);
             hook('memberRegisterSuccess', $data);
@@ -2438,5 +2440,33 @@ public function registerMember($user_name, $password, $email, $mobile, $user_qq_
         } else {
             return null;
         }
+    }
+
+    public function getUserRank()
+    {
+        $sql = "SELECT sum(o.order_money) as count_money,o.buyer_id,u.current_login_ip FROM `ns_order` as o join `sys_user` as u on o.buyer_id = u.uid WHERE  order_status IN (1,2,3,4) group by buyer_id order by sum(order_money) desc limit 6";
+        $user = Db::query($sql);
+
+        $result = Db::name('ns_order o')
+                        ->field('o.order_id,o.buyer_id,m.member_name,o.order_money,m.reg_ip')
+                        ->join('ns_member m','o.buyer_id = m.uid')
+                        ->where('o.order_status','in','1,2,3,4')
+                        ->select();
+        foreach ($result as $k => $val){
+            $goods_count = Db::name('ns_order_goods')->where('order_id',$val['order_id'])->sum('num');
+            $result[$k]['goods_count'] = $goods_count;
+        }
+        $rank = array();
+        foreach ($user as $k=>$val){
+            $rank[$k]['country'] = judge_ip($val['current_login_ip'])['country'];
+            foreach ($result as $key => $value){
+                if ($val['buyer_id'] == $value['buyer_id']){
+                    $rank[$k]['money'] += $value['order_money'];
+                    $rank[$k]['goods_count'] += $value['goods_count'];
+                    $rank[$k]['member_name'] = $value['member_name'];
+                }
+            }
+        }
+        return $rank;
     }
 }

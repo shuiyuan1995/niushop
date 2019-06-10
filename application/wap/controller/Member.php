@@ -160,6 +160,18 @@ class Member extends BaseController
                 'Verification/verificationPlatform'
             );
         }
+
+        // 销售排行
+        $goods = new GoodsService();
+        $goods_rank = $goods->getGoodsRank(array(
+            "shop_id" => $this->instance_id
+        ));
+        $this->assign("goods_list", $goods_rank);//dump($goods_rank);exit;
+
+        //用户排行
+        $member = new MemberService();
+        $user_rank = $member->getUserRank();
+        $this->assign('user_rank',$user_rank);
         
         // 商城是否开启虚拟商品
         $is_open_virtual_goods = $this->getIsOpenVirtualGoodsConfig($this->instance_id);
