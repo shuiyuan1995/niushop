@@ -11,7 +11,7 @@ class CartList implements ICartList
         $count = Db::query('SELECT COUNT(DISTINCT  `buyer_id`) as count FROM `ns_cart`');
         $count = $count[0]['count'];
 
-        $user = Db::query('SELECT DISTINCT(c.buyer_id),m.member_name FROM `ns_cart` c INNER JOIN `ns_member` m ON c.buyer_id=m.uid');
+        $user = Db::query('SELECT DISTINCT(c.buyer_id),m.member_name FROM `ns_cart` c INNER JOIN `ns_member` m ON c.buyer_id=m.uid limit '.$page_size*($page_index-1).','.$page_size);
 
         if ($page_index == 1 && $page_size == 0){
             foreach ($user as $k => $v){
@@ -37,7 +37,6 @@ class CartList implements ICartList
                                             ->where($condition)
                                             ->where('buyer_id',$v['buyer_id'])
                                             ->order('c.cart_id','desc')
-                                            ->page($page_index,$page_size)
                                             ->select();
                 foreach ($data[$v['member_name']] as $key => $value){
                     if (!empty($value['ip'])){
