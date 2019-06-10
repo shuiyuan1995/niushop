@@ -1,5 +1,5 @@
 (function() {
-	var URL = window.UEDITOR_HOME_URL || getUEBasePath();
+	var URL = '/public/admin/js/ueditor/';
 	window.UEDITOR_CONFIG = {
 		UEDITOR_HOME_URL : URL,
 		serverUrl : URL + "php/controller.php",
