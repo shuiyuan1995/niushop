@@ -19,6 +19,57 @@ background:url(__TEMP__/{$style}/public/images/Coupon.png) no-repeat;width: 22px
 .last a{position: relative;}
 .tips{width: 16px;height: 16px;background: #F93F40;border:1px solid #F93F40;border-radius: 50%;font-size: 12px;line-height: 16px;text-align: center;color: #fff;position: absolute;z-index: 10;right: -10px;top: -6px;}
 .member_foot{width: 100%;height: 20px;background: url("__TEMP__/{$style}/public/images/member_foot.png") center no-repeat;background-size: 100% 20px;}
+.member_table .nav{
+	display: flex;
+	background: #eb852a;
+	height: 30px;
+	line-height: 30px;
+}
+.member_table .nav span{
+	flex: 1;
+	text-align: center;
+	cursor: pointer;
+}
+.member_table .nav span.active{
+	color: #ffffff;
+}
+.member_table .xiangyan,.member_table .yonghu{
+	background: #ffffff;
+	padding-top: 10px;
+	margin-bottom: 30px;
+}
+.member_table .yonghu{
+	display: none;
+}
+.member_table .xiangyan li,.member_table .yonghu li{
+	display: flex;
+	border-bottom: 2px solid #f3f5f7;
+	height: 36px;
+	line-height: 36px;
+}
+.member_table .xiangyan li span,.member_table .yonghu li span{
+	flex: 1;
+	text-align: center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.member_table .yonghu li:not(:first-of-type) span:nth-of-type(2){
+	text-align: left;
+}
+.member_table .xiangyan li:nth-of-type(2) span:not(:nth-of-type(2)){
+	color: #d40000;
+}
+.member_table .xiangyan li:nth-of-type(3) span:not(:nth-of-type(2)){
+	color: #ffae00;
+}
+.member_table .xiangyan li:nth-of-type(4) span:not(:nth-of-type(2)){
+	color: #006cff;
+}
+.member_table .xiangyan li span:nth-of-type(2){
+	flex: 2;
+	text-align: center;
+}
 </style>
 {/block}
 {block name="main" }
@@ -169,6 +220,71 @@ background:url(__TEMP__/{$style}/public/images/Coupon.png) no-repeat;width: 22px
 	</ul>
 {/volist}
 </div>
+<div class="member_table">
+	<div class="nav" id="paihang">
+		<span class="active">香烟排行榜</span>
+		<span>用户排行榜</span>
+	</div>
+	<ul class="xiangyan">
+		<li>
+			<span>排行</span>
+			<span>商品信息</span>
+			<span>销量</span>
+		</li>
+		<li>
+			<span>1</span>
+			<span>红塔山 经典1956 软盒...</span>
+			<span>63</span>
+		</li>
+		<li>
+			<span>2</span>
+			<span>红塔山 经典1956 硬盒...</span>
+			<span>62</span>
+		</li>
+		<li>
+			<span>3</span>
+			<span>黄金叶 金满堂 硬盒... </span>
+			<span>60</span>
+		</li>
+		<li>
+			<span>4</span>
+			<span>利群 红 硬盒 </span>
+			<span>60</span>
+		</li>
+	</ul>
+	<ul class="yonghu">
+		<li>
+			<span>用户名</span>
+			<span>国家</span>
+			<span>数量（条）</span>
+			<span>金额（元）</span>
+		</li>
+		<li>
+			<span>1</span>
+			<span>红塔山 经典1956 软盒...</span>
+			<span>63</span>
+			<span>63</span>
+		</li>
+		<li>
+			<span>2</span>
+			<span>红塔山 经典1956 硬盒...</span>
+			<span>62</span>
+			<span>63</span>
+		</li>
+		<li>
+			<span>3</span>
+			<span>黄金叶 金满堂 硬盒... </span>
+			<span>60</span>
+			<span>63</span>
+		</li>
+		<li>
+			<span>4</span>
+			<span>利群 红 硬盒 </span>
+			<span>60</span>
+			<span>63</span>
+		</li>
+	</ul>
+</div>
 {/niu:memberinfo}
 <script type="text/javascript">
 $(function(){
@@ -188,6 +304,16 @@ $(function(){
 			$(".right_href").attr("href","{:__URL('APP_MAIN/order/myvirtualorderlist?shop_id='.$shop_id)}");
 		}
 	});
+	$('#paihang span').click(function(){
+		$(this).addClass('active').siblings().removeClass('active')
+		if(this.innerHTML=='用户排行榜'){
+			$('.member_table .xiangyan').hide()
+			$('.member_table .yonghu').show()
+		}else{
+			$('.member_table .xiangyan').show()
+			$('.member_table .yonghu').hide()
+		}
+	})
 })	
 function signIn(){
 	$.ajax({
