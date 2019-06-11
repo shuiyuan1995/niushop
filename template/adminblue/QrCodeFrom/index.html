@@ -1,0 +1,221 @@
+{extend name="adminblue/base" /}
+{block name="resources"/}
+<link rel="stylesheet" type="text/css" href="ADMIN_CSS/member_list.css" />
+<script type="text/javascript" src="__STATIC__/My97DatePicker/WdatePicker.js"></script>
+<style>
+.head-portrait{
+	margin-top:15px;
+}
+.mytable th {
+    padding-left: 0px;
+}
+.btn-common-white{
+	line-height:20px;
+}
+.member-div label{
+	font-size:12px;
+}
+</style>
+{/block}
+{block name="main"}
+<table class="mytable">
+	
+	<tr>
+		<th style="text-align: left;width: 20%;">
+			<button class="btn-common-delete" onclick="batchDelete()" >批量删除</button>
+			<button onclick="dataExcel()" value="导出数据" class="btn-common-white"  >导出数据</button>
+		</th>
+		<th style="width:50%;"> 
+			<span>访问时间：</span>
+			<input type="text" id="startDate" class="input-common middle" placeholder="请选择开始日期" onclick="WdatePicker()" />
+			&nbsp;-&nbsp;
+			<input type="text" id="endDate" placeholder="请选择结束日期" class="input-common middle" onclick="WdatePicker()" />
+			<button onclick="searchData()" value="搜索" class="btn-common" >搜索</button>
+			<!-- 更多搜索下拉框 -->
+			<div class="more-search-container">
+				<dl>
+					<dt></dt>
+					<dd><button onclick="searchData()" class="btn-common">搜索</button></dd>
+				</dl>
+			</div>
+		</th>
+	</tr>
+</table>
+<table class="table-class">
+	<colgroup>
+	<col style="width: 2%;">
+	<col style="width: 23%;">
+	<col style="width: 8%;">
+	<col style="width: 10%;">
+	<col style="width: 10%;">
+	<col style="width: 17%;">
+	<col style="width: 20%;">
+	<col style="width: 20%;">
+	</colgroup>
+	<thead>
+		<tr align="center">
+			<th><i class="checkbox-common"><input type="checkbox" onclick="CheckAll(this)"></i></th>
+			<th style="text-align:left;">IP地址</th>
+			<th style="text-align:left;">国家</th>
+			<th style="text-align:right;">省份</th>
+			<th style="text-align:right;">城市</th>
+			<th>访问次数</th>
+			<th>最后访问时间</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody id="productTbody"></tbody>
+</table>
+
+<input type="hidden" id="modify_uid"/>
+{/block}
+{block name="script"}
+<script type="text/javascript">
+function LoadingInfo(page_index) {
+        var start_date = $("#startDate").val();
+        var end_date = $("#endDate").val();
+
+        $.ajax({
+            type : "post",
+            url : "{:__URL('ADMIN_MAIN/QrCodeFrom/index')}",
+            data : {
+                "page_index" : page_index, "page_size" : $("#showNumber").val(),
+				"start_date" : start_date, "end_date" : end_date
+            },
+            success : function(data) {
+                if (data['data'].length > 0) {
+                    $(".table-class tbody").empty();
+                    for (var i = 0; i < data['data'].length; i++) {
+                        var html = '';
+                        html += '<tr align="center">';
+                        html += '<td><i class="checkbox-common"><input name="sub" type="checkbox" value="'+ data['data'][i]["id"]+'"></i></td>';
+                        html += '<td align="left">';
+                        html += '<div style="float:left;" class="member-div">';
+                        html += '<label style="float:none;width:100%">'+data['data'][i]['ip']+'</label>';
+                        html += '</div>';
+                        html += '</td>';
+						html += '<td style="text-align:left;">' + data['data'][i]["country"] + '</td>';
+                        html += '<td style="text-align:right;">' + data['data'][i]["region"] + '</td>';
+                        html += '<td style="text-align:right;">'+ data['data'][i]["city"] +'</td>';
+                        html += '<td style="text-align:center;">'+ data['data'][i]["visits"] +'</td>';
+                        html += '<td>' +data['data'][i]['from_time']+'</td>';
+                        html += '<td>';
+						html += '<a onclick="delete_user('+ data['data'][i]["id"]+')">删除</a><br/>';
+                        html += '</td>';
+                        html += '</tr>';
+                        $(".table-class tbody").append(html);
+                    }
+                } else {
+                    var html = '<tr align="center"><td colspan="9">暂无符合条件的数据记录</td></tr>';
+                    $(".table-class tbody").html(html);
+                }
+                initPageData(data["page_count"],data['data'].length,data['total_count']);
+                $("#pageNumber").html(pagenumShow(jumpNumber,$("#page_count").val(),{$pageshow}));
+            }
+        });
+    }
+
+//全选
+function CheckAll(event){
+	var checked = event.checked;
+	$("#productTbody input[type = 'checkbox']").prop("checked",checked);
+	if(checked) $(".table-class tbody input[type = 'checkbox']").parent().addClass("selected");
+	else $(".table-class tbody input[type = 'checkbox']").parent().removeClass("selected");
+}
+
+function searchData(){
+	$(".more-search-container").slideUp();
+	LoadingInfo(1);
+}
+
+function delete_user(id){
+	$( "#dialog" ).dialog({
+		buttons: {
+			"确定": function() {
+				$.ajax({
+					type : "post",
+					url : "{:__URL('ADMIN_MAIN/QrCodeFrom/delete')}",
+					data : { "id" : id.toString() },
+					dataType : "json",
+					success : function(data) {
+						if(data["code"] > 0 ){
+							LoadingInfo(getCurrentIndex(id.toString(),'#productTbody'));
+							showTip(data["message"],'success');
+							$("#chek_all").prop("checked", false);
+						}else{
+							showTip(data["message"],'error');
+						}
+					}
+				});
+				$(this).dialog('close');
+			},
+			"取消,#f5f5f5,#666": function() {
+				$(this).dialog('close');
+			},
+		},
+		contentText:"确定要删除吗?",
+	});
+}
+
+
+//批量删除
+function batchDelete() {
+	var id= new Array();
+	$("#productTbody input[type='checkbox']:checked").each(function() {
+		if (!isNaN($(this).val())) {
+			id.push($(this).val());
+		}
+	});
+	if(id.length ==0){
+		$( "#dialog" ).dialog({
+			buttons: {
+				"确定,#0059d6,#fff": function() {
+					$(this).dialog('close');
+				}
+			},
+			contentText:"请选择需要操作的记录",
+			title:"消息提醒",
+		});
+		return false;
+	}
+	delete_user(id);
+}
+
+/**
+ * 数据导出
+ */
+function dataExcel(){
+    var start_date = $("#startDate").val();
+    var end_date = $("#endDate").val();
+	$.ajax({
+		url : "{:__URL('ADMIN_MAIN/QrCodeFrom/excelList')}",
+		type : "post",
+		data : {
+            "start_date" : start_date,
+			"end_date" : end_date
+		},
+		success : function (data){
+			if(data['data'] != ""){
+				window.location.href=__URL("ADMIN_MAIN/QrCodeFrom/dataExcel?start_date="+start_date+"&end_date="+end_date);
+			}else{
+				showTip("没有导出的数据",'error');
+			}
+		}
+	})	
+}
+
+// 点击显示更多搜索
+$(".more-search").on("click", function(e){
+	$(".more-search-container").slideToggle();
+	$(document).one("click", function(){
+        $(".more-search-container").slideUp();
+    });
+    e.stopPropagation();
+})
+
+$(".more-search-container").on("click", function(e){
+    e.stopPropagation();
+});
+
+</script>
+{/block}

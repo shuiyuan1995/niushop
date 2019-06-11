@@ -1,0 +1,57 @@
+{extend name="wap/default_new/base" /} 
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/member_address.css">
+{/block}
+{block name="goodsHead"}
+<section class="head">
+	<a class="head_back" href="javascript:window.history.go(-1)"><i class="icon-back"></i></a>
+	<div class="head-title">{:lang('member_add_delivery_address')}</div>
+</section>
+{/block}
+{block name="main"}
+<input type="hidden" id="ref_url" value="{$pre_url}">
+<input type="hidden" value="{$flag}" id="hidden_flag" />
+<input type="hidden" value="{$id}" id="hidden_id" />
+<input type="hidden" value="{$bargain_id}" id="hidden_bargain_id" />
+<form class="form-info">
+	<div class="div-item">
+		<span>{:lang('member_full_name')}</span> <input type="text" placeholder="{:lang('recipient_name')}" id="Name" />
+	</div>
+	<div class="div-item">
+		<span>{:lang('member_phone')}</span> <input type="text" placeholder="{:lang('cell_phone_number')}" id="Moblie" />
+	</div>
+	<div class="div-item">
+		<span>{:lang('member_fixed_telephone')}</span> <input type="text" id="phone" placeholder="{:lang('member_fixed_telephone')}（选填）" />
+	</div>
+	<div class="div-item">
+		<span>{:lang('member_zip_code')}</span>
+		<input type="text" placeholder="邮编" id="zipcode" />
+	</div>
+	<div class="div-item">
+		<span>{:lang('member_location')}</span>
+		<select id="selCountry">
+			<option value="0">{:lang('member_select_country')}</option>
+			{volist name="country" id="data"}
+			<option value="{$data.id}">{$data.name}</option>
+			{/volist}
+		</select>
+	</div>
+	<div class="div-item">
+		<span>{:lang('member_province')}</span>
+		<input type="text" id="detailed_province" name="province_detail" placeholder="填写省份">
+	</div>
+	<div class="div-item">
+		<span>{:lang('member_city')}</span>
+		<input type="text" id="detailed_city" placeholder="填写城市">
+	</div>
+	<div class="div-item">
+		<span>{:lang('member_detailed_address')}</span>
+		<input type="text" placeholder="{:lang('member_detailed_address')}" id="AddressInfo" />
+	</div>
+</form>
+<button onclick="saveAddress()" class="btn-save">{:lang('member_preservation')}</button>
+{/block}
+{block name="bottom"}{/block} 
+{block name="javascript"}
+<script src="__TEMP__/{$style}/public/js/address.js"></script>
+{/block}

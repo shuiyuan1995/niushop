@@ -1,0 +1,36 @@
+<script src="__TEMP__/{$style}/public/js/public_assembly.js"></script>
+
+<style>
+	.controlSearch{
+		position: relative;
+	}
+	.login{
+		width: 28px;
+		height: 28px;
+		position: absolute;
+		top: 15px;
+		left: 25px;
+		padding-right: 8px;
+		border-right: 1px solid #cccccc;
+	}
+	.login img{
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+<div class="controlSearch">
+	<div class="control-search-input">
+		<div class="login">
+			<img src="/template/shop/blue/public/images/logosmall.png" alt="login">
+		</div>
+		<input type="text" id="keyword" class="search-input custom-search-input" placeholder="{:lang('search_goods')}">
+		<button type="button" id="search" class="search-button custom-search-button">{:lang('search')}</button>
+		<input type="hidden" value="{$shop_id}" id="hidden_shop_id"/>
+	</div>
+</div>
+<script type="text/javascript">
+	$("#search").click(function () {
+        location.href= __URL(APPMAIN+"/goods/goodssearchlist?search_name="+$("#keyword").val()+"&shop_id="+$("#hidden_shop_id").val());
+    });
+</script>

@@ -1,0 +1,78 @@
+{extend name="adminblue/base" /}
+{block name="resources"/}
+<link rel="stylesheet" type="text/css" href="ADMIN_CSS/defau.css">
+<style>
+.common-label{display: inline-block;vertical-align: middle;margin: 0 10px 0 5px;}
+.set-style dl dt { width: 11%;}
+</style>
+{/block}
+{block name="main"}
+<input type="hidden" id="withdraw_id" value="{$list['id']}">
+<div class="set-style">
+	<dl>
+		<dt>拆包费用：</dt>
+		<dd>
+			<input id="chaibao" type="number" min="0.00" value="{$list['value']}" class="input-common harf"/><em class="unit">元</em>
+			<span class="withdraw_rule" id="verification_cash">拆包费用不能为空</span>
+		</dd>
+	</dl>
+	<dl>
+		<dt>是否启用：</dt>
+		<dd>
+			<div class="controls">
+				<i class="radio-common"><input type="radio" name="enable" value="1" checked="checked" id="enableYes"></i><label class="common-label" for="enableYes">启用</label>
+				<i class="radio-common"><input type="radio" name="enable" value="0" id="enableNo"></i><label class="common-label" for="enableNo">禁用</label>
+				<input type="hidden" id="is_open" value="{$list['is_use']}">
+			</div>
+			<p class="hint">是否启用</p>
+		</dd>
+	</dl>
+	<dl>
+		<dt></dt>
+		<dd><button class="btn-common btn-big" onclick="setChaiBaoAjax();">保存</button></dd>
+	</dl>
+</div>
+<script>
+function setChaiBaoAjax() {
+	var is_use = $("input[type='radio'][name='enable']:checked").val();
+	var chai_bao = $("#chaibao").val();
+	
+	if(!(chai_bao>0)){
+		$("#chaibao").focus();
+		showTip("最低提现金额必须大于0","warning");
+		return false;
+	}
+
+	$.ajax({
+		type : "post",
+		url : "{:__URL('ADMIN_MAIN/config/chaiBaoSetting')}",
+		data : {
+			'chai_bao' : chai_bao,
+			'is_use' : is_use
+		},
+		success : function(data) {
+			if (data['code'] > 0) {
+				showMessage('success',"提交成功");
+				window.location.reload();
+			} else {
+				showMessage('error',"提交失败");
+			}
+		}
+	});
+}
+
+$(function(){
+	var is_open = $("#is_open").val();
+	if(is_open == ''){
+		is_open = 0;
+	}
+	if(parseInt(is_open) == 0){
+		$("#enableNo").prop("checked","checked");
+		$("#enableNo").parent().addClass("selected");
+	}else{
+		$("#enableYes").prop("checked","checked");
+		$("#enableYes").parent().addClass("selected");
+	}
+})
+</script>
+{/block}
