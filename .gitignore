@@ -1,9 +1,0 @@
-/.idea
-/runtime/temp/
-/runtime/cache/
-/runtime/log/
-/*.log
-/application/database.php
-/application/config.php
-/upload
-/.user.ini
