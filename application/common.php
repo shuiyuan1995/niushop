@@ -21,6 +21,7 @@ use think\response\Redirect;
 use think\Route;
 use data\extend\Barcode;
 use think\Session;
+use GeoIp2\Database\Reader;
 // 错误级别
 // error_reporting(E_ERROR | E_WARNING | E_PARSE);
 // 去除警告错误
@@ -423,7 +424,7 @@ function get_client_ip(){
     return $ip;
 }
 
-function judge_ip($ip)
+/*function judge_ip($ip)
 {
     $url = "http://ip.taobao.com/service/getIpInfo.php?ip=".$ip;
     $res = file_get_contents($url);
@@ -436,6 +437,27 @@ function judge_ip($ip)
         }
     }
     return false;
+}*/
+
+function judge_ip($ip)
+{
+    $reader = new Reader('/usr/local/share/GeoIP/GeoLite2-City.mmdb');
+
+    $record = $reader->city($ip);
+
+    $country = $record->country->names['zh-CN']; // '中国'
+    $region = $record->subdivisions[0]->names['zh-CN'];
+    $city = $record->city->names['zh-CN']; // '重庆'
+
+    $data['country'] = $country ? $country : 'XX';
+
+    $data['region'] = $region ? $region : 'XX';
+
+    $data['city'] = $city ? $city : 'XX';
+
+    $data['ip'] = $record->traits->ipAddress;
+
+    return $data;
 }
 
 /**

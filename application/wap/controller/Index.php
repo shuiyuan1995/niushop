@@ -60,11 +60,9 @@ class Index extends BaseController
             if ($from == 'fromqrcode'){
                 $ip = get_client_ip();
                 $location = judge_ip($ip);
-                $data['ip'] = $location['ip'];
                 $data['country'] = $location['country'];
                 $data['region'] = $location['region'];
                 $data['city'] = $location['city'];
-                //$data['from_time'] = time();
                 $data['ip'] = $location['ip'];
                 $obj = new FrQrcode();
                 $obj->addQrcodeFrom($data);
