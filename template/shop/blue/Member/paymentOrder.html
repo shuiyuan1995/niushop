@@ -1,7 +1,7 @@
 {extend name="shop/blue/base" /}
 {block name="resources"}
-<link type="text/css" rel="stylesheet" href="__TEMP__/{$style}/public/css/payment_orders/payment_orders.css" />
-<link type="text/css" rel="stylesheet" href="__TEMP__/{$style}/public/css/payment_orders/payment_orders_common.css" />
+<link type="text/css" rel="stylesheet" href="__TEMP__/{$style}/public/css/payment_orders/payment_orders.css?v=1.0" />
+<link type="text/css" rel="stylesheet" href="__TEMP__/{$style}/public/css/payment_orders/payment_orders_common.css?v=1.0" />
 <style>
 .result-box .yue,.result-box .point{margin-top:20px;margin-left: 20px;position: relative;}
 .result-box .yue input[type=text],.result-box .point input[type=number] {width: 100px;height: 28px;border: 1px solid #ddd;margin-left: 10px;padding: 0 10px;display: inline-block;color: #999;}
@@ -903,9 +903,9 @@ input[type="radio"]:checked {
 <!-- </div> -->
 {/block}
 {block name="javascript"}
-<script src="__TEMP__/{$style}/public/js/payment_orders/shipping_address.js"></script>
+<script src="__TEMP__/{$style}/public/js/payment_orders/shipping_address.js?v=1.0"></script>
 {switch name="order_tag"}
-	{case value="buy_now|cart"}<script src="__TEMP__/{$style}/public/js/payment_orders/payment_orders.js"></script>{/case}
+	{case value="buy_now|cart"}<script src="__TEMP__/{$style}/public/js/payment_orders/payment_orders.js?v=1.0"></script>{/case}
 	{case value="virtual_goods"}<script src="__TEMP__/{$style}/public/js/payment_orders/payment_virtual_orders.js"></script>{/case}
 	{case value="combination_packages"}<script src="__TEMP__/{$style}/public/js/payment_orders/payment_combo_package_orders.js"></script>{/case}
 	{case value="group_buy"}<script src="__TEMP__/{$style}/public/js/payment_orders/payment_orders_group_buy.js"></script>{/case}
