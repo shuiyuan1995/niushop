@@ -4295,10 +4295,14 @@ class Goods extends BaseService implements IGoods
                 } else {
                     $price = $member_price;
                 }
+                $ip = get_client_ip();
+                $location = judge_ip($ip);
+                $ip = ip2long($ip);
+                $country = $location['country'].' '.$location['region'];
                 // 判断此用户有无购物车
                 if (empty($cart_query)) {
                     // 获取商品sku信息
-                    $this->addCart($uid, $this->instance_id, $web_info['title'], $v["goods_id"], $goods_info["goods_name"], $v["sku_id"], $sku_info["sku_name"], $price, $v["num"], $goods_info["picture"], 0);
+                    $this->addCart($uid, $this->instance_id, $web_info['title'], $v["goods_id"], $goods_info["goods_name"], $v["sku_id"], $sku_info["sku_name"], $price, $v["num"], $goods_info["picture"], 0, $ip, $country);
                 } else {
                     $is_have = true;
                     foreach ($cart_query as $t => $m) {
@@ -4310,7 +4314,7 @@ class Goods extends BaseService implements IGoods
                         }
                     }
                     if ($is_have) {
-                        $this->addCart($uid, $this->instance_id, $web_info['title'], $v["goods_id"], $goods_info["goods_name"], $v["sku_id"], $sku_info["sku_name"], $price, $v["num"], $goods_info["picture"], 0);
+                        $this->addCart($uid, $this->instance_id, $web_info['title'], $v["goods_id"], $goods_info["goods_name"], $v["sku_id"], $sku_info["sku_name"], $price, $v["num"], $goods_info["picture"], 0, $ip, $country);
                     }
                 }
             }
