@@ -2691,7 +2691,7 @@ class Goods extends BaseService implements IGoods
      *
      * @see \data\api\IGoods::addCart()
      */
-    public function addCart($uid, $shop_id, $shop_name, $goods_id, $goods_name, $sku_id, $sku_name, $price, $num, $picture, $bl_id, $ip, $country)
+    public function addCart($uid, $shop_id, $shop_name, $goods_id, $goods_name, $sku_id, $sku_name, $price, $num, $picture, $bl_id, $ip)
     {
         $retval = array(
             'code' => 0,
@@ -2730,8 +2730,7 @@ class Goods extends BaseService implements IGoods
                     'num' => $num,
                     'goods_picture' => $picture,
                     'bl_id' => $bl_id,
-                    'ip' => $ip,
-                    'country' => $country
+                    'ip' => $ip
                 );
                 $cart->save($data);
                 $retval['code'] = $cart->cart_id;
@@ -4296,13 +4295,11 @@ class Goods extends BaseService implements IGoods
                     $price = $member_price;
                 }
                 $ip = get_client_ip();
-                $location = judge_ip($ip);
                 $ip = ip2long($ip);
-                $country = $location['country'].' '.$location['region'];
                 // 判断此用户有无购物车
                 if (empty($cart_query)) {
                     // 获取商品sku信息
-                    $this->addCart($uid, $this->instance_id, $web_info['title'], $v["goods_id"], $goods_info["goods_name"], $v["sku_id"], $sku_info["sku_name"], $price, $v["num"], $goods_info["picture"], 0, 0, $ip, $country);
+                    $this->addCart($uid, $this->instance_id, $web_info['title'], $v["goods_id"], $goods_info["goods_name"], $v["sku_id"], $sku_info["sku_name"], $price, $v["num"], $goods_info["picture"], 0, 0, $ip);
                 } else {
                     $is_have = true;
                     foreach ($cart_query as $t => $m) {
@@ -4314,7 +4311,7 @@ class Goods extends BaseService implements IGoods
                         }
                     }
                     if ($is_have) {
-                        $this->addCart($uid, $this->instance_id, $web_info['title'], $v["goods_id"], $goods_info["goods_name"], $v["sku_id"], $sku_info["sku_name"], $price, $v["num"], $goods_info["picture"], 0, 0, $ip, $country);
+                        $this->addCart($uid, $this->instance_id, $web_info['title'], $v["goods_id"], $goods_info["goods_name"], $v["sku_id"], $sku_info["sku_name"], $price, $v["num"], $goods_info["picture"], 0, 0, $ip);
                     }
                 }
             }
