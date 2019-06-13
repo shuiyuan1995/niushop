@@ -24,7 +24,10 @@ class CartList implements ICartList
                     ->select();
                 foreach ($data[$v['member_name']] as $key => $value){
                     if (!empty($value['ip'])){
-                        $data[$v['member_name']][$key]['ip'] = long2ip($value['ip']);
+                        $ip = long2ip($value['ip']);
+                        $data[$v['member_name']][$key]['ip'] = $ip;
+                        $location = judge_ip($ip);
+                        $data[$v['member_name']][$key]['country'] = $location['country'].' '.$location['region'];
                     }
                 }
             }
@@ -40,7 +43,10 @@ class CartList implements ICartList
                                             ->select();
                 foreach ($data[$v['member_name']] as $key => $value){
                     if (!empty($value['ip'])){
-                        $data[$v['member_name']][$key]['ip'] = long2ip($value['ip']);
+                        $ip = long2ip($value['ip']);
+                        $data[$v['member_name']][$key]['ip'] = $ip;
+                        $location = judge_ip($ip);
+                        $data[$v['member_name']][$key]['country'] = $location['country'].' '.$location['region'];
                     }
                 }
             }
