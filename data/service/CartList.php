@@ -23,11 +23,13 @@ class CartList implements ICartList
                     ->order('c.cart_id','desc')
                     ->select();
                 foreach ($data[$v['member_name']] as $key => $value){
+                    $ip = long2ip($value['ip']);
+                    $data[$v['member_name']][$key]['ip'] = $ip;
                     if (!empty($value['ip'])){
-                        $ip = long2ip($value['ip']);
-                        $data[$v['member_name']][$key]['ip'] = $ip;
                         $location = judge_ip($ip);
                         $data[$v['member_name']][$key]['country'] = $location['country'].' '.$location['region'];
+                    }else{
+                        $data[$v['member_name']][$key]['country'] = 'XX XX';
                     }
                 }
             }
@@ -42,11 +44,13 @@ class CartList implements ICartList
                                             ->order('c.cart_id','desc')
                                             ->select();
                 foreach ($data[$v['member_name']] as $key => $value){
+                    $ip = long2ip($value['ip']);
+                    $data[$v['member_name']][$key]['ip'] = $ip;
                     if (!empty($value['ip'])){
-                        $ip = long2ip($value['ip']);
-                        $data[$v['member_name']][$key]['ip'] = $ip;
                         $location = judge_ip($ip);
                         $data[$v['member_name']][$key]['country'] = $location['country'].' '.$location['region'];
+                    }else{
+                        $data[$v['member_name']][$key]['country'] = 'XX XX';
                     }
                 }
             }
