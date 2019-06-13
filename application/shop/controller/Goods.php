@@ -1337,7 +1337,6 @@ class Goods extends BaseController
         $picture_id = $cart_detail['picture_id'];
         $_SESSION['order_tag'] = ""; // 清空订单
         $ip = get_client_ip();
-        $ip = '169.235.24.133';
         $ip = ip2long($ip);
         $retval = $goods->addCart($uid, $shop_id, $web_info['title'], $goods_id, $goods_name, $sku_id, $sku_name, $price, $count, $picture_id, 0,$ip);
         return $retval;
