@@ -897,7 +897,9 @@ function submitOrder() {
 						location.href = __URL(APPMAIN + '/order/myorderlist');
 					}else{
                         console.log(333);
-						location.href = __URL(APPMAIN + '/pay/pay?out_trade_no=' + res.code);
+						window.location.href = __URL(APPMAIN + '/pay/pay?out_trade_no=' + res.code);
+						window.event.returnvalue=false;
+						return false
 					}
 				} else {
 					showBox(res.message,"error");
