@@ -134,7 +134,7 @@
 					<div class="floor-title">
 						<!--推荐名称-->
 						<h2 class="category-block-h2" style="{if $vo['color'] == '#ffffff'}border-left:5px solid #0689e1;{else}border-left:5px solid {$vo['color']};{/if}height:29px;line-height:29px;">
-							<a href=javascript:;" target="_blank" >{$vo['category_alias']}</a>
+							<a href=javascript:;">{$vo['category_alias']}</a>
 							<input type="hidden" class="NS-SHORT-NAME" value="{if !empty($vo['short_name'])}{$vo['short_name']}{elseif !empty($vo['category_alias'])}{php} echo mb_substr($vo['category_alias'],0,4,'utf-8'); {/php}{else}{php} echo mb_substr($vo['category_name'],0,4,'utf-8'); {/php}{/if}"/>
 						</h2>
 						<!--推荐类型-->

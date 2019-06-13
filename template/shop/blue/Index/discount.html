@@ -73,9 +73,7 @@
 				</div>
 				<div class="goods-price">
 					<span class="sale" style="font-size: 20px;"><b style="color: #E84C3D;">{$vo.display_price}</b></span>&nbsp;
-					{if condition="$vo.market_price gt 0"}
-					<span class="sale" style="font-size: 16px;"><s><b style="color: #aaaaaa;">¥{$vo.market_price}</b></s></span>
-					{/if}
+					{if condition="$vo.market_price > 0 && $vo.market_price neq $vo.promotion_price"}<span class="sale" style="font-size: 16px;"><s><b style="color: #aaaaaa;">¥{$vo.market_price}</b></s></span>{/if}
 					<!-- <span class="depreciate"><i class="fa fa-down"></i>{:lang('straight_down')}：¥{$vo.sale_down}</span> -->
 				</div>
 <!-- 				</div> -->

@@ -135,7 +135,10 @@
 									<span class="seconds">36</span>
 								</time>
 								<p class="goods_name">{$vo.goods_name}</p>
-								<span class="goods_price"><i>¥</i>{$vo.promotion_price}</span>
+								<p class="price">
+									<span class="goods_price"><i>¥</i>{$vo.promotion_price}</span>
+									<!--{if condition="$vo.market_price > 0 && $vo.market_price neq $vo.promotion_price"}<span class="right_price"><i>¥</i>{$vo.market_price}</span>{/if}-->
+								</p>
 							</div>
 							<div class="goods_pic">
 								<a href="{:__URL('APP_MAIN/goods/goodsdetail?id='.$vo['goods_id'])}">
