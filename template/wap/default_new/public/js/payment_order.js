@@ -918,13 +918,17 @@ function submitOrder() {
                 'ins_price' : ins_price
 			},
 			success : function(res) {
+                console.log(res);
 				if (res.code > 0) {
 					//如果实际付款金额为0，跳转到个人中心的订单界面中
 					if(parseFloat($("#realprice").attr("data-total-money")) == 0){
+                        console.log(111);
 						location.href = __URL(APPMAIN + '/pay/paycallback?msg=1&out_trade_no=' + res.code);
 					}else if(pay_type == 4){
+                        console.log(222);
 						location.href = __URL(APPMAIN + '/order/myorderlist');
 					}else{
+                        console.log(333);
 						location.href = __URL(APPMAIN + '/pay/pay?out_trade_no=' + res.code);
 					}
 				} else {
