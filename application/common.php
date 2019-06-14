@@ -21,6 +21,7 @@ use think\response\Redirect;
 use think\Route;
 use data\extend\Barcode;
 use think\Session;
+use GeoIp2\Database\Reader;
 // 错误级别
 // error_reporting(E_ERROR | E_WARNING | E_PARSE);
 // 去除警告错误
@@ -423,19 +424,78 @@ function get_client_ip(){
     return $ip;
 }
 
-function judge_ip($ip)
+function curl_http_request($order_url, $data_string = '', $second = 30)
+{
+    //初始化curl
+    $ch = curl_init();
+    //超时时间
+    curl_setopt($ch, CURLOPT_TIMEOUT, $second);
+    curl_setopt($ch, CURLOPT_URL, $order_url);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+    curl_setopt($ch, CURLOPT_HEADER, FALSE);
+    if ($data_string) {
+        //设置header
+        /* curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+             'Content-type:application/json;charset=utf-8',
+             'Content-Length:'.strlen($data_string)
+         ));*/
+        //post提交方式
+        curl_setopt($ch, CURLOPT_POST, TRUE);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+    }
+    //要求结果为字符串且输出到屏幕上
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    //运行curl
+    $data = curl_exec($ch);
+    //返回结果
+    if ($data) {
+        curl_close($ch);
+        return $data;
+    } else {
+        $error = curl_errno($ch);
+        //echo "curl出错，错误码:$error" . "<br/>";
+        curl_close($ch);
+        return false;
+    }
+}
+
+/*function judge_ip($ip)
 {
     $url = "http://ip.taobao.com/service/getIpInfo.php?ip=".$ip;
-    $res = file_get_contents($url);
-    if (!empty($res)) {
-        $ipData = json_decode($res,true);
-        if ($ipData['code'] == 0){
-            return $ipData['data'];
-        }else{
-            return false;
-        }
+    $res = curl_http_request($url);
+    if ($res){
+        $ipData = json_decode(trim($res), true);
+        return $ipData['data'];
     }
     return false;
+}*/
+
+function judge_ip($ip)
+{
+    $reader = new Reader('public/static/geoip/GeoLite2-City.mmdb');
+
+    $record = $reader->city($ip);
+
+    $country = $record->country->names['zh-CN']; // '中国'
+    $country_code = $record->country->isoCode;
+    $region = $record->subdivisions[0]->names['zh-CN'];
+    $region_code = $record->subdivisions[0]->isoCode;
+    $city = $record->city->names['zh-CN']; // '重庆'
+
+    $data['country'] = $country ? $country : 'XX';
+
+    $data['country_code'] = $country_code;
+
+    $data['region'] = $region ? $region : 'XX';
+
+    $data['region_code'] = $region_code;
+
+    $data['city'] = $city ? $city : 'XX';
+
+    $data['ip'] = $record->traits->ipAddress;
+
+    return $data;
 }
 
 /**

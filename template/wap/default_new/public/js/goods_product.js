@@ -157,7 +157,7 @@ $(function() {
 														}
 													}
 													$('#submit_ok').show();
-													showBox("加入购物车成功","warning");
+													showBox("加入购物车成功","success");
 												}
 												$("#loading").hide();
 											}else if(data.code == -1){

@@ -5,3 +5,4 @@
 /application/database.php
 /application/config.php
 /upload
+public/static/geoip/
