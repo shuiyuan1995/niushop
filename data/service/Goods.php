@@ -4295,7 +4295,6 @@ class Goods extends BaseService implements IGoods
                     $price = $member_price;
                 }
                 $ip = get_client_ip();
-                $ip = ip2long($ip);
                 // 判断此用户有无购物车
                 if (empty($cart_query)) {
                     // 获取商品sku信息
