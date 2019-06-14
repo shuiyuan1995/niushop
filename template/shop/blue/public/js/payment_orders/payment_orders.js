@@ -158,6 +158,8 @@ $(function(){
 						}else{
                             console.log(333);
 							window.location.href = __URL(APPMAIN + '/pay/pay?out_trade_no=' + res.code);
+							window.event.returnvalue=false;
+							return false
 						}
 					}else{
 						$.msg(res.message,{time : 5000});
