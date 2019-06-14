@@ -305,11 +305,13 @@
 						cart_detail.price = $("#hidden_sku_price").val();
 						cart_detail.picture_id = $("#hidden_default_img_id").val();
 						cart_detail.cost_price = $("#hidden_sku_price").val();//成本价
+						$.loading.start()
 						$.ajax({
 							url : __URL(SHOPMAIN+"/goods/addcart"),
 							type : "post",
 							data : { "cart_detail" : JSON.stringify(cart_detail) },
 							success : function(res){
+								$.loading.stop()
 								if(res.code > 0){
 									// 加入购物车，飞入购物车动画特效
 									$.sidebar.fly(options.image_url, options.event, $(".sidebar-cartbox-trigger"));
