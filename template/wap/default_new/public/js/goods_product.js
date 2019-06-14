@@ -124,12 +124,13 @@ $(function() {
 									});
 								}
 								if(cart_tag == "addCart"){
+									$("#loading").show();
 									$.ajax({
 										url :  __URL(APPMAIN + "/goods/addcart"),
 										type : "post",
 										data : { "cart_detail" : JSON.stringify(cart_detail), "cart_tag" : cart_tag },
 										success : function(data) {
-
+											$("#loading").hide();
 											$('body').css("overflow", "auto");
 											if(data.code>0){
 
