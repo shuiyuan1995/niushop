@@ -9,9 +9,9 @@ class ComposerStaticInit6f4c6fc29d62d4e6946cff3a9a69569b
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '1cfd2761b63b0a29ed23657ea394cb2d' => __DIR__ . '/..' . '/topthink/think-captcha/src/helper.php',
-        '72c97b53391125cae04082a81029f42d' => __DIR__ . '/..' . '/topthink/think-testing/src/config.php',
-        '9e05116ddaa5b1d244b68c3993908acd' => __DIR__ . '/..' . '/topthink/think-queue/src/config.php',
         'ddc3cd2a04224f9638c5d0de6a69c7e3' => __DIR__ . '/..' . '/topthink/think-migration/src/config.php',
+        '9e05116ddaa5b1d244b68c3993908acd' => __DIR__ . '/..' . '/topthink/think-queue/src/config.php',
+        '72c97b53391125cae04082a81029f42d' => __DIR__ . '/..' . '/topthink/think-testing/src/config.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -45,9 +45,23 @@ class ComposerStaticInit6f4c6fc29d62d4e6946cff3a9a69569b
         array (
             'Phinx\\' => 6,
         ),
+        'M' => 
+        array (
+            'MaxMind\\WebService\\' => 19,
+            'MaxMind\\Exception\\' => 18,
+            'MaxMind\\Db\\' => 11,
+        ),
+        'G' => 
+        array (
+            'GeoIp2\\' => 7,
+        ),
         'D' => 
         array (
             'Doctrine\\Instantiator\\' => 22,
+        ),
+        'C' => 
+        array (
+            'Composer\\CaBundle\\' => 18,
         ),
     );
 
@@ -91,8 +105,8 @@ class ComposerStaticInit6f4c6fc29d62d4e6946cff3a9a69569b
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -114,9 +128,29 @@ class ComposerStaticInit6f4c6fc29d62d4e6946cff3a9a69569b
         array (
             0 => __DIR__ . '/..' . '/topthink/think-migration/phinx/src/Phinx',
         ),
+        'MaxMind\\WebService\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/maxmind/web-service-common/src/WebService',
+        ),
+        'MaxMind\\Exception\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/maxmind/web-service-common/src/Exception',
+        ),
+        'MaxMind\\Db\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/maxmind-db/reader/src/MaxMind/Db',
+        ),
+        'GeoIp2\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/geoip2/geoip2/src',
+        ),
         'Doctrine\\Instantiator\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator',
+        ),
+        'Composer\\CaBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
         ),
     );
 
