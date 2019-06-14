@@ -446,12 +446,18 @@ function judge_ip($ip)
     $record = $reader->city($ip);
 
     $country = $record->country->names['zh-CN']; // '中国'
+    $country_code = $record->country->isoCode;
     $region = $record->subdivisions[0]->names['zh-CN'];
+    $region_code = $record->subdivisions[0]->isoCode;
     $city = $record->city->names['zh-CN']; // '重庆'
 
     $data['country'] = $country ? $country : 'XX';
 
+    $data['country_code'] = $country_code;
+
     $data['region'] = $region ? $region : 'XX';
+
+    $data['region_code'] = $region_code;
 
     $data['city'] = $city ? $city : 'XX';
 
