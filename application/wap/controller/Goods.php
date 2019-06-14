@@ -446,7 +446,6 @@ class Goods extends BaseController
         if (! empty($this->uid) && $this->is_member == 1) {
             $goods = new GoodsService();
             $ip = get_client_ip();
-            $ip = ip2long($ip);
             $retval = $goods->addCart($uid, $shop_id, $shop_name, $goods_id, $goods_name, $sku_id, $sku_name, $price, $num, $picture, 0, $ip);
         } else {
             $retval = array(
