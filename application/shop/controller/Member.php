@@ -37,6 +37,7 @@ use data\service\Shop;
 use data\service\UnifyPay;
 use data\service\VirtualGoods as VirtualGoodsService;
 use data\service\WebSite;
+use think\Db;
 use think\Session;
 use data\service\GroupBuy;
 use data\service\Order\OrderGroupBuy;
@@ -1748,6 +1749,15 @@ class Member extends BaseController
         }
         return 1;
     }
+
+    public function getCartCount()
+    {
+        $cart_id = request()->post('cart_id');
+        $count = Db::query("SELECT SUM(num) as count from ns_cart where cart_id in ({$cart_id})");
+        $count = $count[0]['count'];
+        return $count;
+    }
+
 
     /**
      * 获取用户余额

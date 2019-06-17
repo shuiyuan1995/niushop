@@ -85,14 +85,26 @@ function selcart_submit() {
 	}
 	// 目前只支持单店铺
 	if (j > 0) {
-		$.ajax({
-			url : __URL(SHOPMAIN + "/member/ordercreatesession"),
-			type : "post",
-			data : { "tag" : "cart", "cart_id" : cart_id_arr.toString() },
-			success : function(res){
-				location.href= __URL(SHOPMAIN + "/member/paymentorder");
-			}
-		});
+        $.ajax({
+            url : __URL(SHOPMAIN + "/member/getCartCount"),
+            type : "post",
+            data : { "cart_id" : cart_id_arr.toString() },
+            success : function(data){
+                if (data < 2){
+                    $.msg("单个订单两条起售！");
+                    return;
+                }else {
+                    $.ajax({
+                        url : __URL(SHOPMAIN + "/member/ordercreatesession"),
+                        type : "post",
+                        data : { "tag" : "cart", "cart_id" : cart_id_arr.toString() },
+                        success : function(res){
+                            location.href= __URL(SHOPMAIN + "/member/paymentorder");
+                        }
+                    });
+                }
+            }
+        });
 	}
 }
 

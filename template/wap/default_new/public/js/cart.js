@@ -269,39 +269,43 @@ function settlement() {
 		if ($(this).is(":hidden")) {
 			count++;
 		}
-	})
+	});
 	if (count == 0 && sum_num()>0) {
-		// 结算
-		var money = $("#orderprice").text() * 1;
+		if (sum_num() <2){
+            showBox("单个订单两条起售！","warning");
+		}else{
+            // 结算
+            var money = $("#orderprice").text() * 1;
 //		if (money != 0) {
-			var i = 0;
-			var cart_id_arr = new Array();
-			var shop_id = 0;
-			var shop_arr = new Array();
-			$(".cart-list-li").each(function() {
-				if ($(this).find(".checkbox").attr("is_check") == 'yes') {
-					var data_shopid = $(this).find("input[name='quantity']").attr("data-shopid");
-					if(shop_id == 0){
-						shop_id = data_shopid;
-					}
-					shop_arr.push(data_shopid);
-					var temp = $(this).find("input[name='quantity']").attr("data-cartid");
-					cart_id_arr.push(temp);
-				}
-			});
-			if(getHeavyArray(shop_arr).length>1){
-				showBox("目前只支持单店铺生成订单","warning");
-			}else{
-				$.ajax({
-					url : __URL(APPMAIN + "/order/ordercreatesession"),
-					type : "post",
-					data : { "tag" : "cart", "cart_id" : cart_id_arr.toString()},
-					success : function(res){
-						window.location.href = __URL(APPMAIN+"/order/paymentorder");
-					}
-				});
-			}
+            var i = 0;
+            var cart_id_arr = new Array();
+            var shop_id = 0;
+            var shop_arr = new Array();
+            $(".cart-list-li").each(function() {
+                if ($(this).find(".checkbox").attr("is_check") == 'yes') {
+                    var data_shopid = $(this).find("input[name='quantity']").attr("data-shopid");
+                    if(shop_id == 0){
+                        shop_id = data_shopid;
+                    }
+                    shop_arr.push(data_shopid);
+                    var temp = $(this).find("input[name='quantity']").attr("data-cartid");
+                    cart_id_arr.push(temp);
+                }
+            });
+            if(getHeavyArray(shop_arr).length>1){
+                showBox("目前只支持单店铺生成订单","warning");
+            }else{
+                $.ajax({
+                    url : __URL(APPMAIN + "/order/ordercreatesession"),
+                    type : "post",
+                    data : { "tag" : "cart", "cart_id" : cart_id_arr.toString()},
+                    success : function(res){
+                        window.location.href = __URL(APPMAIN+"/order/paymentorder");
+                    }
+                });
+            }
 //		}
+		}
 	} else {
 		// 删除
 		var del_id_array = '';

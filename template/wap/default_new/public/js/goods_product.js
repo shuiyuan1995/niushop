@@ -67,7 +67,7 @@ $(function() {
 					var currentNum = $("#hidden_current_num").val() * 1;
 					var num = $("#num").val() * 1;
 					var nummax = $("#num").attr("max") * 1;
-					if(currentNum!=0 && currentNum == purchaseSum){
+                    if(currentNum!=0 && currentNum == purchaseSum){
 						showBox("此商品限购，您最多可购买"+ purchaseSum+ goods_unit,"warning");
 						return;
 					}
@@ -97,10 +97,10 @@ $(function() {
 									cart_detail.is_full_payment = 0;
 								}
 								var cart_tag = $("#submit_ok").attr("tag");
-								
+
 								//选择地址触发事件
 								if(address_tag == "address_tag"){
-									
+
 									var skuid = $("#hiddSkuId").val();
 									var num = $("#num").val();
 
@@ -108,13 +108,13 @@ $(function() {
 									if(skuid == null || skuid == "") skuid = $("#goods_sku0").attr("skuid");
 									getGoodsPurchaseRestrictionForCurrentUser($("#goods_id").val(),num,function(purchase){
 										if(purchase.code>0){
-											
+
 											$.ajax({
 												url : __URL(APPMAIN + "/Goods/addBargainLaunch"),
 												type : "post",
 												data : { "tag" : "addBargain", "sku_id" : skuid, "num" : num, "address_id" : address_id,"bargain_id" : $("#hidden_bargain_id").val(), "distribution_type" : distribution_type },
 												success : function(res){
-													
+
 													window.location.href = __URL(APPMAIN+"/Goods/bargainLaunch?launch_id="+res+"");
 												}
 											});
@@ -169,117 +169,142 @@ $(function() {
 										}
 									});
 								}else if(cart_tag == "spelling"){
-									//拼单
-									//立即购买
-									var skuid = $("#hiddSkuId").val();
-									var num = $("#num").val();
-									//没有SKU商品，获取第一个
-									if(skuid == null || skuid == "") skuid = $("#goods_sku0").attr("skuid");
-									getGoodsPurchaseRestrictionForCurrentUser($("#goods_id").val(),num,function(purchase){
-										if(purchase.code>0){
-											$.ajax({
-												url : __URL(APPMAIN + "/PintuanOrder/ordercreatesession"),
-												type : "post",
-												data : { "tag" : "spelling", "sku_id" : skuid, "num" : num, "goods_type" : $("#hidden_goods_type").val(),"tuangou_group_id" : $("#hidden_tuangou_group_id").val() },
-												success : function(res){
-													window.location.href = __URL(APPMAIN+"/PintuanOrder/paymentorder");
-												}
-											});
-										}else{
-											showBox(purchase.message);
-										}
-									});
+                                    if (num < 2){
+                                        showBox("单个订单两条起售！","warning");
+                                        return;
+                                    }else{
+                                        //拼单
+                                        //立即购买
+                                        var skuid = $("#hiddSkuId").val();
+                                        var num = $("#num").val();
+                                        //没有SKU商品，获取第一个
+                                        if(skuid == null || skuid == "") skuid = $("#goods_sku0").attr("skuid");
+                                        getGoodsPurchaseRestrictionForCurrentUser($("#goods_id").val(),num,function(purchase){
+                                            if(purchase.code>0){
+                                                $.ajax({
+                                                    url : __URL(APPMAIN + "/PintuanOrder/ordercreatesession"),
+                                                    type : "post",
+                                                    data : { "tag" : "spelling", "sku_id" : skuid, "num" : num, "goods_type" : $("#hidden_goods_type").val(),"tuangou_group_id" : $("#hidden_tuangou_group_id").val() },
+                                                    success : function(res){
+                                                        window.location.href = __URL(APPMAIN+"/PintuanOrder/paymentorder");
+                                                    }
+                                                });
+                                            }else{
+                                                showBox(purchase.message);
+                                            }
+                                        });
+									}
 								}else if(cart_tag == 'bargainBtn'){
 									//砍价
 									//立即砍价
-									
+
 									$("#s_buy").slideUp(300);
 									$("body").css({ overflow : "hidden"});
 									$("#mask").show();
 									$(".bottom_popup[data-popup-type='address_popup']").slideDown(300);
 									//没有SKU商品，获取第一个
 									if(skuid == null || skuid == "") skuid = $("#goods_sku0").attr("skuid");
-									
+
 								}else if(cart_tag == "buyBtn1" || cart_tag == "theSelected"){
 									//立即购买
-									var skuid = $("#hiddSkuId").val();
-									var num = $("#num").val();
-									//没有SKU商品，获取第一个
-									if(skuid == null || skuid == "") skuid = $("#goods_sku0").attr("skuid");
-									getGoodsPurchaseRestrictionForCurrentUser($("#goods_id").val(),num,function(purchase){
-										if(purchase.code>0){
-											$.ajax({
-												url : __URL(APPMAIN + "/order/ordercreatesession"),
-												type : "post",
-												data : { "tag" : "buy_now", "sku_id" : skuid, "num" :num, "goods_type" : $("#hidden_goods_type").val() },
-												success : function(res){
-													window.location.href = __URL(APPMAIN+"/order/paymentorder");
-												}
-											});
-										}else{
-											showBox(purchase.message,"error");
-										}
-									});
+                                    if (num < 2){
+                                        showBox("单个订单两条起售！","warning");
+                                        return;
+                                    }else{
+                                        var skuid = $("#hiddSkuId").val();
+                                        var num = $("#num").val();
+                                        //没有SKU商品，获取第一个
+                                        if(skuid == null || skuid == "") skuid = $("#goods_sku0").attr("skuid");
+                                        getGoodsPurchaseRestrictionForCurrentUser($("#goods_id").val(),num,function(purchase){
+                                            if(purchase.code>0){
+                                                $.ajax({
+                                                    url : __URL(APPMAIN + "/order/ordercreatesession"),
+                                                    type : "post",
+                                                    data : { "tag" : "buy_now", "sku_id" : skuid, "num" :num, "goods_type" : $("#hidden_goods_type").val() },
+                                                    success : function(res){
+                                                        window.location.href = __URL(APPMAIN+"/order/paymentorder");
+                                                    }
+                                                });
+                                            }else{
+                                                showBox(purchase.message,"error");
+                                            }
+                                        });
+                                    }
 								}else if(cart_tag == "goods_presell"){
-									//立即购买
-									var skuid = $("#hiddSkuId").val();
-									var num = $("#num").val();
-									//没有SKU商品，获取第一个
-									if(skuid == null || skuid == "") skuid = $("#goods_sku0").attr("skuid");
-									getGoodsPurchaseRestrictionForCurrentUser($("#goods_id").val(),num,function(purchase){
-										if(purchase.code>0){
-											$.ajax({
-												url : __URL(APPMAIN + "/order/ordercreatesession"),
-												type : "post",
-												data : { "tag" : "goods_presell", "sku_id" : skuid, "num" :num, "goods_type" : $("#hidden_goods_type").val()},
-												success : function(res){
-													window.location.href = __URL(APPMAIN+"/order/paymentorder");
-												}
-											});
-										}else{
-											showBox(purchase.message,"error");
-										}
-									});
+                                    if (num < 2){
+                                        showBox("单个订单两条起售！","warning");
+                                        return;
+                                    }else{
+                                        //立即购买
+                                        var skuid = $("#hiddSkuId").val();
+                                        var num = $("#num").val();
+                                        //没有SKU商品，获取第一个
+                                        if(skuid == null || skuid == "") skuid = $("#goods_sku0").attr("skuid");
+                                        getGoodsPurchaseRestrictionForCurrentUser($("#goods_id").val(),num,function(purchase){
+                                            if(purchase.code>0){
+                                                $.ajax({
+                                                    url : __URL(APPMAIN + "/order/ordercreatesession"),
+                                                    type : "post",
+                                                    data : { "tag" : "goods_presell", "sku_id" : skuid, "num" :num, "goods_type" : $("#hidden_goods_type").val()},
+                                                    success : function(res){
+                                                        window.location.href = __URL(APPMAIN+"/order/paymentorder");
+                                                    }
+                                                });
+                                            }else{
+                                                showBox(purchase.message,"error");
+                                            }
+                                        });
+									}
 								}else if(cart_tag == "groupbuy"){
-									//团购
-									var skuid = $("#hiddSkuId").val();
-									var num = $("#num").val();
-									//没有SKU商品，获取第一个
-									if(skuid == null || skuid == "") skuid = $("#goods_sku0").attr("skuid");
-									getGoodsPurchaseRestrictionForCurrentUser($("#goods_id").val(),num,function(purchase){
-										if(purchase.code>0){
-											$.ajax({
-												url : __URL(APPMAIN + "/order/ordercreatesession"),
-												type : "post",
-												data : { "tag" : "groupbuy", "sku_id" : skuid, "num" :num, "goods_type" : $("#hidden_goods_type").val() },
-												success : function(res){
-													window.location.href = __URL(APPMAIN+"/order/paymentorder");
-												}
-											});
-										}else{
-											showBox(purchase.message,"error");
-										}
-									});
+                                    if (num < 2){
+                                        showBox("单个订单两条起售！","warning");
+                                        return;
+                                    }else{
+                                        //团购
+                                        var skuid = $("#hiddSkuId").val();
+                                        var num = $("#num").val();
+                                        //没有SKU商品，获取第一个
+                                        if(skuid == null || skuid == "") skuid = $("#goods_sku0").attr("skuid");
+                                        getGoodsPurchaseRestrictionForCurrentUser($("#goods_id").val(),num,function(purchase){
+                                            if(purchase.code>0){
+                                                $.ajax({
+                                                    url : __URL(APPMAIN + "/order/ordercreatesession"),
+                                                    type : "post",
+                                                    data : { "tag" : "groupbuy", "sku_id" : skuid, "num" :num, "goods_type" : $("#hidden_goods_type").val() },
+                                                    success : function(res){
+                                                        window.location.href = __URL(APPMAIN+"/order/paymentorder");
+                                                    }
+                                                });
+                                            }else{
+                                                showBox(purchase.message,"error");
+                                            }
+                                        });
+									}
 								}else if(cart_tag == "js_point_exchange"){
-									//积分兑换
-									var skuid = $("#hiddSkuId").val();
-									var num = $("#num").val();
-									//没有SKU商品，获取第一个
-									if(skuid == null || skuid == "") skuid = $("#goods_sku0").attr("skuid");
-									getGoodsPurchaseRestrictionForCurrentUser($("#goods_id").val(),num,function(purchase){
-										if(purchase.code>0){
-											$.ajax({
-												url : __URL(APPMAIN + "/order/ordercreatesession"),
-												type : "post",
-												data : { "tag" : "js_point_exchange", "sku_id" : skuid, "num" :num, "goods_type" : $("#hidden_goods_type").val() },
-												success : function(res){
-													window.location.href = __URL(APPMAIN+"/order/paymentorder");
-												}
-											});
-										}else{
-											showBox(purchase.message,"error");
-										}
-									});
+                                    if (num < 2){
+                                        showBox("单个订单两条起售！","warning");
+                                        return;
+                                    }else{
+                                        //积分兑换
+                                        var skuid = $("#hiddSkuId").val();
+                                        var num = $("#num").val();
+                                        //没有SKU商品，获取第一个
+                                        if(skuid == null || skuid == "") skuid = $("#goods_sku0").attr("skuid");
+                                        getGoodsPurchaseRestrictionForCurrentUser($("#goods_id").val(),num,function(purchase){
+                                            if(purchase.code>0){
+                                                $.ajax({
+                                                    url : __URL(APPMAIN + "/order/ordercreatesession"),
+                                                    type : "post",
+                                                    data : { "tag" : "js_point_exchange", "sku_id" : skuid, "num" :num, "goods_type" : $("#hidden_goods_type").val() },
+                                                    success : function(res){
+                                                        window.location.href = __URL(APPMAIN+"/order/paymentorder");
+                                                    }
+                                                });
+                                            }else{
+                                                showBox(purchase.message,"error");
+                                            }
+                                        });
+									}
 								}
 							} else {
 								if (purchaseSum <= 0)  purchaseSum = 0;

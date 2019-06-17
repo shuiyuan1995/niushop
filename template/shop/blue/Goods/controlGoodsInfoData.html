@@ -356,12 +356,16 @@ $().ready(function() {
 	}
 	
 	// 添加
-	$(".add-cart,.js-buy-now,.js-point-exchange").click(function(event) {
+	$(".js-buy-now,.js-point-exchange").click(function(event) {
 		if($(this).hasClass("disabled") || $(this).hasClass("purchase-restriction")) return;
 		if($(".amount-input").val() < min_buy){
 			$.msg("{:lang('shall_not_less_than')}!");
 			return;
 		}
+        if($(".amount-input").val() < 2){
+            $.msg("单个订单两条起售！");
+            return;
+        }
 		var tag = $(this).attr("data-tag");
 		var image_url = $("#MagnifierWrap .MagnifierMain").find("img").attr("src");
 		var goodsid = {$goods_info.goods_id};
@@ -372,6 +376,23 @@ $().ready(function() {
 			tag : tag
 		});
 	});
+
+    $(".add-cart").click(function(event) {
+        if($(this).hasClass("disabled") || $(this).hasClass("purchase-restriction")) return;
+        if($(".amount-input").val() < min_buy){
+            $.msg("{:lang('shall_not_less_than')}!");
+            return;
+        }
+        var tag = $(this).attr("data-tag");
+        var image_url = $("#MagnifierWrap .MagnifierMain").find("img").attr("src");
+        var goodsid = {$goods_info.goods_id};
+        $.cart.add(goodsid, $(".amount-input").val(), {
+            is_sku: true,
+            image_url: image_url,
+            event: event,
+            tag : tag
+        });
+    });
 
 	// 添加对比
 	$(".add-compare").click(function(event) {
