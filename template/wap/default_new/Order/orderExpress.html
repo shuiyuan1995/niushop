@@ -60,10 +60,11 @@
 				<span>{:lang('waybill_number')}：{$vo['express_code']}</span>
 			</div>
 			<!-- JS动态查询物流信息 -->
-			<div class="express_title">物流跟踪</div>
+			<div style="background:#fff;margin-top:10px;" class="express_goods"><a href="https://t.17track.net/zh-cn#nums={$vo.express_code}" style="color: rgb(245, 183, 8);">查看物流</a></div>
+			<!--<div class="express_title">物流跟踪</div>
 			<div class="express_info">
 				<ul class="js-express-info"></ul>
-			</div>
+			</div>-->
 			{else}
 			<div style="background:#fff;" class="express_goods">
 				<span>{:lang('goods_total')}{$vo['order_goods_list']|count}{:lang('goods_goods')},{:lang('no_logistics_required')}</span><br/>

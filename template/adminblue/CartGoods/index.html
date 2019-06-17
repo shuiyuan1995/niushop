@@ -28,20 +28,20 @@
 			&lt;!&ndash;<button class="btn-common-delete" onclick="batchDelete()" >批量删除</button>&ndash;&gt;
 			<button onclick="dataExcel()" value="导出数据" class="btn-common-white"  >导出数据</button>
 		</th>-->
-		<!--<th style="width:50%;">
+		<th style="width:50%;">
 			<span>访问时间：</span>
 			<input type="text" id="startDate" class="input-common middle" placeholder="请选择开始日期" onclick="WdatePicker()" />
 			&nbsp;-&nbsp;
 			<input type="text" id="endDate" placeholder="请选择结束日期" class="input-common middle" onclick="WdatePicker()" />
 			<button onclick="searchData()" value="搜索" class="btn-common" >搜索</button>
-			&lt;!&ndash; 更多搜索下拉框 &ndash;&gt;
+			<!--更多搜索下拉框-->
 			<div class="more-search-container">
 				<dl>
 					<dt></dt>
 					<dd><button onclick="searchData()" class="btn-common">搜索</button></dd>
 				</dl>
 			</div>
-		</th>-->
+		</th>
 	</tr>
 </table>
 <table class="table-class">
@@ -54,6 +54,7 @@
 	<thead>
 		<tr align="center">
 			<th style="text-align:left;">商品名称</th>
+			<th>加购用户</th>
 			<th>商品单价</th>
 			<th>商品数量</th>
 			<th>加购IP</th>
@@ -81,40 +82,26 @@ function LoadingInfo(page_index) {
 				"start_date" : start_date, "end_date" : end_date
             },
             success : function(data) {
-                let array = Object.keys(data['data']);
-                if (array.length > 0) {
+                if (data['data'].length > 0) {
                     $(".table-class tbody").empty();
-                    for(let i in data['data']){
-                        let key = i;
-                        let datas = data['data'][i];
+                    for(var i = 0; i < data['data'].length; i++){
                         var html = '';
-
                         html += '<tr align="center">';
-                        html += '<td align="left" colspan="7" style="background: #cccccc;">';
+                        html += '<td align="left">';
                         html += '<div style="float:left;" class="member-div">';
-                        html += '<label style="float:none;width:100%">用户名：'+key+'</label>';
+                        html += '<label style="float:none;width:100%">'+data['data'][i]['goods_name']+'</label>';
                         html += '</div>';
                         html += '</td>';
+                        html += '<td style="text-align:center;">'+ data['data'][i]['member_name'] +'</td>';
+                        html += '<td style="text-align:center;">¥'+ data['data'][i]['price'] +'</td>';
+                        html += '<td>' +data['data'][i]['num']+'</td>';
+                        if (data['data'][i]['ip'] != 0){var ip = data['data'][i]['ip']}else{var ip = '0.0.0.0'}
+                        html += '<td>' +data['data'][i]['ip']+'</td>';
+                        html += '<td>' +data['data'][i]['country']+'</td>';
+                        if(data['data'][i]['add_time'] != '0000-00-00 00:00:00'){var time = data['data'][i]['add_time']}else{var time = '--'};
+                        html += '<td>' +time+'</td>';
+                        html += '<td style="text-align:center;">¥'+ (data['data'][i]['price']*data['data'][i]['num']).toFixed(2) +'</td>';
                         html += '</tr>';
-
-                        for (let j = 0,len = datas.length ; j < len ;j++){
-							html += '<tr align="center">';
-							html += '<td align="left">';
-							html += '<div style="float:left;" class="member-div">';
-							html += '<label style="float:none;width:100%">'+datas[j]['goods_name']+'</label>';
-							html += '</div>';
-							html += '</td>';
-							html += '<td style="text-align:center;">¥'+ datas[j]['price'] +'</td>';
-							html += '<td>' +datas[j]['num']+'</td>';
-
-                            if (datas[j]['ip'] != 0){var ip = datas[j]['ip']}else{var ip = '0.0.0.0'}
-                            html += '<td>' +ip+'</td>';
-                            html += '<td>' +datas[j]['country']+'</td>';
-                            if(datas[j]['add_time'] != '0000-00-00 00:00:00'){var time = datas[j]['add_time']}else{var time = '--'};
-                            html += '<td>' +time+'</td>';
-							html += '<td style="text-align:center;">¥'+ (datas[j]['price']*datas[j]['num']).toFixed(2) +'</td>';
-							html += '</tr>';
-                        }
                         $(".table-class tbody").append(html);
                     }
                 } else {
