@@ -18,7 +18,37 @@ class CartGoods extends BaseController
             $cart = new CartList();
             $page_index = request()->post("page_index", 1);
             $page_size = request()->post('page_size', PAGESIZE);
-            $list = $cart->getKeyword($page_index, $page_size);
+            $start_date = request()->post('start_date') == "" ? 0 : request()->post('start_date');
+            $end_date = request()->post('end_date') == "" ? 0 : request()->post('end_date');
+
+            $condition = array();
+            if ($start_date != 0 && $end_date != 0) {
+                $condition["add_time"] = [
+                    [
+                        ">",
+                        $start_date
+                    ],
+                    [
+                        "<",
+                        $end_date
+                    ]
+                ];
+            } elseif ($start_date != 0 && $end_date == 0) {
+                $condition["add_time"] = [
+                    [
+                        ">",
+                        $start_date
+                    ]
+                ];
+            } elseif ($start_date == 0 && $end_date != 0) {
+                $condition["add_time"] = [
+                    [
+                        "<",
+                        $end_date
+                    ]
+                ];
+            }
+            $list = $cart->getKeyword($page_index, $page_size, $condition);
 
             return $list;
         }else{

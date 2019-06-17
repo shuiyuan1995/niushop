@@ -21,14 +21,15 @@
 						<li>物流公司：{$vo.express_name}</li>
 						<span class="sepa"></span>
 						<li>快递单号：{$vo.express_code}</li>
-						<li><a href="javascript:;" {if $k eq 0}class="open"{/if}>查看物流<i class="icon-triangle"></i></a></li>
+						<!--<li><a href="javascript:;" {if $k eq 0}class="open"{/if}>查看物流<i class="icon-triangle"></i></a></li>-->
+						<li><a href="https://t.17track.net/zh-cn#nums={$vo.express_code}" target="_blank">查看物流</a></li>
 					</ul>
 				</div>	
-				<div class="logistics-trace" {if $k > 0} style="display:none;" {/if}>
+				<!--<div class="logistics-trace" {if $k > 0} style="display:none;" {/if}>
 					<ul>
 						
 					</ul>
-				</div>
+				</div>-->
 			</div>
 			{/foreach}
 
