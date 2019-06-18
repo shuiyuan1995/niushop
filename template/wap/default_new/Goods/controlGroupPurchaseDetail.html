@@ -514,24 +514,24 @@ $(function () {
 		}
 	});
 	
-	{if condition="$goods_detail.goods_type == 1"}
+	// {if condition="$goods_detail.goods_type == 1"}
 	
-	//定位查询运费
-	$.ajax({
-		type : "post",
-		data :{"goods_id" : "{$goods_id}"},
-		url : "{:__URL('APP_MAIN/Goods/getShippingFeeNameByLocation')}",
-		success : function(data){
-			if(data != ""){
-				if(typeof data == "string"){
-					$(".js-shipping-fee-name").text("运费：" + data);
-				}else if(typeof data == "object"){
-					$(".js-shipping-fee-name").text("运费：" + data[0].express_fee);
-				}
-			}
-		}
-	});
-	{/if}
+	// //定位查询运费
+	// $.ajax({
+	// 	type : "post",
+	// 	data :{"goods_id" : "{$goods_id}"},
+	// 	url : "{:__URL('APP_MAIN/Goods/getShippingFeeNameByLocation')}",
+	// 	success : function(data){
+	// 		if(data != ""){
+	// 			if(typeof data == "string"){
+	// 				$(".js-shipping-fee-name").text("运费：" + data);
+	// 			}else if(typeof data == "object"){
+	// 				$(".js-shipping-fee-name").text("运费：" + data[0].express_fee);
+	// 			}
+	// 		}
+	// 	}
+	// });
+	// {/if}
 
 	$(window).scroll(function(){
 		var scroll_top = $(window).scrollTop();

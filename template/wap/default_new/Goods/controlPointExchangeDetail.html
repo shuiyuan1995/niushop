@@ -154,7 +154,7 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 	<hr class="with-margin-l" />
 	<div class="stock-detail" >
 		<span>销量：{$goods_detail['sales']}笔</span>
-		<span class="js-shipping-fee-name">运费：0.00</span><!-- 运费 -->
+		<span class="js-shipping-fee-name">运费：免邮</span><!-- 运费 -->
 		<span>点击：{$goods_detail.clicks}</span>
 	</div>
 </div>
@@ -528,24 +528,24 @@ $(function () {
 		}
 	});
 	
-	{if condition="$goods_detail.goods_type == 1"}
+	// {if condition="$goods_detail.goods_type == 1"}
 	
-	//定位查询运费
-	$.ajax({
-		type : "post",
-		data :{"goods_id" : "{$goods_id}"},
-		url : "{:__URL('APP_MAIN/Goods/getShippingFeeNameByLocation')}",
-		success : function(data){
-			if(data != ""){
-				if(typeof data == "string"){
-					$(".js-shipping-fee-name").text("运费：" + data);
-				}else if(typeof data == "object"){
-					$(".js-shipping-fee-name").text("运费：" + data[0].express_fee);
-				}
-			}
-		}
-	});
-	{/if}
+	// //定位查询运费
+	// $.ajax({
+	// 	type : "post",
+	// 	data :{"goods_id" : "{$goods_id}"},
+	// 	url : "{:__URL('APP_MAIN/Goods/getShippingFeeNameByLocation')}",
+	// 	success : function(data){
+	// 		if(data != ""){
+	// 			if(typeof data == "string"){
+	// 				$(".js-shipping-fee-name").text("运费：" + data);
+	// 			}else if(typeof data == "object"){
+	// 				$(".js-shipping-fee-name").text("运费：" + data[0].express_fee);
+	// 			}
+	// 		}
+	// 	}
+	// });
+	// {/if}
 
 	$(window).scroll(function(){
 		var scroll_top = $(window).scrollTop();
