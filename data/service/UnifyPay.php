@@ -358,6 +358,7 @@ class UnifyPay extends BaseService implements IUnifyPay
         {
             return $data;
         }
+        $data['pay_body'] = mb_substr($data['pay_body'],0,10);
         $pay = new NsOrderPaymentModel(); 
         $pay->save(['pay_type' => 2], ['out_trade_no' => $out_trade_no]);
         $ali_pay = new AliPay();
