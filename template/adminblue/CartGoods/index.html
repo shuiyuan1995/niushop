@@ -26,7 +26,7 @@
 			<button onclick="dataExcel()" value="导出数据" class="btn-common-white"  >导出数据</button>
 		</th>-->
 		<th style="width:50%;">
-			<span>访问时间：</span>
+			<span>加购时间：</span>
 			<input type="text" id="startDate" class="input-common middle" placeholder="请选择开始日期" onclick="WdatePicker()" />
 			&nbsp;-&nbsp;
 			<input type="text" id="endDate" placeholder="请选择结束日期" class="input-common middle" onclick="WdatePicker()" />
@@ -86,7 +86,7 @@ function LoadingInfo(page_index) {
 							html += '<tr align="center">';
 							html += '<td align="left">';
 							html += '<div style="float:left;" class="member-div">';
-							html += '<label style="float:none;width:100%">'+data['data'][i]['goods_name']+'</label>';
+							html += '<label style="float:none;width:100%;cursor: pointer;"><a href="SHOP_MAIN/goods-'+ data['data'][i]['goods_id'] +'.html" target="_blank">'+data['data'][i]['goods_name']+'</a></label>';
 							html += '</div>';
 							html += '</td>';
 							html += '<td style="text-align:center;">'+ data['data'][i]['member_name'] +'</td>';
