@@ -13,7 +13,7 @@ class CartList implements ICartList
         if ($page_index == 1 && $page_size == 0){
                 $data = Db::name('ns_cart')
                     ->alias('c')
-                    ->join('ns_member m','c.buyer_id = m.uid','left')
+                    ->join('ns_member m','c.buyer_id = m.uid')
                     ->where($condition)
                     ->order('c.add_time','desc')
                     ->select();
@@ -31,7 +31,7 @@ class CartList implements ICartList
         }else{
                 $data = Db::name('ns_cart')
                                             ->alias('c')
-                                            ->join('ns_member m','c.buyer_id = m.uid','left')
+                                            ->join('ns_member m','c.buyer_id = m.uid')
                                             ->where($condition)
                                             ->order('c.add_time','desc')
                                             ->page($page_index,$page_size)
