@@ -4425,19 +4425,19 @@ class Goods extends BaseService implements IGoods
             if($v['count'] > $already_received)
             {
                 $coupon_detial = $v;
-            }
-            if (! empty($coupon_detial)) {
-                $receive_quantity = 0;
-                if(!empty($uid)){
-                    $receive_quantity = $coupon->getCount([
-                        "coupon_type_id" => $coupon_detial['coupon_type_id'],
-                        "uid" => $uid
-                    ]);
-                }
+                if (! empty($coupon_detial)) {
+                    $receive_quantity = 0;
+                    if(!empty($uid)){
+                        $receive_quantity = $coupon->getCount([
+                            "coupon_type_id" => $coupon_detial['coupon_type_id'],
+                            "uid" => $uid
+                        ]);
+                    }
 
-                $coupon_detial['receive_quantity'] = $receive_quantity;
-                if($coupon_detial['max_fetch'] == 0 || ($coupon_detial['max_fetch']!= 0 && $coupon_detial['max_fetch'] > $receive_quantity)){
-                    $coupon_list[] = $coupon_detial;
+                    $coupon_detial['receive_quantity'] = $receive_quantity;
+                    if($coupon_detial['max_fetch'] == 0 || ($coupon_detial['max_fetch']!= 0 && $coupon_detial['max_fetch'] > $receive_quantity)){
+                        $coupon_list[] = $coupon_detial;
+                    }
                 }
             }
         }
