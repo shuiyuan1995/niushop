@@ -341,7 +341,7 @@ class UnifyPay extends BaseService implements IUnifyPay
         if($trade_type== 'APPLET'){
             $openid = $applet_openid;
         }
-        $retval = $weixin_pay->setWeiXinPay($data['pay_body'], $data['pay_detail'], $data['pay_money']*100, $out_trade_no, $red_url, $trade_type, $openid, $product_id);
+        $retval = $weixin_pay->setWeiXinPay('订单编号：'.$data['type_alis_id'], $data['pay_detail'], $data['pay_money']*100, $out_trade_no, $red_url, $trade_type, $openid, $product_id);
         return $retval;
         
         // TODO Auto-generated method stub
@@ -361,7 +361,7 @@ class UnifyPay extends BaseService implements IUnifyPay
         $pay = new NsOrderPaymentModel(); 
         $pay->save(['pay_type' => 2], ['out_trade_no' => $out_trade_no]);
         $ali_pay = new AliPay();
-        $retval = $ali_pay->setAliPay($out_trade_no, $data['pay_body'], $data['pay_detail'], $data['pay_money'], 3, $notify_url, $return_url, $show_url);
+        $retval = $ali_pay->setAliPay($out_trade_no, '订单编号：'.$data['type_alis_id'], $data['pay_detail'], $data['pay_money'], 3, $notify_url, $return_url, $show_url);
         return $retval;
         // TODO Auto-generated method stub
         
