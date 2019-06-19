@@ -93,6 +93,7 @@
 		let len = $(".paomadeng li").length
 		$(".paomadeng").after($(".paomadeng"));
 		$(".paomadeng").clone().prependTo("#rightbox");
+		$(".paomadeng").clone().prependTo("#rightbox1");
 		let index = 0
 		setInterval(function(){
 			index++;
@@ -100,9 +101,17 @@
 				"transform": "translateY("+ -40*index +"px)",
 				"transition": "0.4s all"
 			})
+			$("#rightbox1").css({
+				"transform": "translateY("+ -40*index +"px)",
+				"transition": "0.4s all"
+			})
 			if(index>=len){
 				setTimeout(function(){
 					$("#rightbox").css({
+						"transform": "translateY(0px)",
+						"transition": "0s all"
+					})
+					$("#rightbox1").css({
 						"transform": "translateY(0px)",
 						"transition": "0s all"
 					})
