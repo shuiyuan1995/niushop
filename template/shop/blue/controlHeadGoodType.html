@@ -138,15 +138,13 @@
                 //console.log(res);
                 for (var i=0;i<res['buy'].length;i++){
                     html += "<li>用户"+res['buy'][i].user_name+"购买"+res['buy'][i].goods_name+"</li>";
-								}
-								$("#rightbox .paomadeng").html(html);
-								console.log(html)
-								html = ''
+				}
+				$("#rightbox .paomadeng").html(html);
+				html = ''
                 for (var i=0;i<res['send'].length;i++){
                     html += "<li>用户"+res['send'][i].user_name+"购买的"+res['send'][i].goods_name+"已发货</li>";
                 }
                 $("#rightbox1 .paomadeng").html(html);
-								console.log(html)
                 goup()
             }
         });

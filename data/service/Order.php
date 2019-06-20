@@ -1632,6 +1632,7 @@ class Order extends BaseService implements IOrder
                     ->join('ns_order_goods g','o.order_id = g.order_id')
                     ->where($condition)
                     ->order('create_time','desc')
+                    ->limit(20)
                     ->select();
         foreach ($order as $k => $v){
             $order[$k]['user_name'] = strMiddleReduceWordSensitive($v['user_name'],7);

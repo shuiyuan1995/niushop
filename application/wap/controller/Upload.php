@@ -703,8 +703,8 @@ class Upload extends Controller
         $photoArray = array(
             "bigPath" => array(
                 "path" => '',
-                "width" => 600,
-                "height" => 600,
+                "width" => 700,
+                "height" => 700,
                 'type' => '1'
             ),
             "middlePath" => array(
