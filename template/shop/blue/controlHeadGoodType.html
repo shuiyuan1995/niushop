@@ -90,19 +90,22 @@
     $("#nav a[href='"+url+"']").parent('li').addClass('active');
 	
 	function goup(){
-		let len = $(".paomadeng li").length
-		$(".paomadeng").after($(".paomadeng"));
-		$(".paomadeng").clone().prependTo("#rightbox");
-		$(".paomadeng").clone().prependTo("#rightbox1");
+		let len = $("#rightbox .paomadeng li").length
+		let len1 = $("#rightbox1 .paomadeng li").length
+		// $(".paomadeng").after($(".paomadeng"));
+		$("#rightbox .paomadeng").clone().prependTo("#rightbox");
+		$("#rightbox1 .paomadeng").clone().prependTo("#rightbox1");
 		let index = 0
+		let index1 = 0
 		setInterval(function(){
 			index++;
+			index1++;
 			$("#rightbox").css({
 				"transform": "translateY("+ -40*index +"px)",
 				"transition": "0.4s all"
 			})
 			$("#rightbox1").css({
-				"transform": "translateY("+ -40*index +"px)",
+				"transform": "translateY("+ -40*index1 +"px)",
 				"transition": "0.4s all"
 			})
 			if(index>=len){
@@ -111,18 +114,23 @@
 						"transform": "translateY(0px)",
 						"transition": "0s all"
 					})
+					index = 0
+				},400)
+			}
+			if(index1>=len1){
+				setTimeout(function(){
 					$("#rightbox1").css({
 						"transform": "translateY(0px)",
 						"transition": "0s all"
 					})
-					index = 0
+					index1 = 0
 				},400)
 			}
 		},3000)
 	}
 
 	$(function () {
-	    var html = '';
+	    	var html = '';
         $.ajax({
             url : "{:__URL('SHOP_MAIN/index/getorder')}",
             type : "post",
@@ -130,14 +138,15 @@
                 //console.log(res);
                 for (var i=0;i<res['buy'].length;i++){
                     html += "<li>用户"+res['buy'][i].user_name+"购买"+res['buy'][i].goods_name+"</li>";
-				}
-				$("#rightbox .paomadeng").html(html);
-				goup();
-
+								}
+								$("#rightbox .paomadeng").html(html);
+								console.log(html)
+								html = ''
                 for (var i=0;i<res['send'].length;i++){
                     html += "<li>用户"+res['send'][i].user_name+"购买的"+res['send'][i].goods_name+"已发货</li>";
                 }
-                $("#rightbox .paomadeng").html(html);
+                $("#rightbox1 .paomadeng").html(html);
+								console.log(html)
                 goup()
             }
         });
