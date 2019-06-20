@@ -106,7 +106,7 @@
 			})
 			$("#rightbox1").css({
 				"transform": "translateY("+ -40*index1 +"px)",
-				"transition": "0.4s all"
+				"transition": "0.5s all"
 			})
 			if(index>=len){
 				setTimeout(function(){
@@ -142,7 +142,7 @@
 				$("#rightbox .paomadeng").html(html);
 				html = ''
                 for (var i=0;i<res['send'].length;i++){
-                    html += "<li>用户"+res['send'][i].user_name+"购买的"+res['send'][i].goods_name+"已发货</li>";
+                    html += "<li>"+res['send'][i].user_name+"购买的"+res['send'][i].goods_name+"已发货</li>";
                 }
                 $("#rightbox1 .paomadeng").html(html);
                 goup()
