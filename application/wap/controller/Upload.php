@@ -1065,7 +1065,12 @@ class Upload extends Controller
         if ($this->is_watermark && ! empty($this->imgWatermark) && $this->file_path == UPLOAD_GOODS) {
             
             try {
-                $image = \think\Image::open(request()->file('file_upload'));
+                if ($this->file_size > 512000) {
+                    $this->compressImage($_FILES["file_upload"]["tmp_name"],$this->reset_file_path . $newfile,0.5);
+                    $image = \think\Image::open($this->reset_file_path . $newfile);
+                }else{
+                    $image = \think\Image::open(request()->file('file_upload'));
+                }
                 $res = $image->water($this->imgWatermark, $this->waterPosition, $this->transparency)->save($this->reset_file_path . $newfile);
                 if (! empty($res)) {
                     $ok = [
