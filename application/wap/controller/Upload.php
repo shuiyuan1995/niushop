@@ -42,6 +42,7 @@ use think\Controller;
 use data\service\Upload\QiNiu;
 use think\Config;
 use think\Image;
+use app\wap\controller\Images;
 
 // 存放商品图片、主图、sku
 define("UPLOAD_GOODS", Config::get('view_replace_str.UPLOAD_GOODS'));
@@ -702,8 +703,8 @@ class Upload extends Controller
         $photoArray = array(
             "bigPath" => array(
                 "path" => '',
-                "width" => 700,
-                "height" => 700,
+                "width" => 600,
+                "height" => 600,
                 'type' => '1'
             ),
             "middlePath" => array(
@@ -774,7 +775,7 @@ class Upload extends Controller
             $mode = intval('0777', 8);
             mkdir($this->reset_file_path, $mode, true);
         }
-        
+
         $this->file_name = $_FILES["file_upload"]["name"]; // 文件原名
         $this->file_size = $_FILES["file_upload"]["size"]; // 文件大小
         $this->file_type = $_FILES["file_upload"]["type"]; // 文件类型
@@ -791,7 +792,7 @@ class Upload extends Controller
             $data['origin_file_name'] = $this->file_name;
             return $data;
         }
-        
+
         $guid = time();
         $file_name_explode = explode(".", $this->file_name); // 图片名称
         $suffix = count($file_name_explode) - 1;
@@ -805,7 +806,7 @@ class Upload extends Controller
         if (! $this->validationFile()) {
             return $this->ajaxFileReturn();
         }
-        
+
         $ok = $this->generateImage($newfile);
         
         if ($ok["code"]) {
@@ -970,6 +971,24 @@ class Upload extends Controller
         return $result;
     }
 
+    /*压缩图片*/
+    public function compressImage($path, $filePath, $percent = 1, $quality = 80)
+    {
+        $images = new Images($path);
+        $images->percent = $percent;
+        $images->openImage();
+        $images->thumpImage();
+        $res = $images->saveImage($filePath, $quality);
+        $result = [
+            "code" => $res,
+            "path" => $filePath,
+            "domain" => '',
+            "bucket" => '',
+            "message" => '上传成功'
+        ];
+        return $result;
+    }
+
     /**
      * 用户缩略图上传
      *
@@ -981,7 +1000,7 @@ class Upload extends Controller
         try {
             $image = \think\Image::open($photoPath);
             $image->thumb($width, $height, isset($upload_type) ? $upload_type : $this->thumb_type);
-            $image->save($key, null, 100);
+            $image->save($key, null, 80);
             unset($image);
             $result = array(
                 "code" => true,
@@ -1060,14 +1079,26 @@ class Upload extends Controller
                         $ok = $qiniu->setQiniuUplaod($ok['path'], $ok['path']);
                     }
                 } else {
-                    $ok = $this->moveUploadFile($_FILES["file_upload"]["tmp_name"], $this->reset_file_path . $newfile);
+                    if ($this->file_size > 512000) {
+                        $ok = $this->compressImage($_FILES["file_upload"]["tmp_name"],$this->reset_file_path . $newfile,0.5);
+                    }else{
+                        $ok = $this->moveUploadFile($_FILES["file_upload"]["tmp_name"], $this->reset_file_path . $newfile);
+                    }
                 }
             } catch (\Exception $e) {
                 // 水印图片不存在或者其他错误，则生成正常的图片
-                $ok = $this->moveUploadFile($_FILES["file_upload"]["tmp_name"], $this->reset_file_path . $newfile);
+                if ($this->file_size > 512000) {
+                    $ok = $this->compressImage($_FILES["file_upload"]["tmp_name"],$this->reset_file_path . $newfile,0.5);
+                }else {
+                    $ok = $this->moveUploadFile($_FILES["file_upload"]["tmp_name"], $this->reset_file_path . $newfile);
+                }
             }
         } else {
-            $ok = $this->moveUploadFile($_FILES["file_upload"]["tmp_name"], $this->reset_file_path . $newfile);
+            if ($this->file_size > 512000) {
+                $ok = $this->compressImage($_FILES["file_upload"]["tmp_name"],$this->reset_file_path . $newfile,0.5);
+            }else {
+                $ok = $this->moveUploadFile($_FILES["file_upload"]["tmp_name"], $this->reset_file_path . $newfile);
+            }
         }
         return $ok;
     }   

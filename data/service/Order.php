@@ -1626,7 +1626,6 @@ class Order extends BaseService implements IOrder
 
     public function getOrder($condition='')
     {
-        $condition['o.order_status'] = 1; // 待发货
         $order = Db::name('ns_order')
                     ->alias('o')
                     ->field('o.user_name,g.goods_name,g.num')
@@ -1634,6 +1633,9 @@ class Order extends BaseService implements IOrder
                     ->where($condition)
                     ->order('create_time','desc')
                     ->select();
+        foreach ($order as $k => $v){
+            $order[$k]['user_name'] = strMiddleReduceWordSensitive($v['user_name'],7);
+        }
         return $order;
     }
 

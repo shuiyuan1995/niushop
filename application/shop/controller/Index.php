@@ -272,9 +272,15 @@ class Index extends BaseController
     public function getOrder()
     {
         $orderService = new OrderService();
-        $condition = null;
-        $condition['o.order_type'] = ["in", "1,3"];
-        $order = $orderService->getOrder($condition);
+        $condition1 = null;
+        $condition1['o.order_type'] = ["in", "1,3"];
+        $condition1['o.order_status'] = 1; // 待发货
+        $order['buy'] = $orderService->getOrder($condition1);
+
+        $condition2 = null;
+        $condition2['o.order_type'] = ["in", "1,3"];
+        $condition2['o.order_status'] = 2; // 已发货
+        $order['send'] = $orderService->getOrder($condition2);
         return $order;
     }
 }

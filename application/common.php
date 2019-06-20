@@ -1651,3 +1651,41 @@ function https($num) {
     );
     header($http[$num]);
 }
+
+function strMiddleReduceWordSensitive($string, $max = 42, $rep = '...') {
+    $strlen = strlen($string);
+    if ($strlen <= $max) return $string;
+
+    $lengthtokeep = $max - strlen($rep);
+    $start = 0;
+    $end = 0;
+
+    if (($lengthtokeep % 2) == 0) {
+        $start = $lengthtokeep / 2;
+        $end = $start;
+    } else {
+        $start = intval($lengthtokeep / 2);
+        $end = $start + 1;
+    }
+
+    $i = $start;
+    $tmp_string = $string;
+    while ($i < $strlen) {
+        if (isset($tmp_string[$i]) and $tmp_string[$i] == ' ') {
+            $tmp_string = substr($tmp_string, 0, $i) . $rep;
+            $return = $tmp_string;
+        }
+        $i++;
+    }
+
+    $i = $end;
+    $tmp_string = strrev ($string);
+    while ($i < $strlen) {
+        if (isset($tmp_string[$i]) and $tmp_string[$i] == ' ') {
+            $tmp_string = substr($tmp_string, 0, $i);
+            $return .= strrev ($tmp_string);
+        }
+        $i++;
+    }
+    return substr($string, 0, $start) . $rep . substr($string, - $end);
+}
