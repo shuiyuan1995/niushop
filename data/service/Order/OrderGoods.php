@@ -1649,4 +1649,18 @@ class OrderGoods extends BaseService
         }
         return $balance;
     }
+
+    public function getOrderId($order_no)
+    {
+        $ns_order = new NsOrderModel();
+        $res = $ns_order::where('order_no',$order_no)->value('order_id');
+        return $res;
+    }
+
+    public function getGoodsId($order_id)
+    {
+        $ns_order_goods = new NsOrderGoodsModel();
+        $res = $ns_order_goods::where('order_id',$order_id)->column('order_goods_id');
+        return $res;
+    }
 }

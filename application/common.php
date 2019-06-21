@@ -1156,6 +1156,22 @@ function dataExcel($expTitle, $expCellName, $expTableData)
     $objWriter->save('php://output');
 }
 
+//创建一个读取excel数据，可用于入库
+function readExcel($path)
+{
+    //引用PHPexcel 类
+    include_once('data/extend/phpexcel_classes/PHPExcel.php');
+    include_once('data/extend/phpexcel_classes/PHPExcel/IOFactory.php');//静态类
+    $type = 'Excel2007';//设置为Excel5代表支持2003或以下版本，Excel2007代表2007版
+    $xlsReader = PHPExcel_IOFactory::createReader($type);
+    $xlsReader->setReadDataOnly(true);
+    $xlsReader->setLoadSheetsOnly(true);
+    $Sheets = $xlsReader->load($path);
+    //开始读取上传到服务器中的Excel文件，返回一个二维数组
+    $dataArray = $Sheets->getSheet(0)->toArray();
+    return $dataArray;
+}
+
 /**
  * 获取url参数
  *
