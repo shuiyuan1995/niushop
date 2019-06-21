@@ -375,21 +375,20 @@ $(function(){
 			});
 			setInterval(() => {
 						var addPerson = Math.floor(Math.random()*4);
-						person += addPerson;
+                		person += addPerson;
 						$("#person").html(person);
-						// $("#addperson").text(addPerson);
+						$("#addperson").text(addPerson);
 			},60000);
 	}
-	setInterval("updatePerson()",60000);
-	function updatePerson(){
-			$.ajax({
-					url: "{:__URL('SHOP_MAIN/index/updateperson')}",
-					type: "post",
-			data:{"addPerson":$("#addperson").text()},
-					success: function (res) {
-					}
-			})
-	}
+	setInterval(function () {
+        $.ajax({
+            url: "{:__URL('SHOP_MAIN/index/updateperson')}",
+            type: "post",
+            data:{"addPerson":$("#addperson").text()},
+            success: function (res) {
+            }
+        })
+    },60000);
 	// 跑马灯
 	var html = null;
 	getdata();
