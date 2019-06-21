@@ -279,24 +279,6 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 	<h2></h2>
 	<div class="list" id="rightbox">
 		<ul class="paomadeng">
-			<li class="mai">1234444567</li>
-			<li class="mai">1234444567</li>
-			<li class="mai">1234444567</li>
-			<li class="huo">1dfgcbnlshcn67</li>
-			<li class="mai">1234444567</li>
-			<li class="huo">1dfgcbnlshcn67</li>
-			<li class="mai">1234444567</li>
-			<li class="huo">1dfgcbnlshcn67</li>
-			<li class="mai">1234444567</li>
-			<li class="mai">1234444567</li>
-			<li class="huo">1dfgcbnlshcn67</li>
-			<li class="mai">1234444567</li>
-			<li class="huo">1dfgcbnlshcn67</li>
-			<li class="mai">1234444567</li>
-			<li class="huo">1dfgcbnlshcn67</li>
-			<li class="mai">1234444567</li>
-			<li class="mai">1234444567</li>
-			<li class="huo">1dfgcbnlshcn67</li>
 		</ul>
 	</div>
 </div>
@@ -410,27 +392,41 @@ $(function(){
 	}
 	// 跑马灯
 	var html = null;
-	getdata()
+	getdata();
 	function getdata(){
-		html = []
-		for(let i =0;i<30;i++){
-			if(Math.random()>0.5){
-				html.push('<li class="huo">1dfgcbnlshcn67</li>')
-			}else{
-				html.push('<li class="mai">1234444567</li>')
-			}
-		}
-		$('.paomadeng').html(html)
+		html = [];
+        $.ajax({
+            url : "{:__URL('SHOP_MAIN/index/getorder')}",
+            type : "post",
+            success : function(res) {
+                //console.log(res);
+                let j = 0;let k = 0;
+                for(let i =0;i<40;i++){
+                    if(Math.random()>0.5){
+                        if (j<res['send'].length){
+                            html.push("<li class='huo'>"+res['send'][j].user_name+"购买的"+res['send'][j].goods_name+"已发货</li>");
+                            j++;
+						}
+                    }else{
+                        if (k<res['buy'].length) {
+                            html.push("<li class='mai'>用户" + res['buy'][k].user_name + "购买" + res['buy'][k].goods_name + "</li>");
+                            k++;
+                        }
+                    }
+                }
+                $('.paomadeng').html(html);
+                goup();
+            }
+        });
 	}
-	goup()
 	function goup(){
 		setInterval(function(){
-			let newhtml = html.splice(0, Math.floor(3*Math.random()))
-			html.push(...newhtml)
-			$('.paomadeng').html(html)
+			let newhtml = html.splice(0, Math.floor(3*Math.random()));
+			html.push(...newhtml);
+			$('.paomadeng').html(html);
 		},Math.random()*3000)
 	}
-})
+});
 //跳转到电脑端
 function locationShop(){
 	$.ajax({
