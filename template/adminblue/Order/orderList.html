@@ -35,6 +35,8 @@
 					<a class="btn-common-white" id="BatchShipment" href="javascript:;">
 						<span>批量发货</span>
 					</a>
+					<label class="btn-common-white" for="excel">导入发货表发货</label>
+					<input type="file" style="display: none" id="excel">
 					{/if}
 					{in name="$status" value="1,2"}
 					<a class="btn-common-white" id="PrintShipping" href="javascript:;">
@@ -525,5 +527,25 @@ $(".more-search-container").on("click", function(e){
     e.stopPropagation();
 });
 
+$('#excel').on('change',function () {
+    var uploadFile=document.querySelector("#excel").files[0];
+    var formData = new FormData();
+    formData.append('file', uploadFile);//文件
+    $.ajax({
+        url:"{:__URL('ADMIN_MAIN/order/excelSend')}", //路径，指向spring controller
+        type:"post",
+        processData: false,
+        contentType: false,
+        data:formData,
+        success:function(res){
+            if (res.code <0){
+                showTip(res.message,'error');
+            }else{
+                showTip(res.message,'success');
+                window.history.go(0)
+            }
+        }
+    })
+});
 </script>
 {/block}

@@ -42,6 +42,7 @@ use think\Controller;
 use data\service\Upload\QiNiu;
 use think\Config;
 use think\Image;
+use app\wap\controller\Images;
 
 // 存放商品图片、主图、sku
 define("UPLOAD_GOODS", Config::get('view_replace_str.UPLOAD_GOODS'));
@@ -970,6 +971,23 @@ class Upload extends Controller
         return $result;
     }
 
+    /*压缩图片*/
+    public function compressImage($path, $filePath, $percent = 1, $quality = 80)
+    {
+        $images = new Images($path);
+        $images->percent = $percent;
+        $images->openImage();
+        $images->thumpImage();
+        $res = $images->saveImage($filePath, $quality);
+        $result = [
+            "code" => $res,
+            "path" => $filePath,
+            "domain" => '',
+            "bucket" => '',
+            "message" => '上传成功'
+        ];
+        return $result;
+    }
     /**
      * 用户缩略图上传
      *
@@ -981,7 +999,7 @@ class Upload extends Controller
         try {
             $image = \think\Image::open($photoPath);
             $image->thumb($width, $height, isset($upload_type) ? $upload_type : $this->thumb_type);
-            $image->save($key, null, 100);
+            $image->save($key, null, 80);
             unset($image);
             $result = array(
                 "code" => true,
@@ -1046,7 +1064,12 @@ class Upload extends Controller
         if ($this->is_watermark && ! empty($this->imgWatermark) && $this->file_path == UPLOAD_GOODS) {
             
             try {
-                $image = \think\Image::open(request()->file('file_upload'));
+                if ($this->file_size > 512000) {
+                    $this->compressImage($_FILES["file_upload"]["tmp_name"],$this->reset_file_path . $newfile,0.5);
+                    $image = \think\Image::open($this->reset_file_path . $newfile);
+                }else{
+                    $image = \think\Image::open(request()->file('file_upload'));
+                }
                 $res = $image->water($this->imgWatermark, $this->waterPosition, $this->transparency)->save($this->reset_file_path . $newfile);
                 if (! empty($res)) {
                     $ok = [
@@ -1060,14 +1083,26 @@ class Upload extends Controller
                         $ok = $qiniu->setQiniuUplaod($ok['path'], $ok['path']);
                     }
                 } else {
-                    $ok = $this->moveUploadFile($_FILES["file_upload"]["tmp_name"], $this->reset_file_path . $newfile);
+                    if ($this->file_size > 512000) {
+                        $ok = $this->compressImage($_FILES["file_upload"]["tmp_name"],$this->reset_file_path . $newfile,0.5);
+                    }else {
+                        $ok = $this->moveUploadFile($_FILES["file_upload"]["tmp_name"], $this->reset_file_path . $newfile);
+                    }
                 }
             } catch (\Exception $e) {
                 // 水印图片不存在或者其他错误，则生成正常的图片
-                $ok = $this->moveUploadFile($_FILES["file_upload"]["tmp_name"], $this->reset_file_path . $newfile);
+                if ($this->file_size > 512000) {
+                    $ok = $this->compressImage($_FILES["file_upload"]["tmp_name"],$this->reset_file_path . $newfile,0.5);
+                }else {
+                    $ok = $this->moveUploadFile($_FILES["file_upload"]["tmp_name"], $this->reset_file_path . $newfile);
+                }
             }
         } else {
-            $ok = $this->moveUploadFile($_FILES["file_upload"]["tmp_name"], $this->reset_file_path . $newfile);
+            if ($this->file_size > 512000) {
+                $ok = $this->compressImage($_FILES["file_upload"]["tmp_name"],$this->reset_file_path . $newfile,0.5);
+            }else {
+                $ok = $this->moveUploadFile($_FILES["file_upload"]["tmp_name"], $this->reset_file_path . $newfile);
+            }
         }
         return $ok;
     }   
