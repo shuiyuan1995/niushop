@@ -23,7 +23,7 @@
 	<tr>
 		<th style="text-align: left;width: 20%;">
 			<button class="btn-common-delete" onclick="batchDelete()" >批量删除</button>
-			<button onclick="dataExcel()" value="导出数据" class="btn-common-white"  >导出数据</button>
+			<!--<button onclick="dataExcel()" value="导出数据" class="btn-common-white"  >导出数据</button>-->
 		</th>
 		<th style="width:50%;"> 
 			<span>搜索时间：</span>
@@ -82,7 +82,7 @@ function LoadingInfo(page_index) {
                     for (var i = 0; i < data['data'].length; i++) {
                         var html = '';
                         html += '<tr align="center">';
-                        html += '<td><i class="checkbox-common"><input name="sub" type="checkbox" value="'+ data['data'][i]["id"]+'"></i></td>';
+                        html += '<td><i class="checkbox-common"><input name="sub" type="checkbox" value="'+ data['data'][i]['keyword']+'"></i></td>';
                         html += '<td align="left">';
                         html += '<div style="float:left;" class="member-div">';
                         html += '<label style="float:none;width:100%">'+data['data'][i]['keyword']+'</label>';
@@ -91,9 +91,31 @@ function LoadingInfo(page_index) {
                         html += '<td style="text-align:center;">'+ data['data'][i]["search_times"] +'</td>';
                         html += '<td>' +data['data'][i]['search_time']+'</td>';
                         html += '<td>';
-						html += '<a onclick="delete_user('+ data['data'][i]["id"]+')">删除</a><br/>';
+						html += '<a onclick="delete_user('+"'"+data['data'][i]["keyword"]+"'"+')">删除</a><br/>';
                         html += '</td>';
                         html += '</tr>';
+                        if (data['data'][i]['goods'].length > 0){
+                            html += '<tr align="center">' +
+                                '<th></th>' +
+                                '<th style="text-align:left;">商品名称</th>\n' +
+                                '<th>售价</th>' +
+                                '<th>销售量</th>' +
+                                '<th>点击数</th>' +
+                                '</tr>';
+                            for (var j = 0; j < data['data'][i]['goods'].length; j++){
+                                html += '<tr align="center">';
+                                html += '<td></td>';
+                                html += '<td align="left">';
+                                html += '<div style="float:left;" class="member-div">';
+                                html += '<label style="float:none;width:100%">'+data['data'][i]['goods'][j]['goods_name']+'</label>';
+                                html += '</div>';
+                                html += '</td>';
+                                html += '<td style="text-align:center;">'+ data['data'][i]['goods'][j]["price"] +'</td>';
+                                html += '<td>' +data['data'][i]['goods'][j]['real_sales']+'</td>';
+                                html += '<td>' +data['data'][i]['goods'][j]['clicks']+'</td>';
+                                html += '</tr>';
+							}
+						}
                         $(".table-class tbody").append(html);
                     }
                 } else {
@@ -153,7 +175,7 @@ function delete_user(id){
 function batchDelete() {
 	var id= new Array();
 	$("#productTbody input[type='checkbox']:checked").each(function() {
-		if (!isNaN($(this).val())) {
+		if ($(this).val()) {
 			id.push($(this).val());
 		}
 	});

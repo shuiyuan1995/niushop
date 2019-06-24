@@ -300,6 +300,7 @@ public function registerMember($user_name, $password, $email, $mobile, $user_qq_
         $result = $member_view->getViewList($page_index, $page_size, $condition, $order);
         foreach ($result['data'] as $k => $v) {
             $member_account = new MemberAccount();
+            $result['data'][$k]['reg_country'] = $v['reg_ip'] ? judge_ip($v['reg_ip'])['country'] : '';
             $result['data'][$k]['point'] = $member_account->getMemberPoint($v['uid'], '');
             $result['data'][$k]['balance'] = $member_account->getMemberBalance($v['uid']);
             $result['data'][$k]['coin'] = $member_account->getMemberCoin($v['uid']);

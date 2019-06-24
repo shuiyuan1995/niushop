@@ -661,7 +661,11 @@ class Goods extends BaseController
             $controlTypeName = request()->get('controlTypeName', ''); // 什么类型 1最新 2精品 3推荐
 
             //保存搜索关键词
-            if (! empty($search_name)) {
+            $ip = get_client_ip();
+            //$ip = '125.84.90.168';
+            $res = judge_ip($ip);
+            $country = $res['country_code'];
+            if (! empty($search_name) && $country == 'CN') {
                 $search_title = $search_name;
                 $search = new SearchRank();
                 $search->addKeyword($search_name);

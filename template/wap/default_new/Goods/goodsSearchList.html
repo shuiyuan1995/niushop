@@ -40,7 +40,7 @@
 </style>
 <script type="text/javascript">
 $(function(){
-	$('.custom-search-input').val('{$search_title}');
+	$('.custom-search-input').val("{$search_title}");
 	$("#search").click(function () {
 		location.href= __URL(APPMAIN+"/goods/goodssearchlist?search_name="+$("#keyword").val()+"&shop_id="+$("#hidden_shop_id").val());
 	});
