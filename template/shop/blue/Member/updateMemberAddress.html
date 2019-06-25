@@ -33,7 +33,7 @@
 					</tr>
 					<tr>
 						<td align="right">{:lang('member_phone')}：</td>
-						<td align="left"><input name="mobile" type="text" class="inputBg" id="Moblie" value="{$address_info['mobile']}" />({:lang('member_required')})</td>
+						<td align="left"><input name="mobile" type="text" class="inputBg" id="Moblie" value="{$address_info['mobile']}" onkeyup="this.value=this.value.replace(/\s+/g,'')"/>({:lang('member_required')})</td>
 					</tr>
 				 	<tr>
 	                  	<td align="right">{:lang('member_fixed_telephone')}：</td>
