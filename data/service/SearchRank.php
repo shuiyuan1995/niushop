@@ -9,28 +9,33 @@ class SearchRank implements ISearchRank
     public function addKeyword($keyword)
     {
         $data['keyword'] = $keyword;
-        $res = Db::name('ns_search_keywords')->where('keyword',$keyword)->find();
-        if ($res){
-            Db::name('ns_search_keywords')->where('keyword',$keyword)->setInc('search_times',1);
-        }else{
-            Db::name('ns_search_keywords')->insert($data);
-        }
+        Db::name('ns_search_keywords')->insert($data);
     }
 
     public function getKeyword($page_index = 1, $page_size = 0, $condition = '', $field = '*')
     {
         if ($condition){
-            $count = Db::name('ns_search_keywords')->where($condition)->count();
+            $count = Db::name('ns_search_keywords')->where($condition)->count('DISTINCT keyword');
         }else{
-            $count = Db::name('ns_search_keywords')->count();
+            $count = Db::name('ns_search_keywords')->count('DISTINCT keyword');
         }
 
+        $subQuery = Db::name('ns_search_keywords')->where($condition)->order('search_time','DESC')->limit(1000000)->buildSql();
         if ($page_index == 1 && $page_size == 0){
-            $data = Db::name('ns_search_keywords')->field($field)->where($condition)->order('search_times','desc')->select();
+            $sql = "SELECT keyword,count(keyword) as search_times,search_time FROM ({$subQuery}) s  GROUP BY s.keyword ORDER BY search_times desc";
+            $data = Db::query($sql);
             $page_count = 1;
         }else{
-            $data = Db::name('ns_search_keywords')->field($field)->where($condition)->order('search_times','desc')->page($page_index,$page_size)->select();
+            $start = ($page_index-1)*$page_size;
+            $sql = "SELECT keyword,count(keyword) as search_times,search_time FROM ({$subQuery}) s GROUP BY s.keyword ORDER BY search_times desc limit $start,$page_size";
+            $data = Db::query($sql);
             $page_count = ceil($count/$page_size);
+        }
+
+        foreach ($data as $k=>$v){
+            $data[$k]['goods'] = Db::name('ns_goods')->field('goods_id,goods_name,price,clicks,real_sales')
+                ->where('goods_name|keywords','like','%' .$v['keyword'] . '%')
+                ->order('clicks','DESC')->select();
         }
 
         if ($data){
@@ -48,7 +53,7 @@ class SearchRank implements ISearchRank
 
     public function deleteKeyword($id)
     {
-        $res = Db::name('ns_search_keywords')->where('id','in',$id)->delete();
+        $res = Db::name('ns_search_keywords')->where('keyword','in',$id)->delete();
         return $res;
     }
 }
