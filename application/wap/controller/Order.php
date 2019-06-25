@@ -989,6 +989,12 @@ class Order extends BaseController
         
         $member = new Member();
         $address = $member->getDefaultExpressAddress();
+        if (trim($address['province_detail'],' ') == ''){
+            return AjaxReturn(-9004);
+        }
+        if (trim($address['country_detail'],',') != '爱尔兰' && $address['zip_code'] == ''){
+            return AjaxReturn(-9003);
+        }
         $coin = 0; // 购物币
         $buyer_ip = get_client_ip();
         $distribution_time_out = request()->post("distribution_time_out", '');

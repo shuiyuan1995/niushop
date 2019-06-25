@@ -241,15 +241,11 @@ textarea{width: 350px;}
 				</div>
 				<div class="form-group">
 					<div class="pick_title"><span class="required">*</span>收货人手机号：</div>
-					<div class="col-lg-4"><input type="text" id="receiver_mobile" class="form-control input-common" style="width:350px;margin-bottom:10px !important;"></div>
+					<div class="col-lg-4"><input type="text" id="receiver_mobile" class="form-control input-common" onkeyup="this.value=this.value.replace(/\s+/g,'')" style="width:350px;margin-bottom:10px !important;"></div>
 				</div>
 				<div class="form-group">
 					<div class="pick_title">收货人固定电话：</div>
 					<div class="col-lg-4"><input type="text" id="fixed_telephone" class="form-control input-common" style="width:350px;margin-bottom:10px !important;"></div>
-				</div>
-				<div class="form-group">
-					<div class="pick_title">收货人邮编：</div>
-					<div class="col-lg-4"><input type="text" id="receiver_zip" class="form-control input-common" style="width:350px;margin-bottom:10px !important;"></div>
 				</div>
 				<div class="form-group" style="width:100%;margin-bottom: 10px;">
 					<div class="pick_title"><span class="required">*</span>国家：</div>
@@ -260,7 +256,7 @@ textarea{width: 350px;}
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="pick_title">省份：</div>
+					<div class="pick_title"><span class="required">*</span>省份：</div>
 					<div class="col-lg-4"><input type="text" id="detailed_province" class="form-control input-common" style="width:350px;margin-bottom:10px !important;"></div>
 				</div>
 				<div class="form-group">
@@ -270,6 +266,10 @@ textarea{width: 350px;}
 				<div class="form-group">
 					<div class="pick_title"><span class="required">*</span>详细地址：</div>
 					<div class="col-lg-4"><input type="text" id="address_detail" class="form-control input-common" style="width:350px"></div>
+				</div>
+				<div class="form-group">
+					<div class="pick_title">收货人邮编：</div>
+					<div class="col-lg-4"><input type="text" id="receiver_zip" class="form-control input-common" style="width:350px;margin-bottom:10px !important;"></div>
 				</div>
 			</div>
 			
@@ -1061,6 +1061,11 @@ function updateAddressSubmit(){
 
 	if(selCountry == '0'){
 		showTip("请选择国家",'warning');
+		return false;
+	}
+
+	if(detailed_province == ''){
+		showTip("省份不能为空",'warning');
 		return false;
 	}
 

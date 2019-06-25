@@ -60,8 +60,15 @@ class Order extends BaseController
         $chai_price = request()->post('chai_price');//拆包价格
         $is_ins = request()->post('is_ins');//是否拆包
         $ins_price = request()->post('ins_price');//拆包价格
+
         $member = new Member();
         $address = $member->getDefaultExpressAddress();
+        if (trim($address['province_detail'],' ') == ''){
+            return AjaxReturn(-9004);
+        }
+        if (trim($address['country_detail'],',') != '爱尔兰' && $address['zip_code'] == ''){
+            return AjaxReturn(-9003);
+        }
         $coin = 0; // 购物币
 
         // 查询商品限购
