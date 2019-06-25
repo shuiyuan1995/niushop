@@ -18,14 +18,10 @@
 		<span>{:lang('member_full_name')}</span> <input type="text" placeholder="{:lang('recipient_name')}" id="Name" />
 	</div>
 	<div class="div-item">
-		<span>{:lang('member_phone')}</span> <input type="text" placeholder="{:lang('cell_phone_number')}" id="Moblie" />
+		<span>{:lang('member_phone')}</span> <input type="text" placeholder="{:lang('cell_phone_number')}" id="Moblie" onkeyup="this.value=this.value.replace(/\s+/g,'')" />
 	</div>
 	<div class="div-item">
 		<span>{:lang('member_fixed_telephone')}</span> <input type="text" id="phone" placeholder="{:lang('member_fixed_telephone')}（选填）" />
-	</div>
-	<div class="div-item">
-		<span>{:lang('member_zip_code')}</span>
-		<input type="text" placeholder="邮编" id="zipcode" />
 	</div>
 	<div class="div-item">
 		<span>{:lang('member_location')}</span>
@@ -47,6 +43,10 @@
 	<div class="div-item">
 		<span>{:lang('member_detailed_address')}</span>
 		<input type="text" placeholder="{:lang('member_detailed_address')}" id="AddressInfo" />
+	</div>
+	<div class="div-item">
+		<span>{:lang('member_zip_code')}</span>
+		<input type="text" placeholder="邮编" id="zipcode" />
 	</div>
 </form>
 <button onclick="saveAddress()" class="btn-save">{:lang('member_preservation')}</button>
