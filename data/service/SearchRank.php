@@ -20,7 +20,7 @@ class SearchRank implements ISearchRank
             $count = Db::name('ns_search_keywords')->count('DISTINCT keyword');
         }
 
-        $subQuery = Db::name('ns_search_keywords')->where($condition)->order('search_time','DESC')->buildSql();
+        $subQuery = Db::name('ns_search_keywords')->where($condition)->order('search_time','DESC')->limit(1000000)->buildSql();
         if ($page_index == 1 && $page_size == 0){
             $sql = "SELECT keyword,count(keyword) as search_times,search_time FROM ({$subQuery}) s  GROUP BY s.keyword ORDER BY search_times desc";
             $data = Db::query($sql);

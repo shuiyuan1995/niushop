@@ -436,7 +436,7 @@ class Goods extends BaseController
         //$ip = '125.84.90.168';
         $res = judge_ip($ip);
         $country = $res['country_code'];
-        if (!empty($keyword) && $country == 'CN'){
+        if (!empty($keyword) && $country != 'CN'){
             $search = new SearchRank();
             $search->addKeyword($keyword);
         }
