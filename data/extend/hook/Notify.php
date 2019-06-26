@@ -517,10 +517,23 @@ class Notify
         $order_id=$params["order_id"];
         $order_model=new NsOrderModel();
         $order_obj=$order_model->get($order_id);
+        $order_goods_model = new NsOrderGoodsModel();
+        $order_goods_obj=$order_goods_model->where('order_id',$order_id)->select();
+        if (count($order_goods_obj) > 1){
+            $goods_name = '';
+            foreach ($order_goods_obj as $k =>$v){
+                $goods_name .= $v['goods_name'] . '+';
+            }
+            $goods_name = rtrim($goods_name,'+');
+        }else{
+            $goods_name = $order_goods_obj[0]['goods_name'];
+        }
         $shop_id=$order_obj["shop_id"];
         $buyer_id=$order_obj["buyer_id"];
-        $user_name=$order_obj["receiver_name"];
-        $order_no=$order_obj["out_trade_no"];
+        $user_model = new UserModel();
+        $user_obj = $user_model->get($buyer_id);
+        $user_name=$user_obj["nick_name"];
+        $order_no=$order_obj["order_no"];
         $order_money=$order_obj["order_money"];
         $mobile=$order_obj["receiver_mobile"];
         $goods_money=$order_obj["goods_money"];
@@ -534,7 +547,8 @@ class Notify
             "username"=>$user_name,
             "orderno"=>$order_no,
             "ordermoney"=>$order_money,
-            "goodsmoney"=>$goods_money
+            "goodsmoney"=>$goods_money,
+            "goodsname" =>$goods_name
         );
         #短信发送
         if(!empty($mobile) && $this->mobile_is_open==1){
@@ -543,9 +557,7 @@ class Notify
                 $this->createNoticeSmsRecords($template_obj, $shop_id, $buyer_id, $mobile, $sms_params, "订单创建成功通知", 4);
             }
         }
-            // 邮件发送
-        $user_model = new UserModel();
-        $user_obj = $user_model->get($buyer_id);
+        // 邮件发送
         if (! empty($user_obj)) {
             $email = $user_obj["user_email"];
             if (! empty($email) && $this->email_is_open == 1) {
@@ -553,12 +565,14 @@ class Notify
                 if (! empty($template_obj) && $template_obj["is_enable"] == 1) {
                     $content = $template_obj["template_content"];
                     $content = str_replace("{商场名称}", $this->shop_name, $content);
+                    $content = str_replace("{商品名称}", $goods_name, $content);
                     $content = str_replace("{用户名称}", $user_name, $content);
                     $content = str_replace("{主订单号}", $order_no, $content);
                     $content = str_replace("{订单金额}", $order_money, $content);
                     $content = str_replace("{商品金额}", $goods_money, $content);
                     $send_title=$template_obj["template_title"];
                     $send_title = str_replace("{商场名称}", $this->shop_name, $send_title);
+                    $send_title = str_replace("{商品名称}", $goods_name, $send_title);
                     $send_title = str_replace("{用户名称}", $user_name, $send_title);
                     $send_title = str_replace("{主订单号}", $order_no, $send_title);
                     $send_title = str_replace("{订单金额}", $order_money, $send_title);
@@ -1660,6 +1674,82 @@ class Notify
             );
         }
         $notice_service -> createVerificationCodeRecords($shop_id, $uid, $send_type, $send_account, json_encode($send_config), $records_type, $notice_title, $notice_context, $send_message, $is_send);
+    }
+
+    /**
+     * 订单收货
+     * @param string $params
+     */
+    public function orderReceipt($params=null){
+        #查询系统配置信息
+        $this->getShopNotifyInfo(0);
+        $order_id=$params["order_id"];
+        $order_model=new NsOrderModel();
+        $order_obj=$order_model->get($order_id);
+        $order_goods_model = new NsOrderGoodsModel();
+        $order_goods_obj=$order_goods_model->where('order_id',$order_id)->select();
+        if (count($order_goods_obj) > 1){
+            $goods_name = '';
+            foreach ($order_goods_obj as $k =>$v){
+                $goods_name .= $v['goods_name'] . '+';
+            }
+            $goods_name = rtrim($goods_name,'+');
+        }else{
+            $goods_name = $order_goods_obj[0]['goods_name'];
+        }
+        $shop_id=$order_obj["shop_id"];
+        $buyer_id=$order_obj["buyer_id"];
+        $user_model = new UserModel();
+        $user_obj = $user_model->get($buyer_id);
+        $user_name=$user_obj["nick_name"];
+        $order_no=$order_obj["order_no"];
+        $order_money=$order_obj["order_money"];
+        $mobile=$order_obj["receiver_mobile"];
+        $goods_money=$order_obj["goods_money"];
+        $sms_params=array(
+            "shop_name"=>$this->shop_name,
+            "user_name"=>$user_name,
+            "order_no"=>$order_no,
+            "order_money"=>$order_money,
+            "goods_money"=>$goods_money,
+            "shopname"=>$this->shop_name,
+            "username"=>$user_name,
+            "orderno"=>$order_no,
+            "ordermoney"=>$order_money,
+            "goodsmoney"=>$goods_money,
+            "goodsname" =>$goods_name
+        );
+        #短信发送
+        if(!empty($mobile) && $this->mobile_is_open==1){
+            $template_obj=$this->getTemplateDetail($shop_id, "create_order", "sms");
+            if(!empty($template_obj) && $template_obj["is_enable"]==1){
+                $this->createNoticeSmsRecords($template_obj, $shop_id, $buyer_id, $mobile, $sms_params, "订单创建成功通知", 4);
+            }
+        }
+        // 邮件发送
+        if (! empty($user_obj)) {
+            $email = $user_obj["user_email"];
+            if (! empty($email) && $this->email_is_open == 1) {
+                $template_obj = $this->getTemplateDetail($shop_id, "confirm_receipt", "email");
+                if (! empty($template_obj) && $template_obj["is_enable"] == 1) {
+                    $content = $template_obj["template_content"];
+                    $content = str_replace("{商场名称}", $this->shop_name, $content);
+                    $content = str_replace("{商品名称}", $goods_name, $content);
+                    $content = str_replace("{用户名称}", $user_name, $content);
+                    $content = str_replace("{主订单号}", $order_no, $content);
+                    $content = str_replace("{订单金额}", $order_money, $content);
+                    $content = str_replace("{商品金额}", $goods_money, $content);
+                    $send_title=$template_obj["template_title"];
+                    $send_title = str_replace("{商场名称}", $this->shop_name, $send_title);
+                    $send_title = str_replace("{商品名称}", $goods_name, $send_title);
+                    $send_title = str_replace("{用户名称}", $user_name, $send_title);
+                    $send_title = str_replace("{主订单号}", $order_no, $send_title);
+                    $send_title = str_replace("{订单金额}", $order_money, $send_title);
+                    $send_title = str_replace("{商品金额}", $goods_money, $send_title);
+                    $this->createNoticeEmailRecords($shop_id, $buyer_id, $email, $send_title, $content, 20);
+                }
+            }
+        }
     }
     
 } 
