@@ -307,19 +307,6 @@ class OrderStatus extends BaseService
                         'name' => '删除订单'
                     )
                 )
-            ),
-            array(
-                'status_id' => '-1',
-                'status_name' => '退款中',
-                'is_refund' => 1,
-                'operation' => array(
-                    '0' => array(
-                        'no' => 'seller_memo',
-                        'color' => '#666666',
-                        'name' => '备注'
-                    )
-                ),
-                'member_operation' => array()
             )
         );
         return $status;

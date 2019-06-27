@@ -285,7 +285,8 @@
 					<th width="20%"></th>
 					<th width="15%">
 						{if condition="$vo.is_express == 1"}
-						<a class="js-query-logistics" data-express-code="{$vo.express_code}" data-express-name="{$vo.express_name}" data-express-id="{$vo.express_id}" href="javascript:;">{:lang('member_inquiry_logistics')}</a>
+						<!--<a class="js-query-logistics" data-express-code="{$vo.express_code}" data-express-name="{$vo.express_name}" data-express-id="{$vo.express_id}" href="javascript:;">{:lang('member_inquiry_logistics')}</a>-->
+						<a href="https://t.17track.net/zh-cn#nums={$vo.express_code}" target="_blank">查询物流</a>
 						{/if}
 					</th>
 					<th width="10%"></th>

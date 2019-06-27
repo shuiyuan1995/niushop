@@ -244,8 +244,10 @@
 		<tr style="background-color:#f2f2f2;color:#999;font-weight:bold;">
 		<td colspan="7"><a href="javascript:;" style="color:rgba(34, 34, 34, 0.71);font-size:14px;">{$v['packet_name']}</a>&nbsp;&nbsp;&nbsp;&nbsp;
 		{if condition="$v['is_express'] eq 1"}
-			{$v['express_name']}&nbsp;&nbsp;运单号:{$v['express_code']}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" data-html="true" class="logistics-tracking" data-container="body" data_express="{$v['express_name']}" data-placement="top" data-trigger="manual" goods_id="{$v['express_id']}" data-show="1">物流跟踪</a>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" onclick="updateExpress({$order.order_id},{$key})" >修改运单号 </a>
+			{$v['express_name']}&nbsp;&nbsp;运单号:{$v['express_code']}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<!--<a href="javascript:;" data-html="true" class="logistics-tracking" data-container="body" data_express="{$v['express_name']}" data-placement="top" data-trigger="manual" goods_id="{$v['express_id']}" data-show="1">物流跟踪</a>-->
+			<a href="https://t.17track.net/zh-cn#nums={$vo.express_code}" target="_blank">查询跟踪</a>
+			<a href="javascript:void(0);" onclick="updateExpress({$order.order_id},{$key})" >修改运单号 </a>
 		{/if}
 		</td>
 		</tr>
