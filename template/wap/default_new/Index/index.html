@@ -413,19 +413,17 @@ $(function(){
             url : "{:__URL('SHOP_MAIN/index/getorder')}",
             type : "post",
             success : function(res) {
-                //console.log(res);
+                console.log(res);
                 let j = 0;let k = 0;
                 for(let i =0;i<40;i++){
                     if(Math.random()>0.5){
                         if (j<res['send'].length){
-                            // html.push("<li class='huo'>"+res['send'][j].user_name+"购买的"+res['send'][j].goods_name+"已发货</li>");
-														html.push("<li class='huo'><span>fgdfgg</span><span>美国</span><span>中南海+红塔...12条</span><span>15:04</span><span>已下单</span></li>");
+                            html.push("<li class='huo'><span>"+res['send'][j].user_name+"</span><span>"+res['send'][j].country+"</span><span>"+res['send'][j].goods_name+' '+res['send'][j].num+"条</span><span>"+res['send'][j].consign_time+"</span><span>已发货</span></li>");
                             j++;
 						}
                     }else{
                         if (k<res['buy'].length) {
-                            // html.push("<li class='mai'>用户" + res['buy'][k].user_name + "购买" + res['buy'][k].goods_name + "</li>");
-														html.push("<li class='mai'><span>fgdfgg</span><span>美国</span><span>中南海+红塔...12条</span><span>15:04</span><span>已发货</span></li>");
+                            html.push("<li class='mai'><span>" + res['buy'][k].user_name + "</span><span>" + res['buy'][k].country + "</span><span>" + res['buy'][k].goods_name+' '+res['buy'][k].num + "条</span><span>" + res['buy'][k].pay_time + "</span><span>已下单</span></li>");
                             k++;
                         }
                     }

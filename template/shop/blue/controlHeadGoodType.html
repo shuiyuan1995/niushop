@@ -130,22 +130,19 @@
 	}
 
 	$(function () {
-	    	var html = '';
-				console.log(1)
+		var html = '';
         $.ajax({
             url : "{:__URL('SHOP_MAIN/index/getorder')}",
             type : "post",
             success : function(res) {
                 // console.log('res',res);
-                for (var i=0;i<res['buy'].length;i++){
-                    // html += "<li>用户"+res['buy'][i].user_name+"购买"+res['buy'][i].goods_name+"</li>";
-										html += "<li><p><span>fgdfgg</span><span>美国</span></p><p>中南海+红塔...12条</p><p><span>15:04</span><span>已下单</span></p></li>";
-								}
-								$("#rightbox .paomadeng").html(html);
-								html = ''
-                for (var i=0;i<res['send'].length;i++){
-                    // html += "<li>"+res['send'][i].user_name+"购买的"+res['send'][i].goods_name+"已发货</li>";
-										html += "<li><p><span>fgdfgg</span><span>美国</span></p><p>中南海+红塔...12条</p><p><span>15:04</span><span>已发货</span></p></li>";
+                for (var k=0;k<res['buy'].length;k++){
+                    html += "<li><p><span>" + res['buy'][k].user_name + "</span><span>" + res['buy'][k].country + "</span></p><p><span>" + res['buy'][k].goods_name+' '+res['buy'][k].num + "条</span></p><p><span>" + res['buy'][k].pay_time + "</span><span>已下单</span></p></li>";
+				}
+				$("#rightbox .paomadeng").html(html);
+				html = '';
+                for (var j=0;j<res['send'].length;j++){
+                    html += "<li><p><span>"+res['send'][j].user_name+"</span><span>"+res['send'][j].country+"</span></p><p><span>"+res['send'][j].goods_name+' '+res['send'][j].num+"条</span></p><p><span>"+res['send'][j].consign_time+"</span><span>已发货</span></p></li>";
                 }
                 $("#rightbox1 .paomadeng").html(html);
                 goup()

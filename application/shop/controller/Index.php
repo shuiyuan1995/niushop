@@ -273,14 +273,16 @@ class Index extends BaseController
     {
         $orderService = new OrderService();
         $condition1 = null;
-        $condition1['o.order_type'] = ["in", "1,3"];
-        $condition1['o.order_status'] = 1; // 待发货
-        $order['buy'] = $orderService->getOrder($condition1);
+        $condition1['order_type'] = ["in", "1,3"];
+        $condition1['order_status'] = 1; // 待发货
+        $orderBy = 'pay_time';
+        $order['buy'] = $orderService->getOrder($condition1,$orderBy);
 
         $condition2 = null;
-        $condition2['o.order_type'] = ["in", "1,3"];
-        $condition2['o.order_status'] = 2; // 已发货
-        $order['send'] = $orderService->getOrder($condition2);
+        $condition2['order_type'] = ["in", "1,3"];
+        $condition2['order_status'] = 2; // 已发货
+        $orderBy = 'consign_time';
+        $order['send'] = $orderService->getOrder($condition2,$orderBy);
         return $order;
     }
 }

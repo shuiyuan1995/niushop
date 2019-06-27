@@ -1627,20 +1627,41 @@ class Order extends BaseService implements IOrder
         return $orderStatusNum;
     }
 
-    public function getOrder($condition='')
+    public function getOrder($condition='',$order)
     {
         $order = Db::name('ns_order')
-                    ->alias('o')
-                    ->field('o.user_name,g.goods_name,g.num')
-                    ->join('ns_order_goods g','o.order_id = g.order_id')
+                    ->field('order_id,user_name,receiver_address,pay_time,consign_time')
                     ->where($condition)
-                    ->order('create_time','desc')
+                    ->order($order,'desc')
                     ->limit(20)
                     ->select();
         foreach ($order as $k => $v){
             $order[$k]['user_name'] = strMiddleReduceWordSensitive($v['user_name'],7);
+            $address = explode('&nbsp;',$v['receiver_address']);
+            $order[$k]['country'] = $address[0];
+            $order_goods = $this->getOrderGoodsNums($v['order_id']);
+            $order[$k]['goods_name'] = $order_goods['goods'];
+            $order[$k]['num'] = $order_goods['num'];
+            $order[$k]['pay_time'] = date('n.d',$v['pay_time']);
+            $order[$k]['consign_time'] = date('n.d',$v['consign_time']);
         }
         return $order;
+    }
+
+    private function getOrderGoodsNums($order_id)
+    {
+        $result = Db::name('ns_order_goods')
+                        ->field('goods_name,num')
+                        ->where('order_id',$order_id)
+                        ->select();
+        $data['goods'] = '';
+        $data['num'] = 0;
+        foreach ($result as $k=>$v){
+            $data['goods'] .= $v['goods_name'].'+';
+            $data['num'] += $v['num'];
+        }
+        $data['goods'] = rtrim($data['goods'],'+');
+        return $data;
     }
 
     /**
