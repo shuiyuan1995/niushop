@@ -43,9 +43,11 @@
 						location.href=__URL(APPMAIN+"/order/paymentorder");
 					}
 				}
-			} else {
-				showBox(txt,"error");
-			}
+			} else if(txt["code"] == -1 || txt["code"] == -10) {
+                location.href=__URL(APPMAIN+"/login");
+            } else {
+                showBox(txt,"error");
+            }
 		}
 	});
 }
