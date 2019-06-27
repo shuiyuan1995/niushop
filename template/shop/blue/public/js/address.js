@@ -55,14 +55,6 @@ function saveAddress() {
 
 function Check_Consignee() {
 	var reg = /^[0-9]*$/;
-	if ($("#selCountry").val() == '0' || $("#selCountry").val() == "") {
-		$.msg("请选择国家", {
-			time: 2000
-		});
-		$("#selCountry").focus();
-		return false;
-	}
-
 	if ($("#Name").val() == "") {
 		$.msg("收货人姓名不能为空", {
 			time: 2000
@@ -70,6 +62,42 @@ function Check_Consignee() {
 		$("#Name").focus();
 		return false;
 	}
+
+    if ($("#Moblie").val() == "") {
+        $.msg("手机号码不能为空", {
+            time: 2000
+        });
+        $("#Moblie").focus();
+        return false;
+    }
+
+    if (!reg.test($("#Moblie").val())) {
+        $.msg("请输入正确的手机号码", {
+            time: 2000
+        });
+        $("#Moblie").focus();
+        return false;
+    }
+
+    var phone = $("#phone").val();
+    if(phone.length > 0){
+        var pattern =/^0\d{2,3}-?\d{7,8}$/;
+        if(!pattern.test(phone)) {
+            $.msg("请输入正确的固定电话", {
+                time: 2000
+            });
+            $("#phone").focus();
+            return false;
+        }
+    }
+
+    if ($("#selCountry").val() == '0' || $("#selCountry").val() == "") {
+        $.msg("请选择国家", {
+            time: 2000
+        });
+        $("#selCountry").focus();
+        return false;
+    }
 
     if ($("#detailed_province").val() == ''){
         $("#detailed_province").focus();
@@ -93,32 +121,6 @@ function Check_Consignee() {
 		});
 		$("#AddressInfo").focus();
 		return false;
-	} 
-	if ($("#Moblie").val() == "") {
-		$.msg("手机号码不能为空", {
-			time: 2000
-		});
-		$("#Moblie").focus();
-		return false;
-	} 
-	if (!reg.test($("#Moblie").val())) {
-		$.msg("请输入正确的手机号码", {
-			time: 2000
-		});
-		$("#Moblie").focus();
-		return false;
-	} 
-	
-	var phone = $("#phone").val();
-	if(phone.length > 0){
-		var pattern =/^0\d{2,3}-?\d{7,8}$/; 
-		if(!pattern.test(phone)) { 
-			$.msg("请输入正确的固定电话", {
-				time: 2000
-			});
-			$("#phone").focus();
-			return false; 
-		} 
 	}
 
     if ($("#selCountry option:selected").text() != '爱尔兰')
@@ -129,7 +131,6 @@ function Check_Consignee() {
             return false;
         }
     }
-
 	return true;
 }
 

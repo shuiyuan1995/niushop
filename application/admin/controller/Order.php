@@ -2224,4 +2224,39 @@ class Order extends BaseController
         }
         $this->success('处理成功');
     }
+
+    public function excelSend()
+    {
+        $file = $_FILES['file'];
+
+        if ($file['type'] != 'application/vnd.ms-excel' && $file['type'] != 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'){
+            return returnAjax(-1,'文件格式错误！');
+        }
+        $path = 'upload/excel/'.date("Ymd");
+        if (!is_dir($path)){
+            mkdir($path,0777,true);
+        }
+        $filename = date('YmdHis').rand(11111,99999).'.xlsx';
+        $filePath = $path.'/'.$filename;
+        move_uploaded_file($file['tmp_name'],$filePath);
+        $data = readExcel($filePath);
+        $del = array_shift($data);
+        @unlink($filePath);
+        if ($del[0] == '订单号' && $del[1] == '物流单号'){
+            $order_goods = new OrderGoods();
+            $order_service = new OrderService();
+            foreach ($data as $k => $v){
+                $order_id = $order_goods->getOrderId($v[0]);
+                $order_goods_id_array = $order_goods->getGoodsId($order_id);
+                $order_goods_id_array = implode(',',$order_goods_id_array);
+                $shipping_type = 1;
+                $express_name = '邮政';
+                $express_company_id = 1;
+                $express_no = $v[1];
+                $res = $order_service->orderDelivery($order_id, $order_goods_id_array, $express_name, $shipping_type, $express_company_id, $express_no);
+            }
+            return returnAjax(1,'发货成功！');
+        }
+        return returnAjax(-2,'请上传发货表！');
+    }
 }

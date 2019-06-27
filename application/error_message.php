@@ -81,6 +81,7 @@ define('VIRIUAL_GOODS_MEMBER_ERROR', '-8003');
 define('BARGAIN_LAUNCH_ALREADY_CLOSE', '-9001');
 define('BARGAIN_LAUNCH_MAX_PARTAKE', '-9002');
 define('ZIP_CODE','-9003');
+define('PROVINCE','-9004');
 function getErrorInfo($error_code)
 {
     $system_error_arr = array(
@@ -95,6 +96,7 @@ function getErrorInfo($error_code)
         SYSTEM_ISUSED_DELETE_FAIL => '当前分类已被使用，不能删除!',
 
         ZIP_CODE => '请填写收货地址邮编',
+        PROVINCE => '请填写收货地址省份',
         
         // 用户变量定义
         LOGIN_FAIL => '登录失败',

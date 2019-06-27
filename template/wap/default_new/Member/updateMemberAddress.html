@@ -24,16 +24,11 @@
 
 	<div class="div-item">
 		<span>{:lang('member_phone')}</span> <input type="text" placeholder="{:lang('member_enter_your_phone_number')}" id="Moblie"
-			value="{$address_info['mobile']}" />
+			value="{$address_info['mobile']}" onkeyup="this.value=this.value.replace(/\s+/g,'')"/>
 	</div>
 
 	<div class="div-item">
 		<span>{:lang('member_fixed_telephone')}</span> <input type="text" id="phone" placeholder="{:lang('member_fixed_telephone')}（选填）" value="{$address_info['phone']}" />
-	</div>
-
-	<div class="div-item">
-		<span>{:lang('member_zip_code')}</span>
-		<input type="text" placeholder="邮编" id="zipcode" value="{$address_info['zip_code']}" />
 	</div>
 
 	<div class="div-item">
@@ -58,10 +53,15 @@
 		<span>{:lang('member_detailed_address')}</span> <input type="text" placeholder="{:lang('please_enter_detailed_address')}"
 			id="AddressInfo" value="{$address_info['address']}" />
 	</div>
+
+	<div class="div-item">
+		<span>{:lang('member_zip_code')}</span>
+		<input type="text" placeholder="邮编" id="zipcode" value="{$address_info['zip_code']}" />
+	</div>
 </form>
 <button onclick="saveAddress()" class="btn-save">{:lang('member_preservation')}</button>
 {/block}
 {block name="bottom"}{/block}
 {block name="javascript"}
-<script src="__TEMP__/{$style}/public/js/address.js"></script>
+<script src="__TEMP__/{$style}/public/js/address.js?v=1.0"></script>
 {/block}

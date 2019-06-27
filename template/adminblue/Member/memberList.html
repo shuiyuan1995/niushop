@@ -39,7 +39,7 @@
 				<dl>
 					<dt>搜索内容：</dt>
 					<dd>
-						<input type="text" id ='search_text' placeholder="手机号/邮箱/会员昵称" class="input-common middle" />
+						<input type="text" id ='search_text' placeholder="手机号/邮箱/会员昵称/IP" class="input-common middle" />
 					</dd>
 				</dl>
 				<dl>
@@ -388,7 +388,8 @@ function LoadingInfo(page_index) {
 			"start_date" : start_date, "end_date" : end_date, "status" : status
 		},
 		success : function(data) {
-			if (data["data"].length > 0) {
+            console.log(data);
+            if (data["data"].length > 0) {
 				$(".table-class tbody").empty();
 				for (var i = 0; i < data["data"].length; i++) {
 					var html = '';
@@ -468,7 +469,7 @@ function LoadingInfo(page_index) {
 					}
 					html += '<td style="text-align:right;">' + data["data"][i]["point"] + '</td>';
 					html += '<td style="text-align:right;">'+'¥'+ data["data"][i]["balance"] +'</td>';
-					html += '<td>' +'注册时间 : '+ timeStampTurnTime(data["data"][i]["reg_time"]) +'<br>'+'最后登录 : '+ timeStampTurnTime(data["data"][i]["current_login_time"])+'</td>';
+					html += '<td>' +'注册时间 : '+ timeStampTurnTime(data["data"][i]["reg_time"]) +'<br>'+'最后登录 : '+ timeStampTurnTime(data["data"][i]["current_login_time"])+'<br>注册IP : '+ data["data"][i]["reg_ip"] +'<br>'+'注册国家 : '+ data["data"][i]["reg_country"] +'<br></td>';
 					html += data["data"][i]["user_status"] == 0 ? '<td style="color:red;">锁定</td>' : '<td style="color:green;">正常</td>';
 					html += '<td>';
 					//html += '<a href="'+__URL('ADMIN_MAIN/member/pointdetail?member_id='+ data['data'][i]['uid'])+'">积分明细</a>&nbsp;&nbsp;';

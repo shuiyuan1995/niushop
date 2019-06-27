@@ -28,6 +28,19 @@
 			<div class="mar_top">
 				<table width="100%" border="0" cellpadding="10" cellspacing="1" bgcolor="#eeeeee">
 					<tr>
+						<td align="right" width="10%">{:lang('member_consignee_name')}：</td>
+						<td align="left" width="40%"><input name="consignee" type="text" class="inputBg" id="Name" value="{$address_info['consigner']}" />({:lang('member_required')}) </td>
+					</tr>
+					<tr>
+						<td align="right">{:lang('member_phone')}：</td>
+						<td align="left"><input name="mobile" type="text" class="inputBg" id="Moblie" value="{$address_info['mobile']}" onkeyup="this.value=this.value.replace(/\s+/g,'')" />({:lang('member_required')})</td>
+					</tr>
+				 	<tr>
+	                  	<td align="right">{:lang('member_fixed_telephone')}：</td>
+                  		<td align="left"><input name="mobile" type="text" class="inputBg" id="phone" value="{$address_info['phone']}" />
+	                  	</td>
+	                </tr>
+					<tr>
 						<td align="right" width="10%">{:lang('member_location')}：</td>
 						<td colspan="3" align="left">
 							<select name="province" id="selCountry" class="inputBg">
@@ -41,10 +54,6 @@
 						</td>
 					</tr>
 					<tr>
-						<td align="right" width="10%">{:lang('member_consignee_name')}：</td>
-						<td align="left" width="40%"><input name="consignee" type="text" class="inputBg" id="Name" value="{$address_info['consigner']}" />({:lang('member_required')}) </td>
-					</tr>
-					<tr>
 						<td align="right" width="10%">{:lang('member_province')}：</td>
 						<td align="left" width="40%"><input type="text" id="detailed_province" name="province_detail" class="inputBg" value="{$address_info['province_detail']}" />({:lang('member_required')})</td>
 					</tr>
@@ -56,15 +65,6 @@
 						<td align="right">{:lang('member_detailed_address')}：</td>
 						<td align="left" colspan="3"><input name="address" type="text" class="inputBg" id="AddressInfo" value="{$address_info['address']}" style="width: 692px;"/>({:lang('member_required')})</td>
 					</tr>
-					<tr>
-						<td align="right">{:lang('member_phone')}：</td>
-						<td align="left"><input name="mobile" type="text" class="inputBg" id="Moblie" value="{$address_info['mobile']}" />({:lang('member_required')})</td>
-					</tr>
-				 	<tr>
-	                  	<td align="right">{:lang('member_fixed_telephone')}：</td>
-                  		<td align="left"><input name="mobile" type="text" class="inputBg" id="phone" value="{$address_info['phone']}" />
-	                  	</td>
-	                </tr>
 					<tr>
 						<td align="right">{:lang('member_zip_code')}：</td>
 						<td align="left"><input type="text" class="inputBg" name="zipcode" id="zipcode" value="{$address_info['zip_code']}" />(爱尔兰非必填)</td>
@@ -85,7 +85,7 @@
 {/block}
 {block name="RightSideBar"}{/block}
 {block name="javascript"}
-<script src="__TEMP__/{$style}/public/js/address.js"></script>
+<script src="__TEMP__/{$style}/public/js/address.js?v=1.0"></script>
 <script type="text/javascript">
 
 $(function(){

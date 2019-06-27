@@ -1442,9 +1442,12 @@ class Order extends BaseService implements IOrder
         $order = new OrderBusiness();
         $res = $order->OrderTakeDelivery($order_id);
         if ($res) {
-            hook("orderTakeDeliverySuccess", [
+            /*hook("orderTakeDeliverySuccess", [
                 'order_id' => $order_id
-            ]);
+            ]);*/
+            runhook("Notify", "orderReceipt", array(
+                'order_id' => $order_id
+            ));
         }
         return $res;
     }
