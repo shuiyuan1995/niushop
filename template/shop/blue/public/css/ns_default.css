@@ -2657,6 +2657,7 @@
 }
 
 .right-login-message {
+	height: 167px;
 	width: 100%;
 	overflow: hidden;
 	padding: 10px 0;
