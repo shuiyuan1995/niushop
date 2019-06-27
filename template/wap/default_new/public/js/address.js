@@ -29,7 +29,7 @@
 		url: ajax_url,
 		data: data_json,
 		success: function (txt) {
-			if (txt["code"] >0) {
+            if (txt["code"] >0) {
 				if(flag == 1){
 					location.href=__URL(APPMAIN+"/member/memberaddress?flag=1");
 				}else if(flag == 4){
@@ -43,8 +43,10 @@
 						location.href=__URL(APPMAIN+"/order/paymentorder");
 					}
 				}
+			} else if(txt["code"] == -1 || txt["code"] == -10) {
+                location.href=__URL(APPMAIN+"/login");
 			} else {
-				showBox(txt,"error");
+                showBox(txt,"error");
 			}
 		}
 	});
