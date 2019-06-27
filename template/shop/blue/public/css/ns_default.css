@@ -135,12 +135,13 @@
 }
 /* 公告*/
 .proclamation1 {
-	height: 130px;
+	height: 50px;
 	padding: 0 15px;
 	box-sizing: content-box;
 	position: relative;
 	/* 	border-bottom: 1px solid #eeeeee; */
 	line-height: 20px;
+	overflow: hidden;
 }
 
 .proclamation1 .mall-news {

@@ -101,11 +101,11 @@
 			index++;
 			index1++;
 			$("#rightbox").css({
-				"transform": "translateY("+ -40*index +"px)",
+				"transform": "translateY("+ -60*index +"px)",
 				"transition": "0.4s all"
 			})
 			$("#rightbox1").css({
-				"transform": "translateY("+ -40*index1 +"px)",
+				"transform": "translateY("+ -60*index1 +"px)",
 				"transition": "0.5s all"
 			})
 			if(index>=len){
@@ -131,18 +131,21 @@
 
 	$(function () {
 	    	var html = '';
+				console.log(1)
         $.ajax({
             url : "{:__URL('SHOP_MAIN/index/getorder')}",
             type : "post",
             success : function(res) {
-                //console.log(res);
+                // console.log('res',res);
                 for (var i=0;i<res['buy'].length;i++){
-                    html += "<li>用户"+res['buy'][i].user_name+"购买"+res['buy'][i].goods_name+"</li>";
-				}
-				$("#rightbox .paomadeng").html(html);
-				html = ''
+                    // html += "<li>用户"+res['buy'][i].user_name+"购买"+res['buy'][i].goods_name+"</li>";
+										html += "<li><p><span>fgdfgg</span><span>美国</span></p><p>中南海+红塔...12条</p><p><span>15:04</span><span>已下单</span></p></li>";
+								}
+								$("#rightbox .paomadeng").html(html);
+								html = ''
                 for (var i=0;i<res['send'].length;i++){
-                    html += "<li>"+res['send'][i].user_name+"购买的"+res['send'][i].goods_name+"已发货</li>";
+                    // html += "<li>"+res['send'][i].user_name+"购买的"+res['send'][i].goods_name+"已发货</li>";
+										html += "<li><p><span>fgdfgg</span><span>美国</span></p><p>中南海+红塔...12条</p><p><span>15:04</span><span>已发货</span></p></li>";
                 }
                 $("#rightbox1 .paomadeng").html(html);
                 goup()

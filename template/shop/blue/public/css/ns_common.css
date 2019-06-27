@@ -5753,17 +5753,21 @@ img {
 }
 .rightbox{
 	float: right;
-	line-height: 40px;
+	line-height: 20px;
 	padding: 0;
-	height: 40px;
-	width: 205px;
+	height: 60px;
+	width: 200px;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	font-size: 12px;
-	padding-left: 40px;
+	padding: 0 10px;
 	position: relative;
 	box-sizing: border-box;
+}
+.rightbox li p{
+	display: flex;
+	justify-content: space-between;
 }
 .rightimg{
 	position: absolute;

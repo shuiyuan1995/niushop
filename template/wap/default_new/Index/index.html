@@ -50,10 +50,24 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 	margin-top: 10px;
 	overflow: hidden;
 }
+.xiaoxi .list div{
+	display: flex
+}
+.xiaoxi .list span{
+	flex: 1;
+	text-align: center;
+}
+.xiaoxi .list span:nth-of-type(3){
+	flex: 2
+}
 .xiaoxi .list li{
+	display: flex;
+	text-align: center;
 	line-height: 30px;
-	padding-left: 10px;
 	border-bottom: 1px solid #ffffff;
+}
+.xiaoxi .list li:nth-of-type(3){
+	flex: 2
 }
 .xiaoxi .list li.mai{
 	background: #eb9c55;
@@ -278,6 +292,7 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 	<span style="display: none;" id="addperson"> </span>
 	<h2></h2>
 	<div class="list" id="rightbox">
+		<div><span>用户名</span><span>国家</span><span>商品</span><span>时间</span><span>下单</span></div>
 		<ul class="paomadeng">
 		</ul>
 	</div>
@@ -403,12 +418,14 @@ $(function(){
                 for(let i =0;i<40;i++){
                     if(Math.random()>0.5){
                         if (j<res['send'].length){
-                            html.push("<li class='huo'>"+res['send'][j].user_name+"购买的"+res['send'][j].goods_name+"已发货</li>");
+                            // html.push("<li class='huo'>"+res['send'][j].user_name+"购买的"+res['send'][j].goods_name+"已发货</li>");
+														html.push("<li class='huo'><span>fgdfgg</span><span>美国</span><span>中南海+红塔...12条</span><span>15:04</span><span>已下单</span></li>");
                             j++;
 						}
                     }else{
                         if (k<res['buy'].length) {
-                            html.push("<li class='mai'>用户" + res['buy'][k].user_name + "购买" + res['buy'][k].goods_name + "</li>");
+                            // html.push("<li class='mai'>用户" + res['buy'][k].user_name + "购买" + res['buy'][k].goods_name + "</li>");
+														html.push("<li class='mai'><span>fgdfgg</span><span>美国</span><span>中南海+红塔...12条</span><span>15:04</span><span>已发货</span></li>");
                             k++;
                         }
                     }
