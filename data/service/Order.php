@@ -1641,8 +1641,8 @@ class Order extends BaseService implements IOrder
             $order[$k]['country'] = $address[0];
             $order_goods = $this->getOrderGoodsNums($v['order_id']);
             $order[$k]['goods_name'] = $order_goods['goods'];
-            if (mb_strlen($order[$k]['goods_name']) > 7){
-                $order[$k]['goods_name'] = mb_substr($order_goods['goods'],0,7).'···';
+            if (mb_strlen($order[$k]['goods_name']) > 6){
+                $order[$k]['goods_name'] = mb_substr($order_goods['goods'],0,6).'···';
             }
             $order[$k]['num'] = $order_goods['num'];
             $order[$k]['pay_time'] = date('n.d',$v['pay_time']);
