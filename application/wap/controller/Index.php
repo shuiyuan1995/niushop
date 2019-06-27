@@ -73,7 +73,12 @@ class Index extends BaseController
         // 首页轮播图
         $plat_adv_list = $platform->getPlatformAdvPositionDetail(1105);
         $this->assign('plat_adv_list', $plat_adv_list);
-        
+
+        $platform = new Platform();
+        // 首页广告位
+        $index_adv = $platform->getPlatformAdvPositionDetailByApKeyword("waptuijian");
+        $this->assign('index_adv', $index_adv);
+
         // 首页楼层版块
         $block_list = $good_category->getGoodsCategoryBlockQuery($shop_id, $this->category_good_num);
         $this->assign('block_list', $block_list);

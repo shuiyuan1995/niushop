@@ -58,7 +58,7 @@ class Member extends BaseController
             $status = request()->post('status', -1);
             $condition = [
                 'su.is_member' => 1,
-                'su.nick_name|su.user_tel|su.user_email' => array(
+                'su.nick_name|su.user_tel|su.user_email|reg_ip' => array(
                     'like',
                     '%' . $search_text . '%'
                 ),
