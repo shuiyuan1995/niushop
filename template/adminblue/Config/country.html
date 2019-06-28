@@ -125,7 +125,7 @@
 					<tr>
 						<td align="right"><span style="color:red;margin-right:10px;">*</span>保险：</td>
 						<td>
-								价格区间：<input type="number" id="start" style="margin-bottom: 5px;" class="baoxian"/> - <input type="number" id="end" style="margin-bottom: 5px;" class="baoxian"/>   保险费：<input type="number" id="price" style="margin-bottom: 5px;" class="baoxian"/>%
+								价格区间：<input type="text" id="start" style="margin-bottom: 5px;" class="baoxian" oninput = "value=value.replace(/[^\d+\.?]/g,'')"/> - <input type="text" id="end" style="margin-bottom: 5px;" class="baoxian" oninput = "value=value.replace(/[^\d+\.?]/g,'')"/>   保险费：<input type="text" id="price" style="margin-bottom: 5px;" class="baoxian" oninput = "value=value.replace(/[^\d+\.?]/g,'')"/>%
 								<button type="button" onclick="baoxianadd()" class="btn-small btn-common tianjiabtn">添加</button>
 								<div id="baoxianitem" class="baoxianitem">
 
@@ -204,10 +204,10 @@ function addCountry(){
 // 添加保险
 function baoxianadd(){
     if($("#start").val()==''||$("#end").val()==''||$("#price").val()==''){
-        showTip('价格，保险不能为空','warning');
+        showTip('区间价格不能为空','warning');
         return false
     }
-    if($("#start").val() > $("#end").val()){
+    if(Number($("#start").val()) > Number($("#end").val())){
         showTip('起始价格不能大于结束价格','warning');
         return false
     }
