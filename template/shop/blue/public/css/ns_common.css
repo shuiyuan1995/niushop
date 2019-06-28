@@ -5751,23 +5751,35 @@ img {
     font-size: 14px;
     padding-top: 30px;
 }
+.zixun{
+	border: 1px solid #eb852a;
+	width: 190px;
+	margin: 0 auto;
+}
+.zixun.last{
+	margin-top: 4px;
+}
+.zixun .title{
+	color: #eb852a;
+	border-bottom: 1px solid #eb852a;
+}
 .rightbox{
-	float: right;
 	line-height: 20px;
 	padding: 0;
-	height: 60px;
-	width: 200px;
+	height: 80px;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	font-size: 12px;
-	padding: 0 10px;
 	position: relative;
 	box-sizing: border-box;
 }
 .rightbox li p{
 	display: flex;
 	justify-content: space-between;
+}
+.rightbox li p:nth-of-type(odd){
+	color: #eb852a;
 }
 .rightimg{
 	position: absolute;

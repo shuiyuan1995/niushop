@@ -122,11 +122,11 @@
 /*焦点区域右侧*/
 .banner .right-sidebar {
 	width: 200px;
-	height: 400px;
+	height: 424px;
 	margin-left: 405px;
 	position: absolute;
 	z-index: 1;
-	top: 20px;
+	top: 10px;
 	left: 50%;
 	float: right;
 	overflow: hidden;
@@ -142,6 +142,7 @@
 	/* 	border-bottom: 1px solid #eeeeee; */
 	line-height: 20px;
 	overflow: hidden;
+	display: none;
 }
 
 .proclamation1 .mall-news {

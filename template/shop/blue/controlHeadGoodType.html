@@ -101,11 +101,11 @@
 			index++;
 			index1++;
 			$("#rightbox").css({
-				"transform": "translateY("+ -60*index +"px)",
+				"transform": "translateY("+ -80*index +"px)",
 				"transition": "0.4s all"
 			})
 			$("#rightbox1").css({
-				"transform": "translateY("+ -60*index1 +"px)",
+				"transform": "translateY("+ -80*index1 +"px)",
 				"transition": "0.5s all"
 			})
 			if(index>=len){
@@ -137,12 +137,14 @@
             success : function(res) {
                 // console.log('res',res);
                 for (var k=0;k<res['buy'].length;k++){
-                    html += "<li><p><span>" + res['buy'][k].user_name + "</span><span>" + res['buy'][k].country + "</span></p><p><span>" + res['buy'][k].goods_name+' '+res['buy'][k].num + "条</span></p><p><span>" + res['buy'][k].pay_time + "</span><span>已下单</span></p></li>";
-				}
-				$("#rightbox .paomadeng").html(html);
-				html = '';
+                    // html += "<li><p><span>" + res['buy'][k].user_name + "</span><span>" + res['buy'][k].country + "</span></p><p><span>" + res['buy'][k].goods_name+' '+res['buy'][k].num + "条</span></p><p><span>" + res['buy'][k].pay_time + "</span><span>已下单</span></p></li>";
+										html += "<li><p><span>用户名</span><span>时间</span><span>国家</span></p><p><span>" + res['buy'][k].user_name + "</span><span>" + res['buy'][k].pay_time + "</span><span>" + res['buy'][k].country + "</span></p><p><span>商品名称</span><span>购买数量</span></p><p><span>" + res['buy'][k].goods_name + "</span><span>"+res['buy'][k].num+"</span></p></li>"
+								}
+								$("#rightbox .paomadeng").html(html);
+								html = '';
                 for (var j=0;j<res['send'].length;j++){
-                    html += "<li><p><span>"+res['send'][j].user_name+"</span><span>"+res['send'][j].country+"</span></p><p><span>"+res['send'][j].goods_name+' '+res['send'][j].num+"条</span></p><p><span>"+res['send'][j].consign_time+"</span><span>已发货</span></p></li>";
+									html += "<li><p><span>用户名</span><span>时间</span><span>国家</span></p><p><span>"+res['send'][j].user_name+"</span><span>"+res['send'][j].consign_time+"</span><span>"+res['send'][j].country+"</span></p><p><span>商品名称</span><span>购买数量</span></p><p><span>"+res['send'][j].goods_name + "</span><span>"+res['send'][j].num+"</span></p></li>"
+                    // html += "<li><p><span>"+res['send'][j].user_name+"</span><span>"+res['send'][j].country+"</span></p><p><span>"+res['send'][j].goods_name+' '+res['send'][j].num+"条</span></p><p><span>"+res['send'][j].consign_time+"</span><span>已发货</span></p></li>";
                 }
                 $("#rightbox1 .paomadeng").html(html);
                 goup()
