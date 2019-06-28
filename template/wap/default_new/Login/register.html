@@ -597,7 +597,7 @@ function verifyPassword(password){
 				{if condition="$code_config['pc'] eq 1"}
 				<div class="nk-cont" >
 						<label><span  style="padding-right:14px;color: #333;">{:lang('member_verification_code')}</span>
-						<input type="text" name="captcha" id="register-captcha"  placeholder="{:lang('please_enter_verification_code')}">
+						<input type="text" name="captcha" id="register-captcha"  placeholder="{:lang('please_enter_verification_code')}" style="width: ">
 				        <img class="verifyimg" style="width:100px!important;float: right;margin: 4px;" src=" {:__URL('SHOP_MAIN/captcha')}" onclick="this.src='{:__URL('SHOP_MAIN/captcha')}'"  alt="captcha" style="vertical-align: middle; cursor: pointer; height: 35px;" />
 				        </label>
 				</div>
