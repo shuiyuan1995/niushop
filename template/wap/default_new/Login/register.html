@@ -15,7 +15,7 @@
 .content{
 	max-width: 648px;
 	margin:auto;
-}
+}j
 .footer {
     margin: 100px 0 0 0;
     padding: 0;
@@ -150,6 +150,7 @@ var STATIC = "__STATIC__";
 		var cfpassword = $("#cfpassword").val();
 		var reg = /^.{6,}$/;
 		var register_captcha = $("#register-captcha").val();
+		var xieyi = $('#jizhu').prop('checked');
 		
 		if(username == ''){
 			showBox("{:lang('account_cannot_be_empty')}", "error");
@@ -205,6 +206,11 @@ var STATIC = "__STATIC__";
 			showBox("{:lang('verification_code_cannot_be_null')}", "error");
 			return false;
 		}
+
+		if (xieyi != true){
+            showBox("请先勾选用户注册协议", "error");
+            return false;
+        }
 		if(is_member_sub) return;
 		is_member_sub = true;
 		$.ajax({
@@ -596,7 +602,7 @@ function verifyPassword(password){
 				        </label>
 				</div>
 				 {/if}
-				 <label class="jizhu" for="jizhu"><input id="jizhu" type="checkbox" name="item"> 我已阅读并同意<a href="http://www.shop.com/wap/helpcenter/index.html?id=3&amp;class_id=6" class="user_protocol" target="_blank">《用户注册协议》</a></label>
+				 <label class="jizhu" for="jizhu"><input id="jizhu" type="checkbox" name="item"> 我已阅读并同意<a href="https://www.51jiyan.com/wap/helpcenter/index.html?id=3" class="user_protocol" target="_blank">《用户注册协议》</a></label>
 				<button id="login-button" class="lang-btn" onclick="register_member()">{:lang('register')}</button>
 				<div class="nk_loginlogin" style="margin-top:15px;"><a href="{:__URL('APP_MAIN/login/index')}">{:lang('existing_account')},<i style="color:red;">{:lang('logon_immediately')}</i></a></div>  
 			</div>
