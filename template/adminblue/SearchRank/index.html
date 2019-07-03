@@ -81,7 +81,7 @@ function LoadingInfo(page_index) {
                     $(".table-class tbody").empty();
                     for (var i = 0; i < data['data'].length; i++) {
                         var html = '';
-                        html += '<tr align="center">';
+                        html += '<tr align="center" data-id="open'+i+'" style="cursor:pointer;">';
                         html += '<td><i class="checkbox-common"><input name="sub" type="checkbox" value="'+ data['data'][i]['keyword']+'"></i></td>';
                         html += '<td align="left">';
                         html += '<div style="float:left;" class="member-div">';
@@ -95,7 +95,7 @@ function LoadingInfo(page_index) {
                         html += '</td>';
                         html += '</tr>';
                         if (data['data'][i]['goods'].length > 0){
-                            html += '<tr align="center">' +
+                            html += '<tr align="center" class="open'+i+'" style="display:none;">' +
                                 '<th></th>' +
                                 '<th style="text-align:left;">商品名称</th>\n' +
                                 '<th>售价</th>' +
@@ -103,7 +103,7 @@ function LoadingInfo(page_index) {
                                 '<th>点击数</th>' +
                                 '</tr>';
                             for (var j = 0; j < data['data'][i]['goods'].length; j++){
-                                html += '<tr align="center">';
+                                html += '<tr align="center" class="open'+i+'" style="display:none;background:#ff98006e;">';
                                 html += '<td></td>';
                                 html += '<td align="left">';
                                 html += '<div style="float:left;" class="member-div">';
@@ -216,6 +216,12 @@ function dataExcel(){
 		}
 	})	
 }
+
+// 点击下拉
+$('#productTbody').click(function(e){
+	var targetid = $(e.target).parents('tr').data('id')
+	$('.'+targetid).toggle()
+})
 
 // 点击显示更多搜索
 $(".more-search").on("click", function(e){
