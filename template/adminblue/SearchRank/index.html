@@ -91,6 +91,7 @@ function LoadingInfo(page_index) {
                         html += '<td style="text-align:center;">'+ data['data'][i]["search_times"] +'</td>';
                         html += '<td>' +data['data'][i]['search_time']+'</td>';
                         html += '<td>';
+                        html += '<a>展开</a>&nbsp;';
 						html += '<a onclick="delete_user('+"'"+data['data'][i]["keyword"]+"'"+')">删除</a><br/>';
                         html += '</td>';
                         html += '</tr>';
