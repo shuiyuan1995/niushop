@@ -105,9 +105,12 @@ background:url(__TEMP__/{$style}/public/images/Coupon.png) no-repeat;width: 22px
 			</a>
 		</li>
 		<li class="last">
-			<a href="{:__URL('APP_MAIN/order/myorderlist?status=3&shop_id='.$shop_id)}">
+			<a href="{:__URL('APP_MAIN/order/myorderlist?status=5&shop_id='.$shop_id)}">
 				<img src="__TEMP__/{$style}/public/images/member_icon/received.png">
-				<p>{:lang('member_received_goods')}</p>
+				{if condition="$goodsComment neq 0"}
+				<div class="tips">{$goodsComment}</div>
+				{/if}
+				<p>{:lang('member_comment')}</p>
 			</a>
 		</li>
 		<li class="last">

@@ -508,6 +508,7 @@ return [
     'member_customer_service_required' => '如果卖家没有解决你的上述问题，你可以在交易成功后的15天内发起售后维权，要求客服介入处理',
     'member_shipment_and_patient'    => '已发货，请耐心等待',
     'member_received_goods'          => '已收货',
+    'member_comment'                 => '待评价',
     'member_contact_the_seller'      => '交易已成功，如果你还未收到货物，或者收到的货物无法正常使用，请及时联系卖家协商处理',
     'member_completed'               => '已完成',
     'member_closed'                  => '已关闭',
