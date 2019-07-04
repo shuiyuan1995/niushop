@@ -91,7 +91,7 @@
                         html += '<td style="text-align:center;">'+ data['data'][i]["search_times"] +'</td>';
                         html += '<td>' +data['data'][i]['search_time']+'</td>';
                         html += '<td>';
-                        html += '<a>展开</a>&nbsp;';
+                        html += '<a class="zhankai">展开</a>&nbsp;';
                         html += '<a onclick="delete_user('+"'"+data['data'][i]["keyword"]+"'"+')">删除</a><br/>';
                         html += '</td>';
                         html += '</tr>';
@@ -220,8 +220,15 @@
 
     // 点击下拉
     $('#productTbody').click(function(e){
-        var targetid = $(e.target).parents('tr').data('id')
-        $('.'+targetid).toggle()
+        if($(e.target).hasClass('zhankai')){
+            if($(e.target).text() == '展开'){
+                $(e.target).text('收起')
+            }else{
+                $(e.target).text('展开')
+            }
+            var targetid = $(e.target).parents('tr').data('id')
+            $('.'+targetid).toggle()
+        }
     })
 
 
