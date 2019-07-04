@@ -587,6 +587,7 @@ class Login extends Controller
                     if ($res['reg_coupon'] != 0) {
                         $retval = $member->memberGetCoupon($retval_id, $res['reg_coupon'], 2);
                     }
+                    $this->success('新用户注册优惠券已到账，请注意查看！',__URL__);
                 }
                 $this->redirect(__URL__);
             } else {

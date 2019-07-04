@@ -246,7 +246,7 @@
 		{if condition="$v['is_express'] eq 1"}
 			{$v['express_name']}&nbsp;&nbsp;运单号:{$v['express_code']}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<!--<a href="javascript:;" data-html="true" class="logistics-tracking" data-container="body" data_express="{$v['express_name']}" data-placement="top" data-trigger="manual" goods_id="{$v['express_id']}" data-show="1">物流跟踪</a>-->
-			<a href="https://t.17track.net/zh-cn#nums={$vo.express_code}" target="_blank">查询跟踪</a>
+			<a href="https://t.17track.net/zh-cn#nums={$v.express_code}" target="_blank">查询跟踪</a>
 			<a href="javascript:void(0);" onclick="updateExpress({$order.order_id},{$key})" >修改运单号 </a>
 		{/if}
 		</td>
