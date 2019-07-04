@@ -135,7 +135,8 @@
             url : "{:__URL('SHOP_MAIN/index/getorder')}",
             type : "post",
             success : function(res) {
-                // console.log('res',res);
+                res = JSON.parse(res);
+                //console.log(res);
                 for (var k=0;k<res['buy'].length;k++){
                     // html += "<li><p><span>" + res['buy'][k].user_name + "</span><span>" + res['buy'][k].country + "</span></p><p><span>" + res['buy'][k].goods_name+' '+res['buy'][k].num + "条</span></p><p><span>" + res['buy'][k].pay_time + "</span><span>已下单</span></p></li>";
 										html += "<li><p><span>用户名</span><span>时间</span><span>国家</span></p><p><span>" + res['buy'][k].user_name + "</span><span>" + res['buy'][k].pay_time + "</span><span>" + res['buy'][k].country + "</span></p><p><span>商品名称</span><span>购买数量</span></p><p><span>" + res['buy'][k].pc_goods_name + "</span><span>"+res['buy'][k].num+"</span></p></li>"

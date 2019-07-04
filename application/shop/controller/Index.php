@@ -283,6 +283,8 @@ class Index extends BaseController
         $condition2['order_status'] = 2; // 已发货
         $orderBy = 'consign_time';
         $order['send'] = $orderService->getOrder($condition2,$orderBy);
+        $order = json_encode($order,JSON_UNESCAPED_UNICODE);
+        $order = mb_convert_encoding($order, 'UTF-8', 'UTF-8');
         return $order;
     }
 }
