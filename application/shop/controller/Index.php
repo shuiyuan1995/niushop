@@ -204,6 +204,39 @@ class Index extends BaseController
         return view($this->style . 'Index/discount');
     }
 
+    public function spike()
+    {
+        $goods = new Goods();
+        $page = request()->get('page', 1);
+        $category_id = request()->get('category_id', 0);
+        $condition['ng.state'] = 1;
+        $condition['status'] = 1;
+        if (! empty($category_id)) {
+            $condition['category_id_1'] = $category_id;
+        }
+        $discount_list = $goods->getDiscountGoodsList($page, PAGESIZE, $condition, 'end_time');
+        $assign_get_list = array(
+            'page' => $page,
+            'page_count' => $discount_list['page_count'], // 总页数
+            'total_count' => $discount_list['total_count'], // 总条数
+            'discount_list' => $discount_list['data'], // 店铺分页
+            'category_id' => $category_id
+        ); // 已选中商品分类一级
+        foreach ($discount_list['data'] as $k => $v) {
+            $sale_down = $v['price'] - $v['promotion_price'];
+            // 四舍五入取小数点后两位有效数字
+            $sale_price = round($sale_down, 2);
+            $discount_list['data'][$k]['sale_down'] = $sale_price;
+        }
+
+        foreach ($assign_get_list as $key => $value) {
+            $this->assign($key, $value);
+        }
+        $this->assign('is_head_goods_nav', 1); // 代表默认显示以及分类
+        $this->assign("title_before", "疯狂秒杀");
+        return view($this->style . 'Index/spike');
+    }
+
     /**
      * 平台促销板块信息
      * 任鹏强

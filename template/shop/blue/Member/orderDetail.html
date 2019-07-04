@@ -1,4 +1,9 @@
 {extend name="shop/blue/base" /}
+{block name="header"}
+<title>{if condition="$title_before neq ''"}{$title_before}&nbsp;-&nbsp;{/if}{$title}{if condition="$seoconfig.seo_title neq ''"}&nbsp;-&nbsp;{$seoconfig.seo_title}{/if}</title>
+<meta name="keywords" content="{$seoconfig.seo_meta}" />
+<meta name="description" content="{$seoconfig.seo_desc}"/>
+{/block}
 {block name="resources"}
 <link href="__TEMP__/{$style}/public/css/order/ns_order_detail.css" rel="stylesheet">
 <link href="__TEMP__/{$style}/public/css/plugin/tooltips.css" rel="stylesheet">
