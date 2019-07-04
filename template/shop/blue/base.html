@@ -4,9 +4,12 @@
 <meta name="renderer" content="webkit" />
 <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/>
 <meta charset="UTF-8">
-<meta name="renderer" content="webkit"> 
-{block name="header"}
-{/block}
+<meta name="renderer" content="webkit">
+<title>{if condition="$title_before neq ''"}{$title_before}&nbsp;-&nbsp;{/if}{$title}{if condition="$seoconfig.seo_title neq ''"}&nbsp;-&nbsp;{$seoconfig.seo_title}{/if}</title>
+<meta name="keywords" content="{$seoconfig.seo_meta}" />
+<meta name="description" content="{$seoconfig.seo_desc}"/>
+<!--{block name="header"}
+{/block}-->
 <meta name="google-site-verification" content="HSgXH_R8m4JVH_zp_LWsqo5rFZVNnzgOpUqmM663F7c" />
 <link rel="shortcut  icon" type="image/x-icon" href="__TEMP__/{$style}/public/images/favicon.ico" media="screen"/>
 <!--可共用-->

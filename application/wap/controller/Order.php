@@ -1252,10 +1252,7 @@ class Order extends BaseController
                             'in',
                             '3,4'
                         );
-                        $condition['is_evaluate'] = array(
-                            'in',
-                            '0,1'
-                        );
+                        $condition['is_evaluate'] = 0;
                         break;
                     default:
                         break;

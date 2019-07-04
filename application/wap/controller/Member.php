@@ -267,6 +267,18 @@ class Member extends BaseController
             )
         ]);
         $this->assign("goodsNotReceivedOrder", $goodsNotReceivedOrder);
+
+        // 待评价订单数量
+        $goodsComment = $order->getOrderNumByOrderStatu([
+            'order_status' => array('in','3,4'),
+            "buyer_id" => $this->uid,
+            'order_type' => array(
+                "in",
+                "1,3"
+            ),
+            'is_evaluate' => 0
+        ]);
+        $this->assign("goodsComment", $goodsComment);
         
         // 退款订单
         $condition['order_status'] = array(
