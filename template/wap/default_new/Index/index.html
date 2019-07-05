@@ -41,6 +41,23 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 .zhengxin li img{
 	width: 100%;
 }
+.rightbox{
+	position: relative;
+	white-space: nowrap;
+	width: 100%;
+	overflow: hidden;
+	font-size: 12px;
+	height: 30px;
+	line-height: 30px;
+}
+.rightbox ul{
+	position: absolute;
+	left: 0px;
+	float: left;
+}
+.rightbox li{
+	display: inline;
+}
 </style>
 {/block}
 
@@ -84,7 +101,12 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 {include file='wap/default_new/share'/}
 
 <div class="com-content">
-
+	<div class="rightbox">
+		<div id="rightbox">
+				<ul class="paomadeng">
+				</ul>
+		</div>
+	</div>
 	<!-- 轮播图 -->
 	{include file='wap/default_new/Index/controlSlide'/}
 
@@ -310,7 +332,41 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 {/block}
 {block name="javascript"}
 <script>
+function goup(){
+	var liH = 0;
+	for(var i=0;i<$(".paomadeng li").length;i++){
+		liH += $(".paomadeng li").eq(i).width()
+	}
+	$(".paomadeng").width(liH)
+	$(".paomadeng").after($(".paomadeng"));
+	$(".paomadeng").clone().prependTo("#rightbox");
+	$(".paomadeng").eq(1).css({
+		left:liH+'px'
+	})
+	var offw = 0
+	setInterval(function(){
+		offw--;
+		$("#rightbox").css({
+			"transform": "translateX("+ offw +"px)"
+		})
+		if(Math.abs(offw) == liH){
+			offw = 0
+		}
+	},100)
+}
 $(function(){
+	var html = '';
+	$.ajax({
+			url : "{:__URL('SHOP_MAIN/index/getorder')}",
+			type : "post",
+			success : function(res) {
+					for (var i=0;i<res.length;i++){
+							html += "<li>用户"+res[i].user_name+"购买"+res[i].goods_name+"; </li>";
+	}
+					$("#rightbox .paomadeng").html(html);
+					goup()
+			}
+	});
 	//关注微信公众号弹出
 	$("#subscribe").click(function(){
 		
