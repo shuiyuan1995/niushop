@@ -1,3 +1,12 @@
+<style>
+	.hotsearch{
+		margin-top: 4px;
+	}
+	.hotsearch li{
+		float: left;
+		margin-left: 5px;
+	}
+</style>
 <!--
 	创建人：王永杰
 	创建时间：2017年2月7日 12:09:42
@@ -59,10 +68,10 @@
 <div class="header">
 	<div class="w1210">
 		<div class="logo-info">
-			<a href="{:__URL('SHOP_MAIN')}" class="logo"> <img src="{:__IMG($web_info['logo'])}"/></a>
+			<a href="{:__URL('SHOP_MAIN')}" class="logo"> <img src="{:__IMG($web_info['logo'])}"  alt="我要寄烟网——海外华人中国香烟代购超市"/></a>
 			{niu:adv name="logo_right_nav" id="1052"}
 				{notempty name="$logo_right_nav['adv_list'][0]['adv_image']"}
-					<a href="{$logo_right_nav['adv_list'][0]['adv_url']}" class="logo-right"> <img src="{:__IMG($logo_right_nav['adv_list'][0]['adv_image'])}" style="max-width:{$logo_right_nav['adv_list'][0]['adv_width']}px;max-height:{$logo_right_nav['adv_list'][0]['adv_height']}px;"> </a>
+					<a href="{$logo_right_nav['adv_list'][0]['adv_url']}" class="logo-right"> <img  alt="我要寄烟网——海外华人中国香烟代购超市" src="{:__IMG($logo_right_nav['adv_list'][0]['adv_image'])}" style="max-width:{$logo_right_nav['adv_list'][0]['adv_width']}px;max-height:{$logo_right_nav['adv_list'][0]['adv_height']}px;"> </a>
 				{/notempty}
 			{/niu:adv}
 		</div>
@@ -85,7 +94,12 @@
 					<input type="button" id="btn_search_box_submit" value="{:lang('search')}" class="button btn_search_box_submit NS-SEARCH-BOX-SUBMIT">
 				</div>
 				<!-- -热门搜索热搜词显示 -->
-				<div class="search-results hide NS-SEARCH-BOX-HELPER" style="display: none;">
+				<ul class="hotsearch">
+					{volist name="hot_keys" id="hot_key" empty=""}
+					<li><a  href="{:__URL('SHOP_MAIN/goods/goodslist','keyword='.$hot_key)}" title="{$hot_key}">{$hot_key}</a></li>
+					{/volist}
+				</ul>
+				<!-- <div class="search-results hide NS-SEARCH-BOX-HELPER" style="display: none;">
 					<ul class="history-results">
 						<li class="title" id="search_titles" style="word-wrap:break-word "></li>
 						
@@ -96,7 +110,7 @@
 						<li><a  href="{:__URL('SHOP_MAIN/goods/goodslist','keyword='.$hot_key)}" title="{$hot_key}">{$hot_key}</a></li>
 						{/volist}
 					</ul>
-				</div>
+				</div> -->
 			</form>
 			<ul class="hot-query">
 				<!-- 默认搜索词 -->

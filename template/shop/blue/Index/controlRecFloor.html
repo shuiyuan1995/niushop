@@ -183,11 +183,9 @@
 							{foreach $vo['goods_list'] as $k=>$v}
 							{if condition="$k < $vo['goods_num']"}
 								<li class="goodslist">
-									<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$v['goods_id'])}">
+									<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$v['goods_id'])}" title="{$v['goods_name']}">
 											<div class="goods-list-padding-block">
-													<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$v['goods_id'])}" target="_blank">
-														<div class="goods_img"><img src="{:__IMG($default_goods_img)}" class="lazy_load" data-original="{:__IMG($v['pic_cover_mid'])}" /></div>
-													</a>
+													<div class="goods_img"><img src="{:__IMG($default_goods_img)}" alt="{$v['goods_name']}" class="lazy_load" data-original="{:__IMG($v['pic_cover_mid'])}" /></div>
 													{in name="$v.point_exchange_type" value="0,2"}
 														<div class="goods_price">¥{$v['promotion_price']}</div>
 													{else/}
@@ -197,9 +195,7 @@
 															<div>{$v.point_exchange}积分</div>
 														{/if}
 													{/in}
-													<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$v['goods_id'])}" target="_blank">
-														<div class="goods_name">{$v['goods_name']}</div>
-													</a>
+													<div class="goods_name">{$v['goods_name']}</div>
 													<!-- <div class="goods_itemstar">
 														<i class="gold"></i>
 														<i class="gold"></i>
@@ -225,7 +221,7 @@
 													<!-- {if condition="$v['is_new'] eq 1"}
 														<img src="__TEMP__/{$style}/public/images/new.png" alt="" class="recommend">
 													{/if} -->
-												</div>
+											</div>
 									</a>
 								
 									<!-- <a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$v['goods_id'])}" target="_blank">
