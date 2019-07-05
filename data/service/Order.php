@@ -1642,12 +1642,12 @@ class Order extends BaseService implements IOrder
             $order_goods = $this->getOrderGoodsNums($v['order_id']);
             $order[$k]['goods_name'] = $order_goods['goods'];
             $order[$k]['pc_goods_name'] = $order_goods['goods'];
-            if (mb_strlen($order[$k]['goods_name']) > 7 && mb_strlen($order[$k]['goods_name']) <= 18){
+            /*if (mb_strlen($order[$k]['goods_name']) > 7 && mb_strlen($order[$k]['goods_name']) <= 18){
                 $order[$k]['goods_name'] = mb_substr($order_goods['goods'],0,5).'···';
             }elseif(mb_strlen($order[$k]['goods_name']) > 18){
                 $order[$k]['goods_name'] = mb_substr($order_goods['goods'],0,5).'···';
                 $order[$k]['pc_goods_name'] = mb_substr($order_goods['goods'],0,17).'···';
-            }
+            }*/
             $order[$k]['num'] = $order_goods['num'];
             $order[$k]['pay_time'] = date('H:i',$v['pay_time']);
             $order[$k]['consign_time'] = date('H:i',$v['consign_time']);
