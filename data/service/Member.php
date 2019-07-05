@@ -1236,6 +1236,9 @@ public function registerMember($user_name, $password, $email, $mobile, $user_qq_
     public function getGuessMemberLikes()
     {
         $history = Cookie::has('goodshistory') ? Cookie::get('goodshistory') : Session::get('goodshistory');
+        $order_arr = array('ng.sort asc','ng.clicks desc','ng.sales desc','ng.collects desc','ng.real_sales desc','ng.star desc');
+        $arr_id = array_rand($order_arr);
+        $order = $order_arr[$arr_id];
         if (! empty($history)) {
             $history_array = explode(",", $history);
             $goods_id = $history_array[count($history_array) - 1];
@@ -1243,16 +1246,21 @@ public function registerMember($user_name, $password, $email, $mobile, $user_qq_
             $category_id = $goods_model->getInfo([
                 'goods_id' => $goods_id
             ], 'category_id');
+            $goods = new Goods();
+
+            $goods_list = $goods->getGoodsQueryLimit([
+                'ng.category_id' => $category_id['category_id'],
+                'ng.state' => 1
+            ], "ng.goods_id,ng.goods_name,ng_sap.pic_cover_mid,ng.price,ng.point_exchange_type,ng.point_exchange,ng.promotion_price", PAGESIZE, $order);
+
         } else {
-            $category_id['category_id'] = 0;
+            $goods = new Goods();
+
+            $goods_list = $goods->getGoodsQueryLimit([
+                'ng.state' => 1
+            ], "ng.goods_id,ng.goods_name,ng_sap.pic_cover_mid,ng.price,ng.point_exchange_type,ng.point_exchange,ng.promotion_price", PAGESIZE, $order);
+
         }
-        $goods = new Goods();
-        
-        $goods_list = $goods->getGoodsQueryLimit([
-            'ng.category_id' => $category_id['category_id'],
-            'ng.state' => 1
-        ], "ng.goods_id,ng.goods_name,ng_sap.pic_cover_mid,ng.price,ng.point_exchange_type,ng.point_exchange,ng.promotion_price", PAGESIZE);
-        
         return $goods_list;
     }
 
