@@ -58,7 +58,7 @@ class NsPlatformHelpDocumentModel extends BaseModel {
     {
         $viewObj = $this->alias('np')
         ->join('ns_platform_help_class nph','np.class_id = nph.class_id','left')
-        ->field('np.id,np.uid,np.class_id,np.title,np.link_url,np.sort,np.content,np.image,np.create_time,np.modufy_time,nph.class_name');
+        ->field('np.id,np.uid,np.class_id,np.title,np.alt,np.link_url,np.sort,np.content,np.image,np.create_time,np.modufy_time,nph.class_name');
         $list = $this->viewPageQuery($viewObj, $page_index, $page_size, $condition, $order);
         return $list;
     }
@@ -72,7 +72,7 @@ class NsPlatformHelpDocumentModel extends BaseModel {
     {
         $viewObj = $this->alias('np')
         ->join('ns_platform_help_class nph','np.class_id = nph.class_id','left')
-        ->field('np.id,np.uid,np.class_id,np.title,np.link_url,np.sort,np.content,np.image,np.create_time,np.modufy_time,nph.class_name');
+        ->field('np.id,np.uid,np.class_id,np.title,np.alt,np.link_url,np.sort,np.content,np.image,np.create_time,np.modufy_time,nph.class_name');
         $count = $this->viewCount($viewObj,$condition);
         return $count;
     }

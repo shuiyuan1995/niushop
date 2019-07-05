@@ -50,7 +50,7 @@ img{vertical-align: top !important;}
 						{foreach name="platform_help_document" item="document_vo"} {if
 						condition="$class_vo['class_id'] eq $document_vo['class_id']"}
 						<li><a href="{:__URL('SHOP_MAIN/helpcenter/index','id='.$document_vo['id'])}"
-							title="{$document_vo.title}" target="_blank">{$document_vo.title}</a></li> {/if}
+							title="{if $document_vo.alt neq ''}{$document_vo.alt}{else/}{$document_vo.title}{/if}" target="_blank">{$document_vo.title}</a></li> {/if}
 						{/foreach}
 					</ul>
 				</div>
