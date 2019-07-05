@@ -185,7 +185,7 @@
 								<li class="goodslist">
 									<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$v['goods_id'])}">
 											<div class="goods-list-padding-block">
-													<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$v['goods_id'])}" target="_blank">
+													<a href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$v['goods_id'])}" title="{$v['goods_name']}" target="_blank">
 														<div class="goods_img"><img src="{:__IMG($default_goods_img)}" class="lazy_load" data-original="{:__IMG($v['pic_cover_mid'])}" /></div>
 													</a>
 													{in name="$v.point_exchange_type" value="0,2"}
