@@ -5764,27 +5764,23 @@ img {
 	border-bottom: 1px solid #eb852a;
 }
 .rightbox{
-	line-height: 20px;
-	padding: 0;
-	height: 80px;
+	float: right;
+	line-height: 40px;
+	width: 165px;
 	overflow: hidden;
 	white-space: nowrap;
-	text-overflow: ellipsis;
 	font-size: 12px;
 	position: relative;
 	box-sizing: border-box;
 }
-.rightbox li p{
-	display: flex;
-	justify-content: space-between;
+.rightbox li{
+	display: inline;
 }
 .rightbox li p:nth-of-type(odd){
 	color: #eb852a;
 }
 .rightimg{
-	position: absolute;
-	left: 0px;
-	top: 0px;
+	float: right;
 	width: 40px;
 	height: 40px;
 	background: url('../images/gonggao.png') center no-repeat;

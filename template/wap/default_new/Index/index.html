@@ -75,6 +75,33 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 .xiaoxi .list li.huo{
 	background: #ebbc92;
 }
+.allbox{
+	display: flex;
+}
+.rightbox{
+	position: relative;
+	white-space: nowrap;
+	width: 100%;
+	overflow: hidden;
+	font-size: 12px;
+	height: 30px;
+	line-height: 30px;
+}
+.rightbox ul{
+	position: absolute;
+	left: 0px;
+	float: left;
+}
+.rightbox li{
+	display: inline;
+}
+.rightimg{
+	float: left;
+	width: 30px;
+	height: 30px;
+	background: url('__TEMP__/{$style}/public/images/gonggao.png') center no-repeat;
+	background-size: 20px 20px
+}
 </style>
 {/block}
 
@@ -120,6 +147,15 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 <div class="com-content">
 
 	<!-- 轮播图 -->
+	<div class="allbox">
+		<div class="rightimg"></div>
+		<div class="rightbox">
+			<div id="rightbox">
+					<ul class="paomadeng">
+					</ul>
+			</div>
+		</div>
+	</div>
 	{include file='wap/default_new/Index/controlSlide'/}
 
 	<!-- 搜索栏 -->
@@ -287,16 +323,6 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 		{/if}
 	{/foreach}
 </div>
-<div class="xiaoxi">
-	<p>网站已访问人数：<span id="person">0000</span></p>
-	<span style="display: none;" id="addperson"> </span>
-	<h2></h2>
-	<div class="list" id="rightbox">
-		<div><span>用户名</span><span>国家</span><span>商品</span><span>时间</span><span>下单</span></div>
-		<ul class="paomadeng">
-		</ul>
-	</div>
-</div>
 <div class="foot-nav">
 	<div class="nav">
 		{empty name="$uid"}
@@ -356,6 +382,30 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 {block name="javascript"}
 <script>
 $(function(){
+	var html = '';
+	$.ajax({
+		url : "{:__URL('SHOP_MAIN/index/getorder')}",
+		type : "post",
+		success : function(res) {
+			res = JSON.parse(res);
+			let j = 0;let k = 0;
+				for(let i =0;i<40;i++){
+						if(Math.random()>0.5){
+							if (j<res['send'].length){
+								html += "<li>用户"+res['send'][j].user_name+"购买了"+res['send'][j].goods_name+"; </li>";
+								j++;
+							}
+						}else{
+								if (k<res['buy'].length) {
+									html += "<li>用户"+res['buy'][k].user_name+"的"+res['buy'][k].goods_name+"已发货; </li>";
+									k++;
+								}
+						}
+				}
+			$("#rightbox .paomadeng").html(html);
+			goup()
+		}
+	});
 	//关注微信公众号弹出
 	$("#subscribe").click(function(){
 		
@@ -376,70 +426,28 @@ $(function(){
 			{include file='wap/default_new/shareContents'/}
 		}
 	})
-	// 添加人数
-	addPerson();
-	function addPerson(){
-			let person;
-			$.ajax({
-					url: "{:__URL('SHOP_MAIN/index/visitcount')}",
-					type: "post",
-					success: function (res) {
-							person = res;
-							$("#person").html(person);
-					}
-			});
-			setInterval(() => {
-						var addPerson = Math.floor(Math.random()*4);
-                		person += addPerson;
-						$("#person").html(person);
-						$("#addperson").text(addPerson);
-			},60000);
-	}
-	setInterval(function () {
-        $.ajax({
-            url: "{:__URL('SHOP_MAIN/index/updateperson')}",
-            type: "post",
-            data:{"addPerson":$("#addperson").text()},
-            success: function (res) {
-            }
-        })
-    },60000);
-	// 跑马灯
-	var html = null;
-	getdata();
-	function getdata(){
-		html = [];
-        $.ajax({
-            url : "{:__URL('SHOP_MAIN/index/getorder')}",
-            type : "post",
-            success : function(res) {
-                res = JSON.parse(res);
-                //console.log(res);
-                let j = 0;let k = 0;
-                for(let i =0;i<40;i++){
-                    if(Math.random()>0.5){
-                        if (j<res['send'].length){
-                            html.push("<li class='huo'><span>"+res['send'][j].user_name+"</span><span>"+res['send'][j].country+"</span><span>"+res['send'][j].goods_name+' '+res['send'][j].num+"条</span><span>"+res['send'][j].consign_time+"</span><span>已发货</span></li>");
-                            j++;
-						}
-                    }else{
-                        if (k<res['buy'].length) {
-                            html.push("<li class='mai'><span>" + res['buy'][k].user_name + "</span><span>" + res['buy'][k].country + "</span><span>" + res['buy'][k].goods_name+' '+res['buy'][k].num + "条</span><span>" + res['buy'][k].pay_time + "</span><span>已下单</span></li>");
-                            k++;
-                        }
-                    }
-                }
-                $('.paomadeng').html(html);
-                goup();
-            }
-        });
-	}
 	function goup(){
+		var liH = 0;
+		for(var i=0;i<$(".paomadeng li").length;i++){
+			liH += $(".paomadeng li").eq(i).width()
+		}
+		console.log(liH)
+		$(".paomadeng").width(liH)
+		$(".paomadeng").after($(".paomadeng"));
+		$(".paomadeng").clone().prependTo("#rightbox");
+		$(".paomadeng").eq(1).css({
+			left:liH+'px'
+		})
+		var offw = 0
 		setInterval(function(){
-			let newhtml = html.splice(0, Math.floor(3*Math.random()));
-			html.push(...newhtml);
-			$('.paomadeng').html(html);
-		},Math.random()*60000)
+			offw--;
+			$("#rightbox").css({
+				"transform": "translateX("+ offw +"px)"
+			})
+			if(Math.abs(offw) == liH){
+				offw = 0
+			}
+		},100)
 	}
 });
 //跳转到电脑端

@@ -70,13 +70,13 @@
 		</div> -->
 		<!-- 公共的菜单栏-->
 	{include file='shop/blue/controlCommonNav'/}
-		<!-- <div class="rightbox">
-			<div class="rightimg"></div>
+		<div class="rightbox">
 			<div id="rightbox">
 					<ul class="paomadeng">
 					</ul>
 			</div>
-		</div> -->
+		</div>
+		<div class="rightimg"></div>
 	</div>
 </div>
 
@@ -89,67 +89,54 @@
     var url = window.location.href;
     $("#nav a[href='"+url+"']").parent('li').addClass('active');
 	
-	function goup(){
-		let len = $("#rightbox .paomadeng li").length
-		let len1 = $("#rightbox1 .paomadeng li").length
-		// $(".paomadeng").after($(".paomadeng"));
-		$("#rightbox .paomadeng").clone().prependTo("#rightbox");
-		$("#rightbox1 .paomadeng").clone().prependTo("#rightbox1");
-		let index = 0
-		let index1 = 0
-		setInterval(function(){
-			index++;
-			index1++;
-			$("#rightbox").css({
-				"transform": "translateY("+ -80*index +"px)",
-				"transition": "0.4s all"
-			})
-			$("#rightbox1").css({
-				"transform": "translateY("+ -80*index1 +"px)",
-				"transition": "0.5s all"
-			})
-			if(index>=len){
-				setTimeout(function(){
-					$("#rightbox").css({
-						"transform": "translateY(0px)",
-						"transition": "0s all"
-					})
-					index = 0
-				},400)
+		function goup(){
+			var liH = 0;
+			for(var i=0;i<$(".paomadeng li").length;i++){
+				liH += $(".paomadeng li").eq(i).width()
 			}
-			if(index1>=len1){
-				setTimeout(function(){
-					$("#rightbox1").css({
-						"transform": "translateY(0px)",
-						"transition": "0s all"
-					})
-					index1 = 0
-				},400)
-			}
-		},3000)
-	}
+			console.log(liH)
+			$(".paomadeng").width(liH)
+			$(".paomadeng").after($(".paomadeng"));
+			$(".paomadeng").clone().prependTo("#rightbox");
+			$(".paomadeng").eq(1).css({
+				left:liH+'px'
+			})
+			var offw = 0
+			setInterval(function(){
+				offw--;
+				$("#rightbox").css({
+					"transform": "translateX("+ offw +"px)"
+				})
+				if(Math.abs(offw) == liH){
+					offw = 0
+				}
+			},100)
+		}
 
 	$(function () {
 		var html = '';
-        $.ajax({
-            url : "{:__URL('SHOP_MAIN/index/getorder')}",
-            type : "post",
-            success : function(res) {
-                res = JSON.parse(res);
-                //console.log(res);
-                for (var k=0;k<res['buy'].length;k++){
-                    // html += "<li><p><span>" + res['buy'][k].user_name + "</span><span>" + res['buy'][k].country + "</span></p><p><span>" + res['buy'][k].goods_name+' '+res['buy'][k].num + "条</span></p><p><span>" + res['buy'][k].pay_time + "</span><span>已下单</span></p></li>";
-										html += "<li><p><span>用户名</span><span>时间</span><span>国家</span></p><p><span>" + res['buy'][k].user_name + "</span><span>" + res['buy'][k].pay_time + "</span><span>" + res['buy'][k].country + "</span></p><p><span>商品名称</span><span>购买数量</span></p><p><span>" + res['buy'][k].pc_goods_name + "</span><span>"+res['buy'][k].num+"</span></p></li>"
+		$.ajax({
+			url : "{:__URL('SHOP_MAIN/index/getorder')}",
+			type : "post",
+			success : function(res) {
+				res = JSON.parse(res);
+				let j = 0;let k = 0;
+					for(let i =0;i<40;i++){
+							if(Math.random()>0.5){
+								if (j<res['send'].length){
+									html += "<li>用户"+res['send'][j].user_name+"购买了"+res['send'][j].goods_name+"; </li>";
+									j++;
 								}
-								$("#rightbox .paomadeng").html(html);
-								html = '';
-                for (var j=0;j<res['send'].length;j++){
-									html += "<li><p><span>用户名</span><span>时间</span><span>国家</span></p><p><span>"+res['send'][j].user_name+"</span><span>"+res['send'][j].consign_time+"</span><span>"+res['send'][j].country+"</span></p><p><span>商品名称</span><span>购买数量</span></p><p><span>"+res['send'][j].pc_goods_name + "</span><span>"+res['send'][j].num+"</span></p></li>"
-                    // html += "<li><p><span>"+res['send'][j].user_name+"</span><span>"+res['send'][j].country+"</span></p><p><span>"+res['send'][j].goods_name+' '+res['send'][j].num+"条</span></p><p><span>"+res['send'][j].consign_time+"</span><span>已发货</span></p></li>";
-                }
-                $("#rightbox1 .paomadeng").html(html);
-                goup()
-            }
-        });
+							}else{
+									if (k<res['buy'].length) {
+										html += "<li>用户"+res['buy'][k].user_name+"的"+res['buy'][k].goods_name+"已发货; </li>";
+										k++;
+									}
+							}
+					}
+				$("#rightbox .paomadeng").html(html);
+				goup()
+			}
+		});
     });
 </script>
