@@ -11,6 +11,12 @@
 			<input id="title" type="text" class="input-common long" />
 		</dd>
 	</dl>
+	<dl>
+		<dt>提示：</dt>
+		<dd>
+			<input id="alt" type="text" class="input-common long">
+		</dd>
+	</dl>
 	<dl style="display:none;">
 		<dt>标题图片：</dt>
 		<dd>
@@ -81,6 +87,7 @@ var if_submit  = false;
 function setConfigAjax() {
 	var title = $("#title").val();
 	var class_id = $("#class_id").val();
+    var alt = $("#alt").val();
 	var link_url = $("#link_url").val();
 	var image = $("#logo").val();
 	var content = UE.getEditor('editor').getContent();
@@ -101,6 +108,7 @@ function setConfigAjax() {
 			url : "{:__URL('ADMIN_MAIN/config/adddocument')}",
 			data : {
 				'title' : title,
+                'alt' : alt,
 				'class_id' : class_id,
 				'link_url' : link_url,
 				'content' : content,
