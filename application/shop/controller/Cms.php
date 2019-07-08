@@ -64,6 +64,11 @@ class Cms extends BaseController
      */
     public function articleClassInfo($article_id = '')
     {
+        if (request()->isMobile()) {
+            $redirect = __URL(__URL__ . "/wap/Articlecenter/articlecontent?article_id=".$article_id);
+            $this->redirect($redirect);
+            exit();
+        }
         $cms = new CmsService();
         // 文章ID
         if (empty($article_id)) {
