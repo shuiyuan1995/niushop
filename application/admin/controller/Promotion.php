@@ -574,13 +574,15 @@ class Promotion extends BaseController
         if (request()->isAjax()) {
             $discount = new PromotionService();
             $discount_name = request()->post('discount_name', '');
+            $keywords = request()->post('keywords', '');
+            $description = request()->post('description', '');
             $start_time = request()->post('start_time', '');
             $end_time = request()->post('end_time', '');
             $remark = '';
             $goods_id_array = request()->post('goods_id_array', '');
             $decimal_reservation_number = request()->post("decimal_reservation_number", -1);
             
-            $retval = $discount->addPromotiondiscount($discount_name, $start_time, $end_time, $remark, $goods_id_array, $decimal_reservation_number);
+            $retval = $discount->addPromotiondiscount($discount_name, $keywords, $description, $start_time, $end_time, $remark, $goods_id_array, $decimal_reservation_number);
             return AjaxReturn($retval);
         }
         return view($this->style . "Promotion/addDiscount");
@@ -595,12 +597,14 @@ class Promotion extends BaseController
             $discount = new PromotionService();
             $discount_id = request()->post('discount_id', '');
             $discount_name = request()->post('discount_name', '');
+            $keywords = request()->post('keywords', '');
+            $description = request()->post('description', '');
             $start_time = request()->post('start_time', '');
             $end_time = request()->post('end_time', '');
             $remark = '';
             $goods_id_array = request()->post('goods_id_array', '');
             $decimal_reservation_number = request()->post("decimal_reservation_number", -1);
-            $retval = $discount->updatePromotionDiscount($discount_id, $discount_name, $start_time, $end_time, $remark, $goods_id_array, $decimal_reservation_number);
+            $retval = $discount->updatePromotionDiscount($discount_id, $discount_name, $keywords, $description, $start_time, $end_time, $remark, $goods_id_array, $decimal_reservation_number);
             return AjaxReturn($retval);
         }
         $info = $this->getDiscountDetail();

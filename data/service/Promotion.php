@@ -1049,7 +1049,7 @@ class Promotion extends BaseService implements IPromotion
      *
      * @see \data\api\IPromote::addPromotiondiscount()
      */
-    public function addPromotiondiscount($discount_name, $start_time, $end_time, $remark, $goods_id_array, $decimal_reservation_number)
+    public function addPromotiondiscount($discount_name, $keywords, $description, $start_time, $end_time, $remark, $goods_id_array, $decimal_reservation_number)
     {
         $promotion_discount = new NsPromotionDiscountModel();
         $promotion_discount->startTrans();
@@ -1058,6 +1058,8 @@ class Promotion extends BaseService implements IPromotion
             $shop_name = $this->instance_name;
             $data = array(
                 'discount_name' => $discount_name,
+                'keywords' => $keywords,
+                'description' => $description,
                 'start_time' => getTimeTurnTimeStamp($start_time),
                 'end_time' => getTimeTurnTimeStamp($end_time),
                 'shop_id' => $this->instance_id,
@@ -1117,7 +1119,7 @@ class Promotion extends BaseService implements IPromotion
      *
      * @see \data\api\IPromote::updatePromotionDiscount()
      */
-    public function updatePromotionDiscount($discount_id, $discount_name, $start_time, $end_time, $remark, $goods_id_array, $decimal_reservation_number)
+    public function updatePromotionDiscount($discount_id, $discount_name, $keywords, $description, $start_time, $end_time, $remark, $goods_id_array, $decimal_reservation_number)
     {
         $promotion_discount = new NsPromotionDiscountModel();
         $promotion_discount->startTrans();
@@ -1126,6 +1128,8 @@ class Promotion extends BaseService implements IPromotion
             $shop_name = $this->instance_name;
             $data = array(
                 'discount_name' => $discount_name,
+                'keywords' => $keywords,
+                'description' => $description,
                 'start_time' => getTimeTurnTimeStamp($start_time),
                 'end_time' => getTimeTurnTimeStamp($end_time),
                 'shop_id' => $this->instance_id,

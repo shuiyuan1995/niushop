@@ -15,6 +15,15 @@ input[type="radio"]{margin-top:6px;}
 		
 	</dl>
 	<dl>
+		<dt>关键字：</dt>
+		<dd><input type="text" id="keywords" class="input-common"></dd>
+
+	</dl>
+	<dl>
+		<dt>描述：</dt>
+		<dd><textarea id="description" rows="10" cols="10" class="textarea-common"></textarea></dd>
+	</dl>
+	<dl>
 		<dt>活动有效期：</dt>
 		<dd>
 			<input class="input-medium input-common harf" type="text" id="start_time" style="width:250px;"onclick="WdatePicker({skin:'twoer',dateFmt:'yyyy-MM-dd HH:mm:ss'})">
@@ -85,6 +94,8 @@ function discount(event){
 var flag = false;//防止重复提交
 function addDiscount(){
 	var discount_name = $("#discount_name").val();
+    var keywords = $("#keywords").val();
+    var description = $("#description").val();
 	var start_time = $("#start_time").val();
 	var end_time = $("#end_time").val();
 	var obj = $(".goods-list input[type='number'][name='discount']");
@@ -116,6 +127,8 @@ function addDiscount(){
 			url : "{:__URL('ADMIN_MAIN/promotion/adddiscount')}",
 			data : {
 				'discount_name' : discount_name,
+                'keywords' : keywords,
+                'description' : description,
 				'start_time' : start_time,
 				'end_time' : end_time,
 				'goods_id_array' : goods_id_array,
