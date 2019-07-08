@@ -16,6 +16,7 @@
 namespace app\wap\controller;
 
 use data\service\Article;
+use data\service\Config;
 
 /**
  * 帮助中心
@@ -100,6 +101,16 @@ class Articlecenter extends BaseController
         
         $ticket = $this->getShareTicket();
         $this->assign("signPackage", $ticket);
+        $Config = new Config();
+        $seoconfig = $Config->getSeoConfig($this->instance_id);
+
+        if (!empty($article_info['keyword'])) {
+            $seoconfig['seo_meta'] = $article_info['keyword']; // 关键词
+        }
+        if (!empty($article_info['summary'])) {
+            $seoconfig['seo_desc'] = $article_info['summary'];
+        }
+        $this->assign("seoconfig", $seoconfig);
         
         return view($this->style . 'Articlecenter/articleContent');
     }

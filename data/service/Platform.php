@@ -911,13 +911,14 @@ class Platform extends BaseService implements IPlatform
      * (non-PHPdoc)
      * @see \data\api\IPlatform::addPlatformDocument()
      */
-    public function addPlatformDocument($uid, $class_id, $title, $link_url, $is_visibility, $sort, $content, $image)
+    public function addPlatformDocument($uid, $class_id, $title, $alt, $link_url, $is_visibility, $sort, $content, $image)
     {
         Cache::clear("niu_platform_help");
         $data = array(
             'uid' => $uid,
             'class_id' => $class_id,
             'title' => $title,
+            'alt' => $alt,
             'link_url' => $link_url,
             'is_visibility' => $is_visibility,
             'sort' => $sort,
