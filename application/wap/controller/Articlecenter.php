@@ -71,7 +71,12 @@ class Articlecenter extends BaseController
         if (empty($article_info)) {
             $this->error("未获取到文章信息");
         }
-        
+        if (!request()->isMobile()) {
+            $redirect = __URL(__URL__ . "/cms/articleclassinfo?article_id=".$article_id."&class_id=1");
+            $this->redirect($redirect);
+            exit();
+        }
+
         $article -> updateArticleClickNum($article_id);
         
         $this->assign("title_before",$article_info['title']);

@@ -108,6 +108,11 @@ class Member extends BaseController
      */
     public function memberIndex()
     {
+        if (!request()->isMobile()) {
+            $redirect = __URL(__URL__ . "/membercenter");
+            $this->redirect($redirect);
+            exit();
+        }
         $member = new MemberService();
         $platform = new Platform();
         // 基本信息行级显示菜单项

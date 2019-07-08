@@ -52,6 +52,11 @@ class Index extends BaseController
      */
     public function index()
     {
+        if (! request()->isMobile()) {
+            $redirect = __URL(__URL__);
+            $this->redirect($redirect);
+            exit();
+        }
         $platform = new Platform();
         $good_category = new GoodsCategory();
         $goods = new Goods();
@@ -183,6 +188,11 @@ class Index extends BaseController
      */
     public function discount()
     {
+        if (!request()->isMobile()) {
+            $redirect = __URL(__URL__ . "/discount");
+            $this->redirect($redirect);
+            exit();
+        }
         $platform = new Platform();
         // 限时折扣广告位
         $discounts_adv = $platform->getPlatformAdvPositionDetail(1163);

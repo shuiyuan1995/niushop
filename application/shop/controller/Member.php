@@ -742,6 +742,11 @@ class Member extends BaseController
 
     public function index()
     {
+        if (request()->isMobile()) {
+            $redirect = __URL__ . "/wap/member/index";
+            $this->redirect($redirect);
+            exit();
+        }
         // 可用积分和余额,显示的是用户在店铺中的积分和余额
         $point = 0;
         $member_detail = $this->getMemberDetail();
