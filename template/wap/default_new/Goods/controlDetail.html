@@ -41,6 +41,23 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 #shop_service img{width: 22px;height: 23px;margin-right: 10px;padding-left: 1px;}
 #shop_service span{color:#051b28;}
 .goods-unit-style{color: #F44;font-size: 20px;display: inline-block;font-weight: normal;}
+.detail_info_table{
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	color: #3c3c3c;
+	table-layout: fixed;
+}
+/* .detail_info_table tr, */
+/* .detail_info_table tbody{
+	display: block;
+	width: 100%;
+} */
+.detail_info_table td{
+	border: 1px solid #dadada;
+	text-align: center;
+	padding: 4px 8px;
+}
 </style>
 <div data-exp="goods"></div>
 <section id="banner">
@@ -328,8 +345,21 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 <!-- 商品属性 -->
 {if condition = "count($goods_detail['goods_attribute_list']) gt 0"}
 <hr class="divider-line">
-<div class="price_postage" id="goods-attribute">
-	<span class="price_postage_tit single">{:lang('goods_commodity_attribute')}<i class="jiantou"></i></span>
+<div class="price_postage">
+	<span class="price_postage_tit single">{:lang('goods_commodity_attribute')}</span>
+</div>
+<hr class="with-margin-l">
+<div class="detail_info_wrap" id="p-detail">
+	<table class="detail_info_table" width="100%">
+		{foreach $goods_detail["goods_attribute_list"] as $vo}
+			{notempty name="$vo['attr_value_name']"}
+			<tr>
+				<td>{$vo.attr_value}：</td>
+				<td id="goods_attr_" title="{$vo.attr_value_name}" class="goods-attr-value">{$vo.attr_value_name}</td>
+			</tr>
+			{/notempty}
+		{/foreach}
+	</table>
 </div>
 {/if}
 
@@ -575,7 +605,7 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 </div>
 
 <!-- 商品属性 -->
-<div class="bottom_popup"  data-popup-type="goods-attribute">
+<!-- <div class="bottom_popup"  data-popup-type="goods-attribute">
 	<div class="bottom_popup_title">
 		{:lang('goods_commodity_attribute')}
 	</div>
@@ -589,7 +619,7 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 			{/notempty}
 		{/foreach}
 	</ul>
-</div>
+</div> -->
 <!-- 图片放大 -->
 {include file="wap/default_new/Goods/controlPhotoSwipe" /}
 {include file="wap/default_new/Goods/controlSkuSelectEvent" /}

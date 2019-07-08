@@ -5767,11 +5767,18 @@ img {
 	float: right;
 	line-height: 40px;
 	width: 165px;
+	height: 40px;
 	overflow: hidden;
 	white-space: nowrap;
 	font-size: 12px;
 	position: relative;
 	box-sizing: border-box;
+}
+#rightbox{
+	position: relative;
+}
+.rightbox ul {
+	position: absolute;
 }
 .rightbox li{
 	display: inline;
