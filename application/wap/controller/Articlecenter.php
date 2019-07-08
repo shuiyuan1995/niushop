@@ -16,6 +16,7 @@
 namespace app\wap\controller;
 
 use data\service\Article;
+use data\service\Config;
 
 /**
  * 帮助中心
@@ -70,6 +71,11 @@ class Articlecenter extends BaseController
         if (empty($article_info)) {
             $this->error("未获取到文章信息");
         }
+        if (!request()->isMobile()) {
+            $redirect = __URL(__URL__ . "/cms/articleclassinfo?article_id=".$article_id."&class_id=1");
+            $this->redirect($redirect);
+            exit();
+        }
         
         $article -> updateArticleClickNum($article_id);
         
@@ -100,6 +106,16 @@ class Articlecenter extends BaseController
         
         $ticket = $this->getShareTicket();
         $this->assign("signPackage", $ticket);
+        $Config = new Config();
+        $seoconfig = $Config->getSeoConfig($this->instance_id);
+
+        if (!empty($article_info['keyword'])) {
+            $seoconfig['seo_meta'] = $article_info['keyword']; // 关键词
+        }
+        if (!empty($article_info['summary'])) {
+            $seoconfig['seo_desc'] = $article_info['summary'];
+        }
+        $this->assign("seoconfig", $seoconfig);
         
         return view($this->style . 'Articlecenter/articleContent');
     }

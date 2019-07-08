@@ -1328,12 +1328,13 @@ class Config extends BaseController
             $uid = $this->user->getSessionUid();
             $title = request()->post('title', '');
             $class_id = request()->post('class_id', '');
+            $alt = request()->post('alt', '');
             $link_url = request()->post('link_url', '');
             $content = request()->post('content', '');
             $image = request()->post('image', '');
             $is_visibility = request()->post("is_visibility", 1);
             $sort = request()->post('sort', '');
-            $result = $platform->addPlatformDocument($uid, $class_id, $title, $link_url, $is_visibility, $sort, $content, $image);
+            $result = $platform->addPlatformDocument($uid, $class_id, $title, $alt, $link_url, $is_visibility, $sort, $content, $image);
             return AjaxReturn($result);
         } else {
             $help_class_list = $platform->getPlatformHelpClassList();

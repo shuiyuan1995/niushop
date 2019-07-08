@@ -19,10 +19,12 @@ use data\service\Article;
 use data\service\Goods;
 use data\service\GoodsCategory;
 use data\service\Platform;
+use data\service\Config;
 use think\Cookie;
 use think\Cache;
 use data\service\WebSite as WebSite;
 use data\service\Order as OrderService;
+use think\Db;
 
 /**
  * 首页控制器
@@ -173,6 +175,11 @@ class Index extends BaseController
      */
     public function discount()
     {
+        if (request()->isMobile()) {
+            $redirect = __URL(__URL__ . "/wap/index/index/discount");
+            $this->redirect($redirect);
+            exit();
+        }
         $goods = new Goods();
         $page = request()->get('page', 1);
         $category_id = request()->get('category_id', 0);
@@ -199,6 +206,28 @@ class Index extends BaseController
         foreach ($assign_get_list as $key => $value) {
             $this->assign($key, $value);
         }
+        $discount = Db::name('ns_promotion_discount')->field('keywords,description')->where('end_time','>',time())->select();
+        $seo = array();
+        foreach ($discount as $k => $v){
+            if ($v['keywords'] != ''){
+                $seo['keywords'] .= $v['keywords'].',';
+            }
+            if ($v['description'] != ''){
+                $seo['description'] .= $v['description'].',';
+            }
+        }
+        $seo['keywords'] = rtrim($seo['keywords'],',');
+        $seo['description'] = rtrim($seo['description'],',');
+        $Config = new Config();
+        $seoconfig = $Config->getSeoConfig($this->instance_id);
+
+        if (!empty($seo['keywords'])) {
+            $seoconfig['seo_meta'] = $seo['keywords']; // 关键词
+        }
+        if (!empty($seo['description'])) {
+            $seoconfig['seo_desc'] = $seo['description'];
+        }
+        $this->assign("seoconfig", $seoconfig);
         $this->assign('is_head_goods_nav', 1); // 代表默认显示以及分类
         $this->assign("title_before", "限时折扣");
         return view($this->style . 'Index/discount');

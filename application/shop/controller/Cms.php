@@ -16,6 +16,7 @@
 namespace app\shop\controller;
 
 use data\service\Article as CmsService;
+use data\service\Config;
 
 /**
  * 内容控制器
@@ -63,6 +64,11 @@ class Cms extends BaseController
      */
     public function articleClassInfo($article_id = '')
     {
+        if (request()->isMobile()) {
+            $redirect = __URL(__URL__ . "/wap/Articlecenter/articlecontent?article_id=".$article_id);
+            $this->redirect($redirect);
+            exit();
+        }
         $cms = new CmsService();
         // 文章ID
         if (empty($article_id)) {
@@ -90,7 +96,18 @@ class Cms extends BaseController
         $this->assign('cmsList', $cmsList['data']);
         // 增加文章点击量
         $cms -> updateArticleClickNum($article_id);
-        
+
+        $Config = new Config();
+        $seoconfig = $Config->getSeoConfig($this->instance_id);
+
+        if (!empty($info['keyword'])) {
+            $seoconfig['seo_meta'] = $info['keyword']; // 关键词
+        }
+        if (!empty($info['summary'])) {
+            $seoconfig['seo_desc'] = $info['summary'];
+        }
+        $this->assign("seoconfig", $seoconfig);
+
         // 标题title(文章详情页面)
         $this->assign("title_before", $info['title']);
         $this->assign('info', $info);

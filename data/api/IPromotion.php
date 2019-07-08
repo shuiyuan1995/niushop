@@ -210,7 +210,7 @@ interface IPromotion
      * @param unknown $goods_id_array
      *            goods_id:discount,goods_id:discount
      */
-    function addPromotiondiscount($discount_name, $start_time, $end_time, $remark, $goods_id_array, $decimal_reservation_number);
+    function addPromotiondiscount($discount_name, $keywords, $description, $start_time, $end_time, $remark, $goods_id_array, $decimal_reservation_number);
 
     /**
      * 修改限时折扣
@@ -222,7 +222,7 @@ interface IPromotion
      * @param unknown $remark            
      * @param unknown $goods_id_array            
      */
-    function updatePromotionDiscount($discount_id, $discount_name, $start_time, $end_time, $remark, $goods_id_array, $decimal_reservation_number);
+    function updatePromotionDiscount($discount_id, $discount_name, $keywords, $description, $start_time, $end_time, $remark, $goods_id_array, $decimal_reservation_number);
 
     /**
      * 关闭限时折扣活动

@@ -28,6 +28,7 @@ use data\service\Promotion;
 use data\service\Shop;
 use think\Cache;
 use app\common\Des;
+use think\Db;
 
 class Index extends BaseController
 {
@@ -67,6 +68,11 @@ class Index extends BaseController
                 $obj = new FrQrcode();
                 $obj->addQrcodeFrom($data);
             }
+        }
+        if (! request()->isMobile()) {
+            $redirect = __URL(__URL__);
+            $this->redirect($redirect);
+            exit();
         }
         $platform = new Platform();
         $good_category = new GoodsCategory();
@@ -202,6 +208,11 @@ class Index extends BaseController
      */
     public function discount()
     {
+        if (!request()->isMobile()) {
+            $redirect = __URL(__URL__ . "/discount");
+            $this->redirect($redirect);
+            exit();
+        }
         $platform = new Platform();
         // 限时折扣广告位
         $discounts_adv = $platform->getPlatformAdvPositionDetail(1163);
@@ -228,6 +239,28 @@ class Index extends BaseController
                 "is_visible" => 1,
                 "level" => 1
             ]);
+            $discount = Db::name('ns_promotion_discount')->field('keywords,description')->where('end_time','>',time())->select();
+            $seo = array();
+            foreach ($discount as $k => $v){
+                if ($v['keywords'] != ''){
+                    $seo['keywords'] .= $v['keywords'].',';
+                }
+                if ($v['description'] != ''){
+                    $seo['description'] .= $v['description'].',';
+                }
+            }
+            $seo['keywords'] = rtrim($seo['keywords'],',');
+            $seo['description'] = rtrim($seo['description'],',');
+            $Config = new Config();
+            $seoconfig = $Config->getSeoConfig($this->instance_id);
+
+            if (!empty($seo['keywords'])) {
+                $seoconfig['seo_meta'] = $seo['keywords']; // 关键词
+            }
+            if (!empty($seo['description'])) {
+                $seoconfig['seo_desc'] = $seo['description'];
+            }
+            $this->assign("seoconfig", $seoconfig);
             
             // 获取当前时间
             $current_time = $this->getCurrentTime();

@@ -314,7 +314,7 @@ interface IPlatform
      * @param unknown $content            
      * @param unknown $image            
      */
-    function addPlatformDocument($uid, $class_id, $title, $link_url, $is_visibility, $sort, $content, $image);
+    function addPlatformDocument($uid, $class_id, $title, $alt, $link_url, $is_visibility, $sort, $content, $image);
 
     /**
      * 删除帮助中心标题

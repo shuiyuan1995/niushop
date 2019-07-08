@@ -11,6 +11,12 @@
 			<input id="title" type="text" class="input-common long" />
 		</dd>
 	</dl>
+	<dl>
+		<dt>提示：</dt>
+		<dd>
+			<input id="alt" type="text" class="input-common long">
+		</dd>
+	</dl>
 	<dl style="display:none;">
 		<dt>标题图片：</dt>
 		<dd>
@@ -81,6 +87,7 @@ var if_submit  = false;
 function setConfigAjax() {
 	var title = $("#title").val();
 	var class_id = $("#class_id").val();
+	var alt = $("#alt").val();
 	var link_url = $("#link_url").val();
 	var image = $("#logo").val();
 	var content = UE.getEditor('editor').getContent();
@@ -102,6 +109,7 @@ function setConfigAjax() {
 			data : {
 				'title' : title,
 				'class_id' : class_id,
+				'alt' : alt,
 				'link_url' : link_url,
 				'content' : content,
 				'image' : image,
