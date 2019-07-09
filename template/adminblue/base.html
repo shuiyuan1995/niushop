@@ -18,6 +18,19 @@
 	.Switch_FlatRadius.On span.switch-open{background-color: #126AE4;border-color: #126AE4;}
 	#copyright_meta a{color:#333;}
 	.fa-wechat-applet:before{content:'';display:inline-block;width:20px;height:20px;background:#FFF url(__STATIC__/images/wechat_applet.png) no-repeat;background-size: 100%;}
+	.item li div{
+		position: absolute;
+		left: 90%;
+		top: 0px;
+		background: #FF6600;
+		color: #ffffff;
+		text-align: center;
+		border-radius: 100%;
+		padding: 1px 3px;
+		height: 18px;
+		line-height: 18px;
+		width: 14px;
+	}
 	</style>
 	<script src="__STATIC__/js/jquery-1.8.1.min.js"></script>
 	<script src="__STATIC__/blue/bootstrap/js/bootstrap.js"></script>
@@ -204,13 +217,19 @@
 			<!-- 三级导航菜单 -->
 			{block name="thirdmenu"}
 				{if count($child_menu_list) > 1}
-				<nav class="ns-third-menu">
+				<nav class="ns-third-menu item">
 					<ul>
 					{foreach name="child_menu_list" item="child_menu" key="k" }
 						{eq name="child_menu['active']" value="1"}
-							<li class="selected" onclick="location.href='{:__URL('ADMIN_MAIN/'.$child_menu['url'])}';">{$child_menu.menu_name}</li>
+							<li class="selected" onclick="location.href='{:__URL('ADMIN_MAIN/'.$child_menu['url'])}';">
+								<span>{$child_menu.menu_name}</span>
+								{if condition="$k eq 8"}<div {if condition="$child_menu.wait_see eq 0"}style='display:none;'{/if}>{$child_menu.wait_see}</div>{/if}
+							</li>
 						{else/}
-							<li onclick="location.href='{:__URL('ADMIN_MAIN/'.$child_menu['url'])}';">{$child_menu.menu_name}</li>
+							<li onclick="location.href='{:__URL('ADMIN_MAIN/'.$child_menu['url'])}';">
+								<span>{$child_menu.menu_name}</span>
+								{if condition="$k eq 8"}<div {if condition="$child_menu.wait_see eq 0"}style='display:none;'{/if}>{$child_menu.wait_see}</div>{/if}
+							</li>
 						{/eq}
 					{/foreach}
 					</ul>

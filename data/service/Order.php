@@ -296,6 +296,9 @@ class Order extends BaseService implements IOrder
                 $order_list['data'][$k]['shipping_type_name'] = array();
                 $order_list['data'][$k]['shipping_type_name'] = OrderStatus::getShippingTypeName($order_list['data'][$k]['shipping_type']);
 
+                if ($order_list['data'][$k]['order_status'] == 8){
+                    $order_list['data'][$k]['wait_see'] = Db::name('c_card')->where('typeid',$order_list['data'][$k]['order_id'])->value('wait_see');
+                }
                 // 查询订单操作
                 foreach ($order_status as $k_status => $v_status) {
                     
@@ -330,7 +333,7 @@ class Order extends BaseService implements IOrder
                     }
                 }
             }
-        }       
+        }
         return $order_list;
     }
     

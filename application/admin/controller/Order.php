@@ -54,6 +54,7 @@ class Order extends BaseController
         $expressList = $express->expressCompanyQuery();
 
         $this->assign('expressList', $expressList);
+        $this->assign('adminuid',session('adminuid'));
        
         $action = Cache::get("orderAction");
         if(empty($action)){
@@ -192,11 +193,21 @@ class Order extends BaseController
                  * $status_name = $v['status_name'];
                  * }
                  */
-                $child_menu_list[] = array(
-                    'url' => "order/orderlist?status=" . $v['status_id'],
-                    'menu_name' => $v['status_name'],
-                    "active" => $status == $v['status_id'] ? 1 : 0
-                );
+                if ($v['status_id'] == 8){
+                    $count = Db::name('c_card')->where('wait_see',1)->count();
+                    $child_menu_list[] = array(
+                        'url' => "order/orderlist?status=" . $v['status_id'],
+                        'menu_name' => $v['status_name'],
+                        "active" => $status == $v['status_id'] ? 1 : 0,
+                        'wait_see' => $count
+                    );
+                }else {
+                    $child_menu_list[] = array(
+                        'url' => "order/orderlist?status=" . $v['status_id'],
+                        'menu_name' => $v['status_name'],
+                        "active" => $status == $v['status_id'] ? 1 : 0
+                    );
+                }
             }
             $this->assign('child_menu_list', $child_menu_list);
             $this->assign('order_type', '1,3');
@@ -360,6 +371,10 @@ class Order extends BaseController
         //var_dump($detail);exit();
         if (empty($detail)) {
             $this->error("没有获取到订单信息");
+        }
+        if ($detail['order_status'] == 8){
+            $wait_see = Db::name('c_card')->where('typeid',$order_id)->value('wait_see');
+            if ($wait_see == 1)  Db::name('c_card')->where('typeid',$order_id)->update(['wait_see' =>0]);
         }
         if (! empty($detail['operation'])) {
             $operation_array = $detail['operation'];

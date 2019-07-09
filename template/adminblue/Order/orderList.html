@@ -169,7 +169,32 @@
 {/block}
 {block name="script"}
 
+<script src='http://cdn.bootcss.com/socket.io/1.3.7/socket.io.js'></script>
 <script type="text/javascript">
+    $(function () {
+        var wait = $(".item li:eq(8) div").text();
+        var new_wait = Number(wait)+1;
+        var html = "<div>"+new_wait+"</div>";
+        // 连接服务端
+        var socket = io('http://127.0.0.1:2120'); //这里当然填写真实的地址了
+        // uid可以是自己网站的用户id，以便针对uid推送以及统计在线人数
+        uid = {$adminuid};
+        // socket连接后以uid登录
+        socket.on('connect', function () {
+            socket.emit('login', uid);
+        });
+        // 后端推送来消息时
+        socket.on('new_msg', function (msg) {
+            //console.log("收到消息：" + msg);
+            $(".item li:eq(8) div").remove();
+            $(".item li:eq(8)").append(html);
+        });
+        // 后端推送来在线数据时
+        socket.on('update_online_count', function (online_stat) {
+            console.log(online_stat);
+            /*$('#count').html(online_stat);*/
+        });
+    });
 
 var order_type = '{$order_type}';
 $(window).scroll(function(){
@@ -336,7 +361,16 @@ function LoadingInfo(page_index) {
 					html += data["data"][i]["user_email"]+'<br/>';
 					html += '<i class="'+data["data"][i]["order_from_tag"]+'" style="color:#666;"><i></div></td>';
 					
-					html += '<td rowspan="'+row+'"><div class="business-status" style="text-align:center">'+data["data"][i]["status_name"]+'<br></div></td>';
+					if (data['data'][i]['order_status'] == 8){
+					    if (data["data"][i]["wait_see"] == 1){
+					        var wait = "<span style='margin-left:5px;background: #FF6600;color: #ffffff;border-radius: 100%;padding: 1px 3px;height: 18px;line-height: 18px;width: 18px;'>！</span>"
+						} else{
+					        var wait = '';
+						}
+                        html += '<td rowspan="'+row+'"><div class="business-status" style="text-align:center">'+data["data"][i]["status_name"]+wait+'<br></div></td>';
+					} else{
+                        html += '<td rowspan="'+row+'"><div class="business-status" style="text-align:center">'+data["data"][i]["status_name"]+'<br></div></td>';
+					}
 					html += '<td rowspan="'+row+'"><div class="business-status" style="text-align:center">'+ shipping_type_name +'<br></div></td>';
 					html += '<td rowspan="'+row+'" style="text-align:center;">';
 					
