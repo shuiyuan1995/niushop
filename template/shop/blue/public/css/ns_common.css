@@ -1173,7 +1173,7 @@ ul .mobile i, .header-box ul .menu-hd b, .header .logo-right .city .city-select 
 	text-align: center;
 	padding: 0;
 	height: 40px;
-	width: 990px;
+	/* width: 990px; */
 	position: relative;
 	margin-left: 10px;
 }
