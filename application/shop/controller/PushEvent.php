@@ -19,7 +19,7 @@ class PushEvent
     /**
      * @var string 推送服务地址
      */
-    protected $push_api_url = 'http://127.0.0.1:2121/';
+    protected $push_api_url = 'http://127.0.0.1:3121/';
 
     /**
      * @var string 推送内容

@@ -14,7 +14,7 @@ $last_online_count = 0;
 $last_online_page_count = 0;
 
 // PHPSocketIO服务
-$sender_io = new SocketIO(2120);
+$sender_io = new SocketIO(3120);
 // 客户端发起连接事件时，设置连接socket的各种事件回调
 $sender_io->on('connection', function($socket){
     // 当客户端发来登录事件时触发
@@ -57,7 +57,7 @@ $sender_io->on('connection', function($socket){
 // 当$sender_io启动后监听一个http端口，通过这个端口可以给任意uid或者所有uid推送数据
 $sender_io->on('workerStart', function(){
     // 监听一个http端口
-    $inner_http_worker = new Worker('http://0.0.0.0:2121');
+    $inner_http_worker = new Worker('http://0.0.0.0:3121');
     // 当http客户端发来数据时触发
     $inner_http_worker->onMessage = function($http_connection, $data){
         global $uidConnectionMap;

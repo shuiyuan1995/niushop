@@ -176,7 +176,7 @@
         var new_wait = Number(wait)+1;
         var html = "<div>"+new_wait+"</div>";
         // 连接服务端
-        var socket = io('http://127.0.0.1:2120'); //这里当然填写真实的地址了
+        var socket = io('http://127.0.0.1:3120'); //这里当然填写真实的地址了
         // uid可以是自己网站的用户id，以便针对uid推送以及统计在线人数
         uid = {$adminuid};
         // socket连接后以uid登录
