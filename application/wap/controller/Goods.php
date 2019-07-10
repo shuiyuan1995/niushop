@@ -57,7 +57,8 @@ class Goods extends BaseController
         if ($goods_id == 0) {
             $this->error("没有获取到商品信息");
         }
-        
+
+        $Config = new Config();
         $this->web_site = new WebSite();
         $goods = new GoodsService();
         $config_service = new WebConfig();
@@ -118,7 +119,12 @@ class Goods extends BaseController
             $price = $goods_detail['promotion_price'] < $goods_detail['member_price'] ? $goods_detail['promotion_price'] : $goods_detail['member_price'];
             $goods_detail['give_point'] = round($price * $goods_detail['give_point'] * 0.01);
         }
-        
+        $seoconfig = $Config->getSeoConfig($this->instance_id);
+        if (!empty($goods_detail['keywords'])) {
+            $seoconfig['seo_meta'] = $goods_detail['keywords']; // 关键词
+        }
+        $seoconfig['seo_desc'] = $goods_detail['goods_name'];
+        $this->assign("seoconfig", $seoconfig);
         // 获取当前时间
         $current_time = $this->getCurrentTime();
         $this->assign('ms_time', $current_time);
