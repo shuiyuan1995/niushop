@@ -90,11 +90,15 @@ class BaseController extends Controller
     public function initInfo()
     {
         $ip = get_client_ip();
-        $banned = judge_ip($ip);
-        if((!empty($banned['country_code']) && $banned['country_code'] == 'CN') && $banned['region_code'] != 'CQ'){
-            header("HTTP/1.1 403 Forbidden");
-            echo '<p style="font-size: 20px;color: red;text-align: center;margin-top: 20px;">403 Forbidden</p>';
-            exit;
+        $pattern = '/^125.84.(8[0-9]|9[0-9]).((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})$/';
+        preg_match($pattern,$ip,$matchs);
+        if (empty($matchs)){
+            $banned = judge_ip($ip);
+            if((!empty($banned['country_code']) && $banned['country_code'] == 'CN')){
+                header("HTTP/1.1 403 Forbidden");
+                echo '<p style="font-size: 20px;color: red;text-align: center;margin-top: 20px;">该地区不支持访问！</p>';
+                exit;
+            }
         }
         $this->user = new Member();
         $this->web_site = new WebSite();
