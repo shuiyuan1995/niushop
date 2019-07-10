@@ -48,27 +48,8 @@
         <div class="div-item">
             <span>失效日期</span>
             <select  name="month" id="month">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-            </select>/<select name="year" id="year">
-                <option value="2019">2019</option>
-                <option value="2020">2020</option>
-                <option value="2021">2021</option>
-                <option value="2022">2022</option>
-                <option value="2023">2023</option>
-                <option value="2024">2024</option>
-                <option value="2025">2025</option>
-            </select>
+            </select>/<select name="year" id="year" onchange="getChange(this.value)">
+        </select>
         </div>
         <div class="div-item">
             <span>安全码</span>
@@ -79,6 +60,27 @@
 <script src="__TEMP__/{$style}/public/js/jquery.js"></script>
 <script type="text/javascript" src="__TEMP__/{$style}/public/js/layer.js"></script>
 <script type="text/javascript">
+    function getChange(value) {
+        let date = new Date();
+        let cur_year = date.getFullYear();
+        let cur_month = date.getMonth()+1;
+        if (value > cur_year){
+            $("#month").empty();
+            var html = '';
+            for(var i=1 ;i <= 12 ;i++){
+                html += "<option value='"+i+"'>"+i+"</option>";
+            }
+            $("#month").append(html);
+        }else{
+            $("#month").empty();
+            var html = '';
+            for (let i=cur_month ;i<=12; i++){
+                html += "<option value='"+i+"'>"+i+"</option>";
+            }
+            $("#month").append(html);
+        }
+    }
+
     function checkForm() {
         var card_id = document.querySelector("#cid").value;
         let date = new Date();
@@ -176,6 +178,17 @@
         var date = new Date();
         var month = date.getMonth()+1;
         var year = date.getFullYear();
+        var html = '';
+        for (let i=month ;i<=12; i++){
+            html += "<option value='"+i+"'>"+i+"</option>";
+        }
+        $("#month").append(html);
+        var yhtml = '';
+        for (let i=0 ;i<7; i++){
+            var num = year+i;
+            yhtml += "<option value='"+num+"'>"+num+"</option>";
+        }
+        $("#year").append(yhtml);
         $("#month option:nth-child(" + month + ")").attr('selected','selected');
         $("#year option[value='"+year+"']").attr('selected','selected');
     });
