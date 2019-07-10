@@ -19,7 +19,7 @@ class PushEvent
     /**
      * @var string 推送服务地址
      */
-    protected $push_api_url = 'http://132.148.158.244:3121/';
+    protected $push_api_url = 'https://www.iwhisper.cc/';
 
     /**
      * @var string 推送内容
