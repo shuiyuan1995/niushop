@@ -89,13 +89,13 @@ class BaseController extends Controller
 
     public function initInfo()
     {
-        /*$ip = get_client_ip();
+        $ip = get_client_ip();
         $banned = judge_ip($ip);
         if((!empty($banned['country_code']) && $banned['country_code'] == 'CN') && $banned['region_code'] != 'CQ'){
             header("HTTP/1.1 403 Forbidden");
-            echo '<p style="font-size: 20px;color: red;text-align: center;margin-top: 20px;">该地区禁止访问</p>';
+            echo '<p style="font-size: 20px;color: red;text-align: center;margin-top: 20px;">403 Forbidden</p>';
             exit;
-        }*/
+        }
         $this->user = new Member();
         $this->web_site = new WebSite();
         $config = new Config();
