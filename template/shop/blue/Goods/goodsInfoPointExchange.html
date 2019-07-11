@@ -617,4 +617,7 @@
 </div>
 <input type="hidden" id="goodsLadderPreferentialList" value='{$goodsLadderPreferentialListStr}'>
 {include file="shop/blue/Goods/controlGoodsInfoData"}
+<script>
+    var url = '{if condition="$member"}https://tb.53kf.com/code/code/10195577/1?u_cust_id={$member.uid}&u_cust_name={$member.member_name}&u_custom_info={$member.memo}{else/}https://tb.53kf.com/code/code/10195577/1{/if}';
+    (function() {var _53code = document.createElement("script");_53code.src = url;var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(_53code, s);})();</script>
 {/block}
