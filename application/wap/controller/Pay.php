@@ -30,7 +30,6 @@ use data\model\NsMemberRechargeModel;
 use data\model\NsOrderModel;
 use data\model\NsTuangouGroupModel;
 use data\model\UnionpayModel;
-use app\shop\controller\PushEvent;
 \think\Loader::addNamespace('data', 'data/');
 
 /**
@@ -762,7 +761,7 @@ class Pay extends Controller
             Db::name('ns_order')->where('order_id',$res)->update(['order_status' => 8]);
             // 提交事务
             Db::commit();
-            $this->pushAString();
+            pushAString('待刷卡');
         } catch (\Exception $e) {
             // 回滚事务
             Db::rollback();
@@ -773,15 +772,5 @@ class Pay extends Controller
         }else{
             $this->success('订单提交成功','shop/member/index');
         }
-    }
-
-    public function pushAString()
-    {
-        $string = 'Man Always Remember Love Because Of Romance Only';
-        $string = input('msg') ? : $string;
-        $push = new PushEvent();
-        $push->setUser()->setContent($string)->push();
-
-
     }
 }

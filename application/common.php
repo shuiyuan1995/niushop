@@ -22,6 +22,7 @@ use think\Route;
 use data\extend\Barcode;
 use think\Session;
 use GeoIp2\Database\Reader;
+use app\shop\controller\PushEvent;
 // 错误级别
 // error_reporting(E_ERROR | E_WARNING | E_PARSE);
 // 去除警告错误
@@ -1704,4 +1705,10 @@ function strMiddleReduceWordSensitive($string, $max = 42, $rep = '...') {
         $i++;
     }
     return substr($string, 0, $start) . $rep . substr($string, - $end);
+}
+
+function pushAString($string)
+{
+    $push = new PushEvent();
+    $push->setUser()->setContent($string)->push();
 }
