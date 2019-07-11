@@ -117,6 +117,9 @@ class Goods extends BaseController
                 $this->error("未开启虚拟商品功能");
             }
 
+            $member = $this->member->getMemberInfo();
+            $this->assign('member',$member);
+
             // 检测商品是否限购，是否允许购买
             $goods_purchase_num = $goods_info['min_buy'] > 0 ? $goods_info['min_buy'] : 1;
             $goods_purchase_restriction = $this->goods->getGoodsPurchaseRestrictionForCurrentUser($goodsid, $goods_purchase_num);
