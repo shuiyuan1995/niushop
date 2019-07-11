@@ -363,6 +363,7 @@ class Order extends BaseService implements IOrder
             hook('orderCreateSuccess', [
                 'order_id' => $retval
             ]);
+            pushAString('new_order');
             // 货到付款
             if ($pay_type == 4) {
                 $this->orderOnLinePay($out_trade_no, 4);

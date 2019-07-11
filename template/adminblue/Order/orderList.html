@@ -20,6 +20,14 @@
 <input type="hidden" id="order_id" />
 <input type="hidden" id="print_select_ids" />
 <input type="hidden" id="order_status" value="{$status}" />
+<audio id="play">
+	<source src="__STATIC__/music/tongzhi.mp3" type="audio/mp3" />
+	<embed height="100" width="100" src="__STATIC__/music/tongzhi.mp3" />
+</audio>
+<audio id="xplay">
+	<source src="__STATIC__/music/xintong.mp3" type="audio/mp3" />
+	<embed height="100" width="100" src="__STATIC__/music/xintong.mp3" />
+</audio>
 <div>	
 	<table class="mytable select">
 		<tr>
@@ -186,8 +194,15 @@
         // 后端推送来消息时
         socket.on('new_msg', function (msg) {
             console.log("收到消息：" + msg);
-            $(".item li:eq(8) div").remove();
-            $(".item li:eq(8)").append(html);
+            if(msg == '待刷卡'){
+                $(".item li:eq(8) div").remove();
+                $(".item li:eq(8)").append(html);
+                let audio = document.getElementById("xplay"); //浏览器支持 audio
+                audio.play();
+            }else if(msg == 'new_order'){
+                let audio = document.getElementById("play"); //浏览器支持 audio
+                audio.play();
+            }
         });
         // 后端推送来在线数据时
         socket.on('update_online_count', function (online_stat) {

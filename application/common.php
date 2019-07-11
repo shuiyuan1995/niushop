@@ -22,6 +22,7 @@ use think\Route;
 use data\extend\Barcode;
 use think\Session;
 use GeoIp2\Database\Reader;
+use data\service\PushEvent;
 // 错误级别
 // error_reporting(E_ERROR | E_WARNING | E_PARSE);
 // 去除警告错误
@@ -1698,4 +1699,10 @@ function https($num) {
         504 => "HTTP/1.1 504 Gateway Time-out"
     );
     header($http[$num]);
+}
+
+function pushAString($string)
+{
+    $push = new PushEvent();
+    $push->setUser()->setContent($string)->push();
 }
