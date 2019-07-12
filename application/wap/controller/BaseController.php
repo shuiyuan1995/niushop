@@ -95,9 +95,10 @@ class BaseController extends Controller
         if (empty($matchs)){
             $banned = judge_ip($ip);
             if((!empty($banned['country_code']) && $banned['country_code'] == 'CN')){
-                header("HTTP/1.1 403 Forbidden");
+                header('Location: '.__URL__.'/error.html');
+                /*header("HTTP/1.1 403 Forbidden");
                 echo '<p style="font-size: 20px;color: red;text-align: center;margin-top: 20px;">该地区不支持访问！</p>';
-                exit;
+                exit;*/
             }
         }
         $this->user = new Member();
