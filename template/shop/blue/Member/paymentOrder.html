@@ -691,12 +691,16 @@ input[type="radio"]:checked {
 							{/if}
 							
 							<!-- 运费 -->
-							{if $order_goods_type == 1}
+							<!--{if $order_goods_type == 1}
 							<p class="slivergrey">
 								<span>{:lang('goods_freight')}：</span>
 								<span class="txtmoney">¥<b id="express">0.00</b></span>
 							</p>
-							{/if}
+							{/if}-->
+                            <p class="slivergrey">
+                                <span>服务费(包含运费)：</span>
+                                <span class="txtmoney">¥<b id="server_price">{$server_price}</b></span>
+                            </p>
 							<p class="slivergrey">
 								<span>拆包：</span>
 								<span class="txtmoney">¥<b id="chaibao">0.00</b></span>
@@ -788,6 +792,7 @@ input[type="radio"]:checked {
 							<input type="hidden" id="hide_chai" value="{$chai_price}">
                             <input type="hidden" id="is_chai" value="1">
                             <input type="hidden" id="chai" value="{$chai_price}">
+                            <input type="hidden" id="hidden_server_money" value="{$server_price}">
 							<!-- 组合套餐 -->
 							{if $order_tag eq 'combination_packages' }
 							<input type="hidden" id="hidden_combo_package_id" value="{$combo_detail.id}" />

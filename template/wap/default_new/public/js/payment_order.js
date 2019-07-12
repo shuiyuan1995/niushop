@@ -707,7 +707,8 @@ function calculateTotalAmount(){
 	var account_balance = 0;//可用余额
 	var old_total_money = parseFloat($("#realprice").attr("data-old-keep-total-money"));//原合计
     var chaibao = parseFloat($("#chai").val());//拆包费
-    money += chaibao;
+    var server_money = parseFloat($("#hidden_server_money").val());//拆包费
+    money += chaibao + server_money;
 
 	//如果选择的是门店自提，则不计算运费
 	if(getPickupId() > 0){
@@ -866,6 +867,7 @@ function submitOrder() {
 		var distribution_time_out = $(".time-out-list span.selected").text();
         var is_chai = $("#is_chai").val();
         var chai_price = $("#chai").val();
+        var server_price = $("#hidden_server_money").val();
 		$.ajax({
 			url : __URL(APPMAIN + "/order/ordercreate"),
 			type : "post",
@@ -884,6 +886,7 @@ function submitOrder() {
 				'distribution_time_out' : distribution_time_out,
                 'is_chai' : is_chai,
                 'chai_price' : chai_price,
+				'server_price' : server_price
 			},
 			success : function(res) {
                 console.log(res);

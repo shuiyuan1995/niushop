@@ -2015,6 +2015,16 @@ class Config extends BaseService implements IConfig
         }
     }
 
+    public function getFuWuConfig($shop_id)
+    {
+        $server_price = $this->getConfig($shop_id,"SERVER_PRICE");
+        if ($server_price){
+            return $server_price;
+        }else{
+            return '';
+        }
+    }
+
     public function SetSeoConfig($shop_id, $seo_title, $seo_meta, $seo_desc, $seo_other)
     {
         $array[0] = array(
@@ -2233,6 +2243,19 @@ class Config extends BaseService implements IConfig
             'key' => 'CHAI_BAO_PRICE',
             'value' => $chai_price,
             'desc' => '拆包费用',
+            'is_use' => $is_use
+        );
+        $res = $this->setConfig($array);
+        return $res;
+    }
+
+    public function SetFuWuConfig($shop_id,$server_money,$is_use)
+    {
+        $array[0] = array(
+            'instance_id' => $this->instance_id,
+            'key' => 'SERVER_PRICE',
+            'value' => $server_money,
+            'desc' => '服务费用',
             'is_use' => $is_use
         );
         $res = $this->setConfig($array);
