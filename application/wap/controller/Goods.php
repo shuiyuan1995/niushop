@@ -736,6 +736,7 @@ class Goods extends BaseController
     {
         // 查询购物车中商品的数量
         $uid = $this->uid;
+        $Config = new Config();
         $goods = new GoodsService();
         $goods_category_service = new GoodsCategory();
         $cartlist = $goods->getCart($uid);
@@ -856,6 +857,15 @@ class Goods extends BaseController
                     }
                     sort($goods_spec_array);
                 }
+                $seoconfig = $Config->getSeoConfig($this->instance_id);
+
+                if (!empty($goods_category_info['keywords'])) {
+                    $seoconfig['seo_meta'] = $goods_category_info['keywords']; // 关键词
+                }
+                if (!empty($goods_category_info['description'])) {
+                    $seoconfig['seo_desc'] = $goods_category_info['description'];
+                }
+                $this->assign("seoconfig", $seoconfig);
                 $this->assign("attr_or_spec", $attr_list);
                 $this->assign("category_brands", $category_brands);
                 $this->assign("category_count", $category_count);
