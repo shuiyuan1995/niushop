@@ -378,13 +378,18 @@
 		</p>
 		{/if}
 		<!-- 运费 -->
-		{if $order_tag neq 'virtual_goods'}	
+		<!--{if $order_tag neq 'virtual_goods'}
 		<p>
 			<label>{:lang('goods_freight')}：</label>
 			<span>¥<b id="express">0.00</b></span>
 		</p>
-		{/if}
-		
+		{/if}-->
+
+		<p>
+			<label>服务费(包含运费)：</label>
+			<span>¥<b id="server_money">{$server_price}</b></span>
+		</p>
+
 		<!-- 总优惠 -->
 		<p>
 			<label>{:lang('member_total_discount')}：</label>
@@ -471,6 +476,7 @@
 		<input type="hidden" id="hide_chai" value="{$chai_price}">
 		<input type="hidden" id="is_chai" value="1">
 		<input type="hidden" id="chai" value="{$chai_price}">
+		<input type="hidden" id="hidden_server_money" value="{$server_price}">
 		<!-- 组合套餐 -->
 		{if $order_tag eq 'combination_packages' }
 		<input type="hidden" id="hidden_combo_package_id" value="{$combo_detail[id]}">

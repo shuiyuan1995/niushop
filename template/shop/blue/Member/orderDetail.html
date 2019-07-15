@@ -330,7 +330,8 @@
 
 					<td colspan="7" align="right" >
 						<span class="price_font">{:lang('member_total_commodity_value')}：¥{$order['goods_money']}</span><br/>
-						<span class="price_font">{:lang('goods_freight')}：¥{$order['shipping_money']}</span><br/>
+						<!--<span class="price_font">{:lang('goods_freight')}：¥{$order['shipping_money']}</span><br/>-->
+						<span class="price_font">服务费(包含运费)：¥{$order['server_money']}</span><br/>
 						{if condition="$order['user_platform_money']>0"}
 						<span class="price_font">{:lang('member_balance_payment')}：¥{$order['user_platform_money']}</span><br/>
 						{/if}

@@ -121,6 +121,7 @@ $(function(){
 			var distribution_time_out = $("#delivery-time .time-out-list span.selected").text();
             var is_chai = $("#is_chai").val();
             var chai_price = $("#chai").val();
+            var server_price = $("#hidden_server_money").val();
 			$.ajax({
 				url : __URL(SHOPMAIN + "/order/ordercreate"),
 				type : "post",
@@ -139,6 +140,7 @@ $(function(){
 					'distribution_time_out' : distribution_time_out,
                     'is_chai' : is_chai,
                     'chai_price' : chai_price,
+					'server_price' : server_price
 				},
 				success : function(res) {
                     console.log(res);
@@ -706,7 +708,8 @@ function calculateTotalAmount(){
 	var tax_sum = parseFloat($("#hidden_count_money").val());//计算发票税额计算：（商品总计+运-优惠活动-优惠券）*发票税率
 	var express = 0; //运费
     var chaibao = parseFloat($("#chai").val());//拆包费
-    money += chaibao;
+	var server_price = parseFloat($("#hidden_server_money").val());//服务费
+    money += chaibao + server_price;
 	// 运费
 	//如果选择的是门店自提，则不计算运费
 	if(getPickupId()>0){

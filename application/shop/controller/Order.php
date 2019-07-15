@@ -58,6 +58,7 @@ class Order extends BaseController
         $distribution_time_out = request()->post('distribution_time_out', ''); // 配送指定时间段
         $is_chai = request()->post('is_chai');//是否拆包
         $chai_price = request()->post('chai_price');//拆包价格
+        $server_price = request()->post('server_price');//服务费
         
         $member = new Member();
         $address = $member->getDefaultExpressAddress();
@@ -78,7 +79,7 @@ class Order extends BaseController
             );
             return $res;
         } else {
-            $order_id = $order->orderCreate('1', $out_trade_no, $pay_type, $shipping_type, '1', $buyer_ip, $leavemessage, $buyer_invoice, $shipping_time, $address['mobile'], $address['province'], $address['city'], $address['district'], $address["country_detail"].'&nbsp;'.$address['province_detail'].'&nbsp;'.$address['city_detail'].'&nbsp;'.$address['address'], $address['zip_code'], $address['consigner'], $integral, $use_coupon, 0, $goods_sku_list, $user_money, $pick_up_id, $express_company_id, $coin, $address["phone"], $distribution_time_out,$is_chai,$chai_price);
+            $order_id = $order->orderCreate('1', $out_trade_no, $pay_type, $shipping_type, '1', $buyer_ip, $leavemessage, $buyer_invoice, $shipping_time, $address['mobile'], $address['province'], $address['city'], $address['district'], $address["country_detail"].'&nbsp;'.$address['province_detail'].'&nbsp;'.$address['city_detail'].'&nbsp;'.$address['address'], $address['zip_code'], $address['consigner'], $integral, $use_coupon, 0, $goods_sku_list, $user_money, $pick_up_id, $express_company_id, $coin, $address["phone"], $distribution_time_out,$is_chai,$chai_price,$server_price);
             // Log::write($order_id);
             if ($order_id > 0) {
                 $order->deleteCart($goods_sku_list, $this->uid);

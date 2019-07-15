@@ -276,7 +276,8 @@ function LoadingInfo(page_index) {
 					var price = data["data"][i]["order_item_list"][0]["price"];//商品价格
 					var num = data["data"][i]["order_item_list"][0]["num"];//购买数量
 					var order_money = data["data"][i]["order_money"];//订单金额
-					var shipping_money = data["data"][i]["shipping_money"];//运费
+					//var shipping_money = data["data"][i]["shipping_money"];//运费
+					var server_money = data["data"][i]["server_money"];//服务费
 					var seller_memo = data["data"][i]["seller_memo"];//订单备注
 					var goods_code = data["data"][i]["order_item_list"][0]["code"];
 					var gift_flag = data['data'][i]['order_item_list'][0]['gift_flag'];//赠品标识，0：不是赠品，1：是赠品
@@ -353,7 +354,7 @@ function LoadingInfo(page_index) {
 					
 					html += '<td rowspan="'+row+'" style="text-align:center">';
 					html += '<div class="cell"><b class="netprice" style="color: #FF6600;font-size: 14px;font-weight: normal;">'+order_money+'</b><br/>';
-					html += '<span class="expressfee">(含配送费:'+shipping_money+'元)</span><br/>';
+					html += '(<span class="expressfee" style="color: #FF6600;">配送服务费:</span>'+server_money+'元)<br/>';
                     html += '(含<span class="expressfee" style="color: #FF6600;">'+is_chai+'</span>:'+chai_price+'元)<br/>';
 					html += '<span class="expressfee">'+data["data"][i]["pay_type_name"]+'</span></div></td>';
 					
