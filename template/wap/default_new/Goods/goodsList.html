@@ -173,9 +173,9 @@ function getgoodlist(page){
 										list_html += '</dt>';
 										list_html += '<dd>';
 											list_html += '<i>'+item.display_price+'</i>';
-											if(item['shipping_fee'] == 0){
+											/*if(item['shipping_fee'] == 0){
 												list_html += '<i class="shipping_fee" style="margin-top:7px;">包邮</i>';
-											}
+											}*/
 										list_html += '</dd>';
 									list_html += '</dl>';
 									
@@ -199,9 +199,9 @@ function getgoodlist(page){
 							list_html += '</p>';
 							list_html += '<div class="price_share">';
 							list_html += '<span class="price">'+item['display_price'];
-							if(item['shipping_fee'] == 0){
+							/*if(item['shipping_fee'] == 0){
 								list_html += '<i class="shipping_fee">包邮</i>';
-							}
+							}*/
 							list_html += '</span>';
 							list_html += '</div>';
 							list_html += '<div class="data-goods-sales-info"><span class="data-sales">销售量：<i>'+item.sales+'</i></span></div>';
