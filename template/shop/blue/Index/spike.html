@@ -6,52 +6,133 @@
 {/block}
 {block name="resources"}
 <link type="text/css" rel="stylesheet" href="__TEMP__/{$style}/public/css/group_buy.css">
-<script type="text/javascript" src="__TEMP__/{$style}/public/js/ns_index.js"></script>	
+<script type="text/javascript" src="__TEMP__/{$style}/public/js/ns_index.js"></script>
 <style type="text/css">
-.classify-box .classify-screen-con a{width: 129px;}
-.classify-box .classify-screen-con .classify-choose{ width: 96%;}
-.category-layer-bg{ background: rgba(6, 137, 225, 0.42);}
-.category-layer .list .cat .cat-name a{color: #fff;}
-.category-layer .list .categorys{background: rgba(238, 238, 238, 0.91)};
+	.topimg{
+		height: 90px;
+		background: #aaaaaa;
+		margin: 1px auto;
+	}
+	.topimg img{
+		width: 100%;
+		height: 100%;
+	}
+	.spiketimes{
+		height: 70px;
+		background: #efefef;
+	}
+	.spiketimes .spiketime{
+		height: 100%;
+		width: 24%;
+		display: inline-block;
+		cursor: pointer;
+		vertical-align: top;
+		padding-left: 26px;
+		box-sizing: border-box;
+	}
+	.spiketimes .spiketime.active{
+		background: #eb852a;
+	}
+	.spiketime>span{
+		font-size: 28px;
+		color: #000000;
+		float: left;
+		line-height: 70px;
+	}
+	.spiketime.active>span{
+		color: #ffffff;
+	}
+	.spiketime>div{
+		margin-left: 108px;
+		font-size: 22px;
+		height: 35px;
+		line-height: 35px;
+		width: 118px;
+		border: 1px solid #b5b5b5;
+		border-radius: 5px;
+		text-align: center;
+		margin-top: 15px;
+		color: #b5b5b5;
+	}
+	.spiketime.active>div{
+		border: 0px;
+		color: #ffffff;
+		width: auto;
+		text-align: left;
+		margin-top: 10px;
+		margin-left: 82px;
+		line-height: 25px;
+	}
+	ul.row-4 li{
+		height: 392px;
+	}
+	ul.row-4 li .p-name{
+		width: 240px;
+		margin: 0 auto;
+		height: 48px;
+		overflow: hidden;
+	}
+	ul.row-4 li .p-name .g-name{
+		color: #000000;
+		font-size: 22px;
+		line-height: 24px;
+	}
+	.linebar{
+		padding-left: 36px;
+		padding-top: 10px;
+	}
+	.linebar span{
+		float: left;
+	}
+	.linebar .linebox{
+		width: 100px;
+		height: 6px;
+		background: #bfbfbf;
+		border-radius: 3px;
+		position: relative;
+		margin-left: 52px;
+		top: 6px;
+	}
+	.linebar .lineinfo{
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 10px;
+		height: 6px;
+		background: #eb852a;
+		border-radius: 3px;
+	}
 </style>
 {/block}
 
-{block name="headGoodType"}
-{include file='shop/blue/controlHeadGoodType'/}
-<!-- 滚动图片广告位 -->
-<div class="template-one">
-	<div class="banner">
-		{include file='shop/blue/Index/controlHeadNav' ap_id='1056'/}
-	</div>
-</div>
-{/block}
 
 {block name="main"}
 <!---活动首页-导航+分类导航--->
-<div class="w1210">
-	<div class="classify-screen">
-		<div class="classify-box clearfix">
-			<h5 class="classify-name">{:lang('classification_goods')}：</h5>
-			<div class="classify-screen-con">
-				<div class="classify-choose">
-					{if condition="$category_id eq 0"}
-						<a target="_self" href="{:__URL('SHOP_MAIN/'.$path_info)}" class="selected" style="height: 45px;float: left;width:66px;"><span>{:lang('whole')}</span></a>
-					{else /}
-						<a target="_self" href="{:__URL('SHOP_MAIN/'.$path_info)}" style="height: 45px;float: left;width:66px;"><span>{:lang('whole')}</span></a>
-					{/if}
-					{volist name="goods_category_one" id="vo"}
-						{if condition="$vo.category_id eq $category_id"}
-						<a target="_self" href="{:__URL('SHOP_MAIN/'.$path_info,'category_id='.$vo['category_id'])}" class="selected" title="{$vo.category_name}"><span>{$vo.category_name}</span></a>
-						{else /}
-						<a target="_self" href="{:__URL('SHOP_MAIN/'.$path_info,'category_id='.$vo['category_id'])}" title="{$vo.category_name}"><span>{$vo.category_name}</span></a>
-						{/if}
-					{/volist}
-				</div>
-			</div>
+<div class="w1210 topimg">
+	<img src="/template/shop/blue/public/images/topimg.png" alt="秒杀">
+</div>
+<div class="w1210 spiketimes">
+	<div class="spiketime active">
+		<span>12:00</span>
+		<div>
+			<p>正在秒杀</p>
+			<p>距结束<span class="settime" endtime="2019-07-15 18:00:00">00:43:28</span></p>
 		</div>
 	</div>
+	<div class="spiketime">
+		<span>14:00</span>
+		<div>即将开始</div>
+	</div>
+	<div class="spiketime">
+		<span>14:00</span>
+		<div>即将开始</div>
+	</div>
+	<div class="spiketime">
+		<span>14:00</span>
+		<div>即将开始</div>
+	</div>
 </div>
-	
+
 <!-- 活动展示 _star -->
 <div class="main">
 	<ul class="row-4">
@@ -66,19 +147,13 @@
 			<a class="scope" href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$vo['goods_id'])}" title="{$vo.goods_name}">
 				<div class="p-img">
 					<img alt="" src="{:__IMG($default_goods_img)}" class="lazy_load" data-original="{:__IMG($vo['picture']['pic_cover_mid'])}">
-<!-- 					<div class="brand-time"> -->
-<!-- 						<em class="time"> -->
-<!-- 							<span class="settime" starttime="{$vo.start_time}" endtime="{$vo.end_time}" ></span> -->
-<!-- 						</em> -->
-<!-- 					</div> -->
-					<div class="p-name">
-						<span class="d-name"><strong>{$vo['discount_name']}</strong></span>
-						<span class="g-name">{$vo.goods_name}</span>
-					</div>
+				</div>
+				<div class="p-name">
+					<span class="g-name">{$vo.goods_name}</span>
 				</div>
 				<div class="goods-price">
-					<span class="sale" style="font-size: 20px;"><b style="color: #E84C3D;">{$vo.display_price}</b></span>&nbsp;
-					<span class="sale" style="font-size: 16px;"><s><b style="color: #aaaaaa;">¥{$vo.price}</b></s></span>
+					<span class="sale" style="font-size: 24px;"><b style="color: #E84C3D;">{$vo.display_price}</b></span>&nbsp;
+					<span class="sale" style="font-size: 20px;"><s><b style="color: #aaaaaa;">¥{$vo.price}</b></s></span>
 					<!-- <span class="depreciate"><i class="fa fa-down"></i>{:lang('straight_down')}：¥{$vo.sale_down}</span> -->
 				</div>
 <!-- 				</div> -->
@@ -89,6 +164,12 @@
 						<div class="fr">
 							<span class="buyer"></span>
 							<span class="main-btn bg-color">{:lang('snap_up')}</span>
+						</div>
+					</div>
+					<div class="linebar">
+						<span>已售10%</span>
+						<div class="linebox">
+							<div class="lineinfo"></div>
 						</div>
 					</div>
 				</div>
@@ -124,7 +205,7 @@ function updateEndTime() {
 			var minite = Math.floor((lag / 60) % 60);
 			var hour = Math.floor((lag / 3600) % 24);
 			var day = Math.floor((lag / 3600) / 24);
-			$(this).html("{:lang('left')}" + day + "{:lang('days')}" + hour + "{:lang('hours')}" + minite + "{:lang('minutes')}" + second + "{:lang('second')}{:lang('end')}");
+			$(this).html(hour + ":" + minite + ":" + second);
 		} else{
 			$(this).html("{:lang('activity_over')}！");
 		}
