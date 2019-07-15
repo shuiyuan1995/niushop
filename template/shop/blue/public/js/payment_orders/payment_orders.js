@@ -123,6 +123,7 @@ $(function(){
 			var chai_price = $("#chai").val();
             var is_ins = $("#is_ins").val();
             var ins_price = $("#ins").val();
+            var server_price = $("#hidden_server_money").val();
 			$.ajax({
 				url : __URL(SHOPMAIN + "/order/ordercreate"),
 				type : "post",
@@ -142,7 +143,8 @@ $(function(){
 					'is_chai' : is_chai,
 					'chai_price' : chai_price,
 					'is_ins' : is_ins,
-					'ins_price' : ins_price
+					'ins_price' : ins_price,
+                    'server_price' : server_price
 				},
 				success : function(res) {
                     console.log(res);
@@ -733,7 +735,8 @@ function calculateTotalAmount(){
 	var express = 0; //运费
 	var chaibao = parseFloat($("#chai").val());//拆包费
     var insurance = parseFloat($("#ins").val());//保险费
-	money += chaibao + insurance;
+    var server_price = parseFloat($("#hidden_server_money").val());//服务费
+	money += chaibao + insurance + server_price;
 	// 运费
 	//如果选择的是门店自提，则不计算运费
 	if(getPickupId()>0){

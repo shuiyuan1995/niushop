@@ -198,9 +198,14 @@
 					<span class="price">¥{$order['goods_money']}</span>
 				</div>
 				
-				<div>
+				<!--<div>
 					<span>{:lang('goods_freight')}：</span>
 					<span class="price">¥{$order['shipping_money']}</span>
+				</div>-->
+
+				<div>
+					<span>服务费(包含运费)：</span>
+					<span class="price">¥{$order['server_money']}</span>
 				</div>
 				
 				{if condition="$order['user_platform_money']>0"}

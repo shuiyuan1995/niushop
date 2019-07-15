@@ -1097,10 +1097,14 @@ class Member extends BaseController
         $config = new Config();
         $distribution_time_out = $config -> getConfig(0, "DISTRIBUTION_TIME_SLOT");
         $chaibao_price = $config -> getConfig(0, "CHAI_BAO_PRICE")['value'];
+        $server_price = $config -> getConfig(0, "SERVER_PRICE")['value'];
         $goods_count = $this->goods_count();
         $chaibao_price = ceil($goods_count/2) * $chaibao_price;
         $chaibao_price = sprintf("%.2f",$chaibao_price);
         $this->assign('chai_price',$chaibao_price);
+        $server_price *= $goods_count;
+        $server_price = sprintf("%.2f",$server_price);
+        $this->assign('server_price',$server_price);
         if(!empty($distribution_time_out["value"])){
             $this->assign("distribution_time_out", json_decode($distribution_time_out["value"], true));
         }else{
