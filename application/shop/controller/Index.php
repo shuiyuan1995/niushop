@@ -235,6 +235,11 @@ class Index extends BaseController
 
     public function spike()
     {
+        if (request()->isMobile()) {
+            $redirect = __URL(__URL__ . "/wap/index/index/spike");
+            $this->redirect($redirect);
+            exit();
+        }
         $goods = new Goods();
         $page = request()->get('page', 1);
         $category_id = request()->get('category_id', 0);

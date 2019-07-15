@@ -270,6 +270,74 @@ class Index extends BaseController
             return view($this->style . 'Index/discount');
         }
     }
+
+    /**
+     * 秒杀
+     */
+    public function spike()
+    {
+        if (!request()->isMobile()) {
+            $redirect = __URL(__URL__ . "/spike");
+            $this->redirect($redirect);
+            exit();
+        }
+        $platform = new Platform();
+        // 限时折扣广告位
+        $discounts_adv = $platform->getPlatformAdvPositionDetail(1163);
+        $this->assign('discounts_adv', $discounts_adv);
+        if (request()->isAjax()) {
+            $goods = new Goods();
+            $category_id = request()->get('category_id', '0');
+            $page_index = request()->get("page", 1);
+            $condition['status'] = 1;
+            $condition['ng.state'] = 1;
+            if (! empty($category_id)) {
+                $condition['category_id_1'] = $category_id;
+            }
+            $discount_list = $goods->getDiscountGoodsList($page_index, PAGESIZE, $condition, "ng.sort asc,ng.create_time desc");
+            foreach ($discount_list['data'] as $k => $v) {
+                $v['discount'] = str_replace('.00', '', $v['discount']);
+                $v['promotion_price'] = str_replace('.00', '', $v['promotion_price']);
+                $v['price'] = str_replace('.00', '', $v['price']);
+            }
+            return $discount_list;
+        } else {
+            $goods_category = new GoodsCategory();
+            $goods_category_list_1 = $goods_category->getGoodsCategoryList(1, 0, [
+                "is_visible" => 1,
+                "level" => 1
+            ]);
+            $discount = Db::name('ns_promotion_discount')->field('keywords,description')->where('end_time','>',time())->select();
+            $seo = array();
+            foreach ($discount as $k => $v){
+                if ($v['keywords'] != ''){
+                    $seo['keywords'] .= $v['keywords'].',';
+                }
+                if ($v['description'] != ''){
+                    $seo['description'] .= $v['description'].',';
+                }
+            }
+            $seo['keywords'] = rtrim($seo['keywords'],',');
+            $seo['description'] = rtrim($seo['description'],',');
+            $Config = new Config();
+            $seoconfig = $Config->getSeoConfig($this->instance_id);
+
+            if (!empty($seo['keywords'])) {
+                $seoconfig['seo_meta'] = $seo['keywords']; // 关键词
+            }
+            if (!empty($seo['description'])) {
+                $seoconfig['seo_desc'] = $seo['description'];
+            }
+            $this->assign("seoconfig", $seoconfig);
+
+            // 获取当前时间
+            $current_time = $this->getCurrentTime();
+            $this->assign('ms_time', $current_time);
+            $this->assign('goods_category_list_1', $goods_category_list_1['data']);
+            $this->assign("title_before", "疯狂秒杀");
+            return view($this->style . 'Index/spike');
+        }
+    }
     
     // 分享送积分
     public function shareGivePoint()
