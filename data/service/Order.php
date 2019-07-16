@@ -997,7 +997,7 @@ class Order extends BaseService implements IOrder
      *
      * @see \data\api\IOrder::orderMoneyAdjust()
      */
-    public function orderMoneyAdjust($order_id, $order_goods_id_adjust_array, $shipping_fee)
+    public function orderMoneyAdjust($order_id, $order_goods_id_adjust_array, $server_money)
     {
         // 调整订单
         $order_goods = new OrderGoods();
@@ -1009,7 +1009,7 @@ class Order extends BaseService implements IOrder
             $new_no = $this->getOrderNewOutTradeNo($order_id);
             $order = new OrderBusiness();
             $order_goods_money = $order->getOrderGoodsMoney($order_id);
-            $retval_order = $order->orderAdjustMoney($order_id, $order_goods_money, $shipping_fee);
+            $retval_order = $order->orderAdjustMoney($order_id, $order_goods_money, $server_money);
             $order_model = new NsOrderModel();
             $order_money = $order_model->getInfo([
                 'order_id' => $order_id
@@ -1019,7 +1019,7 @@ class Order extends BaseService implements IOrder
             hook("orderMoneyAdjustSuccess", [
                 'order_id' => $order_id,
                 'order_goods_id_adjust_array' => $order_goods_id_adjust_array,
-                'shipping_fee' => $shipping_fee
+                'server_money' => $server_money
             ]);
             return $retval_order;
         } else {

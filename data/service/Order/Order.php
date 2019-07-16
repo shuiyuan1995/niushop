@@ -3169,23 +3169,23 @@ class Order extends BaseService
      * @param unknown $shipping_fee
      *            调整后的运费
      */
-    public function orderAdjustMoney($order_id, $goods_money, $shipping_fee)
+    public function orderAdjustMoney($order_id, $goods_money, $server_money)
     {
         $this->order->startTrans();
         try {
             $order_model = new NsOrderModel();
             $order_info = $order_model->getInfo([
                 'order_id' => $order_id
-            ], 'goods_money,shipping_money,order_money,pay_money');
+            ], 'goods_money,server_money,order_money,pay_money');
             // 商品金额差额
             $goods_money_adjust = $goods_money - $order_info['goods_money'];
-            $shipping_fee_adjust = $shipping_fee - $order_info['shipping_money'];
+            $shipping_fee_adjust = $server_money - $order_info['server_money'];
             $order_money = $order_info['order_money'] + $goods_money_adjust + $shipping_fee_adjust;
             $pay_money = $order_info['pay_money'] + $goods_money_adjust + $shipping_fee_adjust;
             $data = array(
                 'goods_money' => $goods_money,
                 'order_money' => $order_money,
-                'shipping_money' => $shipping_fee,
+                'server_money' => $server_money,
                 'pay_money' => $pay_money
             );
             $retval = $order_model->save($data, [

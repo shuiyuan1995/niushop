@@ -105,9 +105,9 @@ function GetgoodsList(sear_type,page){
 						html+= data['data'][i]['goods_name'];
 						html+='</a></p>';
 						html+='<p class="goods-price"><em>'+data['data'][i]['display_price']+'</em>';
-						if(data['data'][i]['shipping_fee'] == 0){
+						/*if(data['data'][i]['shipping_fee'] == 0){
 							html += '<i class="shipping_fee">包邮</i>';
-						}
+						}*/
 						html+='</p>';
 						html+='</div></li>';
 					}

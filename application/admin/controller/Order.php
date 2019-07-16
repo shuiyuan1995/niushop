@@ -625,13 +625,13 @@ class Order extends BaseController
     /**
      * 订单价格调整
      */
-    public function orderAdjustMoney($order_id, $order_goods_id_adjust_array, $shipping_fee)
+    public function orderAdjustMoney($order_id, $order_goods_id_adjust_array, $server_money)
     {
         $order_id = request()->post('order_id', '');
         $order_goods_id_adjust_array = request()->post('order_goods_id_adjust_array', '');
-        $shipping_fee = request()->post('shipping_fee', '');
+        $server_money = request()->post('server_money', '');
         $order_service = new OrderService();
-        $res = $order_service->orderMoneyAdjust($order_id, $order_goods_id_adjust_array, $shipping_fee);
+        $res = $order_service->orderMoneyAdjust($order_id, $order_goods_id_adjust_array, $server_money);
         return AjaxReturn($res);
     }
 
