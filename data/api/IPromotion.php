@@ -292,4 +292,9 @@ interface IPromotion
      */
     function updatePromotionFullMail($shop_id, $is_open, $full_mail_money, $no_mail_province_id_array, $no_mail_city_id_array);
 
+    function getPromotionSpikeList($page_index = 1, $page_size = 0, $condition = '', $order = 'create_time desc');
+
+    function addPromotionSpike($spike_name, $keywords, $description, $start_time, $end_time, $remark, $goods_id_array, $decimal_reservation_number);
+
+    function updatePromotionSpike($spike_id, $spike_name, $keywords, $description, $start_time, $end_time, $remark, $goods_id_array, $decimal_reservation_number);
 }

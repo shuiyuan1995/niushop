@@ -35,6 +35,8 @@ use data\model\NsPromotionGiftModel;
 use data\model\NsPromotionMansongGoodsModel;
 use data\model\NsPromotionMansongModel;
 use data\model\NsPromotionMansongRuleModel;
+use data\model\NsPromotionSpikeGoodsModel;
+use data\model\NsPromotionSpikeModel;
 use data\service\BaseService as BaseService;
 use data\service\promotion\GoodsDiscount;
 use data\service\promotion\GoodsMansong;
@@ -58,6 +60,7 @@ use data\service\Order\Order as OrderService;
 use data\model\NsOrderGoodsModel;
 use data\model\BaseModel;
 use data\model\NsPromotionGiftViewModel;
+use data\service\promotion\GoodsSpike;
 use think\Log;
 
 class Promotion extends BaseService implements IPromotion
@@ -1828,6 +1831,295 @@ class Promotion extends BaseService implements IPromotion
         $count_3 = $topic_goods->where($condition_3)->count();
         $count = $count_1 + $count_2 + $count_3;
         return $count;
+    }
+
+    /**
+     * (non-PHPdoc)
+     *
+     * @see \data\api\IPromote::getPromotionSpikeList()
+     */
+    public function getPromotionSpikeList($page_index = 1, $page_size = 0, $condition = '', $order = 'create_time desc')
+    {
+        $promotion_spike = new NsPromotionSpikeModel();
+        $list = $promotion_spike->pageQuery($page_index, $page_size, $condition, $order, '*');
+        foreach($list['data'] as $v ){
+
+        }
+        return $list;
+    }
+
+    /**
+     * (non-PHPdoc)
+     *
+     * @see \data\api\IPromote::addPromotionSpike()
+     */
+    public function addPromotionSpike($spike_name, $keywords, $description, $start_time, $end_time, $remark, $goods_id_array, $decimal_reservation_number)
+    {
+        $promotion_spike = new NsPromotionSpikeModel();
+        $promotion_spike->startTrans();
+        try {
+
+            $shop_name = $this->instance_name;
+            $data = array(
+                'spike_name' => $spike_name,
+                'keywords' => $keywords,
+                'description' => $description,
+                'start_time' => getTimeTurnTimeStamp($start_time),
+                'end_time' => getTimeTurnTimeStamp($end_time),
+                'shop_id' => $this->instance_id,
+                'shop_name' => $shop_name,
+                'status' => 0,
+                'remark' => $remark,
+                'create_time' => time(),
+                'decimal_reservation_number' => $decimal_reservation_number
+            );
+            $promotion_spike->save($data);
+            $spike_id = $promotion_spike->spike_id;
+            $this->addUserLog($this->uid, 1, '营销', '限时秒杀', '添加限时秒杀：'.$spike_name);
+            $goods_id_array = explode(',', $goods_id_array);
+            $promotion_spike_goods = new NsPromotionSpikeGoodsModel();
+            $promotion_spike_goods->destroy([
+                'spike_id' => $spike_id
+            ]);
+            foreach ($goods_id_array as $k => $v) {
+                // 添加检测考虑商品在一个时间段内只能有一种活动
+
+                $promotion_spike_goods = new NsPromotionSpikeGoodsModel();
+                $spike_info = explode(':', $v);
+                $goods_spike = new GoodsSpike();
+                $count = $goods_spike->getGoodsIsSpike($spike_info[0], $start_time, $end_time);
+                // 查询商品名称图片
+                if ($count > 0) {
+                    $promotion_spike->rollback();
+                    return ACTIVE_REPRET;
+                }
+                $goods = new NsGoodsModel();
+                $goods_info = $goods->getInfo([
+                    'goods_id' => $spike_info[0]
+                ], 'goods_name,picture');
+                $data_goods = array(
+                    'spike_id' => $spike_id,
+                    'goods_id' => $spike_info[0],
+                    'spike' => $spike_info[1],
+                    'status' => 0,
+                    'start_time' => getTimeTurnTimeStamp($start_time),
+                    'end_time' => getTimeTurnTimeStamp($end_time),
+                    'goods_name' => $goods_info['goods_name'],
+                    'goods_picture' => $goods_info['picture'],
+                    'decimal_reservation_number' => $decimal_reservation_number
+                );
+                $promotion_spike_goods->save($data_goods);
+            }
+            $promotion_spike->commit();
+            return $spike_id;
+        } catch (\Exception $e) {
+            $promotion_spike->rollback();
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * (non-PHPdoc)
+     *
+     * @see \data\api\IPromote::updatePromotionSpike()
+     */
+    public function updatePromotionSpike($spike_id, $spike_name, $keywords, $description, $start_time, $end_time, $remark, $goods_id_array, $decimal_reservation_number)
+    {
+        $promotion_spike = new NsPromotionSpikeModel();
+        $promotion_spike->startTrans();
+        try {
+
+            $shop_name = $this->instance_name;
+            $data = array(
+                'spike_name' => $spike_name,
+                'keywords' => $keywords,
+                'description' => $description,
+                'start_time' => getTimeTurnTimeStamp($start_time),
+                'end_time' => getTimeTurnTimeStamp($end_time),
+                'shop_id' => $this->instance_id,
+                'shop_name' => $shop_name,
+                'status' => 0,
+                'remark' => $remark,
+                'create_time' => time(),
+                'decimal_reservation_number' => $decimal_reservation_number
+            );
+            $promotion_spike->save($data, [
+                'spike_id' => $spike_id
+            ]);
+            $this->addUserLog($this->uid, 1, '营销', '限时秒杀', '修改限时秒杀：'.$spike_name);
+            $goods_id_array = explode(',', $goods_id_array);
+            $promotion_spike_goods = new NsPromotionSpikeGoodsModel();
+            $promotion_spike_goods->destroy([
+                'spike_id' => $spike_id
+            ]);
+            foreach ($goods_id_array as $k => $v) {
+                $promotion_spike_goods = new NsPromotionSpikeGoodsModel();
+                $spike_info = explode(':', $v);
+                $goods_spike = new GoodsSpike();
+                $count = $goods_spike->getGoodsIsSpike($spike_info[0], $start_time, $end_time);
+                // 查询商品名称图片
+                if ($count > 0) {
+                    $promotion_spike->rollback();
+                    return ACTIVE_REPRET;
+                }
+                // 查询商品名称图片
+                $goods = new NsGoodsModel();
+                $goods_info = $goods->getInfo([
+                    'goods_id' => $spike_info[0]
+                ], 'goods_name,picture');
+                $data_goods = array(
+                    'spike_id' => $spike_id,
+                    'goods_id' => $spike_info[0],
+                    'spike' => $spike_info[1],
+                    'status' => 0,
+                    'start_time' => getTimeTurnTimeStamp($start_time),
+                    'end_time' => getTimeTurnTimeStamp($end_time),
+                    'goods_name' => $goods_info['goods_name'],
+                    'goods_picture' => $goods_info['picture'],
+                    'decimal_reservation_number' => $decimal_reservation_number
+                );
+                $promotion_spike_goods->save($data_goods);
+            }
+            $promotion_spike->commit();
+            return $spike_id;
+        } catch (\Exception $e) {
+            $promotion_spike->rollback();
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * (non-PHPdoc)
+     *
+     * @see \data\api\IPromote::getPromotionSpikeDetail()
+     */
+    public function getPromotionSpikeDetail($spike_id)
+    {
+        $promotion_spike = new NsPromotionSpikeModel();
+        $promotion_detail = $promotion_spike->get($spike_id);
+        $promotion_spike_goods = new NsPromotionSpikeGoodsModel();
+        $promotion_goods_list = $promotion_spike_goods->getQuery([
+            'spike_id' => $spike_id
+        ], '*', '');
+        if (! empty($promotion_goods_list)) {
+            foreach ($promotion_goods_list as $k => $v) {
+                $goods = new NsGoodsModel();
+                $goods_info = $goods->getInfo([
+                    'goods_id' => $v['goods_id']
+                ], 'price, stock');
+                $picture = new AlbumPictureModel();
+                $pic_info = array();
+                $pic_info['pic_cover'] = '';
+                if (! empty($v['goods_picture'])) {
+                    $pic_info = $picture->get($v['goods_picture']);
+                }
+                $v['picture_info'] = $pic_info;
+                $v['price'] = $goods_info['price'];
+                $v['stock'] = $goods_info['stock'];
+            }
+        }
+        $promotion_detail['goods_list'] = $promotion_goods_list;
+        return $promotion_detail;
+    }
+
+    /**
+     * (non-PHPdoc)
+     *
+     * @see \data\api\IPromote::closePromotionSpike()
+     */
+    public function closePromotionSpike($spike_id)
+    {
+        $promotion_spike = new NsPromotionSpikeModel();
+        $promotion_spike->startTrans();
+        try {
+            $retval = $promotion_spike->save([
+                'status' => 3
+            ], [
+                'spike_id' => $spike_id
+            ]);
+            if ($retval == 1) {
+                $goods = new NsGoodsModel();
+
+                $data_goods = array(
+                    'promotion_type' => 2,
+                    'promote_id' => $spike_id
+                );
+                $goods_id_list = $goods->getQuery($data_goods, 'goods_id', '');
+                if (! empty($goods_id_list)) {
+
+                    foreach ($goods_id_list as $k => $goods_id) {
+                        $goods_info = $goods->getInfo([
+                            'goods_id' => $goods_id['goods_id']
+                        ], 'promotion_type,price');
+                        $goods->save([
+                            'promotion_price' => $goods_info['price']
+                        ], [
+                            'goods_id' => $goods_id['goods_id']
+                        ]);
+                        $goods_sku = new NsGoodsSkuModel();
+                        $goods_sku_list = $goods_sku->getQuery([
+                            'goods_id' => $goods_id['goods_id']
+                        ], 'price,sku_id', '');
+                        foreach ($goods_sku_list as $k_sku => $sku) {
+                            $goods_sku = new NsGoodsSkuModel();
+                            $data_goods_sku = array(
+                                'promote_price' => $sku['price']
+                            );
+                            $goods_sku->save($data_goods_sku, [
+                                'sku_id' => $sku['sku_id']
+                            ]);
+                        }
+                    }
+                }
+                $goods->save([
+                    'promotion_type' => 0,
+                    'promote_id' => 0
+                ], $data_goods);
+                $promotion_spike_goods = new NsPromotionSpikeGoodsModel();
+                $retval = $promotion_spike_goods->save([
+                    'status' => 3
+                ], [
+                    'spike_id' => $spike_id
+                ]);
+            }
+            $promotion_spike->commit();
+            return $retval;
+        } catch (\Exception $e) {
+            $promotion_spike->rollback();
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     *
+     * @ERROR!!!
+     *
+     * @see \data\api\IPromote::delPromotionSpike()
+     */
+    public function delPromotionSpike($spike_id)
+    {
+        $promotion_spike = new NsPromotionSpikeModel();
+        $promotion_spike_goods = new NsPromotionSpikeGoodsModel();
+        $promotion_spike->startTrans();
+        try {
+            $spike_id_array = explode(',', $spike_id);
+            foreach ($spike_id_array as $k => $v) {
+                $promotion_detail = $promotion_spike->get($spike_id);
+                if ($promotion_detail['status'] == 1) {
+                    $promotion_spike->rollback();
+                    return - 1;
+                }
+                $promotion_spike->destroy($v);
+                $promotion_spike_goods->destroy([
+                    'spike_id' => $v
+                ]);
+            }
+            $promotion_spike->commit();
+            return 1;
+        } catch (\Exception $e) {
+            $promotion_spike->rollback();
+            return $e->getMessage();
+        }
     }
 
 }

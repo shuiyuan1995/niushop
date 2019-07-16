@@ -961,5 +961,170 @@ class Promotion extends BaseController
         }
         
         return 0;
-    }   
+    }
+
+    /**
+     * 获取限时秒杀列表
+     */
+    public function getSpikeList()
+    {
+        if (request()->isAjax()) {
+            $page_index = request()->post("page_index", 1);
+            $page_size = request()->post('page_size', PAGESIZE);
+            $search_text = request()->post('search_text', '');
+            $status = request()->post('status', '');
+            $discount = new PromotionService();
+
+            $condition = array(
+                'shop_id' => $this->instance_id,
+                'spike_name' => array(
+                    'like',
+                    '%' . $search_text . '%'
+                )
+            );
+            if ($status !== '-1') {
+                $condition['status'] = $status;
+                $list = $discount->getPromotionSpikeList($page_index, $page_size, $condition);
+            } else {
+                $list = $discount->getPromotionSpikeList($page_index, $page_size, $condition);
+            }
+
+            return $list;
+        }
+
+        $status = request()->get('status', - 1);
+        $this->assign("status", $status);
+        $child_menu_list = array(
+            array(
+                'url' => "promotion/getSpikeList",
+                'menu_name' => "全部",
+                "active" => $status == '-1' ? 1 : 0
+            ),
+            array(
+                'url' => "promotion/getSpikeList?status=0",
+                'menu_name' => "未发布",
+                "active" => $status == 0 ? 1 : 0
+            ),
+            array(
+                'url' => "promotion/getSpikeList?status=1",
+                'menu_name' => "进行中",
+                "active" => $status == 1 ? 1 : 0
+            ),
+            array(
+                'url' => "promotion/getSpikeList?status=3",
+                'menu_name' => "已关闭",
+                "active" => $status == 3 ? 1 : 0
+            ),
+            array(
+                'url' => "promotion/getSpikeList?status=4",
+                'menu_name' => "已结束",
+                "active" => $status == 4 ? 1 : 0
+            )
+        );
+        $this->assign('child_menu_list', $child_menu_list);
+
+        return view($this->style . "Promotion/getSpikeList");
+    }
+
+    /**
+     * 添加限时秒杀
+     */
+    public function addSpike()
+    {
+        if (request()->isAjax()) {
+            $spike = new PromotionService();
+            $spike_name = request()->post('spike_name', '');
+            $keywords = request()->post('keywords', '');
+            $description = request()->post('description', '');
+            $start_time = request()->post('start_time', '');
+            $end_time = request()->post('end_time', '');
+            $remark = '';
+            $goods_id_array = request()->post('goods_id_array', '');
+            $decimal_reservation_number = request()->post("decimal_reservation_number", -1);
+
+            $retval = $spike->addPromotionSpike($spike_name, $keywords, $description, $start_time, $end_time, $remark, $goods_id_array, $decimal_reservation_number);
+            return AjaxReturn($retval);
+        }
+        return view($this->style . "Promotion/addSpike");
+    }
+
+    /**
+     * 修改限时秒杀
+     */
+    public function updateSpike()
+    {
+        if (request()->isAjax()) {
+            $spike = new PromotionService();
+            $spike_id = request()->post('spike_id', '');
+            $spike_name = request()->post('spike_name', '');
+            $keywords = request()->post('keywords', '');
+            $description = request()->post('description', '');
+            $start_time = request()->post('start_time', '');
+            $end_time = request()->post('end_time', '');
+            $remark = '';
+            $goods_id_array = request()->post('goods_id_array', '');
+            $decimal_reservation_number = request()->post("decimal_reservation_number", -1);
+            $retval = $spike->updatePromotionSpike($spike_id, $spike_name, $keywords, $description, $start_time, $end_time, $remark, $goods_id_array, $decimal_reservation_number);
+            return AjaxReturn($retval);
+        }
+        $info = $this->getSpikeDetail();
+        if (! empty($info['goods_list'])) {
+            foreach ($info['goods_list'] as $k => $v) {
+                $goods_id_array[] = $v['goods_id'];
+                $selected_data[$v['goods_id']] = $v['spike'];
+            }
+        }
+        //选择商品的id
+        $goods_id_array = join(',',$goods_id_array);
+        $info['goods_id_array'] = $goods_id_array;
+        //包含折扣的选择商品数据
+        $selected_data = json_encode($selected_data);
+        $this->assign('selected_data',$selected_data);
+
+        $this->assign("info", $info);
+        return view($this->style . "Promotion/updateSpike");
+    }
+
+    /**
+     * 获取限时秒杀详情
+     */
+    public function getSpikeDetail()
+    {
+        $spike_id = request()->get('spike_id', '');
+        if (! is_numeric($spike_id)) {
+            $this->error("没有获取到秒杀信息");
+        }
+        $discount = new PromotionService();
+        $detail = $discount->getPromotionSpikeDetail($spike_id);
+        return $detail;
+    }
+
+
+    /**
+     * 删除限时秒杀
+     */
+    public function delSpike()
+    {
+        $spike_id = request()->post('spike_id', '');
+        if (empty($spike_id)) {
+            $this->error("没有获取到折扣信息");
+        }
+        $spike = new PromotionService();
+        $res = $spike->delPromotionSpike($spike_id);
+        return AjaxReturn($res);
+    }
+
+    /**
+     * 关闭正在进行的限时秒杀
+     */
+    public function closeSpike()
+    {
+        $spike_id = request()->post('spike_id', '');
+        if (! is_numeric($spike_id)) {
+            $this->error("没有获取到折扣信息");
+        }
+        $spike = new PromotionService();
+        $res = $spike->closePromotionSpike($spike_id);
+        return AjaxReturn($res);
+    }
 }
