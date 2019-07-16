@@ -33,7 +33,7 @@ textarea{width: 350px;}
 							<p class="text-tip">-表示减价<i class="icon-down-pic"></i></p>
 						</div>
 					</td>
-					<td>邮费</td>
+					<td>服务费</td>
 				</tr>
 			</tbody>
 		</table>
@@ -56,8 +56,10 @@ textarea{width: 350px;}
 				<span class="amountpay-price" id="chaibaomoney"></span>元&nbsp;&nbsp;&nbsp;
 				<span class="amountpay-label">保险费：</span>
 				<span class="amountpay-price" id="insmoney"></span>元&nbsp;&nbsp;&nbsp;
-				<span class="amountpay-label">运费：</span>
-				<span class="amountpay-price" id="modifiedFreight"></span>元
+				<!--<span class="amountpay-label">运费：</span>
+				<span class="amountpay-price" id="modifiedFreight"></span>元-->
+				<span class="amountpay-label">服务费：</span>
+				<span class="amountpay-price" id="modifiedServer"></span>元
 			</li>
 			<li>
 				<div>
@@ -756,12 +758,12 @@ function modifyPrice(order_id,orderFreight){
 				str += "</td>"; 
 				if (i == 0) {
 					str += "<td rowspan='"+jsonData.length+"'>";
-					str += "<input onchange=\"caculatePrice()\" id='Freightnumber' type='number' placeholder='0'  class='editprice-input input-common harf' value='"+order_info.shipping_money+"' ";
+					str += "<input onchange=\"caculatePrice()\" id='Servernumber' type='number' placeholder='0'  class='editprice-input input-common harf' value='"+order_info.server_money+"' ";
 					if(orderFreight != 0 || orderFreight != ''){
 						str += orderFreight;
 					}
 					str += "' min='0'/>";
-					str += "<p class='muted'>直接输入邮费金额</p>";
+					str += "<p class='muted'>直接输入服务费金额</p>";
 					str += "<input type='hidden' id='hidorderNumber' value='" + jsonData[i].order_id + "'>";
 					str += "<input type='hidden' id='freighthidden' value='" + orderFreight + "'>";
 					str += "<input type='hidden' id='goodsmoneyhidden' value=''>";
@@ -780,21 +782,22 @@ function modifyPrice(order_id,orderFreight){
 				$("#changeTotal").html(order_info.pay_money); 
 				$("#hiedchangeTotal").html(Total);
 			}
-			$("#modifiedFreight").html(order_info.shipping_money);
-			var freight = $("#Freightnumber").val() == 0 ? 0 : $("#Freightnumber").val(); 
+            //$("#modifiedFreight").html(order_info.shipping_money);
+            $("#modifiedServer").html(order_info.server_money);
+            var server = $("#Servernumber").val() == 0 ? 0 : $("#Servernumber").val();
 			$('#edit-price').modal('show');
 		}
 	});
 }
 //重新计算
 function caculatePrice(){
-	//设置邮费
-	if($("#Freightnumber").val() < 0 || $("#Freightnumber").val() == ''){
-		showTip("邮费错误！","warning");
-		return false;
-	}
-	var Freightnumber = $("#Freightnumber").val();//邮费input
-	$("#modifiedFreight").html(Freightnumber);
+    //设置服务费
+    if($("#Servernumber").val() < 0 || $("#Servernumber").val() == ''){
+        showTip("服务费错误！","warning");
+        return false;
+    }
+    var Servernumber = $("#Servernumber").val();//服务费input
+    $("#modifiedServer").html(Servernumber);
 	//调整金额
 	var price = 0.00;
 	$("input[name = 'caculatePrice']").each(function(i){
@@ -812,15 +815,17 @@ function caculatePrice(){
 	}
 	$("#goodsmoney").html(new_goods_money);
 	// 获取邮费
-	var modifiedFreight = $("#modifiedFreight").html(); 
+	//var modifiedFreight = $("#modifiedFreight").html();
 	// 获取优惠金额
 	var discountmoney = $("#discountmoney").html();
     //拆包费
     var chaibaomoney = $("#chaibaomoney").html();
     //保险费
     var baoxian = $("#insmoney").html();
+    //服务费
+    var servermoney = $("#modifiedServer").html();
 	//计算实收款
-	new_hiedchangeTotal = (parseFloat(new_goods_money)+parseFloat(modifiedFreight)-parseFloat(discountmoney)+parseFloat(chaibaomoney)+parseFloat(baoxian)).toFixed(2);
+	new_hiedchangeTotal = (parseFloat(new_goods_money)-parseFloat(discountmoney)+parseFloat(chaibaomoney)+parseFloat(baoxian)+parseFloat(servermoney)).toFixed(2);
 	$("#changeTotal").html(new_hiedchangeTotal);
 }
 	
@@ -831,7 +836,7 @@ function caculatePrice(){
 function updPrice(){
 	var order_id = $("#hidorderNumber").val();
 	var order_goods_id_adjust_array = '';
-	var shipping_fee = $("#Freightnumber").val();
+    var server_money = $("#Servernumber").val();
 	$("input[name = 'caculatePrice']").each(function(i){
 		if(0 == i){
 			order_goods_id_adjust_array = $(this).attr('id')+','+$(this).val();
@@ -846,7 +851,7 @@ function updPrice(){
 	$.ajax({
 		type: "post",
 		url: "{:__URL('ADMIN_MAIN/order/orderadjustmoney')}",
-		data: { "order_id": order_id, "order_goods_id_adjust_array":order_goods_id_adjust_array, "shipping_fee":shipping_fee},
+		data: { "order_id": order_id, "order_goods_id_adjust_array":order_goods_id_adjust_array, "server_money":server_money},
 		dataType: "json",
 		async: false,
 		success: function (data) {
