@@ -21,7 +21,8 @@ use data\service\Order as OrderService;
 use data\service\promotion\PromoteRewardRule;
 use data\service\Config as Config;
 use data\service\GroupBuy;
-
+use think\Log;
+use data\service\RedisServer;
 /**
  * 订单控制器
  * 创建人：李吉
@@ -84,6 +85,16 @@ class Order extends BaseController
             $order_id = $order->orderCreate('1', $out_trade_no, $pay_type, $shipping_type, '1', $buyer_ip, $leavemessage, $buyer_invoice, $shipping_time, $address['mobile'], $address['province'], $address['city'], $address['district'], $address["country_detail"].'&nbsp;'.$address['province_detail'].'&nbsp;'.$address['city_detail'].'&nbsp;'.$address['address'], $address['zip_code'], $address['consigner'], $integral, $use_coupon, 0, $goods_sku_list, $user_money, $pick_up_id, $express_company_id, $coin, $address["phone"], $distribution_time_out,$is_chai,$chai_price,$is_ins,$ins_price,$server_price);
             // Log::write($order_id);
             if ($order_id > 0) {
+                /*$config = new Config();
+                $config_info = $config->getConfig(0, 'ORDER_BUY_CLOSE_TIME');
+
+                if(!empty($config_info['value']) && $config_info['value'] != 0)
+                {
+                    $close_time = $config_info['value'];
+                    $time = $close_time*60;//订单自动关闭
+                    $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
+                    $redis->setex($order_id,$time,1);
+                }*/
                 $order->deleteCart($goods_sku_list, $this->uid);
                 $_SESSION['order_tag'] = ""; // 订单创建成功会把购物车中的标记清楚
                 return AjaxReturn($out_trade_no);
@@ -91,6 +102,14 @@ class Order extends BaseController
                 return AjaxReturn($order_id);
             }
         }
+    }
+
+    public function closeOrder()
+    {
+        $order_id = request()->post('order_id');
+        $order= new OrderService();
+        $res = $order->orderClose($order_id);
+        return $res;
     }
     
     /**

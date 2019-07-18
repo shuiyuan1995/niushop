@@ -1,7 +1,7 @@
 /.idea
 /runtime/temp/
 /runtime/cache/
-/*.log
+/runtime/log/
 /application/database.php
 /application/config.php
 /upload
