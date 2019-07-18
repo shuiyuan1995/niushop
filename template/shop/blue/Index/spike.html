@@ -142,7 +142,7 @@
 			<div class="tip-text">{:lang('sorry')}！{:lang('no_result_you_want')}……</div>
 		</div>
 		{/if}
-	{volist name="discount_list" id="vo"}
+	{volist name="spike_list" id="vo"}
 		<li>
 			<a class="scope" href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$vo['goods_id'])}" title="{$vo.goods_name}">
 				<div class="p-img">

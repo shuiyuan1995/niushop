@@ -90,6 +90,7 @@ class Task extends Controller
                 $event = new Events();
                 $retval_mansong_operation = $event->mansongOperation();
                 $retval_discount_operation = $event->discountOperation();
+                $retval_spike_operation = $event->spikeOperation();
                 $retval_auto_coupon_close = $event->autoCouponClose();
                 $retval_auto_group_buy_close = $event->autoGroupBuyClose();
                 $retval_auto_topic_close = $event->autoTopicClose();

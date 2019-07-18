@@ -48,12 +48,14 @@ use data\model\NsGoodsViewModel as NsGoodsViewModel;
 use data\model\NsOrderGoodsModel;
 use data\model\NsOrderModel;
 use data\model\NsPromotionDiscountModel;
+use data\model\NsPromotionSpikeModel;
 use data\model\NsShopModel;
 use data\service\BaseService as BaseService;
 use data\service\promotion\GoodsDiscount;
 use data\service\promotion\GoodsExpress;
 use data\service\promotion\GoodsMansong;
 use data\service\promotion\GoodsPreference;
+use data\service\promotion\GoodsSpike;
 use data\service\promotion\PromoteRewardRule;
 use data\service\GroupBuy as GroupBuyService;
 use think;
@@ -1237,10 +1239,17 @@ class Goods extends BaseService implements IGoods
         $goods_preference = new GoodsPreference();
         $goods_promotion_info = $goods_preference->getGoodsPromote($goods_detail["goods_id"]);
         if (! empty($goods_promotion_info)) {
-            $goods_discount_info = new NsPromotionDiscountModel();
-            $goods_detail['promotion_detail'] = $goods_discount_info->getInfo([
-                'discount_id' => $goods_detail['promote_id']
-            ], 'start_time, end_time,discount_name');
+            if ($goods_promotion_info == '限时折扣'){
+                $goods_discount_info = new NsPromotionDiscountModel();
+                $goods_detail['promotion_detail'] = $goods_discount_info->getInfo([
+                    'discount_id' => $goods_detail['promote_id']
+                ], 'start_time, end_time,discount_name');
+            }else{
+                $goods_discount_info = new NsPromotionSpikeModel();
+                $goods_detail['promotion_detail'] = $goods_discount_info->getInfo([
+                    'spike_id' => $goods_detail['promote_id']
+                ], 'start_time, end_time,spike_name');
+            }
         }
         // 判断活动内容是否为空
         if (! empty($goods_detail['promotion_detail'])) {
@@ -5271,5 +5280,20 @@ class Goods extends BaseService implements IGoods
     	$res = $goods_brank_model->save($data, ['brand_id'=>$brand_id]);
     	
     	return $res;
+    }
+
+    /**
+     * 获取限时秒杀的商品
+     *
+     * @param number $page_index
+     * @param number $page_size
+     * @param unknown $condition
+     * @param string $order
+     */
+    public function getSpikeGoodsList($page_index = 1, $page_size = 0, $condition = array(), $order = '')
+    {
+        $goods_spike = new GoodsSpike();
+        $goods_list = $goods_spike->getSpikeGoodsList($page_index, $page_size, $condition, $order);
+        return $goods_list;
     }
 }

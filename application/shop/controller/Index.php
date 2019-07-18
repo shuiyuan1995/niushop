@@ -16,6 +16,7 @@
 namespace app\shop\controller;
 
 use data\service\Article;
+use data\service\Events;
 use data\service\Goods;
 use data\service\GoodsCategory;
 use data\service\Platform;
@@ -248,24 +249,46 @@ class Index extends BaseController
         if (! empty($category_id)) {
             $condition['category_id_1'] = $category_id;
         }
-        $discount_list = $goods->getDiscountGoodsList($page, PAGESIZE, $condition, 'end_time');
+        $spike_list = $goods->getSpikeGoodsList($page, PAGESIZE, $condition, 'end_time');
         $assign_get_list = array(
             'page' => $page,
-            'page_count' => $discount_list['page_count'], // 总页数
-            'total_count' => $discount_list['total_count'], // 总条数
-            'discount_list' => $discount_list['data'], // 店铺分页
+            'page_count' => $spike_list['page_count'], // 总页数
+            'total_count' => $spike_list['total_count'], // 总条数
+            'spike_list' => $spike_list['data'], // 店铺分页
             'category_id' => $category_id
         ); // 已选中商品分类一级
-        foreach ($discount_list['data'] as $k => $v) {
+        foreach ($spike_list['data'] as $k => $v) {
             $sale_down = $v['price'] - $v['promotion_price'];
             // 四舍五入取小数点后两位有效数字
             $sale_price = round($sale_down, 2);
-            $discount_list['data'][$k]['sale_down'] = $sale_price;
+            $spike_list['data'][$k]['sale_down'] = $sale_price;
         }
 
         foreach ($assign_get_list as $key => $value) {
             $this->assign($key, $value);
         }
+        $discount = Db::name('ns_promotion_spike')->field('keywords,description')->where('end_time','>',time())->select();
+        $seo = array();
+        foreach ($discount as $k => $v){
+            if ($v['keywords'] != ''){
+                $seo['keywords'] .= $v['keywords'].',';
+            }
+            if ($v['description'] != ''){
+                $seo['description'] .= $v['description'].',';
+            }
+        }
+        $seo['keywords'] = rtrim($seo['keywords'],',');
+        $seo['description'] = rtrim($seo['description'],',');
+        $Config = new Config();
+        $seoconfig = $Config->getSeoConfig($this->instance_id);
+
+        if (!empty($seo['keywords'])) {
+            $seoconfig['seo_meta'] = $seo['keywords']; // 关键词
+        }
+        if (!empty($seo['description'])) {
+            $seoconfig['seo_desc'] = $seo['description'];
+        }
+        $this->assign("seoconfig", $seoconfig);
         $this->assign('is_head_goods_nav', 1); // 代表默认显示以及分类
         $this->assign("title_before", "疯狂秒杀");
         return view($this->style . 'Index/spike');

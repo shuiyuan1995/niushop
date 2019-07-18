@@ -114,7 +114,7 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 	
 	
 </section>
-{if condition = "$goods_detail['promotion_info'] neq ''"}
+{if condition = "$goods_detail['promotion_info'] eq '限时折扣'"}
 <div class="goods-header js-goods-header goods-activity clearfix">
 	<input type="hidden" id="end_time"  value="{$goods_detail['promotion_detail']['end_time'] | getTimeStampTurnTime}"/>
 	<div class="goods-price">
@@ -131,6 +131,26 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 			<span class="c-red js-hour">00</span> {:lang('hours')}
 			<span class="c-red js-min">00</span> {:lang('minutes')}
 			<span class="c-red js-sec">00</span> {:lang('second')}</div>
+		</div>
+	</div>
+</div>
+{else if condition = "$goods_detail['promotion_info'] eq '疯狂秒杀'"/}
+<div class="goods-header js-goods-header goods-activity clearfix">
+	<input type="hidden" id="end_time"  value="{$goods_detail['promotion_detail']['end_time'] | getTimeStampTurnTime}"/>
+	<div class="goods-price">
+		<div class="current-price activity-price">
+			<span>¥</span><i class="js-goods-price price">{$goods_detail.promotion_price}</i>
+			<span class="price-title js-price-title ">疯狂秒杀</span>
+			<span class="goods-unit-style">/{if condition ="empty($goods_detail['goods_unit'])"}件{else/}{$goods_detail['goods_unit']}{/if}</span>
+		</div>
+		<em class="original-price">¥{$goods_detail.price}</em>
+		<div class="font-size-12 overview-countdown js-activity-tips started " data-status="started">
+			<div class="countdown-title">{:lang('distance_ends')}</div>
+			<div class="js-discount-time countdown" data-countdown="3542691">
+				<span class="c-red js-day">00</span> {:lang('days')}
+				<span class="c-red js-hour">00</span> {:lang('hours')}
+				<span class="c-red js-min">00</span> {:lang('minutes')}
+				<span class="c-red js-sec">00</span> {:lang('second')}</div>
 		</div>
 	</div>
 </div>

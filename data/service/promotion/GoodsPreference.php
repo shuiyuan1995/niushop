@@ -446,15 +446,16 @@ class GoodsPreference extends BaseService
         if ($promote_info['promotion_type'] == 0) {
             // 无促销活动
             return '';
-        } else 
-            if ($promote_info['promotion_type'] == 1) {
+        } elseif ($promote_info['promotion_type'] == 1) {
                 // 团购(注意查询活动时间)
                 return '团购';
-            } else 
-                if ($promote_info['promotion_type'] == 2) {
+        } elseif ($promote_info['promotion_type'] == 2) {
                     // 限时折扣(注意查询活动时间)
                     return '限时折扣';
-                }
+        } elseif ($promote_info['promotion_type'] == 3) {
+            // 限时折扣(注意查询活动时间)
+            return '疯狂秒杀';
+        }
     }
 
     /**

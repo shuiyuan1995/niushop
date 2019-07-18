@@ -889,5 +889,7 @@ interface IGoods
      * @param unknown $goods_id
      */
     function getGoodsSkuListByGoodsId($goods_id);
+
+    public function getSpikeGoodsList($page_index = 1, $page_size = 0, $condition = array(), $order = '');
 }
 

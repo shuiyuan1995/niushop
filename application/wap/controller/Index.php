@@ -282,9 +282,9 @@ class Index extends BaseController
             exit();
         }
         $platform = new Platform();
-        // 限时折扣广告位
-        $discounts_adv = $platform->getPlatformAdvPositionDetail(1163);
-        $this->assign('discounts_adv', $discounts_adv);
+        // 限时秒杀广告位
+        $spike_adv = $platform->getPlatformAdvPositionDetailByApKeyword("spike");
+        $this->assign('spike_adv', $spike_adv);
         if (request()->isAjax()) {
             $goods = new Goods();
             $category_id = request()->get('category_id', '0');
@@ -294,20 +294,20 @@ class Index extends BaseController
             if (! empty($category_id)) {
                 $condition['category_id_1'] = $category_id;
             }
-            $discount_list = $goods->getDiscountGoodsList($page_index, PAGESIZE, $condition, "ng.sort asc,ng.create_time desc");
-            foreach ($discount_list['data'] as $k => $v) {
-                $v['discount'] = str_replace('.00', '', $v['discount']);
+            $spike_list = $goods->getSpikeGoodsList($page_index, PAGESIZE, $condition, "ng.sort asc,ng.create_time desc");
+            foreach ($spike_list['data'] as $k => $v) {
+                $v['spike'] = str_replace('.00', '', $v['spike']);
                 $v['promotion_price'] = str_replace('.00', '', $v['promotion_price']);
                 $v['price'] = str_replace('.00', '', $v['price']);
             }
-            return $discount_list;
+            return $spike_list;
         } else {
             $goods_category = new GoodsCategory();
             $goods_category_list_1 = $goods_category->getGoodsCategoryList(1, 0, [
                 "is_visible" => 1,
                 "level" => 1
             ]);
-            $discount = Db::name('ns_promotion_discount')->field('keywords,description')->where('end_time','>',time())->select();
+            $discount = Db::name('ns_promotion_spike')->field('keywords,description')->where('end_time','>',time())->select();
             $seo = array();
             foreach ($discount as $k => $v){
                 if ($v['keywords'] != ''){

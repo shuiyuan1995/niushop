@@ -48,6 +48,7 @@ class Task extends Controller
         $retval_order_close = $event->ordersClose();
         $retval_mansong_operation = $event->mansongOperation();
         $retval_discount_operation = $event->discountOperation();
+        $retval_spike_operation = $event->spikeOperation();
         $retval_order_complete = $event->ordersComplete();
         $retval_order_autodeilvery = $event->autoDeilvery();
         $retval_auto_coupon_close = $event->autoCouponClose();

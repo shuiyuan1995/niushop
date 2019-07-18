@@ -26,6 +26,7 @@ use data\model\NsOrderModel;
 use data\model\NsOrderRefundModel;
 use data\model\UserModel;
 use data\service\BaseService;
+use data\service\Config;
 use data\service\GoodsCalculate\GoodsCalculate;
 use data\service\Member\MemberAccount;
 use data\service\Order\OrderStatus;
@@ -994,7 +995,7 @@ class OrderGoods extends BaseService
         $order_goods = new NsOrderGoodsModel();
         $order_goods_info = $order_goods->getInfo([
             'order_goods_id' => $order_goods_id
-        ], 'order_id,sku_id,goods_money,point_exchange_type,refund_status');
+        ], 'order_id,sku_id,num,goods_money,point_exchange_type,refund_status');
         $order_goods_promotion = new NsOrderGoodsPromotionDetailsModel();
         $promotion_money = $order_goods_promotion->where([
             'order_id' => $order_goods_info['order_id'],
@@ -1004,6 +1005,14 @@ class OrderGoods extends BaseService
             $promotion_money = 0;
         }
         $money = $order_goods_info['goods_money'] - $promotion_money;
+
+        $config = new Config();
+        $goods_num = $order_goods_info['num'];
+        $chaibao = $config->getChaiBaoConfig($this->instance_id)['value'];
+        $fuwu = $config->getFuWuConfig($this->instance_id)['value'];
+
+        //服务费+拆包费
+        $money += $fuwu*$goods_num +ceil($goods_num/2)*$chaibao;
         // 计算其他方式支付金额
         $order = new NsOrderModel();
         $order_other_pay_money = $order->getInfo([

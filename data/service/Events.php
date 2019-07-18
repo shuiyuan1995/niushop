@@ -17,6 +17,8 @@
 namespace data\service;
 use data\api\IEvents;
 use data\model\NsPromotionMansongModel;
+use data\model\NsPromotionSpikeGoodsModel;
+use data\model\NsPromotionSpikeModel;
 use data\service\Order;
 use data\model\NsOrderModel;
 use data\model\NsPromotionMansongGoodsModel;
@@ -96,13 +98,13 @@ class Events implements IEvents{
             }else{
                 return 1;
             }
-//            $time = time()-$close_time*60;//订单自动关闭
-//            $condition = array(
-//                'order_status' => array('in','0'),
-//                'create_time'  => array('LT', $time),
-//                'payment_type' => array('neq', 6)
-//            );
-//            $order_list = $order_model->getQuery($condition, 'order_id', '');
+            $time = time()-$close_time*60;//订单自动关闭
+            $condition = array(
+                'order_status' => array('in','0'),
+                'create_time'  => array('LT', $time),
+                'payment_type' => array('neq', 6)
+            );
+            $order_list = $order_model->getQuery($condition, 'order_id', '');
             $time=time();
             $presell_order_condition = array(
                 'order_status' => array('in','6'),
@@ -290,6 +292,115 @@ class Events implements IEvents{
             return $e;
         }
     }
+
+    /**
+     * (non-PHPdoc)
+     * @see \data\api\IEvents::spikeOperation()
+     */
+    public function spikeOperation(){
+        $spike = new NsPromotionSpikeModel();
+        $spike->startTrans();
+        try{
+            $time = time();
+            $spike_goods = new NsPromotionSpikeGoodsModel();
+            /************************************************************结束活动**************************************************************/
+            $condition_close = array(
+                'end_time' => array('LT', $time),
+                'status'   => array('NEQ', 3)
+            );
+            $spike->save(['status' => 4], $condition_close);
+            $spike_close_goods_list = $spike_goods->getQuery($condition_close, '*', '');
+            if(!empty($spike_close_goods_list))
+            {
+                foreach ( $spike_close_goods_list as $k => $spike_goods_item)
+                {
+                    $goods = new NsGoodsModel();
+
+                    $data_goods = array(
+                        'promotion_type' => 3,
+                        'promote_id'     => $spike_goods_item['spike_id']
+                    );
+                    $goods_id_list = $goods->getQuery($data_goods, 'goods_id', '');
+                    if(!empty($goods_id_list))
+                    {
+                        foreach($goods_id_list as $k => $goods_id)
+                        {
+                            $goods_info = $goods->getInfo(['goods_id' => $goods_id['goods_id']], 'promotion_type,price');
+                            $goods->save(['promotion_price' => $goods_info['price']], ['goods_id'=> $goods_id['goods_id'] ]);
+                            $goods_sku = new NsGoodsSkuModel();
+                            $goods_sku_list = $goods_sku->getQuery(['goods_id'=> $goods_id['goods_id'] ], 'price,sku_id', '');
+                            foreach ($goods_sku_list as $k_sku => $sku)
+                            {
+                                $goods_sku = new NsGoodsSkuModel();
+                                $data_goods_sku = array(
+                                    'promote_price' => $sku['price']
+                                );
+                                $goods_sku->save($data_goods_sku, ['sku_id' => $sku['sku_id']]);
+                            }
+
+                        }
+
+                    }
+                    $goods->save(['promotion_type' => 0, 'promote_id' => 0], $data_goods);
+
+                }
+            }
+            $spike_goods->save(['status' => 4], $condition_close);
+            /************************************************************结束活动**************************************************************/
+            /************************************************************开始活动**************************************************************/
+            $condition_start = array(
+                'start_time' => array('ELT', $time),
+                'status'   => 0
+            );
+            //查询待开始活动列表
+            $spike_goods_list = $spike_goods->getQuery($condition_start, '*', '');
+            if(!empty($spike_goods_list))
+            {
+                foreach ( $spike_goods_list as $k => $spike_goods_item)
+                {
+                    $goods = new NsGoodsModel();
+                    $goods_info = $goods->getInfo(['goods_id' => $spike_goods_item['goods_id']],'promotion_type,price');
+
+                    $promotion_price = $goods_info['price'] * $spike_goods_item['spike']/10;
+                    if($spike_goods_item['decimal_reservation_number'] >= 0){
+                        $promotion_price = sprintf("%.2f", round($promotion_price, $spike_goods_item['decimal_reservation_number']));
+                    }
+
+                    $data_goods = array(
+                        'promotion_type' => 3,
+                        'promote_id'     => $spike_goods_item['spike_id'],
+                        'promotion_price'  => $promotion_price
+                    );
+
+                    $goods->save($data_goods,['goods_id' => $spike_goods_item['goods_id']]);
+                    $goods_sku = new NsGoodsSkuModel();
+                    $goods_sku_list = $goods_sku->getQuery(['goods_id'=> $spike_goods_item['goods_id'] ], 'price,sku_id', '');
+                    foreach ($goods_sku_list as $k_sku => $sku)
+                    {
+                        $goods_sku = new NsGoodsSkuModel();
+                        $promote_price = $sku['price']*$spike_goods_item['spike']/10;
+                        if($spike_goods_item['decimal_reservation_number'] >= 0){
+                            $promote_price = sprintf("%.2f", round($promote_price, $spike_goods_item['decimal_reservation_number']));
+                        }
+                        $data_goods_sku = array(
+                            'promote_price' => $promote_price
+                        );
+                        $goods_sku->save($data_goods_sku, ['sku_id' => $sku['sku_id']]);
+                    }
+                }
+            }
+            $spike_goods->save(['status' => 1], $condition_start);
+            $spike->save(['status' => 1], $condition_start);
+            /************************************************************开始活动**************************************************************/
+            $spike->commit();
+            return 1;
+        }catch (\Exception $e)
+        {
+            $spike->rollback();
+            return $e;
+        }
+    }
+
     /**
      * (non-PHPdoc)
      * @see \data\api\IEvents::autoDeilvery()

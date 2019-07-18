@@ -29,7 +29,6 @@ class NsPromotionSpikeGoodsViewModel extends BaseModel {
      * @return unknown
      */
     public function getViewList($page_index, $page_size, $condition, $order){
-    
         $queryList = $this->getViewQuery($page_index, $page_size, $condition, $order);
         $queryCount = $this->getViewCount($condition);
         $list = $this->setReturnList($queryList, $queryCount, $page_size);
@@ -46,9 +45,9 @@ class NsPromotionSpikeGoodsViewModel extends BaseModel {
     public function getViewQuery($page_index, $page_size, $condition, $order)
     {
         //设置查询视图
-        $viewObj = $this->alias('npdg')
-        ->join('ns_goods ng','ng.goods_id = npdg.goods_id','inner')
-        ->field('npdg.spike_goods_id,npdg.spike_id,npdg.start_time,npdg.end_time,npdg.goods_id,npdg.status,npdg.spike,ng.goods_name,ng.picture,ng.category_id_1,ng.price,ng.promotion_price,ng.market_price,ng.point_exchange_type,ng.point_exchange');
+        $viewObj = $this->alias('npsg')
+        ->join('ns_goods ng','ng.goods_id = npsg.goods_id','inner')
+        ->field('npsg.spike_goods_id,npsg.spike_id,npsg.start_time,npsg.end_time,npsg.goods_id,npsg.status,npsg.spike,ng.goods_name,ng.picture,ng.category_id_1,ng.price,ng.promotion_price,ng.market_price,ng.point_exchange_type,ng.point_exchange');
         $list = $this->viewPageQuery($viewObj, $page_index, $page_size, $condition, $order);
         return $list;
     }
@@ -59,9 +58,9 @@ class NsPromotionSpikeGoodsViewModel extends BaseModel {
      */
     public function getViewCount($condition)
     {
-        $viewObj = $this->alias('npdg')
-        ->join('ns_goods ng','ng.goods_id = npdg.goods_id','inner')
-        ->field('npdg.spike_goods_id');
+        $viewObj = $this->alias('npsg')
+        ->join('ns_goods ng','ng.goods_id = npsg.goods_id','inner')
+        ->field('npsg.spike_goods_id');
         $count = $this->viewCount($viewObj,$condition);
         return $count;
     }

@@ -2041,7 +2041,7 @@ class Promotion extends BaseService implements IPromotion
                 $goods = new NsGoodsModel();
 
                 $data_goods = array(
-                    'promotion_type' => 2,
+                    'promotion_type' => 3,
                     'promote_id' => $spike_id
                 );
                 $goods_id_list = $goods->getQuery($data_goods, 'goods_id', '');

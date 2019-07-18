@@ -48,6 +48,11 @@ interface IEvents
     function discountOperation();
 
     /**
+     * 限时秒杀自动开始以及自动关闭
+     */
+    function spikeOperation();
+
+    /**
      * 自动收货
      */
     function autoDeilvery();

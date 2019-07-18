@@ -260,6 +260,9 @@ class Goods extends BaseController
                     if ($goods_info["promotion_info"] == '限时折扣') {
                         // 活动-->商品详情界面
                         return view($this->style . 'Goods/goodsInfoPromotion');
+                    } elseif ($goods_info["promotion_info"] == '疯狂秒杀'){
+                        // 活动-->商品详情界面
+                        return view($this->style . 'Goods/goodsInfoSpike');
                     } else {
                         // 基础-->商品详情界面
                         return view($this->style . 'Goods/goodsInfo');
