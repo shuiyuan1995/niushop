@@ -1,0 +1,351 @@
+{extend name="wap/default_new/base" /}
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/components.css">
+<link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/group_goods_list.css">
+<link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/group_buy.css">
+<style>
+	.custom-tag-list {
+		margin-bottom: 10px;
+	}
+
+	.group-list-box {
+		width: 100%;
+	}
+
+	.group-list-box .group-list li {
+		margin: 0 3px 5px 3px;
+	}
+
+	.brand-info .brand-info-right .main-btn {
+		font-size: 12px;
+	}
+
+	/* .slick {max-height: 175px;} */
+	.custom-tag-list {
+		margin-top: 0;
+	}
+
+	/* .slick{margin-bottom: 10px;} */
+	.custom-tag-list {
+		padding-top: 0;
+	}
+
+	.group-list-box .group-list li .brand-name {
+		text-align: left;
+	}
+
+	.group-list-box {
+		margin-left: 0px;
+	}
+
+	.spiketable {
+		display: flex;
+		background: #eb852a;
+		color: #ffffff;
+		padding: 4px 0;
+		font-weight: 600;
+	}
+
+	.spiketable p {
+		flex: 1;
+	}
+
+	.spiketable p.active {
+		color: #010101;
+	}
+
+	.spiketable span {
+		display: block;
+		text-align: center;
+	}
+
+	.spiketime {
+		display: flex;
+		background: #ffffff;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 10px;
+		height: 28px;
+	}
+
+	.spiketime span {
+		padding: 2px 4px;
+		font-size: 12px;
+		color: #ffffff;
+		border-radius: 4px;
+		background: #eb852a;
+		margin: 0 4px;
+	}
+	.group-list-box .group-list li{
+		display: flex;
+		align-items: center;
+		padding: 5px;
+	}
+	.group-list .lazy_load{
+		width: 120px;
+		height: 120px;
+	}
+	.p-right {
+		margin-left: 10px;
+		flex: 1;
+	}
+	.p-right .brand-title{
+		font-size: 15px;
+		max-height: 45px;
+		overflow: hidden;
+	}
+	.p-right .brand-name{
+		font-size: 12px !important;
+		color: #ee2a2b !important;
+	}
+	.p-right .brand-price{
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		font-size: 15px;
+		color: #df0021;
+		font-weight: bold;
+	}
+	.p-right button{
+		width: 80px;
+		height: 34px;
+		background-color: #eb852a;
+		border-radius: 5px;
+		border: none;
+		font-size: 15px;
+		color: #ffffff;
+	}
+	.p-right .brand-bottom{
+		display: flex;
+		justify-content: space-between;
+		color: #8e8e8e;
+		font-size: 12px;
+	}
+	.p-right .bb-price{
+		text-decoration: line-through;
+	}
+	.p-right .bb-box{
+		display: flex;
+		align-items: center;
+	}
+	.p-right .bb-boxbar{
+		width: 86px;
+		height: 5px;
+		border-radius: 3px;
+		border: solid 1px #f29a76;
+		margin-left: 4px;
+		position: relative;
+		box-shadow: 0px 0 0px 1px #f29a76 inset;
+	}
+	.p-right .bb-boxinfo{
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		height: 100%;
+		border-radius: 3px;
+		background: #f29a76;
+		width: 22%
+	}
+</style>
+{/block}
+
+{block name="goodsHead"}
+<section class="head">
+	<a class="head_back" href="javascript:window.history.go(-1)"><i class="icon-back"></i></a>
+	<div class="head-title"><span style="margin-left: 40px;">{:lang("goods_discount")}</span>
+		{include file="wap/default_new/controGroup" /}
+	</div>
+</section>
+<div style="height: 45px;"></div>
+<input type="hidden" id="page_count"><!-- 总页数 -->
+<input type="hidden" id="page" value="1"><!-- 当前页数 -->
+<input type="hidden" id="ms_time" value="{$ms_time}" />
+{/block}
+{block name="main"}
+<div class="custom-tag-list clearfix">
+	<div class="group-list-box">
+		{if condition="$discounts_adv['is_use'] eq 1"}
+		{if condition="$discounts_adv['adv_list'][0]['adv_image'] neq ''"}
+		<!-- <div class="slick">
+				<a href="{$discounts_adv['adv_list'][0]['adv_url']}">
+					<img src="{:__IMG($discounts_adv['adv_list'][0]['adv_image'])}" style="max-width: 100%;max-height: 100%;">
+					style="height:{$discounts_adv.ap_height}px;"
+				</a>
+			</div> -->
+		{/if}
+		{/if}
+		<div class="spiketable">
+			<p>
+				<span>12:00</span>
+				<span>抢购完成</span>
+			</p>
+			<p class="active">
+				<span>14:00</span>
+				<span>抢购中</span>
+			</p>
+			<p>
+				<span>14:00</span>
+				<span>即将开抢</span>
+			</p>
+			<p>
+				<span>18:00</span>
+				<span>即将开抢</span>
+			</p>
+			<p>
+				<span>20:00</span>
+				<span>即将开抢</span>
+			</p>
+		</div>
+		<div class="spiketime">
+			<p>抢购中，先下单先得哦</p>
+			<p class="settime" endtime="2019-07-19 06:00:00">距结束<span>00</span>:<span>31</span>:<span>55</span></p>
+		</div>
+		<ul class="group-list" style="overflow: hidden;">
+			<li>
+				<a href="http://www.shuiyuan.com/wap/goods/goodsdetail?id=5" title="玉溪">
+					<img src="/upload/goods/20190404/3d7440eaf4982f2f3c23a10d4c9df3cd3.png" class="lazy_load" data-original="/upload/goods/20190404/3d7440eaf4982f2f3c23a10d4c9df3cd3.png" style="display: block;">
+				</a>
+				<div class="p-right">
+					<a href="http://www.shuiyuan.com/wap/goods/goodsdetail?id=5" title="玉溪">
+						<p class="brand-title">玉溪</p>
+					</a>
+					<p class="brand-name">高性价 正品保障</p>
+					<div class="brand-price">
+						<p class="b-price">¥0.00</p>
+						<button>立即抢购</button>
+					</div>
+					<div class="brand-bottom">
+						<p class="bb-price">¥0.00</p>
+						<div class="bb-box">
+							已售22%
+							<p class="bb-boxbar"><span class="bb-boxinfo"></span></p>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<script>
+		$(function () {
+			showCategorySecond(0, 0, 1);
+			updateEndTime();
+		})
+
+		var is_load = true;
+		function showCategorySecond(obj, category_id, page) {
+			//设置选中效果
+			if ($(obj).length != 0) {
+				$(".custom-tag-list-side-menu li a").removeClass("selected");
+				$(obj).addClass("selected");
+			}
+			if (is_load) {
+				is_load = false;
+				// $.ajax({
+				// 	type : "get",
+				// 	url:'{:__URL('APP_MAIN/Index/discount')}',
+				// 	async:false,
+				// 	data:{'category_id':category_id,"page":page},
+				// 	dataType:'json',
+				// 	success:function(data){
+
+				// 		is_load = true;
+				// 		$("#page_count").val(data['page_count']);
+				// 		$("#page").val(page);
+				// 		if(page == 1){
+				// 			var list_html='';
+				// 		}else if(page > 1){
+				// 			var list_html = $('.group-list').html();
+				// 		}
+
+				// 		if(data['data'].length==0){
+				// 			$('.group-list').html('<p style="color:#939393;text-align:center;margin-top:100px;"><img src="__TEMP__/{$style}/public/images/wap_nodata.png" height="60" style="margin-bottom:20px;"><br>Sorry！{:lang("goods_no_goods_you_want")}…</p>');
+				// 		}else{
+				// 			for(key in data['data']){
+
+				// 				var item=data['data'][key];
+				// 				var img = "";
+				// 				if(item.picture != null){
+				// 					img = item.picture.pic_cover_small;
+				// 				}
+
+				// 				list_html+='<li>'
+				// 					+'<div class="p-img">'
+				// 					+'<a href="'+__URL('APP_MAIN/goods/goodsdetail?id='+item.goods_id)+'" title="'+item.goods_name+'">'
+				// 					//"{:__IMG($default_goods_img)}"
+				// 					+'<img src="'+ __IMG(img) +'" class="lazy_load" data-original="'+__IMG(img)+'">'
+				// 					+'</a>'
+				// 					+'<div class="brand-time">'
+				// 					+'<i></i>'
+				// 					+'<span class="settime" starttime="'+timeStampTurnTime(item.start_time)+'" endtime="'+timeStampTurnTime(item.end_time)+'"></span>'
+				// 					+'</div>'
+				// 					+'</div>'
+				// 					+'<span class="brand-name">'+item.goods_name+'</span>'
+				// 					+'<div class="brand-info"  style="height:initial;">'
+				// 					+'<div class="brand-info-left"  style="float:none;">'
+				// 					+'<p class="b-price" style="float:left;margin:5px 0;">'+item.display_price+'</p>';
+				// 					if(item.market_price > 0){
+				// 					    list_html+= '<p class="buyer" style="float:right;line-height:30px;"><s>¥'+item.price+'{:lang("element")}</s></p>';
+				// 					}
+				// 					list_html+= '</div>'
+				// 					list_html+= '</div></li>';
+				// 			}
+				// 			$('.group-list').html(list_html);
+				// 		}
+				// 		img_lazyload();	
+				// 		// updateEndTime();
+				// 	}
+				// });
+			}
+		}
+
+		//倒计时函数
+		function updateEndTime() {
+			var date = new Date();
+			var time = date.getTime(); //当前时间距1970年1月1日之间的毫秒数
+			$(".settime").each(function (i) {
+				var endDate = this.getAttribute("endTime"); //结束时间字符串
+				//转换为时间日期类型
+				var endDate1 = eval('new Date(' + endDate.replace(/\d+(?=-[^-]+$)/, function (a) {
+					return parseInt(a, 10) - 1;
+				}).match(/\d+/g) + ')');
+
+				var endTime = endDate1.getTime(); //结束时间毫秒数
+				var lag = (endTime - time) / 1000; ///当前时间和结束时间之间的秒数
+				if (lag > 0) {
+					var second = Math.floor(lag % 60);
+					var minite = Math.floor((lag / 60) % 60);
+					var hour = Math.floor((lag / 3600) % 24);
+					var day = Math.floor((lag / 3600) / 24);
+					$(this).html("距结束<span>" + hour + "</span>:<span>" + minite + "</span>:<span>" + second + "</span>")
+					// $(this).html(hour + ":" + minite + ":" + second);
+				} else {
+					$(this).html("已结束");
+				}
+			});
+			setTimeout("updateEndTime()", 1000);
+		}
+
+		//滑动到底部加载
+		$(window).scroll(function () {
+			var totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
+			var content_box_height = parseFloat($(".group-list-box").height());
+			//console.log(totalheight,content_box_height);
+			if (totalheight - content_box_height >= 50 && content_box_height > 0) {
+
+				if (is_load) {
+					var page = parseInt($("#page").val()) + 1;//页数
+					var total_page_count = $("#page_count").val(); // 总页数
+					var sear_type = $("#sear_type").val();
+
+					if (page > total_page_count) {
+						return false;
+					} else {
+						showCategorySecond(0, 0, page);
+					}
+				}
+			}
+		})
+	</script>
+</div>
+{/block}
+{block name="bottom"}{/block}
