@@ -152,7 +152,7 @@
 {block name="goodsHead"}
 <section class="head">
 	<a class="head_back" href="javascript:window.history.go(-1)"><i class="icon-back"></i></a>
-	<div class="head-title"><span style="margin-left: 40px;">{:lang("goods_discount")}</span>
+	<div class="head-title"><span style="margin-left: 40px;">疯狂秒杀</span>
 		{include file="wap/default_new/controGroup" /}
 	</div>
 </section>
@@ -164,72 +164,83 @@
 {block name="main"}
 <div class="custom-tag-list clearfix">
 	<div class="group-list-box">
-		{if condition="$discounts_adv['is_use'] eq 1"}
-		{if condition="$discounts_adv['adv_list'][0]['adv_image'] neq ''"}
-		<!-- <div class="slick">
-				<a href="{$discounts_adv['adv_list'][0]['adv_url']}">
-					<img src="{:__IMG($discounts_adv['adv_list'][0]['adv_image'])}" style="max-width: 100%;max-height: 100%;">
-					style="height:{$discounts_adv.ap_height}px;"
+		{if condition="$spike_adv['is_use'] eq 1"}
+		{if condition="$spike_adv['adv_list'][0]['adv_image'] neq ''"}
+		 <div class="slick">
+				<a href="{$spike_adv['adv_list'][0]['adv_url']}">
+					<img src="{:__IMG($spike_adv['adv_list'][0]['adv_image'])}" style="max-width: 100%;max-height: 100%;">
+					<!--style="height:{$spike_adv.ap_height}px;"-->
 				</a>
-			</div> -->
+			</div>
 		{/if}
 		{/if}
 		<div class="spiketable">
-			<p>
-				<span>12:00</span>
+			<p id="0">
+				<span>00:00</span>
 				<span>抢购完成</span>
 			</p>
-			<p class="active">
-				<span>14:00</span>
+			<p id="6">
+				<span>06:00</span>
 				<span>抢购中</span>
 			</p>
-			<p>
-				<span>14:00</span>
+			<p id='12'>
+				<span>12:00</span>
 				<span>即将开抢</span>
 			</p>
-			<p>
+			<p id='18'>
 				<span>18:00</span>
 				<span>即将开抢</span>
 			</p>
-			<p>
-				<span>20:00</span>
-				<span>即将开抢</span>
-			</p>
 		</div>
-		<div class="spiketime">
+		<!--<div class="spiketime">
 			<p>抢购中，先下单先得哦</p>
-			<p class="settime" endtime="2019-07-19 06:00:00">距结束<span>00</span>:<span>31</span>:<span>55</span></p>
-		</div>
+			<p class="settime">距结束<span>00</span>:<span>00</span>:<span>00</span></p>
+		</div>-->
 		<ul class="group-list" style="overflow: hidden;">
-			<li>
-				<a href="http://www.shuiyuan.com/wap/goods/goodsdetail?id=5" title="玉溪">
-					<img src="/upload/goods/20190404/3d7440eaf4982f2f3c23a10d4c9df3cd3.png" class="lazy_load" data-original="/upload/goods/20190404/3d7440eaf4982f2f3c23a10d4c9df3cd3.png" style="display: block;">
-				</a>
-				<div class="p-right">
-					<a href="http://www.shuiyuan.com/wap/goods/goodsdetail?id=5" title="玉溪">
-						<p class="brand-title">玉溪</p>
-					</a>
-					<p class="brand-name">高性价 正品保障</p>
-					<div class="brand-price">
-						<p class="b-price">¥0.00</p>
-						<button>立即抢购</button>
-					</div>
-					<div class="brand-bottom">
-						<p class="bb-price">¥0.00</p>
-						<div class="bb-box">
-							已售22%
-							<p class="bb-boxbar"><span class="bb-boxinfo"></span></p>
-						</div>
-					</div>
-				</div>
-			</li>
+
 		</ul>
 	</div>
 	<script>
 		$(function () {
 			showCategorySecond(0, 0, 1);
-			updateEndTime();
-		})
+            updateMenu();
+			//updateEndTime();
+		});
+		
+		function updateMenu() {
+			var date = new Date();
+			var time = date.getFullYear()+'-'+Number(date.getMonth()+1)+'-'+date.getDate();
+			var hour = date.getHours();
+			if (hour >= 0 && hour < 6){
+			    $("#0").addClass('active');
+			    $(".settime").attr('endtime',time+' 06:00:00');
+			    $("#0 span:eq(1)").text('抢购进行中');
+			    $("#6 span:eq(1)").text('即将开场');
+			    $("#12 span:eq(1)").text('即将开场');
+			    $("#18 span:eq(1)").text('即将开场');
+			}else if(hour >= 6 && hour < 12){
+                $("#6").addClass('active');
+                $(".settime").attr('endtime',time+' 12:00:00');
+                $("#0 span:eq(1)").text('已开抢');
+                $("#6 span:eq(1)").text('抢购进行中');
+                $("#12 span:eq(1)").text('即将开场');
+                $("#18 span:eq(1)").text('即将开场');
+			}else if(hour >= 12 && hour < 18){
+                $("#12").addClass('active');
+                $(".settime").attr('endtime',time+' 18:00:00');
+                $("#0 span:eq(1)").text('已开抢');
+                $("#6 span:eq(1)").text('已开抢');
+                $("#12 span:eq(1)").text('抢购进行中');
+                $("#18 span:eq(1)").text('即将开场');
+            }else if(hour >= 18 && hour < 24){
+                $("#18").addClass('active');
+                $(".settime").attr('endtime',time+' 24:00:00');
+                $("#0 span:eq(1)").text('已开抢');
+                $("#6 span:eq(1)").text('已开抢');
+                $("#12 span:eq(1)").text('已开抢');
+                $("#18 span:eq(1)").text('抢购进行中');
+            }
+        }
 
 		var is_load = true;
 		function showCategorySecond(obj, category_id, page) {
@@ -239,65 +250,65 @@
 				$(obj).addClass("selected");
 			}
 			if (is_load) {
-				is_load = false;
-				// $.ajax({
-				// 	type : "get",
-				// 	url:'{:__URL('APP_MAIN/Index/discount')}',
-				// 	async:false,
-				// 	data:{'category_id':category_id,"page":page},
-				// 	dataType:'json',
-				// 	success:function(data){
+                is_load = false;
+                $.ajax({
+                    type : "get",
+                    url:'{:__URL('APP_MAIN/Index/spike')}',
+                    async:false,
+                    data:{'category_id':category_id,"page":page},
+                	dataType:'json',
+                    success:function(data){
+                    is_load = true;
+                    $("#page_count").val(data['page_count']);
+                    $("#page").val(page);
+                    if(page == 1){
+                        var list_html='';
+                    }else if(page > 1) {
+                        var list_html = $('.group-list').html();
+                    }
 
-				// 		is_load = true;
-				// 		$("#page_count").val(data['page_count']);
-				// 		$("#page").val(page);
-				// 		if(page == 1){
-				// 			var list_html='';
-				// 		}else if(page > 1){
-				// 			var list_html = $('.group-list').html();
-				// 		}
-
-				// 		if(data['data'].length==0){
-				// 			$('.group-list').html('<p style="color:#939393;text-align:center;margin-top:100px;"><img src="__TEMP__/{$style}/public/images/wap_nodata.png" height="60" style="margin-bottom:20px;"><br>Sorry！{:lang("goods_no_goods_you_want")}…</p>');
-				// 		}else{
-				// 			for(key in data['data']){
-
-				// 				var item=data['data'][key];
-				// 				var img = "";
-				// 				if(item.picture != null){
-				// 					img = item.picture.pic_cover_small;
-				// 				}
-
-				// 				list_html+='<li>'
-				// 					+'<div class="p-img">'
-				// 					+'<a href="'+__URL('APP_MAIN/goods/goodsdetail?id='+item.goods_id)+'" title="'+item.goods_name+'">'
-				// 					//"{:__IMG($default_goods_img)}"
-				// 					+'<img src="'+ __IMG(img) +'" class="lazy_load" data-original="'+__IMG(img)+'">'
-				// 					+'</a>'
-				// 					+'<div class="brand-time">'
-				// 					+'<i></i>'
-				// 					+'<span class="settime" starttime="'+timeStampTurnTime(item.start_time)+'" endtime="'+timeStampTurnTime(item.end_time)+'"></span>'
-				// 					+'</div>'
-				// 					+'</div>'
-				// 					+'<span class="brand-name">'+item.goods_name+'</span>'
-				// 					+'<div class="brand-info"  style="height:initial;">'
-				// 					+'<div class="brand-info-left"  style="float:none;">'
-				// 					+'<p class="b-price" style="float:left;margin:5px 0;">'+item.display_price+'</p>';
-				// 					if(item.market_price > 0){
-				// 					    list_html+= '<p class="buyer" style="float:right;line-height:30px;"><s>¥'+item.price+'{:lang("element")}</s></p>';
-				// 					}
-				// 					list_html+= '</div>'
-				// 					list_html+= '</div></li>';
-				// 			}
-				// 			$('.group-list').html(list_html);
-				// 		}
-				// 		img_lazyload();	
-				// 		// updateEndTime();
-				// 	}
-				// });
+					if(data['data'].length==0){
+						$('.group-list').html('<p style="color:#939393;text-align:center;margin-top:100px;"><img src="__TEMP__/{$style}/public/images/wap_nodata.png" height="60" style="margin-bottom:20px;"><br>Sorry！{:lang("goods_no_goods_you_want")}…</p>');
+					}else{
+						for(key in data['data'])
+						var item=data['data'][key];
+						var img = "";
+						if(item.picture != null){
+							img = item.picture.pic_cover_small;
+							list_html += '<li>' +
+								'<a href="'+__URL('APP_MAIN/goods/goodsdetail?id='+item.goods_id+'&goods_name='+item.goods_name)+'" title="'+item.goods_name+'">' +
+								'<img src="'+ __IMG(img) +'" class="lazy_load" data-original="'+__IMG(img)+'">'+
+								'<div class="p-right">' +
+								'<a href="'+__URL('APP_MAIN/goods/goodsdetail?id='+item.goods_id+'&goods_name='+item.goods_name)+'" title="'+item.goods_name+'">'+
+								'<p class="brand-title">'+item.goods_name+'</p>' +
+								'</a>' +
+								'<p class="brand-name">高性价 正品保障</p>' +
+								'<div class="brand-price">' +
+								'<p class="b-price">'+item.display_price+'</p>' +
+								'<button value="'+__URL('APP_MAIN/goods/goodsdetail?id='+item.goods_id+'&goods_name='+item.goods_name)+'" onclick="qiangGou(this.value);" style="cursor: pointer;">立即抢购</button>' +
+								'</div>' +
+								'<div class="brand-bottom">' +
+								'<p class="bb-price">¥'+item.price+'</p>' +
+								'<div class="bb-box">' +
+								'已售22%' +
+								'<p class="bb-boxbar"><span class="bb-boxinfo"></span></p>' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'</li>';
+						}
+						$('.group-list').html(list_html);
+					}
+					//img_lazyload();
+					//updateEndTime();
+					}
+                })
 			}
 		}
 
+		function qiangGou(url) {
+			window.location.href = url;
+        }
 		//倒计时函数
 		function updateEndTime() {
 			var date = new Date();
