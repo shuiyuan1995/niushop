@@ -102,6 +102,23 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 	background: url('__TEMP__/{$style}/public/images/gonggao.png') center no-repeat;
 	background-size: 20px 20px
 }
+.hotbox{
+	padding: 0 10px;
+	background: #ffffff;
+	display: flex;
+	color: #bdbdbd;
+}
+.hotbox ul{
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: 6px;
+}
+.hotbox li{
+	margin-right: 4px;
+}
+.hotbox a{
+	color: #bdbdbd;
+}
 </style>
 {/block}
 
@@ -322,6 +339,24 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 		</div>
 		{/if}
 	{/foreach}
+</div>
+<!-- 搜索栏 -->
+{include file='wap/default_new/Index/controlSearch'/}
+<!-- -热门搜索热搜词显示 -->
+<div class="hotbox">
+	<h6>热门搜索:</h6>
+	<ul class="hotsearch">
+		<!-- {volist name="hot_keys" id="hot_key" empty=""}
+		<li><a  href="{:__URL('SHOP_MAIN/goods/goodslist','keyword='.$hot_key)}" title="{$hot_key}">{$hot_key}</a></li>
+		{/volist} -->
+		<li><a  href="{:__URL('SHOP_MAIN/goods/goodslist','keyword='.$hot_key)}" title="{$hot_key}">南京</a></li>
+		<li><a  href="{:__URL('SHOP_MAIN/goods/goodslist','keyword='.$hot_key)}" title="{$hot_key}">南京</a></li>
+		<li><a  href="{:__URL('SHOP_MAIN/goods/goodslist','keyword='.$hot_key)}" title="{$hot_key}">南京</a></li>
+		<li><a  href="{:__URL('SHOP_MAIN/goods/goodslist','keyword='.$hot_key)}" title="{$hot_key}">南京</a></li>
+		<li><a  href="{:__URL('SHOP_MAIN/goods/goodslist','keyword='.$hot_key)}" title="{$hot_key}">南京</a></li>
+		<li><a  href="{:__URL('SHOP_MAIN/goods/goodslist','keyword='.$hot_key)}" title="{$hot_key}">南京</a></li>
+		<li><a  href="{:__URL('SHOP_MAIN/goods/goodslist','keyword='.$hot_key)}" title="{$hot_key}">南京</a></li>
+	</ul>
 </div>
 <div class="foot-nav">
 	<div class="nav">

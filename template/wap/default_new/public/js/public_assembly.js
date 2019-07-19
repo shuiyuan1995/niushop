@@ -9,20 +9,20 @@ $(function(){
 	$('html').append('<div id="detail"></div>');
 	$('.custom-search-input').keyup(function(){
 		var search = $(this).val();
-
 	})
-	// $('.custom-search-button').click(function(){
-	// 	var search = $('.custom-search-input').val();
-	// 	var shop_id = $('#hidden_shop_id').val();
-	// 	location.href= __URL(APPMAIN+"/goods/goodssearchlist?search_name="+search+"&shop_id="+shop_id);
-	// })
+	$('.custom-search-button').click(function(){
+		var search = $(this).prev().val();
+		var shop_id = $(this).next().val();
+		location.href= __URL(APPMAIN+"/goods/goodssearchlist?search_name="+search+"&shop_id="+shop_id);
+	})
 })
 
 document.onkeydown=function(event){ 
 	e = event ? event :(window.event ? window.event : null);
 	if(e.keyCode==13){
-		var search = $('.custom-search-input').val();
-		var shop_id = $('#hidden_shop_id').val();
+		console.log(e.target)
+		var search = $(e.target).val();
+		var shop_id = $(e.target).next().next().val();
 		location.href= __URL(APPMAIN+"/goods/goodssearchlist?search_name="+search+"&shop_id="+shop_id);
 	} 
 }
