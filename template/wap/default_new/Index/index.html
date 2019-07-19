@@ -282,16 +282,9 @@ i.shipping_fee{font-style: normal;font-size: 12px!important;;background: #fff;co
 <div class="hotbox">
 	<h6>热门搜索:</h6>
 	<ul class="hotsearch">
-		<!-- {volist name="hot_keys" id="hot_key" empty=""}
-		<li><a  href="{:__URL('SHOP_MAIN/goods/goodslist','keyword='.$hot_key)}" title="{$hot_key}">{$hot_key}</a></li>
-		{/volist} -->
-		<li><a  href="{:__URL('SHOP_MAIN/goods/goodslist','keyword='.$hot_key)}" title="{$hot_key}">南京</a></li>
-		<li><a  href="{:__URL('SHOP_MAIN/goods/goodslist','keyword='.$hot_key)}" title="{$hot_key}">南京</a></li>
-		<li><a  href="{:__URL('SHOP_MAIN/goods/goodslist','keyword='.$hot_key)}" title="{$hot_key}">南京</a></li>
-		<li><a  href="{:__URL('SHOP_MAIN/goods/goodslist','keyword='.$hot_key)}" title="{$hot_key}">南京</a></li>
-		<li><a  href="{:__URL('SHOP_MAIN/goods/goodslist','keyword='.$hot_key)}" title="{$hot_key}">南京</a></li>
-		<li><a  href="{:__URL('SHOP_MAIN/goods/goodslist','keyword='.$hot_key)}" title="{$hot_key}">南京</a></li>
-		<li><a  href="{:__URL('SHOP_MAIN/goods/goodslist','keyword='.$hot_key)}" title="{$hot_key}">南京</a></li>
+		 {volist name="hot_keys" id="hot_key" empty=""}
+		<li><a  href="{:__URL('SHOP_MAIN/wap/goods/goodssearchlist','search_name='.$hot_key)}" title="{$hot_key}">{$hot_key}</a></li>
+		{/volist}
 	</ul>
 </div>
 <div class="foot-nav">

@@ -95,6 +95,13 @@ class Index extends BaseController
         $this->assign("signPackage", $ticket);
         // 网站信息
         $web_info = $this->web_site->getWebSiteInfo();
+
+        //hot_keys
+        $hot_keys = $config->getHotsearchConfig($this->instance_id);
+        $this->assign("hot_keys", $hot_keys);
+        //default_search
+        $default_key = $config->getDefaultSearchConfig($this->instance_id);
+        $this->assign("default_key", $default_key);
         
         // 首页轮播图
         $plat_adv_list = $platform->getPlatformAdvPositionDetail(1105);

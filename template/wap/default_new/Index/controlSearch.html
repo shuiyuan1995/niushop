@@ -11,7 +11,7 @@
 		<div class="login">
 			<img src="/template/shop/blue/public/images/logosmall.png" alt="login">
 		</div>
-		<input type="text" id="keyword" class="search-input custom-search-input" placeholder="{:lang('search_goods')}">
+		<input type="text" id="keyword" class="search-input custom-search-input" placeholder="{$default_key}" value="{if condition="$default_key !=''"}{$default_key}{/if}">
 		<button type="button" id="search" class="search-button custom-search-button">{:lang('search')}</button>
 		<input type="hidden" value="{$shop_id}" id="hidden_shop_id"/>
 	</div>
