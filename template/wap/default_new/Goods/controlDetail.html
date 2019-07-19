@@ -134,7 +134,7 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 		</div>
 	</div>
 </div>
-{else if condition = "$goods_detail['promotion_info'] eq '疯狂秒杀'"/}
+{elseif condition = "$goods_detail['promotion_info'] eq '疯狂秒杀'"/}
 <div class="goods-header js-goods-header goods-activity clearfix">
 	<input type="hidden" id="end_time"  value="{$goods_detail['promotion_detail']['end_time'] | getTimeStampTurnTime}"/>
 	<div class="goods-price">
