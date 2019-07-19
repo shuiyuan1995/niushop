@@ -4,148 +4,34 @@
 <link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/group_goods_list.css">
 <link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/group_buy.css">
 <style>
-	.custom-tag-list {
-		margin-bottom: 10px;
-	}
-
-	.group-list-box {
-		width: 100%;
-	}
-
-	.group-list-box .group-list li {
-		margin: 0 3px 5px 3px;
-	}
-
-	.brand-info .brand-info-right .main-btn {
-		font-size: 12px;
-	}
-
-	/* .slick {max-height: 175px;} */
-	.custom-tag-list {
-		margin-top: 0;
-	}
-
-	/* .slick{margin-bottom: 10px;} */
-	.custom-tag-list {
-		padding-top: 0;
-	}
-
-	.group-list-box .group-list li .brand-name {
-		text-align: left;
-	}
-
-	.group-list-box {
-		margin-left: 0px;
-	}
-
-	.spiketable {
-		display: flex;
-		background: #eb852a;
-		color: #ffffff;
-		padding: 4px 0;
-		font-weight: 600;
-	}
-
-	.spiketable p {
-		flex: 1;
-	}
-
-	.spiketable p.active {
-		color: #010101;
-	}
-
-	.spiketable span {
-		display: block;
-		text-align: center;
-	}
-
-	.spiketime {
-		display: flex;
-		background: #ffffff;
-		justify-content: space-between;
-		align-items: center;
-		padding: 0 10px;
-		height: 28px;
-	}
-
-	.spiketime span {
-		padding: 2px 4px;
-		font-size: 12px;
-		color: #ffffff;
-		border-radius: 4px;
-		background: #eb852a;
-		margin: 0 4px;
-	}
-	.group-list-box .group-list li{
-		display: flex;
-		align-items: center;
-		padding: 5px;
-	}
-	.group-list .lazy_load{
-		width: 120px;
-		height: 120px;
-	}
-	.p-right {
-		margin-left: 10px;
-		flex: 1;
-	}
-	.p-right .brand-title{
-		font-size: 15px;
-		max-height: 45px;
-		overflow: hidden;
-	}
-	.p-right .brand-name{
-		font-size: 12px !important;
-		color: #ee2a2b !important;
-	}
-	.p-right .brand-price{
-		display: flex;
-		justify-content: space-between;
-		align-items: flex-end;
-		font-size: 15px;
-		color: #df0021;
-		font-weight: bold;
-	}
-	.p-right button{
-		width: 80px;
-		height: 34px;
-		background-color: #eb852a;
-		border-radius: 5px;
-		border: none;
-		font-size: 15px;
-		color: #ffffff;
-	}
-	.p-right .brand-bottom{
-		display: flex;
-		justify-content: space-between;
-		color: #8e8e8e;
-		font-size: 12px;
-	}
-	.p-right .bb-price{
-		text-decoration: line-through;
-	}
-	.p-right .bb-box{
-		display: flex;
-		align-items: center;
-	}
-	.p-right .bb-boxbar{
-		width: 86px;
-		height: 5px;
-		border-radius: 3px;
-		border: solid 1px #f29a76;
-		margin-left: 4px;
-		position: relative;
-		box-shadow: 0px 0 0px 1px #f29a76 inset;
-	}
-	.p-right .bb-boxinfo{
-		position: absolute;
-		top: 0px;
-		left: 0px;
-		height: 100%;
-		border-radius: 3px;
-		background: #f29a76;
-		width: 22%
-	}
+.custom-tag-list {margin-bottom:10px;}
+.group-list-box {width:100%;}
+.group-list-box .group-list li {margin:0 3px 5px 3px;}
+.brand-info .brand-info-right .main-btn {font-size:12px;}
+/* .slick {max-height:175px;}
+*/.custom-tag-list {margin-top:0;}
+/* .slick {margin-bottom:10px;}
+*/.custom-tag-list {padding-top:0;}
+.group-list-box .group-list li .brand-name {text-align:left;}
+.group-list-box {margin-left:0px;}
+.spiketable {display:-webkit-box;display:-ms-flexbox;display:flex;background:#eb852a;color:#ffffff;padding:4px 0;font-weight:600;}
+.spiketable p {-webkit-box-flex:1;-ms-flex:1;flex:1;}
+.spiketable p.active {color:#010101;}
+.spiketable span {display:block;text-align:center;}
+.spiketime {display:-webkit-box;display:-ms-flexbox;display:flex;background:#ffffff;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;align-items:center;padding:0 10px;height:28px;}
+.spiketime span {padding:2px 4px;font-size:12px;color:#ffffff;border-radius:4px;background:#eb852a;margin:0 4px;}
+.group-list-box .group-list li {display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;padding:5px;}
+.group-list .lazy_load {width:120px;height:120px;}
+.p-right {margin-left:10px;-webkit-box-flex:1;-ms-flex:1;flex:1;}
+.p-right .brand-title {font-size:15px;max-height:45px;overflow:hidden;}
+.p-right .brand-name {font-size:12px !important;color:#ee2a2b !important;}
+.p-right .brand-price {display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end;font-size:15px;color:#df0021;font-weight:bold;}
+.p-right button {width:80px;height:34px;background-color:#eb852a;border-radius:5px;border:none;font-size:15px;color:#ffffff;}
+.p-right .brand-bottom {display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;color:#8e8e8e;font-size:12px;}
+.p-right .bb-price {text-decoration:line-through;}
+.p-right .bb-box {display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;}
+.p-right .bb-boxbar {width:86px;height:5px;border-radius:3px;border:solid 1px #f29a76;margin-left:4px;position:relative;-webkit-box-shadow:0px 0 0px 1px #f29a76 inset;box-shadow:0px 0 0px 1px #f29a76 inset;}
+.p-right .bb-boxinfo {position:absolute;top:0px;left:0px;height:100%;border-radius:3px;background:#f29a76;width:22%}
 </style>
 {/block}
 
