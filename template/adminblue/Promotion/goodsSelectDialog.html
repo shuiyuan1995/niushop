@@ -60,7 +60,7 @@ input[name='discount']{vertical-align:-1px;width:60px;}
 				<tr>
 					<th>商品名称</th>
 					<th>价格</th>
-					<th>库存</th>
+					<th id="stock-th"></th>
 					<th id="action-th"></th>
 					<th>操作</th>
 				</tr>
@@ -82,9 +82,16 @@ $(function(){
 	//对某些特殊页面进行特殊操作
 	var action = $("#action").val();
 	if(action == 'discount'){
-		$("#action-th").html('折扣')
+		$("#action-th").html('折扣');
 	}else if(action == 'package'){
 		$(".select-tip").html('组合套餐商品不能少于两种不能多于六种');
+	}else if(action == 'spike'){
+        $("#action-th").html('折扣');
+    }
+    if (action == 'spike'){
+	    $("#stock-th").html('参与秒杀商品数');
+	} else{
+        $("#stock-th").html('库存');
 	}
 	//是否显示全部与部分
 	var is_show_select = $("#is_show_select").val();
@@ -131,8 +138,12 @@ function refreshSelectGoods(){
 							html += '<td style="text-align:left;">' + data["data"][i]["goods_name"] + '</td>';
 
 							html += '<td class="goods_price">' + data["data"][i]["price"] + '</td>';
-							
-							html += '<td>' + data["data"][i]["stock"]  + '</td>';
+
+							if (action == 'spike'){
+							    html += '<td><input type="text" name="num" id="num-'+data["data"][i]["goods_id"]+'" class="input-common short" value="'+data["data"][i]["stock"]+'" oninput = "value=value.replace(/[^\\d]/g,\'\')"/></td>'
+							} else{
+                                html += '<td>' + data["data"][i]["stock"]  + '</td>';
+							}
 							
 							if(action == "discount"){
 								var selected_data = $("#selected_data").val();
@@ -147,7 +158,20 @@ function refreshSelectGoods(){
 								}else{
 									html += '<td><input type="number" name="discount" class="input-common short" onchange="discount(this);" goodsid="'+ data["data"][i]["goods_id"] +'" value="9.99"><em class="unit">折</em></td>';
 								}
-							}else{
+							}else if(action == "spike"){
+                                var selected_data = $("#selected_data").val();
+                                if(selected_data != undefined){
+                                    selected_data = JSON.parse(selected_data);
+                                    if(data["data"][i]["goods_id"] in selected_data){
+                                        var discount = selected_data[data["data"][i]["goods_id"]];
+                                    }else{
+                                        var discount = 9.99;
+                                    }
+                                    html += '<td><input type="number" name="discount" class="input-common short" onchange="discount(this);" goodsid="'+ data["data"][i]["goods_id"] +'" value="'+ discount +'"><em class="unit">折</em></td>';
+                                }else{
+                                    html += '<td><input type="number" name="discount" class="input-common short" onchange="discount(this);" goodsid="'+ data["data"][i]["goods_id"] +'" value="9.99"><em class="unit">折</em></td>';
+                                }
+                            }else{
 								html += '<td></td>';
 							}
 							

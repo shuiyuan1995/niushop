@@ -61,6 +61,7 @@ use data\model\NsOrderGoodsModel;
 use data\model\BaseModel;
 use data\model\NsPromotionGiftViewModel;
 use data\service\promotion\GoodsSpike;
+use data\service\RedisServer;
 use think\Log;
 
 class Promotion extends BaseService implements IPromotion
@@ -1881,6 +1882,7 @@ class Promotion extends BaseService implements IPromotion
             $promotion_spike_goods->destroy([
                 'spike_id' => $spike_id
             ]);
+            $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
             foreach ($goods_id_array as $k => $v) {
                 // 添加检测考虑商品在一个时间段内只能有一种活动
 
@@ -1901,6 +1903,7 @@ class Promotion extends BaseService implements IPromotion
                     'spike_id' => $spike_id,
                     'goods_id' => $spike_info[0],
                     'spike' => $spike_info[1],
+                    'goods_num' => $spike_info[2],
                     'status' => 0,
                     'start_time' => getTimeTurnTimeStamp($start_time),
                     'end_time' => getTimeTurnTimeStamp($end_time),
@@ -1909,6 +1912,10 @@ class Promotion extends BaseService implements IPromotion
                     'decimal_reservation_number' => $decimal_reservation_number
                 );
                 $promotion_spike_goods->save($data_goods);
+                for ($i=0;$i<$spike_info[2];$i++){
+                    $redis->lPush($spike_info[0],1);
+                }
+                $redis->expire($spike_info[0],getTimeTurnTimeStamp($end_time)-time());
             }
             $promotion_spike->commit();
             return $spike_id;

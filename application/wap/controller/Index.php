@@ -21,6 +21,7 @@ use data\service\GoodsCategory;
 use data\service\Member as MemberService;
 use data\service\Platform;
 use data\service\promotion\PromoteRewardRule;
+use data\service\RedisServer;
 use data\service\WebSite;
 use data\service\FrQrcode;
 use think\Cookie;
@@ -294,18 +295,31 @@ class Index extends BaseController
         $this->assign('spike_adv', $spike_adv);
         if (request()->isAjax()) {
             $goods = new Goods();
-            $category_id = request()->get('category_id', '0');
+            $min_start_time = request()->get('start_time', '0');
+            $t = time();
+            $min_start_time = mktime($min_start_time,0,0,date("m",$t),date("d",$t),date("Y",$t));
+            $max_start_time = $min_start_time + 6*60*60;
             $page_index = request()->get("page", 1);
-            $condition['status'] = 1;
+            $condition['status'] = ['in','0,1'];
             $condition['ng.state'] = 1;
-            if (! empty($category_id)) {
-                $condition['category_id_1'] = $category_id;
-            }
+            $condition['start_time'] = [
+                [
+                    '>=',
+                    $min_start_time,
+                ],
+                [
+                    '<',
+                    $max_start_time,
+                ]
+            ];
+            $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
             $spike_list = $goods->getSpikeGoodsList($page_index, PAGESIZE, $condition, "ng.sort asc,ng.create_time desc");
             foreach ($spike_list['data'] as $k => $v) {
                 $v['spike'] = str_replace('.00', '', $v['spike']);
                 $v['promotion_price'] = str_replace('.00', '', $v['promotion_price']);
                 $v['price'] = str_replace('.00', '', $v['price']);
+                $spike_list['data'][$k]['spike_num'] = $v['goods_num']-$redis->lLen($v['goods_id']);
+                $spike_list['data'][$k]['spike_percent'] = ceil(($spike_list['data'][$k]['spike_num']/$v['goods_num'])*100);
             }
             return $spike_list;
         } else {

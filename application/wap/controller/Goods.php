@@ -25,6 +25,7 @@ use data\service\Order as OrderService;
 use data\service\Platform;
 use data\service\promotion\GoodsExpress;
 use data\service\Address;
+use data\service\RedisServer;
 use data\service\WebSite;
 use data\service\Promotion;
 use data\service\promotion\PromoteRewardRule;
@@ -82,6 +83,13 @@ class Goods extends BaseController
         $_SESSION['order_create_flag'] = "";
         
         $goods_detail = $goods->getBasisGoodsDetail($goods_id);
+        if ($goods_detail['promotion_info'] == '疯狂秒杀'){
+            $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
+            $spike_stock = $redis->lLen($goods_id);
+            $this->assign('spike_stock',$spike_stock);
+        }else{
+            $this->assign('spike_stock',-1);
+        }
         if (empty($goods_detail)) {
             $this->error("没有获取到商品信息");
         }

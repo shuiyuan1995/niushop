@@ -61,7 +61,7 @@ input[type="radio"]{margin-top:6px;}
 		<input type="hidden" id="goods_id_array" value="">
 		<input type="hidden" id="range_type" value="0">
 		<input type="hidden" id="is_show_select" value="0">
-		<input type="hidden" id="action" value="discount">
+		<input type="hidden" id="action" value="spike">
 	</span>
 	{include file="adminblue/Promotion/goodsSelectDialog" /}
 	
@@ -107,7 +107,7 @@ function addDiscount(){
 	obj.each(function(i){
 		var dis = obj.eq(i).val() ? obj.eq(i).val() : 10;
 		var gid = obj.eq(i).attr("goodsid");
-		goods_id_array += ','+gid+':'+ dis;
+		goods_id_array += ','+gid+':'+ dis+':'+$("#num-"+gid).val();
 		if(dis >=10 || dis <= 0 ){
 			showMessage('error', "折扣必须在0.01-9.99之间");
 			flag = true;

@@ -16,7 +16,7 @@
 .spiketime>span {font-size:28px;color:#000000;float:left;line-height:70px;}
 .spiketime.active>span {color:#ffffff;}
 .spiketime>div {margin-left:108px;font-size:22px;height:35px;line-height:35px;width:118px;border:1px solid #b5b5b5;border-radius:5px;text-align:center;margin-top:15px;color:#b5b5b5;}
-.spiketime.active>div {border:0px;color:#ffffff;width:auto;text-align:left;margin-top:10px;margin-left:82px;line-height:25px;}
+.spiketime.active>div {margin-left:108px;font-size:22px;height:35px;line-height:35px;width:118px;border:1px solid #ffffff;border-radius:5px;text-align:center;margin-top:15px;color:#ffffff;}
 ul.row-4 li {height:392px;}
 ul.row-4 li .p-name {width:240px;margin:0 auto;height:48px;overflow:hidden;}
 ul.row-4 li .p-name .g-name {color:#000000;font-size:22px;line-height:24px;}
@@ -34,23 +34,23 @@ ul.row-4 li .p-name .g-name {color:#000000;font-size:22px;line-height:24px;}
 	<img src="/template/shop/blue/public/images/topimg.png" alt="秒杀">
 </div>
 <div class="w1210 spiketimes">
-	<div class="spiketime active">
-		<span>12:00</span>
+	<div class="spiketime" id="0">
+		<span>00:00</span>
 		<div>
-			<p>正在秒杀</p>
-			<p>距结束<span class="settime" endtime="2019-07-15 18:00:00">00:43:28</span></p>
+			抢购中
+			<!--<p>距结束<span class="settime" endtime="2019-07-15 18:00:00">00:43:28</span></p>-->
 		</div>
 	</div>
-	<div class="spiketime">
-		<span>14:00</span>
+	<div class="spiketime" id="6">
+		<span>06:00</span>
 		<div>即将开始</div>
 	</div>
-	<div class="spiketime">
-		<span>14:00</span>
+	<div class="spiketime" id="12">
+		<span>12:00</span>
 		<div>即将开始</div>
 	</div>
-	<div class="spiketime">
-		<span>14:00</span>
+	<div class="spiketime" id="18">
+		<span>18:00</span>
 		<div>即将开始</div>
 	</div>
 </div>
@@ -107,7 +107,38 @@ ul.row-4 li .p-name .g-name {color:#000000;font-size:22px;line-height:24px;}
 <script >
 $().ready(function() {
 	updateEndTime();
+	updateMenu();
 });
+
+function updateMenu() {
+    var date = new Date();
+    var hour = date.getHours();
+    if (hour >= 0 && hour < 6){
+        $("#0").addClass('active');
+        $("#0 div").text('抢购进行中');
+        $("#6 div").text('即将开场');
+        $("#12 div").text('即将开场');
+        $("#18 div").text('即将开场');
+    }else if(hour >= 6 && hour < 12){
+        $("#6").addClass('active');
+        $("#0 div").text('已开抢');
+        $("#6 div").text('抢购进行中');
+        $("#12 div").text('即将开场');
+        $("#18 div").text('即将开场');
+    }else if(hour >= 12 && hour < 18){
+        $("#12").addClass('active');
+        $("#0 div").text('已开抢');
+        $("#6 div").text('已开抢');
+        $("#12 div").text('抢购进行中');
+        $("#18 div").text('即将开场');
+    }else if(hour >= 18 && hour < 24){
+        $("#18").addClass('active');
+        $("#0 div").text('已开抢');
+        $("#6 div").text('已开抢');
+        $("#12 div").text('已开抢');
+        $("#18 div").text('抢购进行中');
+    }
+}
 
 //倒计时函数
 function updateEndTime() {

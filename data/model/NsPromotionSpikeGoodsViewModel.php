@@ -47,7 +47,7 @@ class NsPromotionSpikeGoodsViewModel extends BaseModel {
         //设置查询视图
         $viewObj = $this->alias('npsg')
         ->join('ns_goods ng','ng.goods_id = npsg.goods_id','inner')
-        ->field('npsg.spike_goods_id,npsg.spike_id,npsg.start_time,npsg.end_time,npsg.goods_id,npsg.status,npsg.spike,ng.goods_name,ng.picture,ng.category_id_1,ng.price,ng.promotion_price,ng.market_price,ng.point_exchange_type,ng.point_exchange');
+        ->field('npsg.spike_goods_id,npsg.spike_id,npsg.start_time,npsg.end_time,npsg.goods_id,npsg.goods_num,npsg.status,npsg.spike,ng.goods_name,ng.picture,ng.category_id_1,ng.price,ng.promotion_price,ng.market_price,ng.point_exchange_type,ng.point_exchange');
         $list = $this->viewPageQuery($viewObj, $page_index, $page_size, $condition, $order);
         return $list;
     }

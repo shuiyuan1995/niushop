@@ -190,6 +190,11 @@ a#global-cart {
 	color: #fff;
 	position: relative;
 }
+.gray-btn {
+	background: #8e8e8e;
+	color: #fff;
+	position: relative;
+}
 .buy-cart .icon-shopping-cart {
 	display: block;
 	width: 20px;
