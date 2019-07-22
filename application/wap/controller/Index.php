@@ -36,7 +36,7 @@ class Index extends BaseController
      *
      * @var unknown
      */
-    public $category_good_num = 4;
+    public $category_good_num = 6;
 
     /**
      * 商品标签板块每层显示商品个数
