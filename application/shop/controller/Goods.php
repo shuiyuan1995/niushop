@@ -26,6 +26,7 @@ use data\service\Member as MemberService;
 use data\service\Order as OrderService;
 use data\service\promotion\GoodsExpress;
 use data\service\Promotion;
+use data\service\RedisServer;
 use data\service\Shop as ShopService;
 use Qiniu\json_decode;
 use think\Cache;
@@ -262,6 +263,9 @@ class Goods extends BaseController
                         return view($this->style . 'Goods/goodsInfoPromotion');
                     } elseif ($goods_info["promotion_info"] == '疯狂秒杀'){
                         // 活动-->商品详情界面
+                        $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
+                        $spike_stock = $redis->lLen($goodsid);
+                        $this->assign('spike_stock',$spike_stock);
                         return view($this->style . 'Goods/goodsInfoSpike');
                     } else {
                         // 基础-->商品详情界面

@@ -24,6 +24,7 @@ ul.row-4 li .p-name .g-name {color:#000000;font-size:22px;line-height:24px;}
 .linebar span {float:left;}
 .linebar .linebox {width:100px;height:6px;background:#bfbfbf;border-radius:3px;position:relative;margin-left:52px;top:6px;}
 .linebar .lineinfo {position:absolute;top:0px;left:0px;width:10px;height:6px;background:#eb852a;border-radius:3px;}
+	.gray-color{background-color: #8e8e8e;}
 </style>
 {/block}
 
@@ -34,22 +35,22 @@ ul.row-4 li .p-name .g-name {color:#000000;font-size:22px;line-height:24px;}
 	<img src="/template/shop/blue/public/images/topimg.png" alt="秒杀">
 </div>
 <div class="w1210 spiketimes">
-	<div class="spiketime" id="0">
+	<div class="spiketime" id="0" onclick="getSpikeList(1,0)">
 		<span>00:00</span>
 		<div>
 			抢购中
 			<!--<p>距结束<span class="settime" endtime="2019-07-15 18:00:00">00:43:28</span></p>-->
 		</div>
 	</div>
-	<div class="spiketime" id="6">
+	<div class="spiketime" id="6" onclick="getSpikeList(1,6)">
 		<span>06:00</span>
 		<div>即将开始</div>
 	</div>
-	<div class="spiketime" id="12">
+	<div class="spiketime" id="12" onclick="getSpikeList(1,12)">
 		<span>12:00</span>
 		<div>即将开始</div>
 	</div>
-	<div class="spiketime" id="18">
+	<div class="spiketime" id="18" onclick="getSpikeList(1,18)">
 		<span>18:00</span>
 		<div>即将开始</div>
 	</div>
@@ -65,6 +66,7 @@ ul.row-4 li .p-name .g-name {color:#000000;font-size:22px;line-height:24px;}
 		</div>
 		{/if}
 	{volist name="spike_list" id="vo"}
+		{if condition="$vo.status eq 1"}
 		<li>
 			<a class="scope" href="{:__URL('SHOP_MAIN/goods/goodsinfo','goodsid='.$vo['goods_id'])}" title="{$vo.goods_name}">
 				<div class="p-img">
@@ -78,18 +80,22 @@ ul.row-4 li .p-name .g-name {color:#000000;font-size:22px;line-height:24px;}
 					<span class="sale" style="font-size: 20px;"><s><b style="color: #aaaaaa;">¥{$vo.price}</b></s></span>
 					<!-- <span class="depreciate"><i class="fa fa-down"></i>{:lang('straight_down')}：¥{$vo.sale_down}</span> -->
 				</div>
-<!-- 				</div> -->
+				<!-- 				</div> -->
 				<div class="brand-info">
 					<div class="b-price clearfix">
 						<div class="price fl">
 						</div>
 						<div class="fr">
 							<span class="buyer"></span>
+							{if condition="$vo.spike_num neq $vo.goods_num"}
 							<span class="main-btn bg-color">{:lang('snap_up')}</span>
+							{else/}
+							<span class="main-btn gray-color">已抢完</span>
+							{/if}
 						</div>
 					</div>
 					<div class="linebar">
-						<span>已售10%</span>
+						<span>已抢{$vo.spike_percent}%</span>
 						<div class="linebox">
 							<div class="lineinfo"></div>
 						</div>
@@ -97,6 +103,34 @@ ul.row-4 li .p-name .g-name {color:#000000;font-size:22px;line-height:24px;}
 				</div>
 			</a>
 		</li>
+		{else/}
+		<li>
+			<a class="scope" href="javascript:void(0);" title="{$vo.goods_name}">
+				<div class="p-img">
+					<img alt="" src="{:__IMG($default_goods_img)}" class="lazy_load" data-original="{:__IMG($vo['picture']['pic_cover_mid'])}">
+				</div>
+				<div class="p-name">
+					<span class="g-name">{$vo.goods_name}</span>
+				</div>
+				<div class="goods-price">
+					<span class="sale" style="font-size: 24px;"><b style="color: #E84C3D;">¥{$vo.price*$vo.spike/10|zfloor}</b></span>&nbsp;
+					<span class="sale" style="font-size: 20px;"><s><b style="color: #aaaaaa;">¥{$vo.price}</b></s></span>
+					<!-- <span class="depreciate"><i class="fa fa-down"></i>{:lang('straight_down')}：¥{$vo.sale_down}</span> -->
+				</div>
+				<!-- 				</div> -->
+				<div class="brand-info">
+					<div class="b-price clearfix">
+						<div class="price fl">
+						</div>
+						<div class="fr">
+							<span class="buyer"></span>
+							<span class="main-btn gray-color">即将开抢</span>
+						</div>
+					</div>
+				</div>
+			</a>
+		</li>
+		{/if}
 	{/volist}
 	</ul>
 	{include file='shop/blue/controlCommonPage'/}
@@ -107,37 +141,37 @@ ul.row-4 li .p-name .g-name {color:#000000;font-size:22px;line-height:24px;}
 <script >
 $().ready(function() {
 	updateEndTime();
-	updateMenu();
+	updateMenu({$start_hours});
 });
 
-function updateMenu() {
+function getSpikeList(page,start_time) {
+    window.location.href=__URL("SHOP_MAIN/spike?start_time="+start_time+"&page="+page);
+}
+function updateMenu(start_time) {
     var date = new Date();
     var hour = date.getHours();
     if (hour >= 0 && hour < 6){
-        $("#0").addClass('active');
         $("#0 div").text('抢购进行中');
         $("#6 div").text('即将开场');
         $("#12 div").text('即将开场');
         $("#18 div").text('即将开场');
     }else if(hour >= 6 && hour < 12){
-        $("#6").addClass('active');
         $("#0 div").text('已开抢');
         $("#6 div").text('抢购进行中');
         $("#12 div").text('即将开场');
         $("#18 div").text('即将开场');
     }else if(hour >= 12 && hour < 18){
-        $("#12").addClass('active');
         $("#0 div").text('已开抢');
         $("#6 div").text('已开抢');
         $("#12 div").text('抢购进行中');
         $("#18 div").text('即将开场');
     }else if(hour >= 18 && hour < 24){
-        $("#18").addClass('active');
         $("#0 div").text('已开抢');
         $("#6 div").text('已开抢');
         $("#12 div").text('已开抢');
         $("#18 div").text('抢购进行中');
     }
+    $("#"+start_time).addClass('active');
 }
 
 //倒计时函数

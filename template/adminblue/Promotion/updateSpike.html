@@ -103,7 +103,7 @@ function updateSpike(){
 	obj.each(function(i){
 		var dis = obj.eq(i).val() ? obj.eq(i).val() : 10;
 		var gid = obj.eq(i).attr("goodsid");
-		goods_id_array += ','+gid+':'+ dis;
+		goods_id_array += ','+gid+':'+ dis+':'+$("#num-"+gid).val();
 		if(dis >=10 || dis <= 0 ){
 			showMessage('error', "折扣必须在0.01-9.99之间");
 			flag = true;

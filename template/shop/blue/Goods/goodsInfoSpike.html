@@ -117,7 +117,7 @@
 						{if condition ='!empty($goods_info.goods_unit)'}
 							<span class="p-price second-color">/{$goods_info.goods_unit}</span>
 						{/if}
-						<strong class="p-price second-color" style="font-size:12px;padding: 1px 5px;color: #fff;margin: 3px 0 0 5px;background-color: #FF7200;border-radius:1px;display:inline-block;">{$goods_info['promotion_detail']['spike_name']}</strong>
+						<!--<strong class="p-price second-color" style="font-size:12px;padding: 1px 5px;color: #fff;margin: 3px 0 0 5px;background-color: #FF7200;border-radius:1px;display:inline-block;">{$goods_info['promotion_detail']['spike_name']}</strong>-->
 					</div>
 				</div>
 				
@@ -410,9 +410,6 @@
 							<!-- 限购判断 -->
 							{if condition="$goods_purchase_restriction['code'] == 0"}
 							<a href="javascript:;" class="buy-goods purchase-restriction js-buy-now" data-tag="buy_now">
-							{else/}
-							<a href="javascript:;" class="buy-goods color js-buy-now" data-tag="buy_now">
-							{/if}
 								<span class="buy-goods-bg"></span>
 								<span class="buy-goods-border"></span>
 								{if condition="$integral_flag == 1"}
@@ -421,9 +418,28 @@
 								{:lang('goods_buy_now')}
 								{/if}
 							</a>
+							{else/}
+								{if condition="$spike_stock > 0"}
+									<a href="javascript:;" class="buy-goods color js-buy-now" data-tag="buy_now">
+										<span class="buy-goods-bg"></span>
+										<span class="buy-goods-border"></span>
+										{if condition="$integral_flag == 1"}
+										{:lang('goods_exchange')}
+										{else/}
+										立即抢购
+										{/if}
+									</a>
+								{else/}
+									<a href="javascript:;" class="no-auth" data-tag="buy_all">
+										<span class="buy-goods-bg"></span>
+										<span class="buy-goods-border"></span>
+										已 抢 完
+									</a>
+								{/if}
+							{/if}
 						</div>
-						
-						{if condition="$goods_info.goods_type == 1"}
+
+						{if condition="$goods_info.goods_type == 1 && $spike_stock > 0"}
 							{if condition="$goods_purchase_restriction['code'] == 0"}
 							<div class="btn-buy"><a href="javascript:;" class="add-cart purchase-restriction" data-tag="to_cart"><i></i>{:lang('goods_add_cart')}</a></div>
 							{else/}

@@ -21,6 +21,8 @@ use data\service\Order as OrderService;
 use data\service\promotion\PromoteRewardRule;
 use data\service\Config as Config;
 use data\service\GroupBuy;
+use data\service\RedisServer;
+use think\Db;
 
 /**
  * 订单控制器
@@ -79,14 +81,52 @@ class Order extends BaseController
             );
             return $res;
         } else {
+            $res = $this->checkSpikeUser($goods_sku_list,$this->uid);
+            if (!$res) return returnAjax(-1,'你已经抢购过订单中的商品，请重新选择商品');
             $order_id = $order->orderCreate('1', $out_trade_no, $pay_type, $shipping_type, '1', $buyer_ip, $leavemessage, $buyer_invoice, $shipping_time, $address['mobile'], $address['province'], $address['city'], $address['district'], $address["country_detail"].'&nbsp;'.$address['province_detail'].'&nbsp;'.$address['city_detail'].'&nbsp;'.$address['address'], $address['zip_code'], $address['consigner'], $integral, $use_coupon, 0, $goods_sku_list, $user_money, $pick_up_id, $express_company_id, $coin, $address["phone"], $distribution_time_out,$is_chai,$chai_price,$server_price);
             // Log::write($order_id);
             if ($order_id > 0) {
                 $order->deleteCart($goods_sku_list, $this->uid);
+                $this->delSpikeStock($goods_sku_list, $this->uid);
                 $_SESSION['order_tag'] = ""; // 订单创建成功会把购物车中的标记清楚
                 return AjaxReturn($out_trade_no);
             } else {
                 return AjaxReturn($order_id);
+            }
+        }
+    }
+
+    private function checkSpikeUser($goods_sku,$uid)
+    {
+        $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
+        $sku_array = explode(',',$goods_sku);
+        foreach ($sku_array as $k=>$v){
+            $data = explode(':',$v);
+            $goods_id = Db::name('ns_goods_sku')->where('sku_id',$data[0])->value('goods_id');
+            if ($redis->exists($goods_id)){
+                if ($redis->sIsMember('user_'.$goods_id,$uid)) return false;
+            }
+        }
+        return true;
+    }
+
+    private function delSpikeStock($goods_sku,$uid)
+    {
+        $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
+        $sku_array = explode(',',$goods_sku);
+        foreach ($sku_array as $k=>$v){
+            $data = explode(':',$v);
+            $goods_id = Db::name('ns_goods_sku')->where('sku_id',$data[0])->value('goods_id');
+            if ($redis->exists($goods_id)){
+                for ($i = 0;$i<$data[1];$i++){
+                    $redis->rPop($goods_id);
+                    if(!$redis->exists('user_'.$goods_id)){
+                        $redis->sAdd('user_'.$goods_id,$uid);
+                        $redis->expire('user_'.$goods_id,$redis->ttl($goods_id));
+                    }else{
+                        $redis->sAdd('user_'.$goods_id,$uid);
+                    }
+                }
             }
         }
     }

@@ -21,6 +21,7 @@ use data\service\Goods;
 use data\service\GoodsCategory;
 use data\service\Platform;
 use data\service\Config;
+use data\service\RedisServer;
 use think\Cookie;
 use think\Cache;
 use data\service\WebSite as WebSite;
@@ -243,25 +244,47 @@ class Index extends BaseController
         }
         $goods = new Goods();
         $page = request()->get('page', 1);
-        $category_id = request()->get('category_id', 0);
-        $condition['ng.state'] = 1;
-        $condition['status'] = 1;
-        if (! empty($category_id)) {
-            $condition['category_id_1'] = $category_id;
+        $hour = date('G',time());
+        if ($hour >= 0 && $hour < 6){
+            $current = 0;
+        }elseif ($hour >= 6 && $hour < 12){
+            $current = 6;
+        }elseif ($hour >= 12 && $hour < 18){
+            $current = 12;
+        }elseif ($hour >= 18){
+            $current = 18;
         }
+        $start_hours = request()->get('start_time', $current);
+        $t = time();
+        $min_start_time = mktime($start_hours,0,0,date("m",$t),date("d",$t),date("Y",$t));
+        $max_start_time = $min_start_time + 6*60*60;
+        $condition['status'] = ['in','0,1'];
+        $condition['ng.state'] = 1;
+        $condition['start_time'] = [
+            [
+                '>=',
+                $min_start_time,
+            ],
+            [
+                '<',
+                $max_start_time,
+            ]
+        ];
+        $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
         $spike_list = $goods->getSpikeGoodsList($page, PAGESIZE, $condition, 'end_time');
         $assign_get_list = array(
             'page' => $page,
             'page_count' => $spike_list['page_count'], // 总页数
             'total_count' => $spike_list['total_count'], // 总条数
-            'spike_list' => $spike_list['data'], // 店铺分页
-            'category_id' => $category_id
+            'spike_list' => $spike_list['data'] // 店铺分页
         ); // 已选中商品分类一级
         foreach ($spike_list['data'] as $k => $v) {
             $sale_down = $v['price'] - $v['promotion_price'];
             // 四舍五入取小数点后两位有效数字
             $sale_price = round($sale_down, 2);
             $spike_list['data'][$k]['sale_down'] = $sale_price;
+            $spike_list['data'][$k]['spike_num'] = $v['goods_num']-$redis->lLen($v['goods_id']);
+            $spike_list['data'][$k]['spike_percent'] = ceil(($spike_list['data'][$k]['spike_num']/$v['goods_num'])*100);
         }
 
         foreach ($assign_get_list as $key => $value) {
@@ -289,7 +312,7 @@ class Index extends BaseController
             $seoconfig['seo_desc'] = $seo['description'];
         }
         $this->assign("seoconfig", $seoconfig);
-        $this->assign('is_head_goods_nav', 1); // 代表默认显示以及分类
+        $this->assign('start_hours',$start_hours);
         $this->assign("title_before", "疯狂秒杀");
         return view($this->style . 'Index/spike');
     }

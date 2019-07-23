@@ -54,7 +54,8 @@ input{
 		{if condition="$goods_detail.is_open_presell eq 0"}
 		{if condition="$goods_detail.goods_type == 1"}
 			{if condition="$spike_stock > 0"}
-			<a href="javascript:;" class="big-btn red-btn" id="buyBtn1" style="width: 100%;">立即抢购</a>
+			<a href="javascript:;" class="big-btn orange-btn" id="addCart">{:lang('goods_add_cart')}</a>
+			<a href="javascript:;" class="big-btn red-btn" id="buyBtn1">立即抢购</a>
 			{elseif condition="$spike_stock < 0"/}
 			<a href="javascript:;" class="big-btn orange-btn" id="addCart">{:lang('goods_add_cart')}</a>
 			<a href="javascript:;" class="big-btn red-btn" id="buyBtn1">{:lang('goods_buy_now')}</a>

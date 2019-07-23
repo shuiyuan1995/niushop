@@ -62,6 +62,7 @@ use data\model\BaseModel;
 use data\model\NsPromotionGiftViewModel;
 use data\service\promotion\GoodsSpike;
 use data\service\RedisServer;
+use think\Db;
 use think\Log;
 
 class Promotion extends BaseService implements IPromotion
@@ -1956,9 +1957,14 @@ class Promotion extends BaseService implements IPromotion
             $this->addUserLog($this->uid, 1, '营销', '限时秒杀', '修改限时秒杀：'.$spike_name);
             $goods_id_array = explode(',', $goods_id_array);
             $promotion_spike_goods = new NsPromotionSpikeGoodsModel();
+            $del_id_array = $promotion_spike_goods->all(['spike_id'=>$spike_id]);
             $promotion_spike_goods->destroy([
                 'spike_id' => $spike_id
             ]);
+            $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
+            foreach ($del_id_array as $key => $val){
+                if ($redis->exists($val['goods_id'])) $redis->del($val['goods_id']);
+            }
             foreach ($goods_id_array as $k => $v) {
                 $promotion_spike_goods = new NsPromotionSpikeGoodsModel();
                 $spike_info = explode(':', $v);
@@ -1978,6 +1984,7 @@ class Promotion extends BaseService implements IPromotion
                     'spike_id' => $spike_id,
                     'goods_id' => $spike_info[0],
                     'spike' => $spike_info[1],
+                    'goods_num' => $spike_info[2],
                     'status' => 0,
                     'start_time' => getTimeTurnTimeStamp($start_time),
                     'end_time' => getTimeTurnTimeStamp($end_time),
@@ -1986,6 +1993,10 @@ class Promotion extends BaseService implements IPromotion
                     'decimal_reservation_number' => $decimal_reservation_number
                 );
                 $promotion_spike_goods->save($data_goods);
+                for ($i=0;$i<$spike_info[2];$i++){
+                    $redis->lPush($spike_info[0],1);
+                }
+                $redis->expire($spike_info[0],getTimeTurnTimeStamp($end_time)-time());
             }
             $promotion_spike->commit();
             return $spike_id;
@@ -2052,6 +2063,7 @@ class Promotion extends BaseService implements IPromotion
                     'promote_id' => $spike_id
                 );
                 $goods_id_list = $goods->getQuery($data_goods, 'goods_id', '');
+                $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
                 if (! empty($goods_id_list)) {
 
                     foreach ($goods_id_list as $k => $goods_id) {
@@ -2063,6 +2075,7 @@ class Promotion extends BaseService implements IPromotion
                         ], [
                             'goods_id' => $goods_id['goods_id']
                         ]);
+                        $redis->del($goods_id['goods_id']);
                         $goods_sku = new NsGoodsSkuModel();
                         $goods_sku_list = $goods_sku->getQuery([
                             'goods_id' => $goods_id['goods_id']
@@ -2108,9 +2121,14 @@ class Promotion extends BaseService implements IPromotion
         $promotion_spike = new NsPromotionSpikeModel();
         $promotion_spike_goods = new NsPromotionSpikeGoodsModel();
         $promotion_spike->startTrans();
+        $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
         try {
             $spike_id_array = explode(',', $spike_id);
             foreach ($spike_id_array as $k => $v) {
+                $goods_id_array = $promotion_spike_goods->all(['spike_id'=>$v]);
+                foreach ($goods_id_array as $key => $val){
+                    if ($redis->exists($val['goods_id'])) $redis->del($val['goods_id']);
+                }
                 $promotion_detail = $promotion_spike->get($spike_id);
                 if ($promotion_detail['status'] == 1) {
                     $promotion_spike->rollback();

@@ -1712,3 +1712,10 @@ function pushAString($string)
     $push = new PushEvent();
     $push->setUser()->setContent($string)->push();
 }
+
+function zfloor($num)
+{
+    $num = floor($num);
+    $res = sprintf("%.2f", $num);
+    return $res;
+}
