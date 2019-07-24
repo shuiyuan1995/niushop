@@ -88,7 +88,8 @@
 							article_list_html+= '<a href="'+__URL('APP_MAIN/Articlecenter/articlecontent?article_id='+item['article_id'])+'">';
 								article_list_html+= '<li class="article-item">';
 									article_list_html+= '<div class="item-thumbnail">';
-										article_list_html+= '<img src="{:__IMG($default_cms_thumbnail)}" class="lazy_load" data-original="'+__IMG(item['image'])+'" alt="">';
+										// article_list_html+= '<img src="{:__IMG($default_cms_thumbnail)}" class="lazy_load" data-original="'+__IMG(item['image'])+'" alt="">';
+										article_list_html+= '<img src="'+__IMG(item['image'])+'" class="lazy_load" data-original="'+__IMG(item['image'])+'" alt="">';
 									article_list_html+= '</div>';
 									article_list_html+= '<div class="item-container">';
 										article_list_html+= '<h3 class="item-title">'+item['title']+'</h3>';
@@ -105,7 +106,7 @@
 						article_list_html+= '<p style="color:#939393;text-align:center;margin-top:100px;"><img src="__TEMP__/{$style}/public/images/wap_nodata.png" height="60" style="margin-bottom:20px;"><br>该分类下暂时没有文章！</p>';
 					}
 					$('ul.article_list_container').html(article_list_html);
-					img_lazyload();	
+					// img_lazyload();
 					is_load =true;
 				}
 			})
