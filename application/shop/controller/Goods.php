@@ -266,6 +266,10 @@ class Goods extends BaseController
                         $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
                         $spike_stock = $redis->lLen($goodsid);
                         $this->assign('spike_stock',$spike_stock);
+                        if (isset($this->uid)) {
+                            $is_spike = $redis->sIsMember('user_'.$goodsid,$this->uid);
+                            $this->assign('is_spike',$is_spike);
+                        }
                         return view($this->style . 'Goods/goodsInfoSpike');
                     } else {
                         // 基础-->商品详情界面
@@ -1356,6 +1360,22 @@ class Goods extends BaseController
     }
 
     /**
+     * 检查秒杀商品库存
+     */
+    public function checkSpikeStock()
+    {
+        $goods_id = request()->post('goods_id');
+        $goods_num = request()->post('goods_num');
+        $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
+        $redis_len = $redis->lLen($goods_id);
+        if ($goods_num > $redis_len){
+            return returnAjax(-1,'商品库存不足');
+        }else{
+            return returnAjax(200,'success');
+        }
+    }
+
+    /**
      * 添加购物车
      */
     public function indexAddCart()
@@ -1388,6 +1408,12 @@ class Goods extends BaseController
     {
         $goods = new GoodsService();
         $cart_list = $goods->getCart($this->uid);
+        $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
+        foreach ($cart_list as $k=>$v){
+            if ($v['promotion_type'] == 3){
+                $cart_list[$k]['stock'] = $redis->lLen($v['goods_id']);
+            }
+        }
         $this->assign("cart_list", $cart_list);
         $this->assign("title_before", "购物车");
         $this->goods = new GoodsService();

@@ -320,7 +320,7 @@
 				<input type="hidden" id="goods_sku_count" value="{$goods_sku_count}"/>
 				<input type="hidden" id="attribute_list" value="{$spec_list}"/>
 				{foreach name="goods_info['sku_list']" item="pro_skus" key="k"}
-				<input type="hidden" id="goods_sku{$k}" value="{$pro_skus.attr_value_items};" stock="{$pro_skus.stock}" {if condition="$pro_skus.promote_price < $pro_skus.member_price" }price="{$pro_skus.promote_price}" {else/}price="{$pro_skus.member_price}"{/if} promotion_price="{$pro_skus.promote_price}" member_price="{$pro_skus.member_price}" skuid="{$pro_skus.sku_id}" skuname="{$pro_skus.sku_name}" original_price="{$pro_skus.market_price}" Js-sku="sku"/>
+				<input type="hidden" id="goods_sku{$k}" value="{$pro_skus.attr_value_items};" stock="{$spike_stock}" {if condition="$pro_skus.promote_price < $pro_skus.member_price" }price="{$pro_skus.promote_price}" {else/}price="{$pro_skus.member_price}"{/if} promotion_price="{$pro_skus.promote_price}" member_price="{$pro_skus.member_price}" skuid="{$pro_skus.sku_id}" skuname="{$pro_skus.sku_name}" original_price="{$pro_skus.market_price}" Js-sku="sku"/>
 				{/foreach}
 				{foreach name="goods_info['spec_list']" item="spec" key="k"}
 				<dl class="attr">
@@ -378,16 +378,14 @@
 					<dt class="dt">{:lang('goods_number')}</dt>
 					<dd class="dd">
 						<span class="amount-widget">
-							<input type="text" class="amount-input" data-max="{if condition='$goods_info.max_buy==0 || $goods_info.max_buy>$goods_info.stock' }{$goods_info.stock}{else/}{$goods_info.max_buy}{/if}" data-min="{$goods_info.min_buy}" title="{:lang('goods_purchase_quantity')}" id="num" value="{if condition = "$goods_info.min_buy gt 0"}{$goods_info['min_buy']}{else/}1{/if}" />
+							<input type="text" class="amount-input" data-max="{if condition='$goods_info.max_buy==0 || $goods_info.max_buy>$spike_stock' }{$spike_stock}{else/}{$goods_info.max_buy}{/if}" data-min="{$goods_info.min_buy}" title="{:lang('goods_purchase_quantity')}" id="num" value="{if condition = "$goods_info.min_buy gt 0"}{$goods_info['min_buy']}{else/}1{/if}" />
 							<span class="amount-btn">
 								<span class="amount-plus"  onselectstart="return false;"><i>+</i></span>
 								<span class="amount-minus"  onselectstart="return false;"><i>-</i></span>
 							</span>
 							<span class="amount-unit">{:lang('goods_piece')}</span>
 						</span>
-						{if condition="$goods_info.is_stock_visible == 1"}
-						<em class="stock js-goods-number">{:lang('goods_stock')}{$goods_info.stock}{:lang('goods_piece')}</em>
-						{/if}
+						<em class="stock js-goods-number">{:lang('goods_stock')}{$spike_stock}{:lang('goods_piece')}</em>
 						{if condition="$goods_info.max_buy!=0"}
 						<!-- 限购 -->
 						<em style="vertical-align: middle;">({:lang('goods_restriction_per_person')}{$goods_info.max_buy}{:lang('goods_piece')})</em>
@@ -420,15 +418,23 @@
 							</a>
 							{else/}
 								{if condition="$spike_stock > 0"}
-									<a href="javascript:;" class="buy-goods color js-buy-now" data-tag="buy_now">
-										<span class="buy-goods-bg"></span>
-										<span class="buy-goods-border"></span>
-										{if condition="$integral_flag == 1"}
-										{:lang('goods_exchange')}
-										{else/}
-										立即抢购
-										{/if}
-									</a>
+									{if condition="$is_spike == true"}
+										<a href="javascript:;" class="no-auth" data-tag="buy_all">
+											<span class="buy-goods-bg"></span>
+											<span class="buy-goods-border"></span>
+											您已抢购此商品
+										</a>
+									{else/}
+										<a href="javascript:;" class="buy-goods color js-buy-now" data-tag="buy_now">
+											<span class="buy-goods-bg"></span>
+											<span class="buy-goods-border"></span>
+											{if condition="$integral_flag == 1"}
+											{:lang('goods_exchange')}
+											{else/}
+											立即抢购
+											{/if}
+										</a>
+									{/if}
 								{else/}
 									<a href="javascript:;" class="no-auth" data-tag="buy_all">
 										<span class="buy-goods-bg"></span>
@@ -439,7 +445,7 @@
 							{/if}
 						</div>
 
-						{if condition="$goods_info.goods_type == 1 && $spike_stock > 0"}
+						{if condition="$goods_info.goods_type == 1 && $spike_stock > 0 && $is_spike neq true"}
 							{if condition="$goods_purchase_restriction['code'] == 0"}
 							<div class="btn-buy"><a href="javascript:;" class="add-cart purchase-restriction" data-tag="to_cart"><i></i>{:lang('goods_add_cart')}</a></div>
 							{else/}
@@ -654,6 +660,7 @@
 </div>
 <input type="hidden" id="goodsLadderPreferentialList" value='{$goodsLadderPreferentialListStr}'>
 <input type="hidden" id="ms_time" value="{$ms_time}"/>
+<input type="hidden" id="sub_type" value="spike">
 <script>
 $(function(){
 	countDown();

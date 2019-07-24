@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/mall.css">
 <link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/pre_foot.css">
 <link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/goods_detail.css?v=1.0">
-<script src="__TEMP__/{$style}/public/js/goods_product.js?v=1.1"></script>
+<script src="__TEMP__/{$style}/public/js/spike_product.js?v=1.0"></script>
 <script type="text/javascript" src="__TEMP__/{$style}/public/js/jscommon.js" charset="gb2312"></script>
 <script src="__TEMP__/{$style}/public/js/jquery.lazyload.js" type="text/javascript"></script>
 <style>
@@ -30,7 +30,7 @@ input{
 </section>
 {/block}
 {block name="main"}
-	{include file="wap/default_new/Goods/controlDetail" /}
+	{include file="wap/default_new/Goods/controlSpikeDetail" /}
 	{include file='wap/default_new/share'/}
 {/block}
 {block name="bottom"}
@@ -53,8 +53,16 @@ input{
 		<div class="big-btn-2-1">
 		{if condition="$goods_detail.is_open_presell eq 0"}
 		{if condition="$goods_detail.goods_type == 1"}
-			<a href="javascript:;" class="big-btn orange-btn" id="addCart">{:lang('goods_add_cart')}</a>
-			<a href="javascript:;" class="big-btn red-btn" id="buyBtn1">{:lang('goods_buy_now')}</a>
+			{if condition="$is_spike == true"}
+				<a href="javascript:;" class="big-btn gray-btn" id="guole" style="width: 100%;">您已抢购此商品</a>
+			{else/}
+				{if condition="$spike_stock > 0"}
+				<a href="javascript:;" class="big-btn orange-btn" id="addCart">{:lang('goods_add_cart')}</a>
+				<a href="javascript:;" class="big-btn red-btn" id="buyBtn1">立即抢购</a>
+				{else/}
+				<a href="javascript:;" class="big-btn gray-btn" id="wanle" style="width: 100%;">已 抢 完</a>
+				{/if}
+			{/if}
 		{else/}
 			<a href="javascript:;" class="big-btn red-btn" id="buyBtn1" style="width: 100%;">{:lang('goods_buy_now')}</a>
 		{/if}

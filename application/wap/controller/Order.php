@@ -30,12 +30,14 @@ use data\service\promotion\GoodsExpress as GoodsExpressService;
 use data\service\promotion\GoodsMansong;
 use data\service\Promotion;
 use data\service\promotion\GoodsPreference;
+use data\service\RedisServer;
 use data\service\Shop;
 use data\model\NsGoodsSkuModel;
 use data\service\promotion\PromoteRewardRule;
 use data\service\WebSite;
 use data\service\Order\OrderGroupBuy;
 use data\service\GroupBuy;
+use think\Db;
 
 /**
  * 订单控制器
@@ -1012,10 +1014,32 @@ class Order extends BaseController
             
             if ($order_id > 0) {
                 $order->deleteCart($goods_sku_list, $this->uid);
+                $this->delSpikeStock($goods_sku_list, $this->uid);
                 $_SESSION['order_tag'] = ""; // 生成订单后，清除购物车
                 return AjaxReturn($out_trade_no);
             } else {
                 return AjaxReturn($order_id);
+            }
+        }
+    }
+
+    private function delSpikeStock($goods_sku,$uid)
+    {
+        $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
+        $sku_array = explode(',',$goods_sku);
+        foreach ($sku_array as $k=>$v){
+            $data = explode(':',$v);
+            $goods_id = Db::name('ns_goods_sku')->where('sku_id',$data[0])->value('goods_id');
+            if ($redis->exists($goods_id)){
+                for ($i = 0;$i<$data[1];$i++){
+                    $redis->rPop($goods_id);
+                    if(!$redis->exists('user_'.$goods_id)){
+                        $redis->sAdd('user_'.$goods_id,$uid);
+                        $redis->expire('user_'.$goods_id,$redis->ttl($goods_id));
+                    }else{
+                        $redis->sAdd('user_'.$goods_id,$uid);
+                    }
+                }
             }
         }
     }

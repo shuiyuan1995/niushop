@@ -2562,7 +2562,7 @@ class Goods extends BaseService implements IGoods
                 $goods = new NsGoodsModel();
                 $goods_info = $goods->getInfo([
                     'goods_id' => $v['goods_id']
-                ], 'max_buy,state,point_exchange_type,point_exchange,goods_name,price, picture, min_buy ');
+                ], 'promotion_type,max_buy,state,point_exchange_type,point_exchange,goods_name,price, picture, min_buy ');
                 // 获取商品sku信息
                 $goods_sku = new NsGoodsSkuModel();
                 $sku_info = $goods_sku->getInfo([
@@ -2648,6 +2648,7 @@ class Goods extends BaseService implements IGoods
                 $cart_goods_list[$k]['min_buy'] = $goods_info['min_buy'];
                 $cart_goods_list[$k]['point_exchange_type'] = $goods_info['point_exchange_type'];
                 $cart_goods_list[$k]['point_exchange'] = $goods_info['point_exchange'];
+                $cart_goods_list[$k]["promotion_type"] = $goods_info["promotion_type"];
                 
                 if ($goods_info['state'] != 1) {
                     unset($cart_goods_list[$k]);

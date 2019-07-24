@@ -114,23 +114,23 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 	
 	
 </section>
-{if condition = "$goods_detail['promotion_info'] eq '限时折扣'"}
+{if condition = "$goods_detail['promotion_info'] eq '疯狂秒杀'"/}
 <div class="goods-header js-goods-header goods-activity clearfix">
 	<input type="hidden" id="end_time"  value="{$goods_detail['promotion_detail']['end_time'] | getTimeStampTurnTime}"/>
 	<div class="goods-price">
 		<div class="current-price activity-price">
 			<span>¥</span><i class="js-goods-price price">{$goods_detail.promotion_price}</i>
-			<span class="price-title js-price-title ">{:lang('goods_discount')}</span>
+			<span class="price-title js-price-title ">疯狂秒杀</span>
 			<span class="goods-unit-style">/{if condition ="empty($goods_detail['goods_unit'])"}件{else/}{$goods_detail['goods_unit']}{/if}</span>
 		</div>
 		<em class="original-price">¥{$goods_detail.price}</em>
 		<div class="font-size-12 overview-countdown js-activity-tips started " data-status="started">
 			<div class="countdown-title">{:lang('distance_ends')}</div>
 			<div class="js-discount-time countdown" data-countdown="3542691">
-			<span class="c-red js-day">00</span> {:lang('days')}
-			<span class="c-red js-hour">00</span> {:lang('hours')}
-			<span class="c-red js-min">00</span> {:lang('minutes')}
-			<span class="c-red js-sec">00</span> {:lang('second')}</div>
+				<span class="c-red js-day">00</span> {:lang('days')}
+				<span class="c-red js-hour">00</span> {:lang('hours')}
+				<span class="c-red js-min">00</span> {:lang('minutes')}
+				<span class="c-red js-sec">00</span> {:lang('second')}</div>
 		</div>
 	</div>
 </div>
@@ -429,19 +429,17 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 		<hr class="with-margin-l" />
 		{/foreach}
 		{foreach name="goods_detail['sku_list']" item="pro_skus" key="k"}
-		<input type="hidden" id="goods_sku{$k}" value="{$pro_skus.attr_value_items}" stock="{$pro_skus.stock}" {if condition="$pro_skus.promote_price < $pro_skus.member_price" }price="{$pro_skus.promote_price}" {else/}price="{$pro_skus.member_price}"{/if} promotion_price="{$pro_skus.promote_price}" member_price="{$pro_skus.member_price}" skuid="{$pro_skus.sku_id}" skuname="{$pro_skus.sku_name}" class="sku-array">
+		<input type="hidden" id="goods_sku{$k}" value="{$pro_skus.attr_value_items}" stock="{$spike_stock}" {if condition="$pro_skus.promote_price < $pro_skus.member_price" }price="{$pro_skus.promote_price}" {else/}price="{$pro_skus.member_price}"{/if} promotion_price="{$pro_skus.promote_price}" member_price="{$pro_skus.member_price}" skuid="{$pro_skus.sku_id}" skuname="{$pro_skus.sku_name}" class="sku-array">
 		{/foreach}
 <!-- 		<input type="hidden" id="goods_sku_num" value="100"> -->
 		<li class="s-buy-li">
 			<div class="left" style="float:left;">{:lang('member_quantity_purchased')}：</div>
 			<div class="right">
 				<span class="reduce quantity-minus-disabled">-</span>
-				<input class="number" name="quantity" autocomplete="off" value="{if condition='$goods_detail.min_buy !=0'}{$goods_detail.min_buy}{else/}1{/if}" min="{if condition='$goods_detail.min_buy !=0'}{$goods_detail.min_buy}{else/}1{/if}" max="{$goods_detail.stock}" id="num" />
+				<input class="number" name="quantity" autocomplete="off" value="{if condition='$goods_detail.min_buy !=0'}{$goods_detail.min_buy}{else/}1{/if}" min="{if condition='$goods_detail.min_buy !=0'}{$goods_detail.min_buy}{else/}1{/if}" max="{$spike_stock}" id="num" />
 				<span class="add">+</span>
 			</div>
-			{if condition="$goods_detail.is_stock_visible == 1"}
-			<span style="display: inline-block;margin-top:5px;color:#333;" id="Stock">{:lang('left')}{$goods_detail.stock}{if condition ="empty($goods_detail['goods_unit'])"}件{else/}{$goods_detail['goods_unit']}{/if}</span>
-			{/if}
+			<span style="display: inline-block;margin-top:5px;color:#333;" id="Stock">{:lang('left')}{$spike_stock}{if condition ="empty($goods_detail['goods_unit'])"}件{else/}{$goods_detail['goods_unit']}{/if}</span>
 			{if condition ="$goods_detail['max_buy'] neq '0' AND $goods_detail['max_buy'] neq -1"}
 			<span style="display: inline-block;margin-top:5px;color:#333;">{:lang('homebuying_restrictions')}{$goods_detail['max_buy']}{if condition ="empty($goods_detail['goods_unit'])"}件{else/}{$goods_detail['goods_unit']}{/if}</span>
 			{/if}
@@ -462,7 +460,7 @@ video::-webkit-media-controls-panel {width: calc(100% + 50px);}
 			<input id="hiddSkuId" type="hidden" />
 			<input id="hiddSkuName" type="hidden" />
 			<input id="hiddSkuprice" type="hidden" />
-			<input id="hiddStock" type="hidden" value="{$goods_detail.stock}"/>
+			<input id="hiddStock" type="hidden" value="{$spike_stock}"/>
 			<input type="hidden" id="hidden_shop_name" value="{$shopname}"/>
 			<input type="hidden" id="hidden_shop_id" value="{$goods_detail.shop_id}"/>
 			<input type="hidden" id="is_sale" value="{$goods_detail.state}" />

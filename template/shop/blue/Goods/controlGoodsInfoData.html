@@ -362,9 +362,11 @@ $().ready(function() {
 			$.msg("{:lang('shall_not_less_than')}!");
 			return;
 		}
-        if($(".amount-input").val() < 2){
-            $.msg("单个订单两条起售！");
-            return;
+        if (typeof $("#sub_type").val()== 'undefined'){
+            if($(".amount-input").val() < 2){
+                $.msg("单个订单两条起售！");
+                return;
+            }
         }
 		var tag = $(this).attr("data-tag");
 		var image_url = $("#MagnifierWrap .MagnifierMain").find("img").attr("src");

@@ -83,13 +83,6 @@ class Goods extends BaseController
         $_SESSION['order_create_flag'] = "";
         
         $goods_detail = $goods->getBasisGoodsDetail($goods_id);
-        if ($goods_detail['promotion_info'] == '疯狂秒杀'){
-            $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
-            $spike_stock = $redis->lLen($goods_id);
-            $this->assign('spike_stock',$spike_stock);
-        }else{
-            $this->assign('spike_stock',-1);
-        }
         if (empty($goods_detail)) {
             $this->error("没有获取到商品信息");
         }
@@ -290,7 +283,19 @@ class Goods extends BaseController
                 }
             } else {
                 if ($goods_detail["point_exchange_type"] == 0 || $goods_detail["point_exchange_type"] == 2 || $goods_detail["is_open_presell"] == 1) {
-                    return view($this->style . 'Goods/goodsDetail');
+                    if ($goods_detail["promotion_info"] == '疯狂秒杀'){
+                        // 活动-->商品详情界面
+                        $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
+                        $spike_stock = $redis->lLen($goods_id);
+                        $this->assign('spike_stock',$spike_stock);
+                        if (isset($this->uid)) {
+                            $is_spike = $redis->sIsMember('user_'.$goods_id,$this->uid);
+                            $this->assign('is_spike',$is_spike);
+                        }
+                        return view($this->style . 'Goods/goodsSpikeDetail');
+                    }else{
+                        return view($this->style . 'Goods/goodsDetail');
+                    }
                 } else {
                     return view($this->style . 'Goods/goodsDetailPointExchange');
                 }
@@ -408,6 +413,12 @@ class Goods extends BaseController
         $goods = new GoodsService();
         
         $cartlist = $goods->getCart($this->uid, $this->instance_id);
+        $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
+        foreach ($cartlist as $k=>$v){
+            if ($v['promotion_type'] == 3){
+                $cartlist[$k]['stock'] = $redis->lLen($v['goods_id']);
+            }
+        }
         // 店铺，店铺中的商品
         $list = Array();
         for ($i = 0; $i < count($cartlist); $i ++) {

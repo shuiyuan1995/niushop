@@ -271,9 +271,6 @@ function settlement() {
 		}
 	});
 	if (count == 0 && sum_num()>0) {
-		if (sum_num() <2){
-            showBox("单个订单两条起售！","warning");
-		}else{
             // 结算
             var money = $("#orderprice").text() * 1;
 //		if (money != 0) {
@@ -296,16 +293,28 @@ function settlement() {
                 showBox("目前只支持单店铺生成订单","warning");
             }else{
                 $.ajax({
-                    url : __URL(APPMAIN + "/order/ordercreatesession"),
-                    type : "post",
-                    data : { "tag" : "cart", "cart_id" : cart_id_arr.toString()},
-                    success : function(res){
-                        window.location.href = __URL(APPMAIN+"/order/paymentorder");
+                    url: __URL(SHOPMAIN + "/member/getCartCount"),
+                    type: "post",
+                    data: {"cart_id": cart_id_arr.toString()},
+                    success: function (data) {
+                        if (data['spike'] == false) {
+                            if (data['count'] < 2) {
+                                showBox("单个订单两条起售！", "warning");
+                                return;
+                            }
+                        }
+                        $.ajax({
+                            url: __URL(APPMAIN + "/order/ordercreatesession"),
+                            type: "post",
+                            data: {"tag": "cart", "cart_id": cart_id_arr.toString()},
+                            success: function (res) {
+                                window.location.href = __URL(APPMAIN + "/order/paymentorder");
+                            }
+                        });
                     }
                 });
-            }
+			}
 //		}
-		}
 	} else {
 		// 删除
 		var del_id_array = '';

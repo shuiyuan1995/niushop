@@ -1763,8 +1763,14 @@ class Member extends BaseController
     {
         $cart_id = request()->post('cart_id');
         $count = Db::query("SELECT SUM(num) as count from ns_cart where cart_id in ({$cart_id})");
-        $count = $count[0]['count'];
-        return $count;
+        $res['count'] = $count[0]['count'];
+        $data = Db::name('ns_cart')
+                    ->alias('c')
+                    ->join('ns_goods g','c.goods_id = g.goods_id')
+                    ->where('cart_id','in',$cart_id)
+                    ->column('g.promotion_type');
+        $res['spike'] = in_array(3,$data);
+        return $res;
     }
 
 
