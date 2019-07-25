@@ -125,6 +125,7 @@ class Goods extends BaseController
             $seoconfig['seo_meta'] = $goods_detail['keywords']; // 关键词
         }
         $seoconfig['seo_desc'] = $goods_detail['goods_name'];
+        $seoconfig['seo_meta'] .= ',哪里买'.$goods_detail['goods_name'];
         $this->assign("seoconfig", $seoconfig);
         // 获取当前时间
         $current_time = $this->getCurrentTime();
@@ -701,6 +702,11 @@ class Goods extends BaseController
                 $search_name = mb_substr($search_name, 0, 7, 'utf-8') . '...';
             }
             $shop_id = $this->shop_id;
+            $Config = new Config();
+            $seoconfig = $Config->getSeoConfig($this->instance_id);
+            $seoconfig['seo_meta'] = $search_name.',哪里买'.$search_name; // 关键词
+            $seoconfig['seo_desc'] = $seoconfig['seo_desc'];
+            $this->assign('seoconfig',$seoconfig);
             $this->assign('controlType', $controlType);
             $this->assign('search_name', $search_name);
             $this->assign('shop_id', $shop_id);
@@ -811,6 +817,11 @@ class Goods extends BaseController
             $this->assign('category_id', $category_id);
             // 筛选条件
             if ($category_id != "") {
+                if (!request()->isMobile()) {
+                    $redirect = __URL(__URL__ . "/list?category_id=".$category_id);
+                    $this->redirect($redirect);
+                    exit();
+                }
                 // 获取商品分类下的品牌列表、价格区间
                 $category_brands = [];
                 $category_price_grades = array(

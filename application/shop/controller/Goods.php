@@ -135,6 +135,7 @@ class Goods extends BaseController
                 $seoconfig['seo_meta'] = $goods_info['keywords']; // 关键词
             }
             $seoconfig['seo_desc'] = $goods_info['goods_name'];
+            $seoconfig['seo_meta'] .= ',哪里买'.$goods_info['goods_name'];
             // 标题title(商品详情页面)
             $this->assign("title_before", $goods_info['goods_name']);
             $this->assign("seoconfig", $seoconfig);
@@ -537,6 +538,11 @@ class Goods extends BaseController
         $this->goods_category = new GoodsCategoryService();
         $this->goods = new GoodsService();
         if ($category_id != "") {
+            if (request()->isMobile()) {
+                $redirect = __URL__ . "/wap/goods/goodslist.html?category_id=".$category_id;
+                $this->redirect($redirect);
+                exit();
+            }
             $Config = new Config();
 
             // 获取商品分类下的品牌列表、价格区间
@@ -643,6 +649,13 @@ class Goods extends BaseController
             $this->assign("curr", 0);
         }
 
+        if (!empty($keyword)){
+            $Config = new Config();
+            $seoconfig = $Config->getSeoConfig($this->instance_id);
+            $seoconfig['seo_meta'] = $keyword.',哪里买'.$keyword; // 关键词
+            $seoconfig['seo_desc'] = $seoconfig['seo_desc'];
+            $this->assign('seoconfig',$seoconfig);
+        }
         $goods_field = "ng.goods_id,ng.goods_name,ng_sap.pic_cover_mid,ng.promotion_price,ng.stock,ng.sales";
         // 新品推荐
         if ($category_id != "") {

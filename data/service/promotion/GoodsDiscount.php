@@ -18,6 +18,7 @@ namespace data\service\promotion;
 
 use data\model\NsPromotionDiscountGoodsModel;
 use data\model\NsPromotionDiscountGoodsViewModel;
+use data\model\NsPromotionSpikeGoodsModel;
 use data\service\BaseService;
 use data\model\AlbumPictureModel;
 use data\model\NsPromotionDiscountModel;
@@ -40,7 +41,10 @@ class GoodsDiscount extends BaseService
      */
     public function getGoodsIsDiscount($goods_id, $start_time, $end_time)
     {
-        $discount_goods = new NsPromotionDiscountGoodsModel();
+        $start_time = getTimeTurnTimeStamp($start_time);
+        $end_time = getTimeTurnTimeStamp($end_time);
+        $discount_goods = new NsPromotionDiscountGoodsModel();//限时折扣
+        $spike_goods = new NsPromotionSpikeGoodsModel();//秒杀
         $condition_1 = array(
             'start_time' => array(
                 'ELT',
@@ -51,8 +55,8 @@ class GoodsDiscount extends BaseService
                 $end_time
             ),
             'status' => array(
-                'NEQ',
-                3
+                'in',
+                '0,1'
             ),
             'goods_id' => $goods_id
         );
@@ -66,8 +70,8 @@ class GoodsDiscount extends BaseService
                 $start_time
             ),
             'status' => array(
-                'NEQ',
-                3
+                'in',
+                '0,1'
             ),
             'goods_id' => $goods_id
         );
@@ -81,15 +85,18 @@ class GoodsDiscount extends BaseService
                 $end_time
             ),
             'status' => array(
-                'NEQ',
-                3
+                'in',
+                '0,1'
             ),
             'goods_id' => $goods_id
         );
         $count_1 = $discount_goods->where($condition_1)->count();
         $count_2 = $discount_goods->where($condition_2)->count();
         $count_3 = $discount_goods->where($condition_3)->count();
-        $count = $count_1 + $count_2 + $count_3;
+        $count_s1 = $spike_goods->where($condition_1)->count();
+        $count_s2 = $spike_goods->where($condition_2)->count();
+        $count_s3 = $spike_goods->where($condition_3)->count();
+        $count = $count_1 + $count_2 + $count_3 + $count_s1 + $count_s2 + $count_s3;
         return $count;
     }
 

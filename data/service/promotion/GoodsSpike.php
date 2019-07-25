@@ -16,6 +16,7 @@
  */
 namespace data\service\promotion;
 
+use data\model\NsPromotionDiscountGoodsModel;
 use data\model\NsPromotionSpikeModel;
 use data\model\NsPromotionSpikeGoodsModel;
 use data\model\NsPromotionSpikeGoodsViewModel;
@@ -40,7 +41,10 @@ class GoodsSpike extends BaseService
      */
     public function getGoodsIsSpike($goods_id, $start_time, $end_time)
     {
-        $spike_goods = new NsPromotionSpikeGoodsModel();
+        $start_time = getTimeTurnTimeStamp($start_time);
+        $end_time = getTimeTurnTimeStamp($end_time);
+        $spike_goods = new NsPromotionSpikeGoodsModel();//秒杀
+        $discount_goods = new NsPromotionDiscountGoodsModel();//限时折扣
         $condition_1 = array(
             'start_time' => array(
                 'ELT',
@@ -51,8 +55,8 @@ class GoodsSpike extends BaseService
                 $end_time
             ),
             'status' => array(
-                'NEQ',
-                3
+                'in',
+                '0,1'
             ),
             'goods_id' => $goods_id
         );
@@ -66,8 +70,8 @@ class GoodsSpike extends BaseService
                 $start_time
             ),
             'status' => array(
-                'NEQ',
-                3
+                'in',
+                '0,1'
             ),
             'goods_id' => $goods_id
         );
@@ -81,15 +85,18 @@ class GoodsSpike extends BaseService
                 $end_time
             ),
             'status' => array(
-                'NEQ',
-                3
+                'in',
+                '0,1'
             ),
             'goods_id' => $goods_id
         );
         $count_1 = $spike_goods->where($condition_1)->count();
         $count_2 = $spike_goods->where($condition_2)->count();
         $count_3 = $spike_goods->where($condition_3)->count();
-        $count = $count_1 + $count_2 + $count_3;
+        $count_d1 = $discount_goods->where($condition_1)->count();
+        $count_d2 = $discount_goods->where($condition_2)->count();
+        $count_d3 = $discount_goods->where($condition_3)->count();
+        $count = $count_1 + $count_2 + $count_3 + $count_d1 + $count_d2 + $count_d3;
         return $count;
     }
 
