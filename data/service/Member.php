@@ -2148,6 +2148,18 @@ public function registerMember($user_name, $password, $email, $mobile, $user_qq_
         return $retval;
     }
 
+    public function GetCouponMoney($coupon_type_id)
+    {
+        $coupon_type = new NsCouponTypeModel();
+        $coupon_type_info = $coupon_type->getInfo([
+            'coupon_type_id' => $coupon_type_id
+        ], 'money');
+        if (empty($coupon_type_info)) {
+            return 0;
+        }
+        return $coupon_type_info;
+    }
+
     /**
      * 获取会员下面的优惠券列表
      *

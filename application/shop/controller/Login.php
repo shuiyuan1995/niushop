@@ -585,9 +585,11 @@ class Login extends Controller
                     $rewardRule = new PromoteRewardRule();
                     $res = $rewardRule->getRewardRuleDetail($this->instance_id);
                     if ($res['reg_coupon'] != 0) {
+                        $coupon = $member->GetCouponMoney($res['reg_coupon']);
+                        $coupon_money = (int)$coupon['money'];
                         $retval = $member->memberGetCoupon($retval_id, $res['reg_coupon'], 2);
                     }
-                    $this->success('新用户注册优惠券已到账，请注意查看！',__URL__);
+                    $this->success('新用户注册'.$coupon_money.'元优惠券已到账，请注意查看！',__URL__);
                 }
                 $this->redirect(__URL__);
             } else {
