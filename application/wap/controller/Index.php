@@ -103,6 +103,9 @@ class Index extends BaseController
         //default_search
         $default_key = $config->getDefaultSearchConfig($this->instance_id);
         $this->assign("default_key", $default_key);
+        //首页通知
+        $index_content = $config->getIndexNotice($this->instance_id);
+        $this->assign('index_content',$index_content);
         
         // 首页轮播图
         $plat_adv_list = $platform->getPlatformAdvPositionDetail(1105);

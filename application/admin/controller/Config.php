@@ -116,6 +116,12 @@ class Config extends BaseController
                 'menu_name' => "商家服务",
                 "active" => 0,
                 "tag" => 15
+            ),
+            array(
+                'url' => "config/notice",
+                'menu_name' => "首页通知",
+                "active" => 0,
+                "tag" => 16
             )
         );
         
@@ -2017,6 +2023,24 @@ class Config extends BaseController
             $shopSet = $Config->getFuWuConfig($shop_id);
             $this->assign("list", $shopSet);
             return view($this->style . "Config/fuWuSetting");
+        }
+    }
+
+    public function notice()
+    {
+        $Config = new WebConfig();
+        if (request()->isAjax()) {
+            $shop_id = $this->instance_id;
+            $notice_content = request()->post("notice_content", 0);
+            $is_use = request()->post('is_use',0);
+            $retval = $Config->SetIndexNotice($shop_id,$notice_content,$is_use);
+            return AjaxReturn($retval);
+        } else {
+            $this->infrastructureChildMenu(16);
+            $shop_id = $this->instance_id;
+            $shopSet = $Config->getIndexNotice($shop_id);
+            $this->assign("list", $shopSet);
+            return view($this->style . "Config/notice");
         }
     }
 

@@ -381,14 +381,16 @@ $(function(){
 		$(".popup").hide();
 	})
 	
-	setTimeout(function(){
-		layer.open({
-			type: 1,
-			title:'我要寄烟网提醒您',
-			skin: 'layui-layer-rim', //加上边框
-			content: '<p style="line-height: 1.4;padding:20px 10px;text-indent:1em;">我要寄烟网网站商品对应价格有所调整，应中国烟草局要求，烟价不可与代购服务费等价格同时标明，所以原商品总价已拆分为烟价+服务费（含运费）=到手价。所有商品总价没有任何变动，给大家带来的不便还望谅解！</p>'
-		});
-	},3000)
+	if({$index_content.is_use == 1}){
+        setTimeout(function(){
+            layer.open({
+                type: 1,
+                title:'我要寄烟网提醒您',
+                skin: 'layui-layer-rim', //加上边框
+                content: '<p style="line-height: 1.4;padding:20px 10px;text-indent:1em;">{$index_content.value}</p>'
+            });
+        },3000)
+	}
 
 	$.ajax({
 		type:"post",

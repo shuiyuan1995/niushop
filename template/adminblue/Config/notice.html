@@ -1,0 +1,71 @@
+{extend name="adminblue/base" /}
+{block name="resources"/}
+<link rel="stylesheet" type="text/css" href="ADMIN_CSS/defau.css">
+<style>
+.common-label{display: inline-block;vertical-align: middle;margin: 0 10px 0 5px;}
+.set-style dl dt { width: 11%;}
+</style>
+{/block}
+{block name="main"}
+<input type="hidden" id="withdraw_id" value="{$list['id']}">
+<div class="set-style">
+	<dl>
+		<dt>通知内容：</dt>
+		<dd>
+			<textarea id="notice_content" rows="5" cols="15">{$list.value}</textarea>
+		</dd>
+	</dl>
+	<dl>
+		<dt>是否启用：</dt>
+		<dd>
+			<div class="controls">
+				<i class="radio-common"><input type="radio" name="enable" value="1" checked="checked" id="enableYes"></i><label class="common-label" for="enableYes">启用</label>
+				<i class="radio-common"><input type="radio" name="enable" value="0" id="enableNo"></i><label class="common-label" for="enableNo">禁用</label>
+				<input type="hidden" id="is_open" value="{$list['is_use']}">
+			</div>
+			<p class="hint">是否启用</p>
+		</dd>
+	</dl>
+	<dl>
+		<dt></dt>
+		<dd><button class="btn-common btn-big" onclick="setChaiBaoAjax();">保存</button></dd>
+	</dl>
+</div>
+<script>
+function setChaiBaoAjax() {
+	var is_use = $("input[type='radio'][name='enable']:checked").val();
+	var notice_content = $("#notice_content").val();
+
+	$.ajax({
+		type : "post",
+		url : "{:__URL('ADMIN_MAIN/config/notice')}",
+		data : {
+			'notice_content' : notice_content,
+			'is_use' : is_use
+		},
+		success : function(data) {
+			if (data['code'] > 0) {
+				showMessage('success',"提交成功");
+				window.location.reload();
+			} else {
+				showMessage('error',"提交失败");
+			}
+		}
+	});
+}
+
+$(function(){
+	var is_open = $("#is_open").val();
+	if(is_open == ''){
+		is_open = 0;
+	}
+	if(parseInt(is_open) == 0){
+		$("#enableNo").prop("checked","checked");
+		$("#enableNo").parent().addClass("selected");
+	}else{
+		$("#enableYes").prop("checked","checked");
+		$("#enableYes").parent().addClass("selected");
+	}
+})
+</script>
+{/block}

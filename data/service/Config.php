@@ -2025,6 +2025,16 @@ class Config extends BaseService implements IConfig
         }
     }
 
+    public function getIndexNotice($shop_id)
+    {
+        $notice_content = $this->getConfig($shop_id,"INDEX_NOTICE");
+        if ($notice_content){
+            return $notice_content;
+        }else{
+            return '';
+        }
+    }
+
     public function SetSeoConfig($shop_id, $seo_title, $seo_meta, $seo_desc, $seo_other)
     {
         $array[0] = array(
@@ -2256,6 +2266,19 @@ class Config extends BaseService implements IConfig
             'key' => 'SERVER_PRICE',
             'value' => $server_money,
             'desc' => '服务费用',
+            'is_use' => $is_use
+        );
+        $res = $this->setConfig($array);
+        return $res;
+    }
+
+    public function SetIndexNotice($shop_id,$notice_content,$is_use)
+    {
+        $array[0] = array(
+            'instance_id' => $this->instance_id,
+            'key' => 'INDEX_NOTICE',
+            'value' => $notice_content,
+            'desc' => '首页通知',
             'is_use' => $is_use
         );
         $res = $this->setConfig($array);

@@ -76,6 +76,11 @@ class Index extends BaseController
             "shop_id" => $this->instance_id
         ], "sort");
         $this->assign("notice", $notice["data"]);
+
+        //首页通知
+        $config = new Config();
+        $index_content = $config->getIndexNotice($this->instance_id);
+        $this->assign('index_content',$index_content);
         
         // 文章列表
         $article = new Article();
