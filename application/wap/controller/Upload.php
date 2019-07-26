@@ -1098,7 +1098,8 @@ class Upload extends Controller
                 }
             }
         } else {
-            if ($this->file_size > 512000) {
+            $arr_img = ['image/jpeg','image/png','image/gif'];
+            if ($this->file_size > 512000 && in_array($this->file_type,$arr_img)) {
                 $ok = $this->compressImage($_FILES["file_upload"]["tmp_name"],$this->reset_file_path . $newfile,0.5);
             }else {
                 $ok = $this->moveUploadFile($_FILES["file_upload"]["tmp_name"], $this->reset_file_path . $newfile);
