@@ -98,7 +98,7 @@ class Task extends Controller
                 $retval_auto_games_operation = $event->autoPromotionGamesOperation();
                 $notice = new Notice();
                 
-                //$notice->sendNoticeRecords();
+                $notice->sendNoticeRecords();
                 // 使用户的过期虚拟商品失效
                 $verification = new Verification();
                 $retval_virtual_goods_close = $verification->virtualGoodsClose();
