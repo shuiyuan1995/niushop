@@ -308,8 +308,13 @@ class Notify
         $order_model=new NsOrderModel();
         $user_model = new UserModel();
         if(count($order_goods_str)>0){
-            $order_goods_id=$order_goods_str[0];
             $order_goods_model=new NsOrderGoodsModel();
+            $order_goods = $order_goods_model->all($order_goods_str);
+            $goods_name = '';
+            foreach ($order_goods as $key => $val){
+                $goods_name .= ' , '.$val['goods_name'];
+            }
+            $order_goods_id=$order_goods_str[0];
             $order_goods_obj=$order_goods_model->get($order_goods_id);
             $shop_id=$order_goods_obj["shop_id"];
             $order_id=$order_goods_obj["order_id"];
@@ -317,7 +322,7 @@ class Notify
             $buyer_id=$order_obj["buyer_id"];
             $user_obj = $user_model->get($buyer_id);
             $user_name=$user_obj["nick_name"];
-            $goods_name=$order_goods_obj["goods_name"];
+            $goods_name=trim($goods_name,' , ');
             $goods_sku=$order_goods_obj["sku_name"];
             $order_no=$order_obj["order_no"];
             $order_money=$order_obj["order_money"];
@@ -370,7 +375,7 @@ class Notify
                         $content = str_replace("{商品金额}", $goods_money, $content);
                         $content = str_replace("{物流公司}", $express_obj["express_name"], $content);
                         $content = str_replace("{快递编号}", $express_obj["express_no"], $content);
-                        
+
                         $send_title=$template_obj["template_title"];
                         $send_title = str_replace("{商场名称}", $this->shop_name, $send_title);
                         $send_title = str_replace("{用户名称}", $user_name, $send_title);

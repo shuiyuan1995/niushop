@@ -870,6 +870,29 @@ function emailSend($email_host, $email_id, $email_pass, $email_port, $email_is_s
     return $result;
 }
 
+function send_email($email_host, $email_id, $email_pass, $email_port, $email_addr, $toemail, $title, $content, $shopName = "")
+{
+    require_once './data/extend/swiftmailer/swiftmailer/swiftmailer/swift_required.php';
+    if (empty($shopName)) {
+        $shopName = "我要寄烟网";
+    }
+    $smtp = new Swift_SmtpTransport($email_host,$email_port);
+    $smtp->setUsername($email_id);
+    $smtp->setPassword($email_pass);
+
+    $mailer = new Swift_Mailer($smtp);
+
+    $message = new Swift_Message();
+    $message->setSubject($title);// 邮件标题
+    $message->setFrom([$email_addr => $shopName]); // 发送者
+    $message->setTo($toemail); //发送对象，数组形式支持多个
+    $message->setBody($content,'text/html'); //邮件内容
+    //$message->attach(Swift_Attachment::fromPath('./tp5.docx')); //添加附件
+    //$message->setBcc(['591856607@qq.com' => 'leijie']);//密送，支持多个邮箱地址
+    $result = $mailer->send($message);
+    return $result;
+}
+
 /**
  * 执行钩子
  *
