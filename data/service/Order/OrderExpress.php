@@ -81,9 +81,9 @@ class OrderExpress extends BaseService
                 // 循环添加到订单商品项
                 $order_goods = new OrderGoods();
                 $order_goods->orderGoodsDelivery($order_id, $order_goods_id_array);
-               /*  runhook("Notify", "orderDelivery", array(
+                runhook("Notify", "orderDelivery", array(
                     "order_goods_ids" => $order_goods_id_array
-                )); */
+                ));
                 $order_express->commit();
             }
             return 1;

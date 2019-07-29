@@ -538,19 +538,12 @@ class OrderGoods extends BaseService
             
             $order = new Order();
             $order->orderDoDelivery($order_id);
-			
-            runhook("Notify", "orderDelivery", array(
-            "order_goods_ids" => $order_goods_id
-            ));
-            
             $this->order_goods->commit();
             return 1;
         } catch (\Exception $e) {
             $this->order_goods->rollback();
             return $e->getMessage();
         }
-        
-        return $retval;
     }
 
     /**

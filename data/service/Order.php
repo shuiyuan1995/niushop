@@ -708,7 +708,7 @@ class Order extends BaseService implements IOrder
     {
         $order_express = new OrderExpress();
         $retval = $order_express->delivey($order_id, $order_goods_id_array, $express_name, $shipping_type, $express_company_id, $express_no);
-        if ($retval) {
+        /*if ($retval) {
             $params = [
                 'order_id' => $order_id,
                 'order_goods_id_array' => $order_goods_id_array,
@@ -718,7 +718,7 @@ class Order extends BaseService implements IOrder
                 'express_no' => $express_no
             ];
             hook('orderDeliverySuccess', $params);
-        }
+        }*/
         return $retval;
     }
     

@@ -308,8 +308,13 @@ class Notify
         $order_model=new NsOrderModel();
         $user_model = new UserModel();
         if(count($order_goods_str)>0){
-            $order_goods_id=$order_goods_str[0];
             $order_goods_model=new NsOrderGoodsModel();
+            $order_goods = $order_goods_model->all($order_goods_str);
+            $goods_name = '';
+            foreach ($order_goods as $key => $val){
+                $goods_name .= ' , '.$val['goods_name'];
+            }
+            $order_goods_id=$order_goods_str[0];
             $order_goods_obj=$order_goods_model->get($order_goods_id);
             $shop_id=$order_goods_obj["shop_id"];
             $order_id=$order_goods_obj["order_id"];
@@ -317,7 +322,7 @@ class Notify
             $buyer_id=$order_obj["buyer_id"];
             $user_obj = $user_model->get($buyer_id);
             $user_name=$user_obj["nick_name"];
-            $goods_name=$order_goods_obj["goods_name"];
+            $goods_name=$goods_name=trim($goods_name,' , ');
             $goods_sku=$order_goods_obj["sku_name"];
             $order_no=$order_obj["out_trade_no"];
             $order_money=$order_obj["order_money"];
