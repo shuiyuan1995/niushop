@@ -54,7 +54,8 @@ class Notice extends BaseService implements INotice
             "create_date" => time()
         );
         $insert_id = $notice_records_model->save($condition);
-        if ($insert_id > 0){
+        return $insert_id;
+        /*if ($insert_id > 0){
             if ($send_type == 1) {
                 // 短信发送
                 $this->noticeSmsSend($insert_id, $send_account, $send_config, $notice_context);
@@ -62,7 +63,7 @@ class Notice extends BaseService implements INotice
                 // 邮件发送
                 $this->noticeEmailSend($insert_id, $send_account, $send_config, $notice_title, $notice_context);
             }
-        }
+        }*/
     }
 
     /**
@@ -82,7 +83,6 @@ class Notice extends BaseService implements INotice
             $send_type = $notice_obj["send_type"];
             if ($send_type == 1) {
                 // 短信发送
-            	
                 $this->noticeSmsSend($notice_obj["id"], $notice_obj["send_account"], $notice_obj["send_config"], $notice_obj["notice_context"]);
             } else {
                 // 邮件发送
