@@ -889,7 +889,7 @@ function emailSend($email_host, $email_id, $email_pass, $email_port, $email_is_s
         if (! empty($shopName)) {
             $mail->_shopName = $shopName;
         } else {
-            $mail->_shopName = "NiuShop开源电商";
+            $mail->_shopName = "我要买烟网";
         }
         $mail->setServer($email_host, $email_id, $email_pass, $email_port, $email_is_security);
         $mail->setFrom($email_addr);

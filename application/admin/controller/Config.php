@@ -1124,7 +1124,7 @@ class Config extends BaseController
         if ($is_socket && $is_connect) {
             $send = new Send();
             // $toemail = "854991437@qq.com";//$_POST['email_test'];
-            $title = 'Niushop测试邮箱发送';
+            $title = '测试邮件发送';
             $content = '测试邮箱发送成功不成功？';
             $email_host = request()->post('email_host', '');
             $email_port = request()->post('email_port', '');
