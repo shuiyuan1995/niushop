@@ -1,7 +1,13 @@
+<style>
+	.flnew{
+		background: url('/template/shop/blue/public/images/new1.png') top left no-repeat;
+		background-size: 34px auto;
+	}
+</style>
 <div class="all-category fl" id="nav">
 	<ul>
 	{foreach name="navigation_list" item="nav" key="k"}
-		<li class="fl" >
+		<li class="fl flnew" >
 			{if condition='$nav.nav_type eq 0'}
 				{if condition='$nav.is_blank eq 1'}
 					<a class="nav" target="_blank" href="{:__URL('SHOP_MAIN'.$nav['nav_url'])}"  title="{$nav.nav_title}">{$nav.nav_title}</a>

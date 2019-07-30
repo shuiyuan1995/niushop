@@ -1,17 +1,41 @@
-<link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/navi.css">
+<link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/navi.css?v=1.0">
+<style>
+	.flnew{
+		position: relative;
+	}
+	.icon{
+		display: none;
+	}
+	.flnew .icon{
+		position: absolute;
+		display: block;
+		top: -2%;
+    left: 62%;
+		transform-origin:left center;
+		transform: rotate(-46deg);
+		animation: rotateicon 1s ease-in-out infinite;
+	}
+	@keyframes rotateicon{
+		0%{transform: rotate(-50deg);}
+		40%{transform: rotate(-30deg);}
+		100%{transform: rotate(-50deg);}
+	}
+</style>
+
 <div class="navi">
 	<div class="navi-item">
 		<nav class="navi-item_row">
 			{if count($navigation_list) > 0}
 				{foreach name="$navigation_list" item="vo"}
 					{if condition='$vo.nav_type eq 0'}
-					<a href="{:__URL('APP_MAIN'.$vo.nav_url)}">
+					<a href="{:__URL('APP_MAIN'.$vo.nav_url)}" class="flnew">
 					{else/}
-					<a href="{$vo.nav_url}">
+					<a href="{$vo.nav_url}" class="flnew">
 					{/if}
 						<span>
 							<img src="{:__IMG($vo.nav_icon)}"><span>{$vo.nav_title}</span>
 						</span>
+						<svg t="1564478144549" class="icon" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4263" width="24" height="24"><path d="M941.1584 292.8128H262.7072c-1.7408 0-3.3792 0.4096-5.12 0.512a57.6512 57.6512 0 0 0-48.0768 16.5376l-189.44 191.1296a59.0336 59.0336 0 0 0 0 83.0976l189.44 191.0784a57.3952 57.3952 0 0 0 46.08 16.7424c2.3552 0 4.5568 0.7168 6.9632 0.7168h678.6048a80.7424 80.7424 0 0 0 80.8448-80.64V373.4016a80.7424 80.7424 0 0 0-80.8448-80.5888zM205.3632 599.04a56.32 56.32 0 1 1 56.32-56.32 56.32 56.32 0 0 1-56.32 56.32z m289.4336 44.4416h-25.9072L368.64 493.7216v149.76h-24.0128V452.9152h25.6l100.096 149.6064V452.9152h24.2176z m185.088 0H537.6V452.9152h137.7792v22.4768h-112.64v58.368h105.4208v22.3744h-105.2672v64.8704h116.992z m210.3808 0h-24.32l-40.192-145.2032c-3.3792-12.1344-5.376-19.6096-5.9904-22.3744-1.9968 8.7552-3.84 16.2304-5.5808 22.3744l-40.3968 145.2032h-25.6l-50.5856-190.5664h25.856l29.0304 124.928c3.072 13.056 5.7856 26.0608 8.0384 38.9632 5.12-20.48 7.7312-32.1024 8.6016-35.2256l36.2496-128.6656h30.4128l27.2896 96.4608a515.1232 515.1232 0 0 1 14.848 67.4304q3.584-18.0224 9.472-41.4208l29.9008-122.4704h25.6z" fill="#FF3F2B" p-id="4264"></path><path d="M470.6304 602.5216L370.4832 452.9152h-25.856v190.5664h24.1664V493.7216l100.096 149.76h25.9072V452.9152h-24.1664v149.6064zM562.8928 556.1344h105.4208v-22.3744h-105.4208v-58.368h112.5888v-22.4768h-137.7792v190.5664h142.1824v-22.4768h-116.992v-64.8704zM887.2448 575.3856q-5.8368 23.3472-9.472 41.4208a515.1232 515.1232 0 0 0-14.848-67.4304l-27.2896-96.4608h-30.4128l-36.2496 128.6656c-0.8704 3.1232-3.7376 14.8992-8.6016 35.2256-2.2528-12.9024-5.12-25.9072-8.0384-38.9632l-29.0304-124.928h-25.856l50.5856 190.5664h25.6l40.448-145.2032c1.7408-6.144 3.584-13.6192 5.5808-22.3744 0.6144 2.7648 2.6112 10.24 5.9904 22.3744l40.192 145.2032h24.32l52.224-190.5664h-25.6z" fill="#FFFFFF" p-id="4265"></path></svg>
 					</a>
 				{/foreach}
 			{/if}

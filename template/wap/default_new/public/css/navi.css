@@ -15,7 +15,7 @@
 	float: left;
 	width: 20%;
 	min-height: 65px;
-	overflow: hidden;
+	/* overflow: hidden; */
 	margin-top: 10px;
 }
 .navi .navi-item .navi-item_row>a>span{
