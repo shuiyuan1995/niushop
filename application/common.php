@@ -897,7 +897,7 @@ function emailSend($email_host, $email_id, $email_pass, $email_port, $email_is_s
         $mail->setMail($title, $content);
         $result = $mail->sendMail();
     } catch (\Exception $e) {
-        $result = false;
+        $result = $e->getMessage();
     }
     return $result;
 }

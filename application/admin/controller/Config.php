@@ -1134,6 +1134,7 @@ class Config extends BaseController
             $email_is_security = request()->post('email_is_security', '');
             $toemail = request()->post('email_test', '');
             $res = emailSend($email_host, $email_id, $email_pass, $email_port, $email_is_security, $email_addr, $toemail, $title, $content, $this->instance_name);
+            dump($res);exit;
             // $config = new WebConfig();
             // $email_message = $config->getEmailMessage($this->instance_id);
             // $email_value = $email_message["value"];
