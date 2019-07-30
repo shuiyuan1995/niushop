@@ -268,7 +268,8 @@ class Notify
                 $content=$template_obj["template_content"];
                 $content=str_replace("{验证码}", $rand, $content);
                 if(!empty($this->email_host) && !empty($this->email_id) && !empty($this->email_pass) && !empty($this->email_addr)){
-                    $result=emailSend($this->email_host, $this->email_id, $this->email_pass, $this->email_port, $this->email_is_security, $this->email_addr, $email, $template_obj["template_title"], $content, $this->shop_name);
+                    //$result=emailSend($this->email_host, $this->email_id, $this->email_pass, $this->email_port, $this->email_is_security, $this->email_addr, $email, $template_obj["template_title"], $content, $this->shop_name);
+                    $result=send_email($this->email_host, $this->email_id, $this->email_pass, $this->email_port, $this->email_addr, $email, $template_obj["template_title"], $content, $this->shop_name);
                     $this->result["param"]=$rand;
                     if($result){
                         $this->result["code"]=0;
@@ -606,7 +607,8 @@ class Notify
                     #发送
                     $content=$template_obj["template_content"];
                     $content=str_replace("{验证码}", $rand, $content);
-                    $result=emailSend($this->email_host, $this->email_id, $this->email_pass, $this->email_port, $this->email_is_security, $this->email_addr, $send_param, $template_obj["template_title"], $content, $this->shop_name);
+                    //$result=emailSend($this->email_host, $this->email_id, $this->email_pass, $this->email_port, $this->email_is_security, $this->email_addr, $send_param, $template_obj["template_title"], $content, $this->shop_name);
+                    $result=send_email($this->email_host, $this->email_id, $this->email_pass, $this->email_port, $this->email_addr, $send_param, $template_obj["template_title"], $content, $this->shop_name);
                     $this->result["param"]=$rand;
                     if($result){
                         $this->result["code"]=0;
@@ -716,7 +718,7 @@ class Notify
               
                 if(!empty($this->email_host) && !empty($this->email_id) && !empty($this->email_pass) && !empty($this->email_addr)){
                 	//$result=emailSend($this->email_host, $this->email_id, $this->email_pass, $this->email_port, $this->email_is_security, $this->email_addr, $email, $template_obj["template_title"], $content, $this->shop_name);
-                	$result=emailSend($this->email_host, $this->email_id, $this->email_pass, $this->email_port, $this->email_is_security, $this->email_addr, $email, $template_obj["template_title"], $content, $this->shop_name);
+                	$result=send_email($this->email_host, $this->email_id, $this->email_pass, $this->email_port, $this->email_addr, $email, $template_obj["template_title"], $content, $this->shop_name);
                     if($result){
                         $this->result["code"]=0;
                         $this->result["message"]="发送成功!";

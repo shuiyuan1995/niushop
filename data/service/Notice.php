@@ -195,7 +195,8 @@ class Notice extends BaseService implements INotice
         $email_is_security = $send_config["email_is_security"];
         $email_addr = $send_config["email_addr"];
         $shopName = $send_config["shopName"];
-        $result = emailSend($email_host, $email_id, $email_pass, $email_port, $email_is_security, $email_addr, $send_account, $notice_title, $notice_context, $shopName);
+        //$result = emailSend($email_host, $email_id, $email_pass, $email_port, $email_is_security, $email_addr, $send_account, $notice_title, $notice_context, $shopName);
+        $result = send_email($email_host, $email_id, $email_pass, $email_port, $email_addr, $send_account, $notice_title, $notice_context, $shopName);
         $status = - 1;
         if ($result) {
             $send_message = "发送成功";
