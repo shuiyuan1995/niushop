@@ -1192,7 +1192,8 @@ ul .mobile i, .header-box ul .menu-hd b, .header .logo-right .city .city-select 
 	position: relative;
 }
 .category-box .all-category li.active{
-	background: #eb852a;
+	background: #eb852a url(../images/new2.png) top left no-repeat;
+	background-size: 34px auto;
 	height: 42px;
 }
 
