@@ -83,6 +83,14 @@
 		</dd>
 	</dl>
 	<dl>
+		<dt>是否新导航：</dt>
+		<dd>
+			<p>
+				<input id="is_new" type="checkbox"  class="checkbox"  {if condition="$data['is_new'] eq 1"}checked{/if}/>
+			</p>
+		</dd>
+	</dl>
+	<dl>
 		<dt>导航图标：</dt>
 		<dd>
 			<div class="upload-btn-common">
@@ -163,6 +171,7 @@ function save(){
 	}
 	var is_blank = $("#is_blank").prop('checked') ? 1 : 0 ;
 	var is_show = $("#is_show").prop('checked') ? 1 : 0 ;
+	var is_new = $("#is_new").prop('checked') ? 1 : 0 ;
 	var nav_icon = $("#logo").val();
 	$.ajax({
 		type:"post",
@@ -177,7 +186,8 @@ function save(){
 			'is_blank' : is_blank,
 			'template_name' : template_name,
 			'nav_icon' : nav_icon,
-			'is_show' : is_show
+			'is_show' : is_show,
+			'is_new' : is_new
 		},
 		success:function(data){
 			if (data["code"] > 0) {

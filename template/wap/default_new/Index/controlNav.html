@@ -28,9 +28,9 @@
 			{if count($navigation_list) > 0}
 				{foreach name="$navigation_list" item="vo"}
 					{if condition='$vo.nav_type eq 0'}
-					<a href="{:__URL('APP_MAIN'.$vo.nav_url)}" class="flnew">
+					<a href="{:__URL('APP_MAIN'.$vo.nav_url)}" {if condition="$vo.is_new eq 1"}class="flnew"{/if}>
 					{else/}
-					<a href="{$vo.nav_url}" class="flnew">
+					<a href="{$vo.nav_url}" {if condition="$vo.is_new eq 1"}class="flnew"{/if}>
 					{/if}
 						<span>
 							<img src="{:__IMG($vo.nav_icon)}"><span>{$vo.nav_title}</span>
