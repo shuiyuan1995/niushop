@@ -7,7 +7,7 @@
 <div class="all-category fl" id="nav">
 	<ul>
 	{foreach name="navigation_list" item="nav" key="k"}
-		<li class="fl flnew" >
+		<li {if condition="$nav.is_new eq 1"}class='fl flnew'{else/}class='fl'{/if}>
 			{if condition='$nav.nav_type eq 0'}
 				{if condition='$nav.is_blank eq 1'}
 					<a class="nav" target="_blank" href="{:__URL('SHOP_MAIN'.$nav['nav_url'])}"  title="{$nav.nav_title}">{$nav.nav_title}</a>

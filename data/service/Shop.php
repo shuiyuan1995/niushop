@@ -158,7 +158,7 @@ class Shop extends BaseService implements IShop
      *
      * @see \data\api\IShop::addShopNavigation()
      */
-    public function addShopNavigation($nav_title, $nav_url, $type, $sort, $align, $nav_type, $is_blank, $template_name, $nav_icon, $is_show)
+    public function addShopNavigation($nav_title, $nav_url, $type, $sort, $align, $nav_type, $is_blank, $template_name, $nav_icon, $is_show, $is_new)
     {
         Cache::clear("niu_shop_navigation");
         $shop_navigation = new NsShopNavigationModel();
@@ -175,7 +175,8 @@ class Shop extends BaseService implements IShop
             'create_time' => time(),
             'modify_time' => time(),
             'nav_icon'=> $nav_icon,
-            'is_show' => $is_show
+            'is_show' => $is_show,
+            'is_new' => $is_new
         );
         $shop_navigation->save($data);
         $retval = $shop_navigation->nav_id;
@@ -188,7 +189,7 @@ class Shop extends BaseService implements IShop
      *
      * @see \data\api\IShop::addShopNavigation()
      */
-    public function updateShopNavigation($nav_id, $nav_title, $nav_url, $type, $sort, $align, $nav_type, $is_blank, $template_name, $nav_icon, $is_show)
+    public function updateShopNavigation($nav_id, $nav_title, $nav_url, $type, $sort, $align, $nav_type, $is_blank, $template_name, $nav_icon, $is_show, $is_new)
     {
         Cache::clear("niu_shop_navigation");
         $shop_navigation = new NsShopNavigationModel();
@@ -203,7 +204,8 @@ class Shop extends BaseService implements IShop
             'template_name' => $template_name,
             'modify_time' => time(),
             'nav_icon'=> $nav_icon,
-            'is_show'=> $is_show
+            'is_show'=> $is_show,
+            'is_new' => $is_new
         );
         $shop_navigation->save($data, [
             'nav_id' => $nav_id

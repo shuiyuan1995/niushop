@@ -765,7 +765,8 @@ class Config extends BaseController
             $template_name = request()->post("template_name", '');
             $nav_icon = request()->post("nav_icon", '');
             $is_show = request()->post('is_show', '');
-            $retval = $shop->addShopNavigation($nav_title, $nav_url, $type, $sort, $align, $nav_type, $is_blank, $template_name, $nav_icon, $is_show);
+            $is_new = request()->post('is_new', '');
+            $retval = $shop->addShopNavigation($nav_title, $nav_url, $type, $sort, $align, $nav_type, $is_blank, $template_name, $nav_icon, $is_show, $is_new);
             return AjaxReturn($retval);
         } else {
             $use_type = "1,2";
@@ -801,7 +802,8 @@ class Config extends BaseController
             $template_name = request()->post("template_name", '');
             $nav_icon = request()->post("nav_icon", '');
             $is_show = request()->post('is_show', '');
-            $retval = $shop->updateShopNavigation($nav_id, $nav_title, $nav_url, $type, $sort, $align, $nav_type, $is_blank, $template_name, $nav_icon, $is_show);
+            $is_new = request()->post('is_new', '');
+            $retval = $shop->updateShopNavigation($nav_id, $nav_title, $nav_url, $type, $sort, $align, $nav_type, $is_blank, $template_name, $nav_icon, $is_show, $is_new);
             return AjaxReturn($retval);
         } else {
             $nav_id = request()->get('nav_id', '');
