@@ -110,8 +110,9 @@ class Pay extends Controller
         $website = new WebSite();
         $web = $website->getWebSiteInfo();
         $pay_url = $web['pay_url'];
+        $web_url = $web['web_url'];
         $this->assign('pay_url',$pay_url);
-        $this->assign('web_url',$web['web_url']);
+        $this->assign('web_url',$web_url);
         
         //拼团付款限制
         $is_support_pintuan = IS_SUPPORT_PINTUAN;
@@ -138,19 +139,19 @@ class Pay extends Controller
         $pay_value = $pay->getPayInfo($out_trade_no);
         
         if (empty($pay_value)) {
-            $this->error("订单主体信息已发生变动!", __URL(__URL__ . "wap/member/index"));
+            $this->error("订单主体信息已发生变动!", $web_url . "/wap/member/index");
         }
         
         if ($pay_value['pay_status'] != 0) {
             // 订单已经支付
-            $this->error("订单已经支付或者订单价格为0.00，无需再次支付!", __URL(__URL__ . "wap/member/index"));
+            $this->error("订单已经支付或者订单价格为0.00，无需再次支付!", $web_url . "/wap/member/index");
         }
         if ($pay_value['type'] == 1) {
             // 订单
             $order_status = $this->getOrderStatusByOutTradeNo($out_trade_no);
             // 订单关闭状态下是不能继续支付的
             if ($order_status == 5) {
-                $this->error("订单已关闭", __URL(__URL__ . "wap/member/index"));
+                $this->error("订单已关闭", $web_url . "/wap/member/index");
             }
         }
         
