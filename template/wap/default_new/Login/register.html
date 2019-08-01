@@ -131,7 +131,7 @@ var STATIC = "__STATIC__";
                     url: "/wap/login/email",
                     data: {"email":user_email},
                     success: function(data){
-                        if(data == true){
+                        if(data){
                             showBox("{:lang('mailbox_has_been_registered')}", "error");
                             $("#isset_email").attr("value","2");
                         }

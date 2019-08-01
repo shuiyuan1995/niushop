@@ -613,7 +613,7 @@ function btnsave() {
 				return false;
 			}else{
 				$.ajax({
-					type: "post",
+					type: "get",
 					url: "{:__URL('APP_MAIN/login/email')}",
 					data: {"email":value},
 					async: false,
@@ -727,7 +727,7 @@ $("#send_email").click(function (){
 	}
 	//验证手机号是否已经注册
 	$.ajax({
-		type: "post",
+		type: "get",
 		url: "{:__URL('APP_MAIN/login/email')}",
 		data: {"email":email},
 		async: false,
