@@ -269,7 +269,6 @@ class Notify
                 $content=str_replace("{验证码}", $rand, $content);
                 if(!empty($this->email_host) && !empty($this->email_id) && !empty($this->email_pass) && !empty($this->email_addr)){
                     $result=emailSend($this->email_host, $this->email_id, $this->email_pass, $this->email_port, $this->email_is_security, $this->email_addr, $email, $template_obj["template_title"], $content, $this->shop_name);
-                    dump($result);exit;
                     $this->result["param"]=$rand;
                     if($result){
                         $this->result["code"]=0;
