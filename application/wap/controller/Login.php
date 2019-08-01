@@ -824,7 +824,7 @@ class Login extends Controller
     {
         if (request()->isAjax()) {
             // 获取数据库中的用户列表
-            $user_email = request()->post('email', '');
+            $user_email = request()->get('email', '');
             $member = new Member();
             $exist = $member->memberIsEmail($user_email);
             return $exist;
