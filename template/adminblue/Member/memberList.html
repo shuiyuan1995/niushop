@@ -388,7 +388,6 @@ function LoadingInfo(page_index) {
 			"start_date" : start_date, "end_date" : end_date, "status" : status
 		},
 		success : function(data) {
-            console.log(data);
             if (data["data"].length > 0) {
 				$(".table-class tbody").empty();
 				for (var i = 0; i < data["data"].length; i++) {
@@ -962,17 +961,26 @@ function batchDelete() {
 function dataExcel(){
 	var search_text = $("#search_text").val();
 	var levelid = $("#level_name").val();
-	$.ajax({
+    var start_date = $("#startDate").val();
+    var end_date = $("#endDate").val();
+	var member_ids = new Array();
+    $(".table-class tbody input[type = 'checkbox']:checked").each(function () {
+        if (!isNaN($(this).val())) {
+            member_ids.push($(this).val());
+        }
+    });
+    $.ajax({
 		url : "{:__URL('ADMIN_MAIN/member/memberExcellist')}",
 		type : "post",
 		data : {
 			"search_text" : search_text,
-			"levelid" : levelid
+			"levelid" : levelid,
+			"start_date" : start_date,
+			"end_date" : end_date
 		},
 		success : function (data){
-			console.log(data);
-			if(data['data'] != ""){
-				window.location.href=__URL("ADMIN_MAIN/member/memberDataExcel?search_text="+search_text+"&levelid="+levelid); 	
+            if(data['data'] != ""){
+				window.location.href=__URL("ADMIN_MAIN/member/memberDataExcel?search_text="+search_text+"&levelid="+levelid+"&memberids="+member_ids+"&start_date="+start_date+"&end_date="+end_date);
 			}else{
 				showTip("没有导出的会员数据",'error');
 			}
