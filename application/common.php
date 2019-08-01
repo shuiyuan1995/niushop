@@ -857,7 +857,7 @@ function emailSend($email_host, $email_id, $email_pass, $email_port, $email_is_s
         if (! empty($shopName)) {
             $mail->_shopName = $shopName;
         } else {
-            $mail->_shopName = "NiuShop开源电商";
+            $mail->_shopName = "我要寄烟网";
         }
         $mail->setServer($email_host, $email_id, $email_pass, $email_port, $email_is_security);
         $mail->setFrom($email_addr);
@@ -865,7 +865,7 @@ function emailSend($email_host, $email_id, $email_pass, $email_port, $email_is_s
         $mail->setMail($title, $content);
         $result = $mail->sendMail();
     } catch (\Exception $e) {
-        $result = $e->getMessage();
+        $result = false;
     }
     return $result;
 }
