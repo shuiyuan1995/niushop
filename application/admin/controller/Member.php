@@ -934,7 +934,7 @@ class Member extends BaseController
         $res = $supplier->deleteSupplier($supplier_id_array);
         return AjaxReturn($res);
     }
-    
+
     /**
      * 订单数据excel导出
      */
@@ -953,17 +953,49 @@ class Member extends BaseController
         );
         $search_text = request()->get('search_text', '');
         $level_id = request()->get('levelid', -1);
+        $member_ids = request()->get('memberids', '');
+        $start_date = request()->get('start_date') == "" ? 0 : getTimeTurnTimeStamp(request()->get('start_date'));
+        $end_date = request()->get('end_date') == "" ? 0 : getTimeTurnTimeStamp(request()->get('end_date'));
         $condition = [
             'su.is_member' => 1,
             'su.nick_name|su.user_tel|su.user_email' => array(
                 'like',
                 '%' . $search_text . '%'
             ),
-        
+
             'su.is_system' => 0
         ];
+        if ($start_date != 0 && $end_date != 0) {
+            $condition["su.reg_time"] = [
+                [
+                    ">",
+                    $start_date
+                ],
+                [
+                    "<",
+                    $end_date
+                ]
+            ];
+        } elseif ($start_date != 0 && $end_date == 0) {
+            $condition["su.reg_time"] = [
+                [
+                    ">",
+                    $start_date
+                ]
+            ];
+        } elseif ($start_date == 0 && $end_date != 0) {
+            $condition["su.reg_time"] = [
+                [
+                    "<",
+                    $end_date
+                ]
+            ];
+        }
         if ($level_id != - 1) {
             $condition['nml.level_id'] = $level_id;
+        }
+        if ($member_ids != ''){
+            $condition['su.uid'] = ['in',$member_ids];
         }
         $member = new MemberService();
         $list = $member->getMemberList(1, 0, $condition, 'su.reg_time desc');
@@ -974,27 +1006,55 @@ class Member extends BaseController
         }
         dataExcel($xlsName,$xlsCell,$list);
     }
-    
+
     public function memberExcellist(){
-    	$search_text = request()->post('search_text', '');
-    	$level_id = request()->post('levelid', -1);
-    	
-    	$condition = [
-    			'su.is_member' => 1,
-    			'su.nick_name|su.user_tel|su.user_email' => array(
-    					'like',
-    					'%' . $search_text . '%'
-    			),
-    	
-    			'su.is_system' => 0
-    	];
-    	if ($level_id != - 1) {
-    		$condition['nml.level_id'] = $level_id;
-    	}
-    	
-    	$member = new MemberService();
-    	$list = $member->getMemberList(1, 0, $condition, 'su.reg_time desc');
-    	return $list;
+        $search_text = request()->post('search_text', '');
+        $level_id = request()->post('levelid', -1);
+        $start_date = request()->post('start_date') == "" ? 0 : getTimeTurnTimeStamp(request()->post('start_date'));
+        $end_date = request()->post('end_date') == "" ? 0 : getTimeTurnTimeStamp(request()->post('end_date'));
+
+        $condition = [
+            'su.is_member' => 1,
+            'su.nick_name|su.user_tel|su.user_email' => array(
+                'like',
+                '%' . $search_text . '%'
+            ),
+
+            'su.is_system' => 0
+        ];
+        if ($start_date != 0 && $end_date != 0) {
+            $condition["su.reg_time"] = [
+                [
+                    ">",
+                    $start_date
+                ],
+                [
+                    "<",
+                    $end_date
+                ]
+            ];
+        } elseif ($start_date != 0 && $end_date == 0) {
+            $condition["su.reg_time"] = [
+                [
+                    ">",
+                    $start_date
+                ]
+            ];
+        } elseif ($start_date == 0 && $end_date != 0) {
+            $condition["su.reg_time"] = [
+                [
+                    "<",
+                    $end_date
+                ]
+            ];
+        }
+        if ($level_id != - 1) {
+            $condition['nml.level_id'] = $level_id;
+        }
+
+        $member = new MemberService();
+        $list = $member->getMemberList(1, 0, $condition, 'su.reg_time desc');
+        return $list;
     }
     
     /**
