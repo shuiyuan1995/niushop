@@ -60,4 +60,13 @@ class CartList implements ICartList
             return $list;
         }
     }
+
+    public function getUser($username)
+    {
+        $username = Db::name('sys_user')->field('uid')->where('user_name|user_email',$username)->find();
+        if ($username){
+            return $username;
+        }
+        return false;
+    }
 }

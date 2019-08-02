@@ -20,6 +20,7 @@ class CartGoods extends BaseController
             $page_size = request()->post('page_size', PAGESIZE);
             $start_date = request()->post('start_date') == "" ? 0 : request()->post('start_date');
             $end_date = request()->post('end_date') == "" ? 0 : request()->post('end_date');
+            $user_name = request()->post('username','');
 
             $condition = array();
             if ($start_date != 0 && $end_date != 0) {
@@ -48,10 +49,17 @@ class CartGoods extends BaseController
                     ]
                 ];
             }
+            if(!empty($user_name)){
+                $user = $cart->getUser($user_name);
+                if ($user){
+                    $condition['buyer_id'] = $user['uid'];
+                }
+            }
             $list = $cart->getKeyword($page_index, $page_size, $condition);
 
             return $list;
         }else{
+            $this->assign('user_name',request()->get('user_name'));
             return view($this->style . "CartGoods/index");
         }
     }

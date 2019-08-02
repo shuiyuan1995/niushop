@@ -211,6 +211,7 @@ class Order extends BaseController
             }
             $this->assign('child_menu_list', $child_menu_list);
             $this->assign('order_type', '1,3');
+            $this->assign('user_name',request()->get('user_name'));
             return view($this->style . "Order/orderList");
         }
     }

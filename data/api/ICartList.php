@@ -10,4 +10,6 @@ namespace data\api;
 interface ICartList
 {
     function getKeyword($page_index = 1, $page_size = 0, $condition = '', $field = '*');
+
+    function getUser($username);
 }
