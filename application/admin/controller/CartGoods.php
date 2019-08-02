@@ -20,6 +20,7 @@ class CartGoods extends BaseController
             $page_size = request()->post('page_size', PAGESIZE);
             $start_date = request()->post('start_date') == "" ? 0 : request()->post('start_date');
             $end_date = request()->post('end_date') == "" ? 0 : request()->post('end_date');
+            $user_name = request()->post('username','');
 
             $condition = array();
             if ($start_date != 0 && $end_date != 0) {

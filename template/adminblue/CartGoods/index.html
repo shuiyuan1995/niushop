@@ -30,9 +30,16 @@
 			<input type="text" id="startDate" class="input-common middle" placeholder="请选择开始日期" onclick="WdatePicker()" />
 			&nbsp;-&nbsp;
 			<input type="text" id="endDate" placeholder="请选择结束日期" class="input-common middle" onclick="WdatePicker()" />
+			<button class="btn-common-white more-search"><i class="fa fa-chevron-down"></i></button>
 			<button onclick="searchData()" value="搜索" class="btn-common" >搜索</button>
 			<!--更多搜索下拉框-->
 			<div class="more-search-container">
+				<dl>
+					<dt>用户名：</dt>
+					<dd>
+						<input id="username" class="input-common middle" type="text" placeholder="输入邮箱，用户名" />
+					</dd>
+				</dl>
 				<dl>
 					<dt></dt>
 					<dd><button onclick="searchData()" class="btn-common">搜索</button></dd>
@@ -70,13 +77,14 @@
 function LoadingInfo(page_index) {
         var start_date = $("#startDate").val();
         var end_date = $("#endDate").val();
+        var username = $("#username").val();
 
         $.ajax({
             type : "post",
             url : "{:__URL('ADMIN_MAIN/CartGoods/index')}",
             data : {
                 "page_index" : page_index, "page_size" : $("#showNumber").val(),
-				"start_date" : start_date, "end_date" : end_date
+				"start_date" : start_date, "end_date" : end_date, "username" : username
             },
             success : function(data) {
                 if (data['data'].length > 0) {
@@ -89,7 +97,7 @@ function LoadingInfo(page_index) {
 							html += '<label style="float:none;width:100%;cursor: pointer;"><a href="SHOP_MAIN/goods-'+ data['data'][i]['goods_id'] +'.html" target="_blank">'+data['data'][i]['goods_name']+'</a></label>';
 							html += '</div>';
 							html += '</td>';
-							html += '<td style="text-align:center;">'+ data['data'][i]['member_name'] +'</td>';
+							html += '<td style="text-align:center;">'+ data['data'][i]['user_name'] +'</td>';
 							html += '<td style="text-align:center;">¥'+ data['data'][i]['price'] +'</td>';
 							html += '<td>' +data['data'][i]['num']+'</td>';
 							if (data['data'][i]['ip'] != 0){var ip = data['data'][i]['ip']}else{var ip = '0.0.0.0'}
