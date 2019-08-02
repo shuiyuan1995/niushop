@@ -487,7 +487,8 @@ function LoadingInfo(page_index) {
 						html += '<a href="'+__URL('ADMIN_MAIN/member/newpath?member_id='+ data['data'][i]['uid'])+'">查看足迹</a>';
 						
 						html += '<a onclick="modify_user('+ data["data"][i]["uid"]+')">修改</a>&nbsp;<a onclick="delete_user('+ data["data"][i]["uid"]+')">删除</a><br/>';
-						
+                        html += '<a href="'+__URL('ADMIN_MAIN/cartGoods/index.html?user_name='+ data['data'][i]['user_name'])+'">购物车</a>&nbsp;<a href="'+__URL('ADMIN_MAIN/order/orderlist.html?user_name='+ data['data'][i]['nick_name'])+'">订单列表</a><br/>';
+
 					}
 					html += '</td>'
 					html += '</tr>';

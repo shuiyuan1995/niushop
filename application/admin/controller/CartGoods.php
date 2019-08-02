@@ -49,10 +49,17 @@ class CartGoods extends BaseController
                     ]
                 ];
             }
+            if(!empty($user_name)){
+                $user = $cart->getUser($user_name);
+                if ($user){
+                    $condition['buyer_id'] = $user['uid'];
+                }
+            }
             $list = $cart->getKeyword($page_index, $page_size, $condition);
 
             return $list;
         }else{
+            $this->assign('user_name',request()->get('user_name'));
             return view($this->style . "CartGoods/index");
         }
     }
