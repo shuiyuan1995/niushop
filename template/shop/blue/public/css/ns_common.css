@@ -1191,13 +1191,13 @@ ul .mobile i, .header-box ul .menu-hd b, .header .logo-right .city .city-select 
 	line-height: 40px;
 	position: relative;
 }
-.category-box .all-category li.active{
+.category-box .all-category .flnew.active{
 	background: #eb852a url(../images/new2.png) top left no-repeat;
 	background-size: 34px auto;
 	height: 42px;
 }
 
-.category-box .all-category li.active a{
+.category-box .all-category li.flnew.active a{
 	color: #ffffff
 }
 
