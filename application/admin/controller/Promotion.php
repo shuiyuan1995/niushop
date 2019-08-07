@@ -1071,7 +1071,8 @@ class Promotion extends BaseController
         if (! empty($info['goods_list'])) {
             foreach ($info['goods_list'] as $k => $v) {
                 $goods_id_array[] = $v['goods_id'];
-                $selected_data[$v['goods_id']] = $v['spike'];
+                $selected_data[$v['goods_id']]['price'] = $v['spike'];
+                $selected_data[$v['goods_id']]['stock'] = $v['goods_num'];
             }
         }
         //选择商品的id

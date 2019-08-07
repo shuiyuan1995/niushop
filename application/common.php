@@ -448,17 +448,17 @@ function judge_ip($ip)
 
     $country = $record->country->names['zh-CN']; // '中国'
     $country_code = $record->country->isoCode;
-    $region = $record->subdivisions[0]->names['zh-CN']?:$record->subdivisions[0]->names['en'];
-    $region_code = $record->subdivisions[0]->isoCode;
+    $region = @$record->subdivisions[0]->names['zh-CN']?:@$record->subdivisions[0]->names['en'];
+    $region_code = @$record->subdivisions[0]->isoCode;
     $city = $record->city->names['zh-CN']?:$record->city->names['en']; // '重庆'
 
     $data['country'] = $country ? $country : 'XX';
 
-    $data['country_code'] = $country_code;
+    $data['country_code'] = $country_code ? $country_code : 'XX';
 
     $data['region'] = $region ? $region : 'XX';
 
-    $data['region_code'] = $region_code;
+    $data['region_code'] = $region_code ? $region_code : 'XX';
 
     $data['city'] = $city ? $city : 'XX';
 
@@ -1738,7 +1738,6 @@ function pushAString($string)
 
 function zfloor($num)
 {
-    $num = floor($num);
     $res = sprintf("%.2f", $num);
     return $res;
 }

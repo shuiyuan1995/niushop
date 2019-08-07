@@ -361,7 +361,8 @@ class Events implements IEvents{
                     $goods = new NsGoodsModel();
                     $goods_info = $goods->getInfo(['goods_id' => $spike_goods_item['goods_id']],'promotion_type,price');
 
-                    $promotion_price = $goods_info['price'] * $spike_goods_item['spike']/10;
+                    //$promotion_price = $goods_info['price'] * $spike_goods_item['spike']/10;
+                    $promotion_price = $spike_goods_item['spike'];
                     if($spike_goods_item['decimal_reservation_number'] >= 0){
                         $promotion_price = sprintf("%.2f", round($promotion_price, $spike_goods_item['decimal_reservation_number']));
                     }
@@ -378,7 +379,8 @@ class Events implements IEvents{
                     foreach ($goods_sku_list as $k_sku => $sku)
                     {
                         $goods_sku = new NsGoodsSkuModel();
-                        $promote_price = $sku['price']*$spike_goods_item['spike']/10;
+                        //$promote_price = $sku['price']*$spike_goods_item['spike']/10;
+                        $promote_price = $spike_goods_item['spike'];
                         if($spike_goods_item['decimal_reservation_number'] >= 0){
                             $promote_price = sprintf("%.2f", round($promote_price, $spike_goods_item['decimal_reservation_number']));
                         }

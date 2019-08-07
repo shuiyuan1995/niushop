@@ -60,7 +60,7 @@
 		<input type="hidden" id="action" value="spike">
 		<input type="hidden" id="selected_data" value='{$selected_data}'>	
 	</span>
-	{include file="adminblue/Promotion/goodsSelectDialog" /}
+	{include file="adminblue/Promotion/spikeSelectDialog" /}
 	<dl>
 		<dt></dt>
 		<dd>
@@ -73,17 +73,17 @@
 <script>
 
 //折扣
-function discount(event){
-	var discount = parseFloat($(event).val()).toFixed(2);
-	if(discount <0.01){
-		$(event).val(0.01);
-		discount = 0.01;
-	}else if(discount >9.99){
-		$(event).val(9.99);
-		discount = 9.99;
-	}
-	var goodsid = $(event).attr("goodsid");
-	$(event).val(discount);
+function discount(event,price){
+    var discount = parseFloat($(event).val()).toFixed(2);
+    if(discount <0.01){
+        $(event).val(0.01);
+        discount = 0.01;
+    }else if(discount >price){
+        $(event).val(price);
+        discount = price;
+    }
+    var goodsid = $(event).attr("goodsid");
+    $(event).val(discount);
 }
 
 //保存
@@ -95,7 +95,7 @@ function updateSpike(){
 	var end_time = $("#end_time").val();
     var keywords = $("#keywords").val();
     var description = $("#description").val();
-	var obj = $(".goods-list input[type='number'][name='discount']");
+	var obj = $(".goods-list input[type='text'][name='discount']");
 	var goods_id_array = '';
 	var decimal_reservation_number = $("input[name='decimal-reservation-number']:checked").val();
 		decimal_reservation_number = decimal_reservation_number == undefined ? -1 : decimal_reservation_number;
@@ -104,13 +104,6 @@ function updateSpike(){
 		var dis = obj.eq(i).val() ? obj.eq(i).val() : 10;
 		var gid = obj.eq(i).attr("goodsid");
 		goods_id_array += ','+gid+':'+ dis+':'+$("#num-"+gid).val();
-		if(dis >=10 || dis <= 0 ){
-			showMessage('error', "折扣必须在0.01-9.99之间");
-			flag = true;
-			return false;
-		}else{
-			flag = false;
-		}
 	});
 	
 	goods_id_array = goods_id_array.substring(1);

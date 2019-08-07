@@ -1488,6 +1488,10 @@ input[type='radio'],input[type='checkbox'] {
 	width: 50px !important;
 }
 
+.input-common.bshort,.select-common.bshort {
+	width: 80px !important;
+}
+
 .input-common.middle,.select-common.middle {
 	width: 150px !important;
 }

@@ -112,7 +112,7 @@ ul.row-4 li .p-name .g-name {color:#858484;font-size:17px;line-height:20px;}
 					<span class="g-name">{$vo.goods_name}</span>
 				</div>
 				<div class="goods-price">
-					<span class="sale" style="font-size: 24px;"><b style="color: #E84C3D;">¥{$vo.price*$vo.spike/10|zfloor}</b></span>&nbsp;
+					<span class="sale" style="font-size: 24px;"><b style="color: #E84C3D;">¥{$vo.spike|zfloor}</b></span>&nbsp;
 					<span class="sale" style="font-size: 20px;"><s><b style="color: #aaaaaa;">¥{$vo.price}</b></s></span>
 					<!-- <span class="depreciate"><i class="fa fa-down"></i>{:lang('straight_down')}：¥{$vo.sale_down}</span> -->
 				</div>
