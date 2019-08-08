@@ -90,11 +90,9 @@ function selcart_submit() {
             type : "post",
             data : { "cart_id" : cart_id_arr.toString() },
             success : function(data){
-            	if (data['spike'] == false){
-                    if (data['count'] < 2) {
-                        $.msg("单个订单两条起售！");
-                        return;
-                    }
+				if (data['count'] < 2) {
+					$.msg("单个订单两条起售！");
+					return;
 				}
 				$.ajax({
 					url : __URL(SHOPMAIN + "/member/ordercreatesession"),

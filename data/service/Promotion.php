@@ -2076,6 +2076,7 @@ class Promotion extends BaseService implements IPromotion
                             'goods_id' => $goods_id['goods_id']
                         ]);
                         $redis->del($goods_id['goods_id']);
+                        $redis->del('user_'.$goods_id['goods_id']);
                         $goods_sku = new NsGoodsSkuModel();
                         $goods_sku_list = $goods_sku->getQuery([
                             'goods_id' => $goods_id['goods_id']

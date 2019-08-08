@@ -140,7 +140,20 @@ var STATIC = "__STATIC__";
             }
         });
 	});
-	
+
+	function check_user() {
+        var username = $("#username").val();
+        if(username == ''){
+            showBox("{:lang('account_cannot_be_empty')}", "error");
+            return false;
+        }
+        if(username.length<3 || username.length>16){
+            $("#username").focus();
+            showBox("用户名3-16位", "error");
+            return false;
+        }
+    }
+
 	var is_member_sub = false;
 	function register_member(){
 		var username = $("#username").val();
@@ -572,7 +585,7 @@ function verifyPassword(password){
 			<div id="nk_text1" style="display:block;">
 				<div class="reg-cont" style="margin-top:45px;">
 					<label class="login-txt" for="username"><span style="padding-right:27px;">{:lang('account_number')}</span><input class="" type="text"
-						name="username" id="username" placeholder="尽量使用微信号作用户名">
+						name="username" id="username" onblur="check_user();" placeholder="尽量使用微信号作用户名">
 					</label>
 				</div>
 				<div class="reg-cont">

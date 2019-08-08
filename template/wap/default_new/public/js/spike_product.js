@@ -202,24 +202,29 @@ $(function() {
 
 								}else if(cart_tag == "buyBtn1" || cart_tag == "theSelected"){
 									//立即购买
-									var skuid = $("#hiddSkuId").val();
-									var num = $("#num").val();
-									//没有SKU商品，获取第一个
-									if(skuid == null || skuid == "") skuid = $("#goods_sku0").attr("skuid");
-									getGoodsPurchaseRestrictionForCurrentUser($("#goods_id").val(),num,function(purchase){
-										if(purchase.code>0){
-											$.ajax({
-												url : __URL(APPMAIN + "/order/ordercreatesession"),
-												type : "post",
-												data : { "tag" : "buy_now", "sku_id" : skuid, "num" :num, "goods_type" : $("#hidden_goods_type").val() },
-												success : function(res){
-													window.location.href = __URL(APPMAIN+"/order/paymentorder");
-												}
-											});
-										}else{
-											showBox(purchase.message,"error");
-										}
-									});
+                                    if (num < 2){
+                                        showBox("单个订单两条起售,请选购其他商品搭配下单","warning");
+                                        return ;
+                                    }else{
+                                        var skuid = $("#hiddSkuId").val();
+                                        var num = $("#num").val();
+                                        //没有SKU商品，获取第一个
+                                        if(skuid == null || skuid == "") skuid = $("#goods_sku0").attr("skuid");
+                                        getGoodsPurchaseRestrictionForCurrentUser($("#goods_id").val(),num,function(purchase){
+                                            if(purchase.code>0){
+                                                $.ajax({
+                                                    url : __URL(APPMAIN + "/order/ordercreatesession"),
+                                                    type : "post",
+                                                    data : { "tag" : "buy_now", "sku_id" : skuid, "num" :num, "goods_type" : $("#hidden_goods_type").val() },
+                                                    success : function(res){
+                                                        window.location.href = __URL(APPMAIN+"/order/paymentorder");
+                                                    }
+                                                });
+                                            }else{
+                                                showBox(purchase.message,"error");
+                                            }
+                                        });
+                                    }
 								}else if(cart_tag == "goods_presell"){
 									//立即购买
 									var skuid = $("#hiddSkuId").val();

@@ -48,6 +48,7 @@ use data\model\NsGoodsViewModel as NsGoodsViewModel;
 use data\model\NsOrderGoodsModel;
 use data\model\NsOrderModel;
 use data\model\NsPromotionDiscountModel;
+use data\model\NsPromotionSpikeGoodsModel;
 use data\model\NsPromotionSpikeModel;
 use data\model\NsShopModel;
 use data\service\BaseService as BaseService;
@@ -2657,15 +2658,31 @@ class Goods extends BaseService implements IGoods
                     continue;
                 }
                 $num = $v['num'];
-                if ($goods_info['max_buy'] != 0 && $goods_info['max_buy'] < $v['num']) {
-                    $num = $goods_info['max_buy'];
-                }
-                if ($sku_info['stock'] < $num) {
-                    $num = $sku_info['stock'];
-                }
-                // 商品最小购买数大于现购买数
-                if ($goods_info['min_buy'] > 0 && $num < $goods_info['min_buy']) {
-                    $num = $goods_info['min_buy'];
+                $spike = new NsPromotionSpikeGoodsModel();
+                $is_spike = $spike->where('goods_id',$v['goods_id'])->where('start_time','<=',time())->where('end_time','>',time())->where('status',1)->count();
+                if ($is_spike){
+                    $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
+                    $sstock = $redis->LLen($v['goods_id']);
+                    if($sstock < $num){
+                        $num = $sstock;
+                        if ($num == 0){
+                            unset($cart_goods_list[$k]);
+                            // 更新cookie购物车
+                            $this->cartDelete($v['cart_id']);
+                            continue;
+                        }
+                    }
+                }else{
+                    if ($goods_info['max_buy'] != 0 && $goods_info['max_buy'] < $v['num']) {
+                        $num = $goods_info['max_buy'];
+                    }
+                    if ($sku_info['stock'] < $num) {
+                        $num = $sku_info['stock'];
+                    }
+                    // 商品最小购买数大于现购买数
+                    if ($goods_info['min_buy'] > 0 && $num < $goods_info['min_buy']) {
+                        $num = $goods_info['min_buy'];
+                    }
                 }
                 // 商品最小购买数大于现有库存
                 if ($goods_info['min_buy'] > $sku_info['stock']) {
@@ -2754,6 +2771,15 @@ class Goods extends BaseService implements IGoods
                     'goods_id' => $goods_id
                 ], 'max_buy');
                 $new_num = $num + $get_num['num'];
+                $spike = new NsPromotionSpikeGoodsModel();
+                $is_spike = $spike->where('goods_id',$goods_id)->where('start_time','<=',time())->where('end_time','>',time())->where('status',1)->count();
+                if ($is_spike){
+                    $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
+                    $snum = $redis->LLen($goods_id);
+                    if ($new_num > $snum) {
+                        $new_num = $snum;
+                    }
+                }
                 if ($max_buy['max_buy'] != 0) {
                     
                     if ($new_num > $max_buy['max_buy']) {

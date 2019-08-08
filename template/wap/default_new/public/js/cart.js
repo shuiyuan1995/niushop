@@ -297,12 +297,10 @@ function settlement() {
                     type: "post",
                     data: {"cart_id": cart_id_arr.toString()},
                     success: function (data) {
-                        if (data['spike'] == false) {
-                            if (data['count'] < 2) {
-                                showBox("单个订单两条起售！", "warning");
-                                return;
-                            }
-                        }
+						if (data['count'] < 2) {
+							showBox("单个订单两条起售！", "warning");
+							return;
+						}
                         $.ajax({
                             url: __URL(APPMAIN + "/order/ordercreatesession"),
                             type: "post",

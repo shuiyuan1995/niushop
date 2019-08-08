@@ -15,6 +15,7 @@
  */
 namespace app\shop\controller;
 
+use data\model\NsPromotionSpikeGoodsModel;
 use data\service\Express;
 use data\service\Member;
 use data\service\Order as OrderService;
@@ -81,8 +82,10 @@ class Order extends BaseController
             );
             return $res;
         } else {
-            //$res = $this->checkSpikeUser($goods_sku_list,$this->uid);
-            //if (!$res) return returnAjax(-1,'商品中有已经抢购过的商品，请重新选购');
+            $res = $this->checkSpikeUser($goods_sku_list,$this->uid);
+            if (!$res) return returnAjax(-1,'商品中有已经抢购过的商品，请重新选购');
+            $res1 = $this->checkSpikeStock($goods_sku_list,$this->uid);
+            if (!$res1) return returnAjax(-1,'秒杀商品库存不足');
             $order_id = $order->orderCreate('1', $out_trade_no, $pay_type, $shipping_type, '1', $buyer_ip, $leavemessage, $buyer_invoice, $shipping_time, $address['mobile'], $address['province'], $address['city'], $address['district'], $address["country_detail"].'&nbsp;'.$address['province_detail'].'&nbsp;'.$address['city_detail'].'&nbsp;'.$address['address'], $address['zip_code'], $address['consigner'], $integral, $use_coupon, 0, $goods_sku_list, $user_money, $pick_up_id, $express_company_id, $coin, $address["phone"], $distribution_time_out,$is_chai,$chai_price,$server_price);
             // Log::write($order_id);
             if ($order_id > 0) {
@@ -96,6 +99,23 @@ class Order extends BaseController
         }
     }
 
+    private function checkSpikeStock($goods_sku,$uid){
+        $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
+        $sku_array = explode(',',$goods_sku);
+        foreach ($sku_array as $k=>$v){
+            $data = explode(':',$v);
+            $goods_id = Db::name('ns_goods_sku')->where('sku_id',$data[0])->value('goods_id');
+            $spike = new NsPromotionSpikeGoodsModel();
+            $is_spike = $spike->where('goods_id',$goods_id)->where('start_time','<=',time())->where('end_time','>',time())->where('status',1)->count();
+            if ($is_spike){
+                if ($redis->LLen($goods_id) == 0){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     private function checkSpikeUser($goods_sku,$uid)
     {
         $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
@@ -103,8 +123,12 @@ class Order extends BaseController
         foreach ($sku_array as $k=>$v){
             $data = explode(':',$v);
             $goods_id = Db::name('ns_goods_sku')->where('sku_id',$data[0])->value('goods_id');
-            if ($redis->exists($goods_id)){
-                if ($redis->sIsMember('user_'.$goods_id,$uid)) return false;
+            $spike = new NsPromotionSpikeGoodsModel();
+            $is_spike = $spike->where('goods_id',$goods_id)->where('start_time','<=',time())->where('end_time','>',time())->where('status',1)->count();
+            if ($is_spike){
+                if ($redis->exists($goods_id)){
+                    if ($redis->sIsMember('user_'.$goods_id,$uid)) return false;
+                }
             }
         }
         return true;
@@ -117,14 +141,20 @@ class Order extends BaseController
         foreach ($sku_array as $k=>$v){
             $data = explode(':',$v);
             $goods_id = Db::name('ns_goods_sku')->where('sku_id',$data[0])->value('goods_id');
-            if ($redis->exists($goods_id)){
-                for ($i = 0;$i<$data[1];$i++){
+            $spike = new NsPromotionSpikeGoodsModel();
+            $is_spike = $spike->where('goods_id',$goods_id)->where('start_time','<=',time())->where('end_time','>',time())->where('status',1)->count();
+            if ($is_spike) {
+                for ($i = 0; $i < $data[1]; $i++) {
                     $redis->rPop($goods_id);
-                    if(!$redis->exists('user_'.$goods_id)){
-                        $redis->sAdd('user_'.$goods_id,$uid);
-                        $redis->expire('user_'.$goods_id,$redis->ttl($goods_id));
-                    }else{
-                        $redis->sAdd('user_'.$goods_id,$uid);
+                }
+                if ($redis->LLen($goods_id) == 0){
+                    if ($redis->exists('user_' . $goods_id)) $redis->del('user_' . $goods_id);
+                }else{
+                    if (!$redis->exists('user_' . $goods_id)) {
+                        $redis->sAdd('user_' . $goods_id, $uid);
+                        $redis->expire('user_' . $goods_id, $redis->ttl($goods_id));
+                    } else {
+                        $redis->sAdd('user_' . $goods_id, $uid);
                     }
                 }
             }

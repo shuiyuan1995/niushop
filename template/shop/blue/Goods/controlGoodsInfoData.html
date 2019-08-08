@@ -367,6 +367,11 @@ $().ready(function() {
                 $.msg("单个订单两条起售！");
                 return;
             }
+        }else{
+            if($(".amount-input").val() < 2){
+                $.msg("单个订单两条起售,请选购其他商品搭配下单");
+                return;
+            }
         }
 		var tag = $(this).attr("data-tag");
 		var image_url = $("#MagnifierWrap .MagnifierMain").find("img").attr("src");
