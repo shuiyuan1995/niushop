@@ -3,6 +3,11 @@
 <script>
 $(document).ready(function(){
 	$("#mobileregistermodel-username").change(function(){
+        if($(this).val() == ''){
+            $("#usernameyz").css("color","red").text("{:lang('account_cannot_be_empty')}");
+            $(this).focus();
+            return false;
+        }
 		if($(this).val().length >= 3 && $(this).val().length <=16 && $(this).val()!=''){
 			var user_name = $(this).val();
 			$(this).css("border","1px solid #ccc");
@@ -20,7 +25,9 @@ $(document).ready(function(){
 					}
 				} 
 			});
-		}
+		}else{
+            $("#usernameyz").css("color","red").text("{:lang('user_name_length')}");
+        }
 	});
     $("#mobileregistermodel-email").change(function(){
         if(!($(this).val().search(/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/)==-1)){
@@ -78,12 +85,15 @@ $(document).ready(function(){
 		var isset_email = $("#isset_email").attr("value");
 		var re =  /^(?!\d+$)[\da-zA-Z]*$/i;
 		var verify_code = $("#verify_code").val(); 
-		if(!(username.length >= 3 && username.length <=16)){
+		if(!(username.length >= 3 && username.length <=16) && username != ''){
 			$("#mobileregistermodel-username").trigger("focus");
 			$('#mobileregistermodel-username').css("border","1px solid red");
 			$("#usernameyz").css("color","red").text("{:lang('user_name_length')}");
 			return false;
-		}else{
+		}else if(username == ''){
+            $("#usernameyz").css("color","red").text("{:lang('account_cannot_be_empty')}");
+            return false;
+        }else{
 			$('#mobileregistermodel-username').css("border","1px solid #ccc");
 			$("#usernameyz").css("color","red").text("");
 		}
