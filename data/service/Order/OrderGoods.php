@@ -123,10 +123,10 @@ class OrderGoods extends BaseService
                     $goods_info['promotion_type'] = 0;
                     $goods_info['promote_id'] = 0;
                 }
-                $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
                 $spike = new NsPromotionSpikeGoodsModel();
                 $is_spike = $spike->where('goods_id',$goods_sku_info['goods_id'])->where('start_time','<=',time())->where('end_time','>',time())->where('status',1)->count();
                 if ($is_spike){
+                    $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
                     $stock = $redis->LLen($goods_sku_info['goods_id']);
                     if ($stock < $goods_sku[1] || $stock <= 0){
                         $this->order_goods->rollback();

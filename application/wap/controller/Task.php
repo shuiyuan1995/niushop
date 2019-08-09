@@ -48,10 +48,9 @@ class Task extends Controller
      */
     public function load_task()
     {
-        /*$redirect = __URL(__URL__ . "/wap/Task/event");
+        $redirect = __URL(__URL__ . "/wap/Task/event");
         http($redirect, $timeout = 1); 
-        return 1;*/
-        $this->event();
+        return 1;
     }
     
     /**
