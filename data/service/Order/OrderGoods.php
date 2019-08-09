@@ -24,6 +24,7 @@ use data\model\NsOrderGoodsModel;
 use data\model\NsOrderGoodsPromotionDetailsModel;
 use data\model\NsOrderModel;
 use data\model\NsOrderRefundModel;
+use data\model\NsPromotionSpikeGoodsModel;
 use data\model\UserModel;
 use data\service\BaseService;
 use data\service\Config;
@@ -37,6 +38,7 @@ use data\service\Order as OrderService;
 use data\model\NsPromotionGiftGoodsModel;
 use data\model\NsCustomerServiceRecordsModel;
 use data\model\NsCustomerServiceModel;
+use data\service\RedisServer;
 use think\Log;
 use data\model\NsOrderPaymentModel;
 use data\model\NsOrderPresellModel;
@@ -121,9 +123,20 @@ class OrderGoods extends BaseService
                     $goods_info['promotion_type'] = 0;
                     $goods_info['promote_id'] = 0;
                 }
-                if ($goods_sku_info['stock'] < $goods_sku[1] || $goods_sku[1] <= 0) {
-                    $this->order_goods->rollback();
-                    return LOW_STOCKS;
+                $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
+                $spike = new NsPromotionSpikeGoodsModel();
+                $is_spike = $spike->where('goods_id',$goods_sku_info['goods_id'])->where('start_time','<=',time())->where('end_time','>',time())->where('status',1)->count();
+                if ($is_spike){
+                    $stock = $redis->LLen($goods_sku_info['goods_id']);
+                    if ($stock < $goods_sku[1] || $stock <= 0){
+                        $this->order_goods->rollback();
+                        return SPIKE_LOW_STOCKS;
+                    }
+                }else{
+                    if ($goods_sku_info['stock'] < $goods_sku[1] || $goods_sku[1] <= 0) {
+                        $this->order_goods->rollback();
+                        return LOW_STOCKS;
+                    }
                 }
                 
                 if($goods_info['integral_give_type'] == 0){

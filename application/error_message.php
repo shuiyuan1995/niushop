@@ -53,6 +53,7 @@ define('NULL_EXPRESS', '-4013');
 define('ORDER_CASH_DELIVERY', '-4014');
 define('ORDER_GOODS_ZERO', '-4015');
 define('NO_OPEN_POINT_PAY', '-4016');
+define('SPIKE_LOW_STOCKS', '-4017');
 // 活动定义变量
 define('ACTIVE_REPRET', '-5001');
 define('GOODS_HAVE_BEEN_GIFT', '-5002');
@@ -123,6 +124,7 @@ function getErrorInfo($error_code)
         // 订单定义变量
         ORDER_DELIVERY_ERROR => '存在未发货订单',
         LOW_STOCKS => '库存不足',
+        SPIKE_LOW_STOCKS => '秒杀商品库存不足',
         LOW_POINT => '用户积分不足',
         LOW_COIN => '用户购物币不足',
         CLOSE_POINT => '店铺积分功能未开启',

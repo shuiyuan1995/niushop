@@ -32,6 +32,7 @@ use data\model\NsOrderRefundAccountRecordsModel;
 use data\model\NsPickupPointModel;
 use data\model\NsPromotionFullMailModel;
 use data\model\NsPromotionMansongRuleModel;
+use data\model\NsPromotionSpikeGoodsModel;
 use data\model\UserModel as UserModel;
 use data\service\Address;
 use data\service\BaseService;
@@ -42,9 +43,11 @@ use data\service\Order\OrderStatus;
 use data\service\promotion\GoodsExpress;
 use data\service\promotion\GoodsMansong;
 use data\service\promotion\GoodsPreference;
+use data\service\RedisServer;
 use data\service\UnifyPay;
 use data\service\WebSite;
 use data\model\NsTuangouGroupModel;
+use think\Db;
 use think\Log;
 use data\service\VirtualGoods;
 use data\service\Promotion;
@@ -352,6 +355,34 @@ class Order extends BaseService
             if ($pay_status == 2) {
                 $data_order["pay_time"] = time();
             }
+            /*$sku_array = explode(',',$goods_sku_list);
+            foreach ($sku_array as $k=>$v){
+                $data = explode(':',$v);
+                $goods_id = Db::name('ns_goods_sku')->where('sku_id',$data[0])->value('goods_id');
+                $spike = new NsPromotionSpikeGoodsModel();
+                $is_spike = $spike->where('goods_id',$goods_id)->where('start_time','<=',time())->where('end_time','>',time())->where('status',1)->count();
+                if ($is_spike) {
+                    $redis = RedisServer::getInstance(array('host' => '127.0.0.1','port' => 6379));
+                    if ($redis->LLen($goods_id) >= $data[1]) {
+                        for ($i = 0; $i < $data[1]; $i++) {
+                            $redis->rPop($goods_id);
+                        }
+                        if ($redis->LLen($goods_id) == 0) {
+                            if ($redis->exists('user_' . $goods_id)) $redis->del('user_' . $goods_id);
+                        } else {
+                            if (!$redis->exists('user_' . $goods_id)) {
+                                $redis->sAdd('user_' . $goods_id, $this->uid);
+                                $redis->expire('user_' . $goods_id, $redis->ttl($goods_id));
+                            } else {
+                                $redis->sAdd('user_' . $goods_id, $this->uid);
+                            }
+                        }
+                    }else{
+                        $this->order->rollback();
+                        return SPIKE_LOW_STOCKS;
+                    }
+                }
+            }*/
             $order = new NsOrderModel();
             $order->save($data_order);
             $order_id = $order->order_id;
@@ -468,6 +499,9 @@ class Order extends BaseService
             if($res_order_goods == LOW_STOCKS){
                 $this->order->rollback();
                 return LOW_STOCKS;
+            }elseif ($res_order_goods == SPIKE_LOW_STOCKS){
+                $this->order->rollback();
+                return SPIKE_LOW_STOCKS;
             }
             // 满减送详情，添加满减送活动优惠情况
             if (! empty($mansong_rule_array)) {
