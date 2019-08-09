@@ -296,6 +296,11 @@ class OrderStatus extends BaseService
                         'no' => 'seller_memo',
                         'color' => '#666666',
                         'name' => '备注'
+                    ),
+                    '1' => array(
+                        'no' => 'card_seller_memo',
+                        'color' => '#666666',
+                        'name' => '刷卡备注'
                     )
 
 
