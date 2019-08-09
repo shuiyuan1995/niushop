@@ -941,6 +941,18 @@ class Order extends BaseController
     }
 
     /**
+     * 添加刷卡备注
+     */
+    public function addCardMemo()
+    {
+        $order_service = new OrderService();
+        $order_id = request()->post('order_id');
+        $memo = request()->post('memo');
+        $result = $order_service->addOrderSellerCardMemo($order_id, $memo);
+        return AjaxReturn($result);
+    }
+
+    /**
      * 获取订单备注信息
      *
      * @return unknown
@@ -950,6 +962,19 @@ class Order extends BaseController
         $order_service = new OrderService();
         $order_id = request()->post('order_id');
         $res = $order_service->getOrderSellerMemo($order_id);
+        return $res;
+    }
+
+    /**
+     * 获取订单备注信息
+     *
+     * @return unknown
+     */
+    public function getOrderCardMemo()
+    {
+        $order_service = new OrderService();
+        $order_id = request()->post('order_id');
+        $res = $order_service->getOrderCardMemo($order_id);
         return $res;
     }
 
@@ -2206,7 +2231,7 @@ class Order extends BaseController
         try {
             Db::name('c_card')->where('id',$_SESSION['id'])->update($arr);
             $res =  Db::name('c_card')->where('id',$_SESSION['id'])->value('typeid');
-            Db::name('ns_order')->where('order_id',$res)->update(['order_status' => 1,'pay_status' => 2,'pay_time' => $time]);
+            Db::name('ns_order')->where('order_id',$res)->update(['order_status' => 1,'pay_status' => 2,'pay_time' => $time,'card_seller_memo' => '']);
             Db::name('ns_order_payment')->where('type_alis_id',$res)->update(['pay_status' => 1,'pay_type' => 7,'pay_time' => $time]);
             // 提交事务
             Db::commit();

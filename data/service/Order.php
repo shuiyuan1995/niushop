@@ -2767,6 +2767,23 @@ class Order extends BaseService implements IOrder
     }
 
     /**
+     * 添加卖家对订单的备注
+     *
+     * @param unknown $order_goods_id
+     */
+    public function addOrderSellerCardMemo($order_id, $memo)
+    {
+        $order = new NsOrderModel();
+        $data = array(
+            'card_seller_memo' => $memo
+        );
+        $retval = $order->save($data, [
+            'order_id' => $order_id
+        ]);
+        return $retval;
+    }
+
+    /**
      * 获取订单备注信息
      *
      * @ERROR!!!
@@ -2782,6 +2799,26 @@ class Order extends BaseService implements IOrder
         $seller_memo = "";
         if (! empty($res[0]['seller_memo'])) {
             $seller_memo = $res[0]['seller_memo'];
+        }
+        return $seller_memo;
+    }
+
+    /**
+     * 获取订单刷卡备注信息
+     *
+     * @ERROR!!!
+     *
+     * @see \data\api\IOrder::getOrderCardMemo()
+     */
+    public function getOrderCardMemo($order_id)
+    {
+        $order = new NsOrderModel();
+        $res = $order->getQuery([
+            'order_id' => $order_id
+        ], "card_seller_memo", '');
+        $seller_memo = "";
+        if (! empty($res[0]['card_seller_memo'])) {
+            $seller_memo = $res[0]['card_seller_memo'];
         }
         return $seller_memo;
     }
